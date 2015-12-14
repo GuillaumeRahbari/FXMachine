@@ -15,5 +15,8 @@
     "load-grunt-tasks": "~3.1.0",
     "request": "~2.55.0",
     "time-grunt": "~1.1.0"
+  },
+  "scripts":{
+    "test" : "mocha --recursive"
   }
 }
