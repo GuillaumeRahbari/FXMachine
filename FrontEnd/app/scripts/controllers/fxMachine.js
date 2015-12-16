@@ -26,6 +26,7 @@ angular.module('frontEndApp')
         var MACHINE =
         {
             initialized:false,
+            isPlaying:false,
             context:null,
             soundBuffer:null,
             // Default value
@@ -79,7 +80,7 @@ angular.module('frontEndApp')
             });
 
             // We need to re buildGraph(), so we stop the music
-            if(MACHINE.initialized)
+            if(MACHINE.initialized && MACHINE.isPlaying)
             {
                 this.stopSound();
             }
@@ -134,40 +135,63 @@ angular.module('frontEndApp')
          Finally: tell the source when to start
          */
         this.playSound = function () {
-            // play the source now.
-            // First parameter = delay in seconds before starting to play
-            // Second parameter = where do we start (0 = beginning of song)
-            console.log("playing sound");
 
-            // connect sound samples to the speakers
-            this.buildGraph();
+            if(!MACHINE.isPlaying)
+            {
+                // play the source now.
+                // First parameter = delay in seconds before starting to play
+                // Second parameter = where do we start (0 = beginning of song)
+                console.log("playing sound");
 
-            // BEWARE : the graph should be connected, if sound has been stopped,
-            // and if the graph is not built (i.e the previous line of code is not present)
-            // Then the next line will do nothing, we need to rebuild the graph
-            MACHINE.soundInput.start(0, 0);
+                // connect sound samples to the speakers
+                this.buildGraph();
 
-            buttonStop.disabled = false;
-            buttonPlay.disabled = true;
+                // BEWARE : the graph should be connected, if sound has been stopped,
+                // and if the graph is not built (i.e the previous line of code is not present)
+                // Then the next line will do nothing, we need to rebuild the graph
+                MACHINE.soundInput.start(0, 0);
+
+                buttonStop.disabled = false;
+                buttonPlay.disabled = true;
+                MACHINE.isPlaying = true;
+            }
+            else
+            {
+                console.error("trying to play sound but already playing")
+            }
+
         };
 
         /**
          */
         this.stopSound = function () {
-            console.log("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
-            // stop the source now.
-            // Parameter : delay before stopping
-            // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
-            // We do not need to redecode the data, just to rebuild the graph
-            MACHINE.soundInput.stop(0);
-            buttonPlay.disabled = false;
-            buttonStop.disabled = true;
+            if(MACHINE.isPlaying)
+            {
+                console.log("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
+                // stop the source now.
+                // Parameter : delay before stopping
+                // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
+                // We do not need to redecode the data, just to rebuild the graph
+                MACHINE.soundInput.stop(0);
+                buttonPlay.disabled = false;
+                buttonStop.disabled = true;
+                MACHINE.isPlaying = false;
+            }
+            else
+            {
+                console.error("trying to stop sound but not playing")
+            }
+
         }
 
         /**
          Connect audio boxes together
          */
         this.buildGraph = function() {
+
+
+            // Just to visualize the entire chain
+            var graph = "";
 
             console.log("Building the audio graph ...");
 
@@ -191,21 +215,28 @@ angular.module('frontEndApp')
 
                 // Connecting all the filters in a big chain
                 for(var i = 0 ; i < l-1 ; i++) {
-                    console.log(this.filters[i].type + "]---->["+this.filters[i+1].type);
+
+                    graph = graph+"--->["+this.filters[i].type+"]";
                     this.filters[i].obj.connect(this.filters[i + 1].obj);
                 }
 
                 // Connecting Input to first filter
+                graph = "X--[Input]-->" + graph;
                 MACHINE.soundInput.connect(this.filters[0].obj);
                 // Connecting Output to last filter
                 this.filters[l-1].obj.connect(MACHINE.soundOutput);
+                graph = graph+"--->[Output]"
             }
             //Otherwise, we just connect input and output together
             else
             {
                 console.log("No filters. Connecting input and output...");
+                var graph = graph+"--->[Output]";
                 MACHINE.soundInput.connect(MACHINE.soundOutput);
             }
+
+            console.log("FINAL GRAPH");
+            console.log(graph);
         };
 
         // **** Audio Machine methods

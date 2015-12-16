@@ -9,24 +9,25 @@ PLAYER CONTROLS
 
 <!-- Filters -->
 <hr>
-FILTER BANK
+<h3>FILTER BANK</h3>
 <button id="addGainFilter" ng-click="machine.addFilter('gain');">Add Gain Filter</button>
-<button id="addLowPassFilter" ng-click="machine.addFilter('biquad');">Add LowPass</button>
+<button id="addLowPassFilter" ng-click="machine.addFilter('biquad');">Add BiQuad</button>
 <button id="addDebugFilter" ng-click="machine.addFilter('lowl');">Add... something else</button>
 
 <hr>
-THE Filters
+<h3>THE Filters</h3>
+<hr width="40%" align="left">
 <!-- For AUDIO GAIN filters only -->
 <div ng-repeat="filter in machine.filters">
 
-    <div>Filtre : {{filter.type}}</div>
+    <h4>Filtre : {{filter.type}}</h4>
 
     <!-- Showing the div corresponding to the right filter -->
     <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
 
     <!-- The GAIN filter -->
     <div ng-show="filter.type === 'gain' ">
-        <input id="volume" type="range" min="0" max="60" value="0" step="1" ng-model="filter.obj.gain.value">
+        <input id="volume" type="range" min="0" max="60" value="1" step="1" ng-model="filter.obj.gain.value">
         {{filter.obj.gain.value}}dB
     </div>
 
@@ -65,5 +66,5 @@ THE Filters
     </div>
 
     <!-- separator -->
-    <hr width="20%" align="left">
+    <hr width="40%" align="left">
 </div>
