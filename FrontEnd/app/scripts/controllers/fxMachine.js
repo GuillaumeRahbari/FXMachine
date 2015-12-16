@@ -88,6 +88,34 @@ angular.module('frontEndApp')
 
 
         /**
+         * Remove a filter from the array of filters
+         * @param filterToRemove
+         */
+        this.removeFilter = function(filterToRemove)
+        {
+            // First, we iterate through the filters tab to find the right index to delete
+            var l = this.filters.length;
+            console.log("coucou");
+            for(var i = 0 ; i < l ; i++)
+            {
+                if(this.filters[i] === filterToRemove)
+                {
+                    console.log("removing filter !");
+                    // We need to re buildGraph(), so we stop the music
+                    if(MACHINE.initialized && MACHINE.isPlaying)
+                    {
+                        this.stopSound();
+                    }
+
+
+                    this.filters.splice(i, 1);
+                    return;
+                }
+            }
+        }
+
+
+        /**
          Load our Sound using XHR AND DECODE IT
          */
         this.loadSound = function(url)
