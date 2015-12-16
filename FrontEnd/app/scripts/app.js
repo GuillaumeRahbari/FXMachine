@@ -29,6 +29,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+        .when('/machine', {
+          templateUrl: 'views/fxMachineV1.html',
+          controller: 'fxMachineCtrl',
+          controllerAs: 'machine'
+        })
       .otherwise({
         redirectTo: '/'
       });
