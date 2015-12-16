@@ -8,9 +8,6 @@
 /**
  * @ngdoc function
  * @name frontEndApp.controller:fxMachineCtrl
- * @description
- * # AboutCtrl
- * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
     .controller('fxMachineCtrl', function ()
@@ -22,121 +19,113 @@ angular.module('frontEndApp')
         ];
 
 
-        this.testfct = function() { console.log("heyyyy");};
-
-        this.test = "Coucou angular";
+        // Note : the method init() is called when the controller is initialized.
 
 
-        //*************** Partie accessible sur la page html
-
-        this.loadSound = function()
-        {
-            loadSound();
-        };
-        this.playSound = function()
-        {
-            playSound();
-        };
-        this.stopSound = function()
-        {
-            stopSound();
-        };
-
-        
-
-        // ************** Reprise du code example
-
-
+        // The audio machine, containing all the stuff that we don't need to access from the html page (yet)
         var MACHINE =
         {
+            initialized:false,
             context:null,
             soundBuffer:null,
+            // Default value
             musicUrl:'./sounds/test_music.mp3',
             // The first box of the graph, linked to the soundBuffer
             soundInput:null,
-            filters:[],
+            // The last box of the graph, linked to.. the speakers in buildGraph()
             soundOutput:null
         };
 
-
-        // TODO : faire ce systeme de boutons a la sauce angular
-        var buttonPlay= null;
-        var buttonStop= null;
-        var buttonLoad= null;
+        // Array of filters applied on sound
+        /*Format:
+         type: {String} type of filter
+         obj: the filter object (WebAudio API)
+         */
+        this.filters = [];
 
 
         /**
-         Initialize the "Audio Context", which is kinda the environment where we put all the boxes
-         There can be only one !
+         *
+         * @param type : the type of filter to add
          */
-        var init = function()
+        this.addFilter = function(type)
         {
 
-            try
+            console.log("Adding filter ! .");
+            var filter = null;
+            var type = type;
+
+            //
+            switch(type)
             {
-                MACHINE.context = new AudioContext();
-                // Fix up for prefixing
-                window.AudioContext = window.AudioContext||window.webkitAudioContext;
-                MACHINE.context = new AudioContext();
-            }
-            catch(e)
-            {
-                alert('Web Audio API is not supported in this browser');
+                case "gain":
+                    filter = MACHINE.context.createGain();
+                    break;
+                case "biquad":
+                    filter = MACHINE.context.createBiquadFilter();
+                    // TODO : doit disparaite quand on pourra choisir le type directement en HTML
+                    break;
+                // Bad type ? Let's just put a debug filter
+                default:
+                    filter = MACHINE.context.createGain();
+                    type='debug';
+                    break;
             }
 
-            buttonPlay = document.getElementById("play");
-            buttonStop = document.getElementById("stop");
-            buttonLoad = document.getElementById("load");
-        };
+            // Update the accessible filters !
+            this.filters.push({
+                type:type,
+                obj:filter
+            });
 
+            // We need to re buildGraph(), so we stop the music
+            if(MACHINE.initialized)
+            {
+                this.stopSound();
+            }
+        }
 
 
         /**
-         Load our Sound using XHR
+         Load our Sound using XHR AND DECODE IT
          */
-        var loadSound = function()
+        this.loadSound = function(url)
         {
-            console.log("loading " + MACHINE.musicUrl + " using Xhr2");
+            // DEBUG
+            url = MACHINE.musicUrl;
+
+            console.log("loading " + url + " using Xhr2");
             // Note: this loads asynchronously
             var request = new XMLHttpRequest();
 
-            request.open("GET", MACHINE.musicUrl, true);
+            request.open("GET", url, true);
             // BINARY TRANSFERT !
             request.responseType = "arraybuffer";
 
             // Our asynchronous callback
             request.onload = function() {
                 var audioData = request.response;
+
                 // We got the sound file from the server, let's decode it
-                decode(audioData);
+
+                console.log("decoding audio data... WebAudio uses RAW sample in memory, not compressed one");
+
+                // The Audio Context handles creating source buffers from raw binary
+                MACHINE.context.decodeAudioData(audioData, function onSuccess(soundBufferDecoded) {
+                    MACHINE.soundBuffer = soundBufferDecoded;
+
+                    console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
+
+                    buttonPlay.disabled = false;
+                    buttonLoad.disabled = true;
+                    MACHINE.initialized = true;
+                }, function onFailure() {
+                    alert("Decoding the audio buffer failed");
+                });
             };
 
             request.send();
         };
-
-
-        var decode = function(audioData)
-        {
-            console.log("decoding audio data... WebAudio uses RAW sample in memory, not compressed one");
-
-            // The Audio Context handles creating source buffers from raw binary
-            MACHINE.context.decodeAudioData(audioData, function onSuccess(soundBufferDecoded) {
-                MACHINE.soundBuffer = soundBufferDecoded;
-
-                console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
-
-                buttonPlay.disabled = false;
-                buttonLoad.disabled = true;
-            }, function onFailure() {
-                alert("Decoding the audio buffer failed");
-            });
-        };
-
-
-
-
-
-
 
 
 
@@ -144,14 +133,14 @@ angular.module('frontEndApp')
          Construct the graph and play the sound
          Finally: tell the source when to start
          */
-        var playSound = function () {
+        this.playSound = function () {
             // play the source now.
             // First parameter = delay in seconds before starting to play
             // Second parameter = where do we start (0 = beginning of song)
             console.log("playing sound");
 
             // connect sound samples to the speakers
-            buildGraph();
+            this.buildGraph();
 
             // BEWARE : the graph should be connected, if sound has been stopped,
             // and if the graph is not built (i.e the previous line of code is not present)
@@ -164,25 +153,25 @@ angular.module('frontEndApp')
 
         /**
          */
-        var stopSound = function () {
+        this.stopSound = function () {
             console.log("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
             // stop the source now.
             // Parameter : delay before stopping
             // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
             // We do not need to redecode the data, just to rebuild the graph
-           MACHINE.soundInput.stop(0);
+            MACHINE.soundInput.stop(0);
             buttonPlay.disabled = false;
             buttonStop.disabled = true;
         }
 
         /**
-         Construct/Initialize the boxes
+         Connect audio boxes together
          */
-        var buildGraph = function() {
-            console.log("Building the audio graph : connecting decoded sound sample to the speakers");
+        this.buildGraph = function() {
 
+            console.log("Building the audio graph ...");
 
-            // *** Initializing my boxes
+            // *** Initializing input and output
 
             // soundInput becomes the "input" box
             MACHINE.soundInput = MACHINE.context.createBufferSource();
@@ -190,38 +179,26 @@ angular.module('frontEndApp')
             MACHINE.soundInput.buffer = MACHINE.soundBuffer;
 
 
-            // filter box
-            //filter = MACHINE.context.createBiquadFilter();
 
-            // Create a gain node.
-            //gainNode = MACHINE.context.createGain();
+            // *** Connection
 
+            var l = this.filters.length;
 
-            //** Giving parameters to the boxes
-
-            // Create and specify parameters for the low-pass filter.
-            //filter.type = 'lowpass'; // Low-pass filter. See BiquadFilterNode docs
-            //filter.frequency.value = 440; // Set cutoff to 440 HZ
-
-
-
-
-            //** Connect all together
-            var l = MACHINE.filters.length;
-
-            // IF we got filters, well..
+            // IF we got filters, well.. we connect them !
             if (l > 0)
             {
                 console.log("filters. Connecting everything together...");
-                // Connecting all filters in a big chain
+
+                // Connecting all the filters in a big chain
                 for(var i = 0 ; i < l-1 ; i++) {
-                    MACHINE.filters[i].connect(MACHINE.filters[i + 1]);
+                    console.log(this.filters[i].type + "]---->["+this.filters[i+1].type);
+                    this.filters[i].obj.connect(this.filters[i + 1].obj);
                 }
 
                 // Connecting Input to first filter
-                MACHINE.soundInput.connect(MACHINE.filters[0]);
+                MACHINE.soundInput.connect(this.filters[0].obj);
                 // Connecting Output to last filter
-                MACHINE.filters[l].connect(MACHINE.SoundOutput);
+                this.filters[l-1].obj.connect(MACHINE.soundOutput);
             }
             //Otherwise, we just connect input and output together
             else
@@ -231,26 +208,41 @@ angular.module('frontEndApp')
             }
         };
 
+        // **** Audio Machine methods
+
+
+        // TODO : faire ce systeme de boutons a la sauce angular
+        var buttonPlay= null;
+        var buttonStop= null;
+        var buttonLoad= null;
+
+        /**
+         Initialize the "Audio Context", which is kinda the environment where we create the audio graph
+         There can be only one !
+         */
+        var init = function()
+        {
+            try
+            {
+                MACHINE.context = new AudioContext();
+                // Fix up for prefixing
+                window.AudioContext = window.AudioContext||window.webkitAudioContext;
+                MACHINE.context = new AudioContext();
+            }
+            catch(e)
+            {
+                alert('Web Audio API is not supported in this browser');
+            }
+
+            // Connecting buttons to variables TODO:NOT VERY ANGULARISED
+            buttonPlay = document.getElementById("play");
+            buttonStop = document.getElementById("stop");
+            buttonLoad = document.getElementById("load");
+        };
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// *** Controller initialisation
+        // *** Launch initialisation
         init();
-
 
     })
