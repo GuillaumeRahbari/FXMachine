@@ -10,13 +10,7 @@
  * @name frontEndApp.controller:fxMachineCtrl
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl', function ()
-    {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('fxMachineCtrl', function () {
 
 
         // Note : the method init() is called when the controller is initialized.
