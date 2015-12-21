@@ -35,7 +35,7 @@ angular.module('frontEndApp')
            * @returns {boolean} False if not intialized, true if initialized.
            */
           get isInitialized (){
-              return this._isInitialized
+              return this._isInitialized;
           }
 
           /**
@@ -43,7 +43,7 @@ angular.module('frontEndApp')
            * @returns {boolean} False if not playing, true if playing.
            */
           get isPlaying (){
-              return this._isPlaying
+              return this._isPlaying;
           }
 
           set context (context){
@@ -82,7 +82,7 @@ angular.module('frontEndApp')
               {
                   alert('Web Audio API is not supported in this browser');
               }
-          };
+          }
 
           /**
            * Adds a filter to the filters array.
