@@ -48,7 +48,7 @@ angular.module('frontEndApp')
 
           /**
            * Setter of the audio context.
-           * @param (AudioContext) the new audio context.
+           * @param context the new audio context.
            */
           set context (context){
               this._context = context;
