@@ -46,6 +46,10 @@ angular.module('frontEndApp')
               return this._isPlaying;
           }
 
+          /**
+           * Setter of the audio context.
+           * @param (AudioContext) the new audio context.
+           */
           set context (context){
               this._context = context;
           }
@@ -67,8 +71,8 @@ angular.module('frontEndApp')
           }
 
           /**
-           Initialize the "Audio Context", which is kinda the environment where we create the audio graph
-           There can be only one !
+           * Initialize the "Audio Context", which is kinda the environment where we create the audio graph
+           * There can be only one !
            */
           init () {
               try
