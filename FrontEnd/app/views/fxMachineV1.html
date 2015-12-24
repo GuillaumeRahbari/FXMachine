@@ -3,7 +3,8 @@
 <hr>
 PLAYER CONTROLS
 <!-- Machine controllers -->
-<button id ="load" ng-click="machine.loadSound();">Charger son via XhR2</button>
+<input type="file" file-model="soundFile">Charger son via XhR2</input>
+<button id="load" ng-click="machine.loadSound()">Test</button>
 <button id="play" ng-click="machine.playSound();" disabled>Lecture du son</button>
 <button id="stop" ng-click="machine.stopSound();" disabled>Stopper le son</button>
 

@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: sound', function () {
+describe('Service: Sound', function () {
 
   // load the service's module
   beforeEach(module('frontEndApp'));
 
   // instantiate service
-  var sound;
-  beforeEach(inject(function (_sound_) {
-    sound = _sound_;
+  var Sound;
+  beforeEach(inject(function (_Sound_) {
+    Sound = _Sound_;
   }));
 
   it('should do something', function () {
-    expect(!!sound).toBe(true);
+    expect(!!Sound).toBe(true);
   });
 
 });

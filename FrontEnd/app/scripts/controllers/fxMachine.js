@@ -10,111 +10,113 @@
  * @name frontEndApp.controller:fxMachineCtrl
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl', function () {
+    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', function ($scope, Machine, Filter, Sound) {
 
+        var self = this;
 
         // Note : the method init() is called when the controller is initialized.
 
-
         // The audio machine, containing all the stuff that we don't need to access from the html page (yet)
-        var MACHINE =
-        {
-            initialized:false,
-            isPlaying:false,
-            context:null,
-            soundBuffer:null,
-            // Default value
-            musicUrl:'./sounds/test_music.mp3',
-            // The first box of the graph, linked to the soundBuffer
-            soundInput:null,
-            // The last box of the graph, linked to.. the speakers in buildGraph()
-            soundOutput:null
-        };
+        var machine = new Machine();
 
-        // Array of filters applied on sound
-        /*Format:
-         type: {String} type of filter
-         obj: the filter object (WebAudio API)
+        /**
+         Initialize the "Audio Context", which is kinda the environment where we create the audio graph
+         There can be only one !
          */
-        this.filters = [];
-
+        machine.init();
 
         /**
          *
          * @param type : the type of filter to add
          */
-        this.addFilter = function(type)
+        self.addFilter = function(type)
         {
 
             console.log("Adding filter ! .");
-            var filter = null;
-            var type = type;
+            var audioNode = null;
 
-            //
             switch(type)
             {
                 case "gain":
-                    filter = MACHINE.context.createGain();
+                    audioNode = MACHINE.context.createGain();
                     break;
                 case "biquad":
-                    filter = MACHINE.context.createBiquadFilter();
+                    audioNode = MACHINE.context.createBiquadFilter();
                     // TODO : doit disparaite quand on pourra choisir le type directement en HTML
                     break;
                 // Bad type ? Let's just put a debug filter
                 default:
-                    filter = MACHINE.context.createGain();
+                    audioNode = MACHINE.context.createGain();
                     type='debug';
                     break;
             }
 
-            // Update the accessible filters !
-            this.filters.push({
-                type:type,
-                obj:filter
-            });
+            machine.addFilter(new Filter(type, audioNode));
+
 
             // We need to re buildGraph(), so we stop the music
-            if(MACHINE.initialized && MACHINE.isPlaying)
+            if(machine.isInitialized && machine.isPlaying)
             {
-                this.stopSound();
+                self.stopSound();
             }
-        }
+        };
 
 
         /**
          * Remove a filter from the array of filters
          * @param filterToRemove
          */
-        this.removeFilter = function(filterToRemove)
+        self.removeFilter = function(filterToRemove)
         {
             // First, we iterate through the filters tab to find the right index to delete
-            var l = this.filters.length;
+            var l = machine.filters.length;
             console.log("coucou");
             for(var i = 0 ; i < l ; i++)
             {
-                if(this.filters[i] === filterToRemove)
+                if(machine.filters[i] === filterToRemove)
                 {
                     console.log("removing filter !");
                     // We need to re buildGraph(), so we stop the music
-                    if(MACHINE.initialized && MACHINE.isPlaying)
+                    if(machine.isInitialized && machine.isPlaying)
                     {
                         this.stopSound();
                     }
 
 
-                    this.filters.splice(i, 1);
+                    machine.filters.splice(i, 1);
                     return;
                 }
             }
-        }
+        };
 
 
         /**
          Load our Sound using XHR AND DECODE IT
          */
-        this.loadSound = function(url)
+        self.loadSound = function()
         {
-            // DEBUG
+            console.log($scope.soundFile);
+
+            Sound.getSound($scope.soundFile.name).then(
+                function (audioData) {
+                    machine.context.decodeAudioData(audioData, function (soundBufferDecoded) {
+                        machine.soundBuffer = soundBufferDecoded;
+                        console.log(soundBufferDecoded);
+
+                        console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
+                        machine.isInitialized = true;
+                        angular.element('#play').removeAttr('disabled');
+                        angular.element('#load').attr('disabled');
+                    }, function () {
+                        alert("Decoding the audio buffer failed");
+                    }
+                    );
+                }, function(errorStatus){
+                    console.log(errorStatus);
+                }
+            );
+
+            /*// DEBUG
             url = MACHINE.musicUrl;
 
             console.log("loading " + url + " using Xhr2");
@@ -147,7 +149,7 @@ angular.module('frontEndApp')
                 });
             };
 
-            request.send();
+            request.send();*/
         };
 
 
@@ -156,9 +158,9 @@ angular.module('frontEndApp')
          Construct the graph and play the sound
          Finally: tell the source when to start
          */
-        this.playSound = function () {
+        self.playSound = function () {
 
-            if(!MACHINE.isPlaying)
+            if(!machine.isPlaying)
             {
                 // play the source now.
                 // First parameter = delay in seconds before starting to play
@@ -166,16 +168,16 @@ angular.module('frontEndApp')
                 console.log("playing sound");
 
                 // connect sound samples to the speakers
-                this.buildGraph();
+                self.buildGraph();
 
                 // BEWARE : the graph should be connected, if sound has been stopped,
                 // and if the graph is not built (i.e the previous line of code is not present)
                 // Then the next line will do nothing, we need to rebuild the graph
-                MACHINE.soundInput.start(0, 0);
+                machine.soundInput.start(0, 0);
 
-                buttonStop.disabled = false;
-                buttonPlay.disabled = true;
-                MACHINE.isPlaying = true;
+                angular.element('#stop').removeAttr('disabled');
+                angular.element('#play').attr('disabled');
+                machine.isPlaying = true;
             }
             else
             {
@@ -186,30 +188,30 @@ angular.module('frontEndApp')
 
         /**
          */
-        this.stopSound = function () {
-            if(MACHINE.isPlaying)
+        self.stopSound = function () {
+            if(machine.isPlaying)
             {
                 console.log("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
                 // stop the source now.
                 // Parameter : delay before stopping
                 // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
                 // We do not need to redecode the data, just to rebuild the graph
-                MACHINE.soundInput.stop(0);
-                buttonPlay.disabled = false;
-                buttonStop.disabled = true;
-                MACHINE.isPlaying = false;
+                machine.soundInput.stop(0);
+                angular.element('#play').removeAttr('disabled');
+                angular.element('#stop').attr('disabled');
+                machine.isPlaying = false;
             }
             else
             {
                 console.error("trying to stop sound but not playing")
             }
 
-        }
+        };
 
         /**
          Connect audio boxes together
          */
-        this.buildGraph = function() {
+        self.buildGraph = function() {
 
 
             // Just to visualize the entire chain
@@ -220,15 +222,16 @@ angular.module('frontEndApp')
             // *** Initializing input and output
 
             // soundInput becomes the "input" box
-            MACHINE.soundInput = MACHINE.context.createBufferSource();
-            MACHINE.soundOutput = MACHINE.context.destination;
-            MACHINE.soundInput.buffer = MACHINE.soundBuffer;
+            machine.soundInput = machine.context.createBufferSource();
+            machine.soundOutput = machine.context.destination;
+            machine.soundInput.buffer = machine.soundBuffer;
+            console.log(machine.soundInput.connect);
 
 
 
             // *** Connection
 
-            var l = this.filters.length;
+            var l = machine.filters.length;
 
             // IF we got filters, well.. we connect them !
             if (l > 0)
@@ -238,15 +241,15 @@ angular.module('frontEndApp')
                 // Connecting all the filters in a big chain
                 for(var i = 0 ; i < l-1 ; i++) {
 
-                    graph = graph+"--->["+this.filters[i].type+"]";
-                    this.filters[i].obj.connect(this.filters[i + 1].obj);
+                    graph = graph+"--->["+machine.filters[i].type+"]";
+                    machine.filters[i].obj.connect(machine.filters[i + 1].obj);
                 }
 
                 // Connecting Input to first filter
                 graph = "X--[Input]-->" + graph;
-                MACHINE.soundInput.connect(this.filters[0].obj);
+                machine.soundInput.connect(machine.filters[0].obj);
                 // Connecting Output to last filter
-                this.filters[l-1].obj.connect(MACHINE.soundOutput);
+                machine.filters[l-1].obj.connect(machine.soundOutput);
                 graph = graph+"--->[Output]"
             }
             //Otherwise, we just connect input and output together
@@ -254,7 +257,7 @@ angular.module('frontEndApp')
             {
                 console.log("No filters. Connecting input and output...");
                 var graph = graph+"--->[Output]";
-                MACHINE.soundInput.connect(MACHINE.soundOutput);
+                machine.soundInput.connect(machine.soundOutput);
             }
 
             console.log("FINAL GRAPH");
@@ -265,9 +268,9 @@ angular.module('frontEndApp')
 
 
         // TODO : faire ce systeme de boutons a la sauce angular
-        var buttonPlay= null;
+        /*var buttonPlay= null;
         var buttonStop= null;
-        var buttonLoad= null;
+        var buttonLoad= null;*/
 
         /**
          Initialize the "Audio Context", which is kinda the environment where we create the audio graph
@@ -296,6 +299,6 @@ angular.module('frontEndApp')
 
 
         // *** Launch initialisation
-        init();
+        //init();
 
-    })
+    }]);

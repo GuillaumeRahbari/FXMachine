@@ -3,12 +3,12 @@
 /**
  * This service permits interactions with sound objects.
  *
- * We need to include the service <i>sound</i>
+ * We need to include the service <i>Sound</i>
  *
  * @example
  * Here is how we do that :
  * angular.module('myModule')
- *  .controller('MyCtrl', ['sound', function (sound) {
+ *  .controller('MyCtrl', ['Sound', function (Sound) {
  * }]);
  *
  * @ngdoc service
@@ -18,7 +18,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .factory('sound', function ($http) {
+  .factory('Sound', function ($http) {
       var folder = 'sounds/';
 
       return {

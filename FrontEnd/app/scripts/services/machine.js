@@ -39,11 +39,27 @@ angular.module('frontEndApp')
           }
 
           /**
+           * Setter of the boolean _isInitialized.
+           * @param {boolean} isInitialized - False if not intialized, true if initialized.
+           */
+          set isInitialized (isInitialized){
+              this._isInitialized = isInitialized;
+          }
+
+          /**
            * Getter of the boolean isPlaying.
            * @returns {boolean} False if not playing, true if playing.
            */
           get isPlaying (){
               return this._isPlaying;
+          }
+
+          /**
+           * Setter of the boolean _isPlaying
+           * @param {boolean} isPlaying - False if not playing, true if playing.
+           */
+          set isPlaying (isPlaying){
+              this._isPlaying = isPlaying;
           }
 
           /**
@@ -68,6 +84,54 @@ angular.module('frontEndApp')
            */
           get filters (){
               return this._filters;
+          }
+
+          /**
+           * Getter of the soundBuffer
+           * @returns {AudioBuffer} The sound buffer.
+           */
+          get soundBuffer () {
+              return this._soundBuffer;
+          }
+
+          /**
+           * Setter of the sound buffer.
+           * @param {AudioBuffer} soundBuffer - The new sound buffer.
+           */
+          set soundBuffer (soundBuffer){
+              this._soundBuffer = soundBuffer;
+          }
+
+          /**
+           * Getter of the sound input.
+           * @returns {AudioBufferSourceNode} The sound input.
+           */
+          get soundInput (){
+              return this._soundInput;
+          }
+
+          /**
+           * Setter of the sound input
+           * @param {AudioBufferSourceNode} soundInput - The new sound input.
+           */
+          set soundInput (soundInput) {
+              this._soundInput = soundInput;
+          }
+
+          /**
+           * Getter of the sound output.
+           * @returns {AudioDestinationNode} The sound output.
+           */
+          get soundOutput () {
+              return this._soundOutput;
+          }
+
+          /**
+           * Setter of the sound output
+           * @param {AudioDestinationNode} soundOutput - The new sound output.
+           */
+          set soundOutput (soundOutput) {
+              this._soundOutput = soundOutput;
           }
 
           /**
