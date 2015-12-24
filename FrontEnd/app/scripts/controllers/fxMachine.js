@@ -33,7 +33,6 @@ angular.module('frontEndApp')
          */
         self.addFilter = function(type)
         {
-            console.log(machine.filters);
             console.log("Adding filter ! .");
 
             machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context)));
@@ -151,7 +150,6 @@ angular.module('frontEndApp')
             machine.soundInput = machine.context.createBufferSource();
             machine.soundOutput = machine.context.destination;
             machine.soundInput.buffer = machine.soundBuffer;
-            console.log(machine.soundInput.connect);
 
 
 
