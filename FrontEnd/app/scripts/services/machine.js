@@ -168,10 +168,6 @@ angular.module('frontEndApp')
               var index = this.filters.indexOf(filter);
 
               if (index > -1){
-                  // We need to re buildGraph(), so we stop the music
-                  if (this.isInitialized && this.isPlaying){
-                      this.stopSound();
-                  }
                   this.filters.splice(index,1);
               }
           }

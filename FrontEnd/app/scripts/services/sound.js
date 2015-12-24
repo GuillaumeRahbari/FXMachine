@@ -59,32 +59,6 @@ angular.module('frontEndApp')
                       return error.status;
                   }
               );
-          },
-
-          /**
-           * Load a sound.
-           *
-           * @example Here is how to use it :
-           * sound.loadSound('test_music.mp3');
-           *
-           * @param machine A instance of the Machine class.
-           */
-          loadSound: function (machine) {
-              this.getSound(machine.musicUrl).then(
-                  function (audioData) {
-                      machine.context.decodeAudioData(audioData, function onSuccess(soundBufferDecoded) {
-                          machine.soundBuffer = soundBufferDecoded;
-
-                          console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
-                          machine.initialized = true;
-                      }, function onFailure() {
-                          alert("Decoding the audio buffer failed");
-                      });
-                  },
-                  function(errorStatus){
-                      console.log(errorStatus);
-                  }
-              )
           }
       };
   });

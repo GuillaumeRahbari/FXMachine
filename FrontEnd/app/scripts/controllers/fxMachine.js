@@ -26,8 +26,8 @@ angular.module('frontEndApp')
         machine.init();
 
         /**
-         *
-         * @param type : the type of filter to add
+         * Add a filter to the filter array.
+         * @param {string} type - The type of the filter to add.
          */
         self.addFilter = function(type)
         {
@@ -64,29 +64,15 @@ angular.module('frontEndApp')
 
         /**
          * Remove a filter from the array of filters
-         * @param filterToRemove
+         * @param {Filter} filterToRemove - The filter to remove.
          */
         self.removeFilter = function(filterToRemove)
         {
-            // First, we iterate through the filters tab to find the right index to delete
-            var l = machine.filters.length;
-            console.log("coucou");
-            for(var i = 0 ; i < l ; i++)
-            {
-                if(machine.filters[i] === filterToRemove)
-                {
-                    console.log("removing filter !");
-                    // We need to re buildGraph(), so we stop the music
-                    if(machine.isInitialized && machine.isPlaying)
-                    {
-                        this.stopSound();
-                    }
-
-
-                    machine.filters.splice(i, 1);
-                    return;
-                }
+            // We need to re buildGraph(), so we stop the music
+            if (machine.isInitialized && machine.isPlaying){
+                self.stopSound();
             }
+            machine.removeFilter(filterToRemove);
         };
 
 
@@ -115,41 +101,6 @@ angular.module('frontEndApp')
                     console.log(errorStatus);
                 }
             );
-
-            /*// DEBUG
-            url = MACHINE.musicUrl;
-
-            console.log("loading " + url + " using Xhr2");
-            // Note: this loads asynchronously
-            var request = new XMLHttpRequest();
-
-            request.open("GET", url, true);
-            // BINARY TRANSFERT !
-            request.responseType = "arraybuffer";
-
-            // Our asynchronous callback
-            request.onload = function() {
-                var audioData = request.response;
-
-                // We got the sound file from the server, let's decode it
-
-                console.log("decoding audio data... WebAudio uses RAW sample in memory, not compressed one");
-
-                // The Audio Context handles creating source buffers from raw binary
-                MACHINE.context.decodeAudioData(audioData, function onSuccess(soundBufferDecoded) {
-                    MACHINE.soundBuffer = soundBufferDecoded;
-
-                    console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
-
-                    buttonPlay.disabled = false;
-                    buttonLoad.disabled = true;
-                    MACHINE.initialized = true;
-                }, function onFailure() {
-                    alert("Decoding the audio buffer failed");
-                });
-            };
-
-            request.send();*/
         };
 
 
@@ -265,40 +216,5 @@ angular.module('frontEndApp')
         };
 
         // **** Audio Machine methods
-
-
-        // TODO : faire ce systeme de boutons a la sauce angular
-        /*var buttonPlay= null;
-        var buttonStop= null;
-        var buttonLoad= null;*/
-
-        /**
-         Initialize the "Audio Context", which is kinda the environment where we create the audio graph
-         There can be only one !
-         */
-        var init = function()
-        {
-            try
-            {
-                MACHINE.context = new AudioContext();
-                // Fix up for prefixing
-                window.AudioContext = window.AudioContext||window.webkitAudioContext;
-                MACHINE.context = new AudioContext();
-            }
-            catch(e)
-            {
-                alert('Web Audio API is not supported in this browser');
-            }
-
-            // Connecting buttons to variables TODO:NOT VERY ANGULARISED
-            buttonPlay = document.getElementById("play");
-            buttonStop = document.getElementById("stop");
-            buttonLoad = document.getElementById("load");
-        };
-
-
-
-        // *** Launch initialisation
-        //init();
 
     }]);
