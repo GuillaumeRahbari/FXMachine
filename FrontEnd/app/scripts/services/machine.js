@@ -17,14 +17,14 @@ angular.module('frontEndApp')
 
           /**
            * The constructor of the Machine.
-           * @param fileName The file name of the music we want to listen.
+           * @param {String} fileName - The file name of the music we want to listen.
            */
           constructor(fileName){
               this._isInitialized = false;
               this._isPlaying = false;
               this._context = null;
               this._soundBuffer = null;
-              this._musicUrl = './sounds/' + fileName;
+              this._musicUrl = './sounds/' + fileName; // TODO see if we really need this.
               this._soundInput = null; // The first box of the graph, linked to the soundBuffer
               this._soundOutput = null; // The last box of the graph, linked to.. the speakers in buildGraph()
               this._filters = [];
@@ -48,7 +48,7 @@ angular.module('frontEndApp')
 
           /**
            * Setter of the audio context.
-           * @param {AudioContext} context the new audio context.
+           * @param {AudioContext} context - The new audio context.
            */
           set context (context){
               this._context = context;
@@ -56,7 +56,7 @@ angular.module('frontEndApp')
 
           /**
            * Getter of the audio context.
-           * @returns {AudioContext} the audio context.
+           * @returns {AudioContext} The audio context.
            */
           get context (){
               return this._context;
@@ -64,7 +64,7 @@ angular.module('frontEndApp')
 
           /**
            * Getter of the filters.
-           * @returns {Array} a filter array.
+           * @returns {Array} A filter array.
            */
           get filters (){
               return this._filters;
@@ -77,10 +77,10 @@ angular.module('frontEndApp')
           init () {
               try
               {
-                  //this.context = new AudioContext();
+                  this.context = new AudioContext();
                   // Fix up for prefixing
                   window.AudioContext = window.AudioContext||window.webkitAudioContext;
-                  //this.context = new AudioContext();
+                  this.context = new AudioContext();
               }
               catch(e)
               {
@@ -90,7 +90,7 @@ angular.module('frontEndApp')
 
           /**
            * Adds a filter to the filters array.
-           * @param {Filter} the filter to add.
+           * @param {Filter} filter - The filter to add.
            */
           addFilter (filter){
               this.filters.push(filter);
@@ -98,7 +98,7 @@ angular.module('frontEndApp')
 
           /**
            * Remove a filter from the array of filters
-           * @param {Filter} the filter to remove
+           * @param {Filter} filter - The filter to remove
            */
           removeFilter (filter){
               var index = this.filters.indexOf(filter);
