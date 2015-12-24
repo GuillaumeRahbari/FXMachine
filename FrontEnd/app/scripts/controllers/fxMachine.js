@@ -166,14 +166,14 @@ angular.module('frontEndApp')
                 for(var i = 0 ; i < l-1 ; i++) {
 
                     graph = graph+"--->["+machine.filters[i].type+"]";
-                    machine.filters[i].filter.connect(machine.filters[i + 1].filter);
+                    machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
                 }
 
                 // Connecting Input to first filter
                 graph = "X--[Input]-->" + graph;
-                machine.soundInput.connect(machine.filters[0].filter);
+                machine.soundInput.connect(machine.filters[0].audioNode);
                 // Connecting Output to last filter
-                machine.filters[l-1].filter.connect(machine.soundOutput);
+                machine.filters[l-1].audioNode.connect(machine.soundOutput);
                 graph = graph+"--->[Output]";
             }
             //Otherwise, we just connect input and output together

@@ -15,11 +15,11 @@ angular.module('frontEndApp')
           /**
            * The constructor of a filter.
            * @param {String} type - The filter's type.
-           * @param {AudioNode} filter - The filter object (WebAudio API).
+           * @param {AudioNode} audioNode - The audioNode object (WebAudio API).
            */
-          constructor (type, filter){
+          constructor (type, audioNode){
               this._type = type;
-              this._filter = filter;
+              this._audioNode = audioNode;
           }
 
           /**
@@ -32,17 +32,17 @@ angular.module('frontEndApp')
 
           /**
            * Getter of the filter.
-           * @returns {AudioNode} The filter.
+           * @returns {AudioNode} The audioNode object.
            */
-          get filter () {
-              return this._filter;
+          get audioNode () {
+              return this._audioNode;
           }
 
           /**
            * A static method pour get the audio node when we know the type.
            * @param {String} type - The filter's type.
            * @param {AudioContext} context - The audio context.
-           * @returns {*}
+           * @returns {AudioNode} The audio node object corresponding to the type.
            */
           static getAudioNodeByType (type, context){
               var audioNode = null;
