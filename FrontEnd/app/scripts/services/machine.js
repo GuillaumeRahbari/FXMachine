@@ -141,7 +141,6 @@ angular.module('frontEndApp')
           init () {
               try
               {
-                  this.context = new AudioContext();
                   // Fix up for prefixing
                   window.AudioContext = window.AudioContext||window.webkitAudioContext;
                   this.context = new AudioContext();

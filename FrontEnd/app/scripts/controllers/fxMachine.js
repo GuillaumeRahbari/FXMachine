@@ -106,7 +106,7 @@ angular.module('frontEndApp')
             }
             else
             {
-                console.error("trying to play sound but already playing")
+                console.error("trying to play sound but already playing");
             }
 
         };
@@ -128,7 +128,7 @@ angular.module('frontEndApp')
             }
             else
             {
-                console.error("trying to stop sound but not playing")
+                console.error("trying to stop sound but not playing");
             }
 
         };
@@ -174,13 +174,13 @@ angular.module('frontEndApp')
                 machine.soundInput.connect(machine.filters[0].filter);
                 // Connecting Output to last filter
                 machine.filters[l-1].filter.connect(machine.soundOutput);
-                graph = graph+"--->[Output]"
+                graph = graph+"--->[Output]";
             }
             //Otherwise, we just connect input and output together
             else
             {
                 console.log("No filters. Connecting input and output...");
-                var graph = graph+"--->[Output]";
+                graph = graph+"--->[Output]";
                 machine.soundInput.connect(machine.soundOutput);
             }
 
