@@ -70,7 +70,7 @@ angular.module('frontEndApp')
                     console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
                     machine.isInitialized = true;
                     angular.element('#play').removeAttr('disabled');
-                    angular.element('#load').attr('disabled');
+                    angular.element('#load').attr('disabled', 'disabled');
                 }, function(errorMsg){
                     console.log(errorMsg);
                 }
@@ -101,7 +101,7 @@ angular.module('frontEndApp')
                 machine.soundInput.start(0, 0);
 
                 angular.element('#stop').removeAttr('disabled');
-                angular.element('#play').attr('disabled');
+                angular.element('#play').attr('disabled', 'disabled');
                 machine.isPlaying = true;
             }
             else
@@ -123,7 +123,7 @@ angular.module('frontEndApp')
                 // We do not need to redecode the data, just to rebuild the graph
                 machine.soundInput.stop(0);
                 angular.element('#play').removeAttr('disabled');
-                angular.element('#stop').attr('disabled');
+                angular.element('#stop').attr('disabled', 'disabled');
                 machine.isPlaying = false;
             }
             else
