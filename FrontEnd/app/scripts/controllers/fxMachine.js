@@ -35,27 +35,8 @@ angular.module('frontEndApp')
         {
             console.log(machine.filters);
             console.log("Adding filter ! .");
-            /*var audioNode = null;
-
-            switch(type)
-            {
-                case "gain":
-                    audioNode = MACHINE.context.createGain();
-                    break;
-                case "biquad":
-                    audioNode = MACHINE.context.createBiquadFilter();
-                    // TODO : doit disparaite quand on pourra choisir le type directement en HTML
-                    break;
-                // Bad type ? Let's just put a debug filter
-                default:
-                    audioNode = MACHINE.context.createGain();
-                    type='debug';
-                    break;
-            }*/
 
             machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context)));
-            console.log(machine.filters);
-
 
             // We need to re buildGraph(), so we stop the music
             if(machine.isInitialized && machine.isPlaying)
