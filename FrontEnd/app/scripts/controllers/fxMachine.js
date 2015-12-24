@@ -61,28 +61,19 @@ angular.module('frontEndApp')
 
 
         /**
-         Load our Sound using XHR AND DECODE IT
+         * Load a sound
          */
-        self.loadSound = function()
-        {
-            console.log($scope.soundFile);
+        self.loadSound = function() {
+            Sound.loadSound(machine.context, $scope.soundFile.name).then(
+                function (soundBufferDecoded) {
+                    machine.soundBuffer = soundBufferDecoded;
 
-            Sound.getSound($scope.soundFile.name).then(
-                function (audioData) {
-                    machine.context.decodeAudioData(audioData, function (soundBufferDecoded) {
-                        machine.soundBuffer = soundBufferDecoded;
-                        console.log(soundBufferDecoded);
-
-                        console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
-                        machine.isInitialized = true;
-                        angular.element('#play').removeAttr('disabled');
-                        angular.element('#load').attr('disabled');
-                    }, function () {
-                        alert("Decoding the audio buffer failed");
-                    }
-                    );
-                }, function(errorStatus){
-                    console.log(errorStatus);
+                    console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
+                    machine.isInitialized = true;
+                    angular.element('#play').removeAttr('disabled');
+                    angular.element('#load').attr('disabled');
+                }, function(errorMsg){
+                    console.log(errorMsg);
                 }
             );
         };
