@@ -30,8 +30,8 @@ PLAYER CONTROLS
 
     <!-- The GAIN filter -->
     <div ng-show="filter.type === 'gain' ">
-        <input id="volume" type="range" min="0" max="60" value="1" step="1" ng-model="filter.obj.gain.value">
-        {{filter.obj.gain.value}}dB
+        <input id="volume" type="range" min="0" max="60" value="1" step="1" ng-model="filter.filter.gain.value">
+        {{filter.filter.gain.value}}dB
     </div>
 
     <!-- The BIQUAD filter -->
@@ -40,24 +40,24 @@ PLAYER CONTROLS
 
         <!-- TODO ajouter le type (lowpass highpass etc)-->
 
-        Type {{filter.obj.type}}
+        Type {{filter.filter.type}}
         <form>
-            <input type="radio" name="biquadType" value="lowpass" ng-model="filter.obj.type" checked>LowPass
-            <input type="radio" name="biquadType" value="highpass" ng-model="filter.obj.type" >HighPass
-            <input type="radio" name="biquadType" value="bandpass" ng-model="filter.obj.type">BandPass
+            <input type="radio" name="biquadType" value="lowpass" ng-model="filter.filter.type" checked>LowPass
+            <input type="radio" name="biquadType" value="highpass" ng-model="filter.filter.type" >HighPass
+            <input type="radio" name="biquadType" value="bandpass" ng-model="filter.filter.type">BandPass
 
         </form>
 
         <!-- TODO limites de frequences de cuttof dependent de l'echantillonnage..-->
-        Cuttof {{filter.obj.frequency.value}}
+        Cuttof {{filter.filter.frequency.value}}
         <br>
-        <input id="cuttofFreq" type="range" min="0" max="40000" value="350" step="10" ng-model="filter.obj.frequency.value">
+        <input id="cuttofFreq" type="range" min="0" max="40000" value="350" step="10" ng-model="filter.filter.frequency.value">
         <br>
 
-        Quality {{filter.obj.Q.value}}
+        Quality {{filter.filter.Q.value}}
         <br>
         <!-- Max theorique : 1000, mais deja a 100 c'est pas mal -->
-        <input id="quality" type="range" min="0.0001" max="100" value="1" step="1" ng-model="filter.obj.Q.value">
+        <input id="quality" type="range" min="0.0001" max="100" value="1" step="1" ng-model="filter.filter.Q.value">
         <br>
 
 

@@ -19,6 +19,8 @@ angular.module('frontEndApp')
         // The audio machine, containing all the stuff that we don't need to access from the html page (yet)
         var machine = new Machine();
 
+        this.filters = machine.filters;
+
         /**
          Initialize the "Audio Context", which is kinda the environment where we create the audio graph
          There can be only one !
@@ -31,9 +33,9 @@ angular.module('frontEndApp')
          */
         self.addFilter = function(type)
         {
-
+            console.log(machine.filters);
             console.log("Adding filter ! .");
-            var audioNode = null;
+            /*var audioNode = null;
 
             switch(type)
             {
@@ -49,9 +51,10 @@ angular.module('frontEndApp')
                     audioNode = MACHINE.context.createGain();
                     type='debug';
                     break;
-            }
+            }*/
 
-            machine.addFilter(new Filter(type, audioNode));
+            machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context)));
+            console.log(machine.filters);
 
 
             // We need to re buildGraph(), so we stop the music
@@ -193,14 +196,14 @@ angular.module('frontEndApp')
                 for(var i = 0 ; i < l-1 ; i++) {
 
                     graph = graph+"--->["+machine.filters[i].type+"]";
-                    machine.filters[i].obj.connect(machine.filters[i + 1].obj);
+                    machine.filters[i].filter.connect(machine.filters[i + 1].filter);
                 }
 
                 // Connecting Input to first filter
                 graph = "X--[Input]-->" + graph;
-                machine.soundInput.connect(machine.filters[0].obj);
+                machine.soundInput.connect(machine.filters[0].filter);
                 // Connecting Output to last filter
-                machine.filters[l-1].obj.connect(machine.soundOutput);
+                machine.filters[l-1].filter.connect(machine.soundOutput);
                 graph = graph+"--->[Output]"
             }
             //Otherwise, we just connect input and output together
