@@ -54,7 +54,6 @@ angular.module('frontEndApp')
                       break;
                   case "biquad":
                       audioNode = context.createBiquadFilter();
-                      // TODO : doit disparaite quand on pourra choisir le type directement en HTML
                       break;
                   // Bad type ? Let's just put a debug filter
                   default:
