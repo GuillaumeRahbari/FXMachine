@@ -12,6 +12,11 @@ angular.module('frontEndApp')
 
       class Filter {
 
+          /**
+           * The constructor of a filter.
+           * @param {String} type - The filter's type.
+           * @param {AudioNode} filter - The filter object (WebAudio API).
+           */
           constructor (type, filter){
               this.type = type;
               this.filter = filter;
