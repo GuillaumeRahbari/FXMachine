@@ -35,7 +35,7 @@ angular.module('frontEndApp')
         {
             console.log("Adding filter ! .");
 
-            machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context)));
+            machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context), machine));
 
             // We need to re buildGraph(), so we stop the music
             if(machine.isInitialized && machine.isPlaying)
@@ -139,6 +139,23 @@ angular.module('frontEndApp')
         self.buildGraph = function() {
 
 
+            // Before rebuilding a graph, we disconnect everything
+
+
+            var l = machine.filters.length;
+
+            for(var i = 0 ; i < l ; i++) {
+ 
+                        machine.filters[i].audioNode.disconnect();
+
+
+
+
+
+            }
+
+
+
             // Just to visualize the entire chain
             var graph = "";
 
@@ -147,6 +164,7 @@ angular.module('frontEndApp')
             // *** Initializing input and output
 
             // soundInput becomes the "input" box
+            // TODO : we dont have to create at every graph build // ou alors faut supprimer les vieux je sais pas
             machine.soundInput = machine.context.createBufferSource();
             machine.soundOutput = machine.context.destination;
             machine.soundInput.buffer = machine.soundBuffer;
@@ -155,7 +173,7 @@ angular.module('frontEndApp')
 
             // *** Connection
 
-            var l = machine.filters.length;
+
 
             // IF we got filters, well.. we connect them !
             if (l > 0)
@@ -165,12 +183,12 @@ angular.module('frontEndApp')
                 // Connecting all the filters in a big chain
                 for(var i = 0 ; i < l-1 ; i++) {
 
-                    graph = graph+"--->["+machine.filters[i].type+"]";
+                    graph = graph+i+"--->["+machine.filters[i].type+"]";
                     machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
                 }
 
                 // Connecting Input to first filter
-                graph = "X--[Input]-->" + graph;
+                graph = "X--[Input]" + graph;
                 machine.soundInput.connect(machine.filters[0].audioNode);
                 // Connecting Output to last filter
                 machine.filters[l-1].audioNode.connect(machine.soundOutput);

@@ -19,7 +19,7 @@ PLAYER CONTROLS
 <h3>THE Filters</h3>
 <hr width="40%" align="left">
 <!-- For AUDIO GAIN filters only -->
-<div draggable-div ng-repeat="filter in machine.filters" style="width:300px">
+<div ng-repeat="filter in machine.filters" style="width:300px">
 
     <h4>Filtre : {{filter.type}}</h4>
 
@@ -37,6 +37,13 @@ PLAYER CONTROLS
     <!-- debug -->
     <div ng-show="filter.type === 'debug' ">
     </div>
+
+
+    <!-- Ajout d'un super equalizer -->
+    <script>
+
+
+    </script>
 
     <!-- separator -->
     <hr width="40%" align="left">
