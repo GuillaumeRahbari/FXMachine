@@ -20,7 +20,7 @@ angular.module('frontEndApp')
           constructor (type, audioNode, machine){
               this._type = type;
               this._audioNode = audioNode;
-              this._analyzer = machine._context.createAnalyser();
+              this._analyser = machine.context.createAnalyser();
           }
 
           /**
@@ -43,7 +43,7 @@ angular.module('frontEndApp')
            * Getter of the analyzer.
            * @returns {AnalyzerNode} - The Analyzer node linked to the filter.
            */
-          get analyzer () {
+          get analyser () {
               return this._analyser;
           }
 

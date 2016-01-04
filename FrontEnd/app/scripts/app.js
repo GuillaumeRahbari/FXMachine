@@ -40,4 +40,9 @@ angular
         if($cookieStore.get('userId') !== undefined) {
             $location.path('/fxmachine');
         }
+        // On va quand meme dans fxMachine parce que merde.
+      else
+        {
+          $location.path('/fxmachine');
+        }
 }]);

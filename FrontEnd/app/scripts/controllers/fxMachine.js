@@ -38,10 +38,15 @@ angular.module('frontEndApp')
             machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context), machine));
 
             // We need to re buildGraph(), so we stop the music
+            // And relaunch it immediately
+            // TODO : bug au debut de la musique, fait un saut
             if(machine.isInitialized && machine.isPlaying)
             {
+                var currentTime = machine.context.currentTime;
                 self.stopSound();
+                self.playSound(currentTime);
             }
+
         };
 
 
@@ -52,8 +57,14 @@ angular.module('frontEndApp')
         self.removeFilter = function(filterToRemove)
         {
             // We need to re buildGraph(), so we stop the music
+            // And relaunch it immediately
+            // TODO : bug au debut de la musique, fait un saut
             if (machine.isInitialized && machine.isPlaying){
+
+                var currentTime = machine.context.currentTime;
                 self.stopSound();
+                self.playSound(currentTime);
+
             }
             machine.removeFilter(filterToRemove);
         };
@@ -83,8 +94,9 @@ angular.module('frontEndApp')
          Construct the graph and play the sound
          Finally: tell the source when to start
          */
-        self.playSound = function () {
+        self.playSound = function (startTime) {
 
+            startTime = typeof startTime !== 'undefined' ?  startTime : 0;
             if(!machine.isPlaying)
             {
                 // play the source now.
@@ -98,7 +110,7 @@ angular.module('frontEndApp')
                 // BEWARE : the graph should be connected, if sound has been stopped,
                 // and if the graph is not built (i.e the previous line of code is not present)
                 // Then the next line will do nothing, we need to rebuild the graph
-                machine.soundInput.start(0, 0);
+                machine.soundInput.start(0, startTime);
 
                 angular.element('#stop').removeAttr('disabled');
                 angular.element('#play').attr('disabled', 'disabled');
@@ -140,18 +152,11 @@ angular.module('frontEndApp')
 
 
             // Before rebuilding a graph, we disconnect everything
-
-
             var l = machine.filters.length;
 
             for(var i = 0 ; i < l ; i++) {
- 
-                        machine.filters[i].audioNode.disconnect();
-
-
-
-
-
+                machine.filters[i].audioNode.disconnect();
+                machine.filters[i].analyser.disconnect();
             }
 
 
@@ -184,14 +189,19 @@ angular.module('frontEndApp')
                 for(var i = 0 ; i < l-1 ; i++) {
 
                     graph = graph+i+"--->["+machine.filters[i].type+"]";
-                    machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
+                    // Connect filter to its own analyzer (for visualisation purposes
+                    machine.filters[i].audioNode.connect(machine.filters[i].analyser);
+                    // Connect analyzer to next filter
+                    machine.filters[i].analyser.connect(machine.filters[i + 1].audioNode);
                 }
 
                 // Connecting Input to first filter
                 graph = "X--[Input]" + graph;
                 machine.soundInput.connect(machine.filters[0].audioNode);
-                // Connecting Output to last filter
-                machine.filters[l-1].audioNode.connect(machine.soundOutput);
+
+                machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
+                // Connecting Output to last filter analyzer
+                machine.filters[l-1].analyser.connect(machine.soundOutput);
                 graph = graph+"--->[Output]";
             }
             //Otherwise, we just connect input and output together
@@ -207,5 +217,26 @@ angular.module('frontEndApp')
         };
 
         // **** Audio Machine methods
+
+
+        // ********* VISUALISATION. TODO. BETA.
+        self.visualiseFilters = function()
+        {
+            var l = machine.filters.length;
+
+            for(var i = 0 ; i < l ; i++) {
+                var analyser = machine.filters[i].analyser;
+
+                var freqDomain = new Float32Array(analyser.frequencyBinCount);
+                analyser.getFloatFrequencyData(freqDomain);
+            }
+        }
+
+
+        self.getFrequencyValue = function (frequency) {
+            var nyquist = context.sampleRate/2;
+            var index = Math.round(frequency/nyquist * freqDomain.length);
+            return freqDomain[index];
+        }
 
     }]);
