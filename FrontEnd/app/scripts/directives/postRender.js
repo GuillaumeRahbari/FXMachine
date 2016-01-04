@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc directive
- * @name frontEndApp.directive:plumbMenuItem
+ * @name frontEndApp.directive:postRender
  * @description
- * # plumbMenuItem
+ * # postRender
  */
 angular.module('frontEndApp')
     .directive('postRender', [ '$timeout', function($timeout) {
