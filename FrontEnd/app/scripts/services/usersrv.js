@@ -8,7 +8,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .factory('UserSrv', function ($cookieStore, $location) {
+  .factory('UserSrv', function ($cookieStore, $location, $http) {
     return {
         /**
          * This function register asynchronously a user.
@@ -35,7 +35,7 @@ angular.module('frontEndApp')
         signin: function (user) {
             return $http({
                 method: 'PUT',
-                url: 'localhost:3000/subscription',
+                url: 'http://localhost:3000/subscription',
                 data: user,
                 headers: {'Content-Type': 'application/json'}
             }).then(
