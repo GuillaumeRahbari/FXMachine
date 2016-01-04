@@ -8,9 +8,10 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-  .controller('ConnectionCtrl', [function (UserSrv) {
+  .controller('ConnectionCtrl', function (UserSrv, $scope) {
 
-      this.signin = function (user) {
+      $scope.signin = function (user) {
+          console.log('cc');
           UserSrv.signin(user).then(
               function (data) {
                   console.log(data);
@@ -19,6 +20,6 @@ angular.module('frontEndApp')
                   console.log(error);
               }
           )
-      }
+      };
 
-  }]);
+  });
