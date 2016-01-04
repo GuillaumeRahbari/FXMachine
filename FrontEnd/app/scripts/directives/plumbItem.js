@@ -32,7 +32,6 @@ angular.module('frontEndApp')
                 scope.$parent.removeState(attrs.identifier);
                 scope.$parent.$digest();
             });
-
         }
     };
 });
