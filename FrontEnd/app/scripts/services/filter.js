@@ -23,28 +23,12 @@ angular.module('frontEndApp')
 
               // Setup Analyzer
               this._analyser = machine.context.createAnalyser();
-              // TODO : parametres a placer ailleurs car peuvent changer je pense *********************************************
+              // Default parameters
               this._analyser.smoothingTimeConstant = 0.3;
               this._analyser.fftSize = 1024;
 
-              // Setup javascript node to handle things properly
-              // TODO : lol  expliquer ca
-              this._analyserEventNode = machine.context.createScriptProcessor(2048,1,1);
-
-              this._audioNode.connect(this._analyser);
-              this._analyser.connect(this._analyserEventNode);
-
-              this._analyserEventNode.onaudioprocess = function() { console.log("just tryin");};
-
           }
 
-          /**
-           * Getter of the type.
-           * @returns {TODO} the scirpt processor connected to the analyzer
-           */
-          get analyserEventNode () {
-              return this._analyserEventNode;
-          }
 
           /**
            * Getter of the type.
