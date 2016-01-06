@@ -14,6 +14,8 @@ angular.module('frontEndApp')
 
         var self = this;
 
+
+        // TODO : bug -> si la musique a reprise a zero, l'ajout d'un filtre va quand meme la faire repartir a la position d'ecoute d'avant
         // Note : the method init() is called when the controller is initialized.
 
         // The audio machine, containing all the stuff that we don't need to access from the html page (yet)
