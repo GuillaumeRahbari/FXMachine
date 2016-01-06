@@ -195,7 +195,8 @@ angular.module('frontEndApp')
 
                     graph = graph+i+"--->["+machine.filters[i].type+"]";
                     // Connect filter its analyzer (dead-end)
-                    //machine.filters[i].audioNode.connect(machine.filters[i].analyser);
+                    machine.filters[i].audioNode.connect(machine.filters[i].analyser);
+
                     // Connect filter to the next one
                     machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
                 }
@@ -207,7 +208,8 @@ angular.module('frontEndApp')
                 graph = graph+i+"--->["+machine.filters[i].type+"]";
 
                 //Connecting last filter to its alnalyze( dead-end)
-                //machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
+                machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
+
                 // Connecting Output to last filter analyzer
                 machine.filters[l-1].audioNode.connect(machine.soundOutput);
 
@@ -227,6 +229,7 @@ angular.module('frontEndApp')
         };
 
         // **** Audio Machine methods
+
 
 
 

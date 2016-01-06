@@ -10,12 +10,13 @@ angular.module('frontEndApp')
   .directive('audioVisualizer', function () {
     return {
       restrict: 'A',
-        link: function(scope, element){
+        scope: {filter: '=filter', context: '=context'},
+        controller: function($scope, $element, $timeout){
+
+    // TODO: STOP HERE. GUIGIU, I NEED YOUR HELP.
+            // can't get the onaudioprocess. If we get it, we're good.
 
 
-
-
-            var self = this;
 
             // ********* VISUALISATION. TODO. BETA.
             /*self.visualiseFilters = function()
@@ -39,15 +40,64 @@ angular.module('frontEndApp')
 
 */
 
-            // setup a javascript node
-            var javascriptNode = context.createScriptProcessor(2048, 1, 1);
+
+
+            console.log("THE  FILTER : " + $scope.filter.type.toString())
+           // console.log("THE  STATE : " +  $scope.test.toString())
+
+            var ctx = $element[0].getContext('2d');
+
+            var t = false;
+
+            // TODO : gerer quand c en POZE pour dessiner un autre truc
+
+            function getAverageVolume(array) {
+                var values = 0;
+                var average;
+
+                var length = array.length;
+                console.log("length" + length)
+                // get all the frequency amplitudes
+                for (var i = 0; i < length/2; i++) {
+                    values += array[i];
+                }
+
+                console.log("values" + values)
+                average = values / length;
+                return average;
+            };
 
 
 
+            var draw = function()
+            {
+                // get the average, bincount is fftsize / 2
+                var array =  new Uint8Array($scope.filter.analyser.frequencyBinCount);
+                $scope.filter.analyser.getByteFrequencyData(array);
+                var average = getAverageVolume(array)
+
+                console.log(array)
+                // clear the current state
+                ctx.clearRect(0, 0, 60, 130);
+
+                // set the fill style
+               // ctx.fillStyle=gradient;
+
+                // create the meters
+                ctx.fillRect(0,130-average,25,130);
+
+                $timeout(draw, 60)
+
+            };
 
 
+            draw();
 
 
+            // draw($scope.filter.analyzer, $scope.context);
+
+
+            // function init
 
 
 
