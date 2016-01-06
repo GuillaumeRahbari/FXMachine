@@ -195,7 +195,7 @@ angular.module('frontEndApp')
 
                     graph = graph+i+"--->["+machine.filters[i].type+"]";
                     // Connect filter its analyzer (dead-end)
-                    machine.filters[i].audioNode.connect(machine.filters[i].analyser);
+                    //machine.filters[i].audioNode.connect(machine.filters[i].analyser);
                     // Connect filter to the next one
                     machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
                 }
@@ -207,7 +207,7 @@ angular.module('frontEndApp')
                 graph = graph+i+"--->["+machine.filters[i].type+"]";
 
                 //Connecting last filter to its alnalyze( dead-end)
-                machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
+                //machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
                 // Connecting Output to last filter analyzer
                 machine.filters[l-1].audioNode.connect(machine.soundOutput);
 
@@ -229,24 +229,6 @@ angular.module('frontEndApp')
         // **** Audio Machine methods
 
 
-        // ********* VISUALISATION. TODO. BETA.
-        self.visualiseFilters = function()
-        {
-            var l = machine.filters.length;
 
-            for(var i = 0 ; i < l ; i++) {
-                var analyser = machine.filters[i].analyser;
-
-                var freqDomain = new Float32Array(analyser.frequencyBinCount);
-                analyser.getFloatFrequencyData(freqDomain);
-            }
-        }
-
-
-        self.getFrequencyValue = function (frequency) {
-            var nyquist = context.sampleRate/2;
-            var index = Math.round(frequency/nyquist * freqDomain.length);
-            return freqDomain[index];
-        }
 
     }]);

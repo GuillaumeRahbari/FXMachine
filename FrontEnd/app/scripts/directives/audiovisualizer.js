@@ -11,6 +11,54 @@ angular.module('frontEndApp')
     return {
       restrict: 'A',
         link: function(scope, element){
+
+
+
+
+            var self = this;
+
+            // ********* VISUALISATION. TODO. BETA.
+            /*self.visualiseFilters = function()
+            {
+                var l = machine.filters.length;
+
+                for(var i = 0 ; i < l ; i++) {
+                    var analyser = machine.filters[i].analyser;
+
+                    var freqDomain = new Float32Array(analyser.frequencyBinCount);
+                    analyser.getFloatFrequencyData(freqDomain);
+                }
+            }
+
+
+            self.getFrequencyValue = function (frequency) {
+                var nyquist = context.sampleRate/2;
+                var index = Math.round(frequency/nyquist * freqDomain.length);
+                return freqDomain[index];
+            }
+
+*/
+
+            // setup a javascript node
+            var javascriptNode = context.createScriptProcessor(2048, 1, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* OLD CANVAS FUNNY STUFF
+
+
             var ctx = element[0].getContext('2d');
 
             // variable that decides if something should be drawn on mousemove
@@ -76,6 +124,7 @@ angular.module('frontEndApp')
                 // draw it
                 ctx.stroke();
             }
+            */
         }
     };
   });
