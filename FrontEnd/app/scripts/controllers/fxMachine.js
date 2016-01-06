@@ -194,10 +194,10 @@ angular.module('frontEndApp')
                 for(var i = 0 ; i < l-1 ; i++) {
 
                     graph = graph+i+"--->["+machine.filters[i].type+"]";
-                    // Connect filter to its own analyzer (for visualisation purposes
+                    // Connect filter its analyzer (dead-end)
                     machine.filters[i].audioNode.connect(machine.filters[i].analyser);
-                    // Connect analyzer to next filter
-                    machine.filters[i].analyser.connect(machine.filters[i + 1].audioNode);
+                    // Connect filter to the next one
+                    machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
                 }
 
                 // Connecting Input to first filter
@@ -205,9 +205,13 @@ angular.module('frontEndApp')
                 machine.soundInput.connect(machine.filters[0].audioNode);
 
                 graph = graph+i+"--->["+machine.filters[i].type+"]";
+
+                //Connecting last filter to its alnalyze( dead-end)
                 machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
                 // Connecting Output to last filter analyzer
-                machine.filters[l-1].analyser.connect(machine.soundOutput);
+                machine.filters[l-1].audioNode.connect(machine.soundOutput);
+
+
                 graph = graph+"--->[Output]";
             }
             //Otherwise, we just connect input and output together
