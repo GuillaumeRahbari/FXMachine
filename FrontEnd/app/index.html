@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <title>FXMachine</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+      <meta name="viewport" content="width=device-width">
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jsPlumb/1.4.1/jquery.jsPlumb-1.4.1-all-min.js"></script>
+
+      <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
@@ -44,6 +48,7 @@
         <script src="scripts/directives/filemodel.js"></script>
         <script src="scripts/directives/filtergain.js"></script>
         <script src="scripts/directives/filterbiquad.js"></script>
+        <script src="scripts/directives/postRender.js"></script>
         <script src="scripts/directives/draggablediv.js"></script>
         <script src="scripts/controllers/connection.js"></script>
         <script src="scripts/services/usersrv.js"></script>
@@ -51,6 +56,11 @@
         <!-- audio visualisation directives -->
         <script src="scripts/directives/egaliservisualiser.js"></script>
         <script src="scripts/directives/waveformvisualiser.js"></script>
+
+    <!-- New architecture WORK IN PROGRESS -->
+        <script src="scripts/services/pedal.js"></script>
+        <script src="scripts/services/webaudio.js"></script>
+        <script src="scripts/services/context.js"></script>
 
         <!-- endbuild -->
 </body>
