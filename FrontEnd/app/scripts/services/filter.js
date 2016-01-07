@@ -20,8 +20,15 @@ angular.module('frontEndApp')
           constructor (type, audioNode, machine){
               this._type = type;
               this._audioNode = audioNode;
-              this._analyzer = machine._context.createAnalyser();
+
+              // Setup Analyzer
+              this._analyser = machine.context.createAnalyser();
+              // Default parameters
+              this._analyser.smoothingTimeConstant = 0.3;
+              this._analyser.fftSize = 1024;
+
           }
+
 
           /**
            * Getter of the type.
@@ -43,7 +50,7 @@ angular.module('frontEndApp')
            * Getter of the analyzer.
            * @returns {AnalyzerNode} - The Analyzer node linked to the filter.
            */
-          get analyzer () {
+          get analyser () {
               return this._analyser;
           }
 

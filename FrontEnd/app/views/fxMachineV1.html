@@ -19,7 +19,7 @@ PLAYER CONTROLS
 <h3>THE Filters</h3>
 <hr width="40%" align="left">
 <!-- For AUDIO GAIN filters only -->
-<div ng-repeat="filter in machine.filters" style="width:300px">
+<div ng-repeat="filter in machine.filters" style="border-style:solid;border-color:black;border-width:3px">
 
     <h4>Filtre : {{filter.type}}</h4>
 
@@ -40,11 +40,9 @@ PLAYER CONTROLS
 
 
     <!-- Ajout d'un super equalizer -->
-    <script>
 
-
-    </script>
-
+    <canvas audio-visualizer filter="filter" context="context" width="400" height="100" id="canvas"
+            style="border-style: solid; border-width:thin;  border-color:black" ></canvas>
     <!-- separator -->
     <hr width="40%" align="left">
 </div>

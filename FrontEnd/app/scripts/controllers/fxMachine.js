@@ -14,6 +14,8 @@ angular.module('frontEndApp')
 
         var self = this;
 
+
+        // TODO : bug -> si la musique a reprise a zero, l'ajout d'un filtre va quand meme la faire repartir a la position d'ecoute d'avant
         // Note : the method init() is called when the controller is initialized.
 
         // The audio machine, containing all the stuff that we don't need to access from the html page (yet)
@@ -38,10 +40,15 @@ angular.module('frontEndApp')
             machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context), machine));
 
             // We need to re buildGraph(), so we stop the music
+            // And relaunch it immediately
+            // TODO : bug au debut de la musique, fait un saut
             if(machine.isInitialized && machine.isPlaying)
             {
+                var currentTime = machine.context.currentTime;
                 self.stopSound();
+                self.playSound(currentTime);
             }
+
         };
 
 
@@ -51,11 +58,18 @@ angular.module('frontEndApp')
          */
         self.removeFilter = function(filterToRemove)
         {
-            // We need to re buildGraph(), so we stop the music
-            if (machine.isInitialized && machine.isPlaying){
-                self.stopSound();
-            }
+
             machine.removeFilter(filterToRemove);
+            // We need to re buildGraph(), so we stop the music
+            // And relaunch it immediately
+            // TODO : bug au debut de la musique, fait un saut
+            if (machine.isInitialized && machine.isPlaying){
+
+                var currentTime = machine.context.currentTime;
+                self.stopSound();
+                self.playSound(currentTime);
+
+            }
         };
 
 
@@ -83,8 +97,9 @@ angular.module('frontEndApp')
          Construct the graph and play the sound
          Finally: tell the source when to start
          */
-        self.playSound = function () {
+        self.playSound = function (startTime) {
 
+            startTime = typeof startTime !== 'undefined' ?  startTime : 0;
             if(!machine.isPlaying)
             {
                 // play the source now.
@@ -98,7 +113,7 @@ angular.module('frontEndApp')
                 // BEWARE : the graph should be connected, if sound has been stopped,
                 // and if the graph is not built (i.e the previous line of code is not present)
                 // Then the next line will do nothing, we need to rebuild the graph
-                machine.soundInput.start(0, 0);
+                machine.soundInput.start(0, startTime);
 
                 angular.element('#stop').removeAttr('disabled');
                 angular.element('#play').attr('disabled', 'disabled');
@@ -139,20 +154,6 @@ angular.module('frontEndApp')
         self.buildGraph = function() {
 
 
-            // Before rebuilding a graph, we disconnect everything
-
-
-            var l = machine.filters.length;
-
-            for(var i = 0 ; i < l ; i++) {
- 
-                        machine.filters[i].audioNode.disconnect();
-
-
-
-
-
-            }
 
 
 
@@ -164,7 +165,8 @@ angular.module('frontEndApp')
             // *** Initializing input and output
 
             // soundInput becomes the "input" box
-            // TODO : we dont have to create at every graph build // ou alors faut supprimer les vieux je sais pas
+            // TODO : we dont have to create at every graph build // ou alors faut supprimer les vieux je sais pas -> Ben en fait c'est la bonne methode...
+            //
             machine.soundInput = machine.context.createBufferSource();
             machine.soundOutput = machine.context.destination;
             machine.soundInput.buffer = machine.soundBuffer;
@@ -173,6 +175,16 @@ angular.module('frontEndApp')
 
             // *** Connection
 
+
+            // Before rebuilding a graph, we disconnect everything
+            machine.soundInput.disconnect();
+            machine.soundOutput.disconnect();
+            var l = machine.filters.length;
+
+            for(var i = 0 ; i < l ; i++) {
+                machine.filters[i].audioNode.disconnect();
+                machine.filters[i].analyser.disconnect();
+            }
 
 
             // IF we got filters, well.. we connect them !
@@ -184,14 +196,26 @@ angular.module('frontEndApp')
                 for(var i = 0 ; i < l-1 ; i++) {
 
                     graph = graph+i+"--->["+machine.filters[i].type+"]";
+                    // Connect filter its analyzer (dead-end)
+                    machine.filters[i].audioNode.connect(machine.filters[i].analyser);
+
+                    // Connect filter to the next one
                     machine.filters[i].audioNode.connect(machine.filters[i + 1].audioNode);
                 }
 
                 // Connecting Input to first filter
                 graph = "X--[Input]" + graph;
                 machine.soundInput.connect(machine.filters[0].audioNode);
-                // Connecting Output to last filter
+
+                graph = graph+i+"--->["+machine.filters[i].type+"]";
+
+                //Connecting last filter to its alnalyze( dead-end)
+                machine.filters[l-1].audioNode.connect(machine.filters[l-1].analyser);
+
+                // Connecting Output to last filter analyzer
                 machine.filters[l-1].audioNode.connect(machine.soundOutput);
+
+
                 graph = graph+"--->[Output]";
             }
             //Otherwise, we just connect input and output together
@@ -207,5 +231,9 @@ angular.module('frontEndApp')
         };
 
         // **** Audio Machine methods
+
+
+
+
 
     }]);
