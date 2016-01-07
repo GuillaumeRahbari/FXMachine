@@ -54,6 +54,9 @@ angular.module('frontEndApp')
               return this._analyser;
           }
 
+
+
+
           /**
            * A static method pour get the audio node when we know the type.
            * @param {String} type - The filter's type.
