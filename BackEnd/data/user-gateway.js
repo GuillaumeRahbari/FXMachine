@@ -24,8 +24,6 @@ function createUser(user ,callback) {
                     console.log(result.ops[0]._id );
                 }
             });
-
-
         }
     });
 }
