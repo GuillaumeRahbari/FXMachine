@@ -196,6 +196,10 @@ angular.module('frontEndApp')
                       }
 
                         console.log("starting music...");
+
+                      // Connecting webaudio input to analyzer
+                      this._soundInput.connect(this._analyser);
+
                       this._soundInput.start(0, 0);
                       this._isPlaying = true;
 

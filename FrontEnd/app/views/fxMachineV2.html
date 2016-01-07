@@ -15,8 +15,14 @@ FX MACHINE V2
 <button id="play" ng-click="fxmachine.playSound2();">Lecture (son initial)</button>
 <button id="stop" ng-click="fxmachine.stopSound2();">Stop (son initial)</button>
 
+
+
 <!-- Input Visualisation : waveform -->
 <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
+        style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
+
+<!-- Input Visualisation : volume -->
+<canvas volume-visualiser analyser-node="fxmachine.webaudio.analyser" width="10" height="100" id="whatever3"
         style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
 
 
