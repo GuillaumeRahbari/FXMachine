@@ -5,60 +5,25 @@
 var app = require('./app/core/core.js').app;
 var router = require('./app/core/core.js').express.Router();
 var mongodb = require('mongodb');
+var userGateway = require('./user-gateway');
+var userFinder = require('./user-finder');
 
-
+/**
+ * This method will sign in a client if his user name is already in the database. If not it will return 404.
+ */
 router.post('/signin', function (req, res) {
-    var mongoClient = mongodb.MongoClient;
-    var url = 'mongodb://localhost:27017/FXMachine';
-    var body = req.body;
-
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.log('Unable to connect to the mongoDB server. Error:', err);
-        } else {
-            var collection = db.collection('users');
-            console.log(body.name);
-            collection.find({name : body.name } ).toArray(function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else if (result.length) {
-                    console.log('Found:', result);
-                    res.send(result);
-                } else {
-                    res.send(404);
-                    console.log('No document(s) found with defined "find" criteria!');
-                }
-            })
-        }
+    userFinder.findOne(req.body, function(response) {
+        res.send(response);
     });
 });
 
-
+/**
+ * This method will communicate with the userGateway to add the user put in the body of the request to the database.
+ * If the login of the user is free, then the user is added and an idea is returned, otherwise 409 is returned.
+ */
 router.put("/subscription", function (req, res) {
-    var mongoClient = mongodb.MongoClient;
-    var url = 'mongodb://localhost:27017/FXMachine';
-
-    var body = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.log('Unable to connect to the mongoDB server. Error:', err);
-            res.send(err);
-        } else {
-            console.log('Connection established to', url);
-            var collection = db.collection('users');
-            console.log(body);
-            collection.insert([body], function (err, result) {
-                if (err) {
-                    res.send(409);
-                } else {
-                    console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
-                    res.send({ id :  result.ops[0]._id });
-                    console.log(result.ops[0]._id );
-                }
-            });
-
-
-        }
+    userGateway.createUser(req.body, function(response) {
+        res.send(response);
     });
 });
 
