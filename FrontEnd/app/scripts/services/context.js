@@ -6,6 +6,7 @@
  * @description
  * # Context
  * Service in the frontEndApp.
+ * The audio context, that should only be accessed by this service
  */
 angular.module('frontEndApp')
   .service('Context', function () {

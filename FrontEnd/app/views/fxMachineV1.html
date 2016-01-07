@@ -5,8 +5,8 @@ PLAYER CONTROLS
 <!-- Machine controllers -->
 <input type="file" file-model="soundFile"/>
 <button id="load" ng-click="machine.loadSound()">Charger le son</button>
-<button id="play" ng-click="machine.playSound();" disabled>Lecture du son</button>
-<button id="stop" ng-click="machine.stopSound();" disabled>Stopper le son</button>
+<button id="play" ng-click="machine.playSound();" disabled>Lecture</button>
+<button id="stop" ng-click="machine.stopSound();" disabled>Stop</button>
 
 <!-- waveform -->
 <canvas waveform-visualiser buffer="machine.machine.soundBuffer" width="400" height="100" id="whatever"

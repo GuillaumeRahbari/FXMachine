@@ -90,7 +90,7 @@ angular.module('frontEndApp')
                     // put in comment so we can load a new song if we want
                     //angular.element('#load').attr('disabled', 'disabled');
 
-                    console.log("BUFFER:" + machine.soundBuffer)
+
 
                 }, function(errorMsg){
                     console.log(errorMsg);
@@ -134,6 +134,7 @@ angular.module('frontEndApp')
         };
 
         /**
+         * It's STOP, not PAUSE.
          */
         self.stopSound = function () {
             if(machine.isPlaying)
@@ -147,6 +148,8 @@ angular.module('frontEndApp')
                 angular.element('#play').removeAttr('disabled');
                 angular.element('#stop').attr('disabled', 'disabled');
                 machine.isPlaying = false;
+
+
             }
             else
             {
@@ -159,8 +162,6 @@ angular.module('frontEndApp')
          Connect audio boxes together
          */
         self.buildGraph = function() {
-
-
 
 
 
