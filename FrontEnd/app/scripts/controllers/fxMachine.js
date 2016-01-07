@@ -10,7 +10,7 @@
  * @name frontEndApp.controller:fxMachineCtrl
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', function ($scope, Machine, Filter, Sound, WebAudio) {
+    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter2', 'Sound', 'WebAudio', 'Pedal', function ($scope, Machine, Filter, Sound, WebAudio, Pedal) {
 
 
 
@@ -26,15 +26,11 @@ angular.module('frontEndApp')
 
 
         var webaudio = new WebAudio();
-       // webaudio.init();
         this.webaudio = webaudio;
-        //this.webaudio = webaudio;
-/*
-        var context = new context();
-        context.init();
-        */
 
-
+        // Only one pedal for now
+        var pedal = new Pedal(webaudio);
+        this.pedal = pedal;
 
 
         /**
@@ -77,6 +73,24 @@ angular.module('frontEndApp')
 
         };
 
+        self.tryPedal = function(ped)
+        {
+            console.log("try pedal")
+            ped.connectFilters();
+
+            console.log("send stuff to webaudio")
+
+            //****************************************
+            // TODO : appeler webaudio.playSound avec la liste de filtres
+            // la methode s'occupe elle meme de tout connecter ensuite
+
+
+            // We work with a copy of the array, just to be sure that above here, we won't alterate our beautiful pedal
+            // (main point of this architecture btw)
+            var filtersArray = ped.filters.slice();
+            filtersArray.push(ped.input); // Because we also need to connect input to the stuff
+            webaudio.playSoundFromPedal(filtersArray, ped.input, ped.output);
+        };
 
         // ******************* OLD STUFF!!! *************************************************
 
@@ -89,17 +103,9 @@ angular.module('frontEndApp')
         {
             console.log("Adding filter ! .");
 
-            machine.addFilter(new Filter(type, Filter.getAudioNodeByType(type,machine.context), machine));
-
-            // We need to re buildGraph(), so we stop the music
-            // And relaunch it immediately
-            // TODO : bug au debut de la musique, fait un saut
-            if(machine.isInitialized && machine.isPlaying)
-            {
-                var currentTime = machine.context.currentTime;
-                self.stopSound();
-                self.playSound(currentTime);
-            }
+            var filterToAdd = new Filter2(type, webaudio.context);
+            // TODO : faire des veririfications ?
+            pedal.addFilter(filterToAdd);
 
         };
 

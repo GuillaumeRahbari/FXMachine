@@ -68,10 +68,150 @@ angular.module('frontEndApp')
            */
 
 
+          getFilterByUUID(array, uuid)
+          {
+              for(var i = 0 ; i < array.length ; i++)
+              {
+                  if(array[i].uuid == uuid)
+                  return array[i];
+              }
+              console.error("NO RESULT GETFILTERBYUUID:" + filters)
+              return undefined;
 
-          playSound(filters) {
+          };
+
+
+          /**
+           * TODO : commenter un peu, chercher a simplifier (connexion de pedalInput...)
+           * @param filters
+           * @param pedalInput
+           * @param pedalOutput
+           */
+          playSoundFromPedal(filters, pedalInput, pedalOutput)
+          {
+
+              this._soundInput = this._context.createBufferSource();
+              this._soundOutput = this._context.destination;
+              this._soundInput.buffer = this._soundBuffer;
+
               // TODO : utiliser les filters SI YEN A
               // if theres filters, graph and all that stuff
+
+              if(filters != undefined)
+              {
+                  //Need to build graph with filters here
+                  var l = filters.length;
+
+                  if(l >0)
+                  {
+                      // **** COnnectinf webaudio to pedalInput
+                      this._soundInput.connect(pedalInput.audioNode);
+
+
+                      // **** Connecting pedalInput to its filters
+                      // TODO : grosse duplication de code
+                      /*for(var i = 0 ; i < pedalInput.outputs.length ; i++)
+                      {
+                          // * get uuids of output
+                          var filterUUID = pedalInput.outputs[i];
+                          console.log("filterUUID:"+filterUUID);
+
+                          // * FInd the matching filter
+                          var outputFilter = undefined;
+                          // COuld be pedalOutput
+                          if(filterUUID == pedalOutput.uuid)
+                          {
+                              console.info("conenxion: output filter was pedaloutput")
+                              outputFilter = pedalOutput;
+                          }
+
+
+                          for(var k = 0 ; k < filters.length ; k++)
+                          {
+                              if(filters[k].uuid == filterUUID)
+                              {
+                                  outputFilter = filters[k];
+                                  console.info("output filter found in pedal filters")
+                              }
+
+                          }
+                          if(outputFilter == undefined)
+                          {
+                              console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
+                              return;
+                          }
+
+                          // * and connect the filter to that output filter
+                          pedalInput.audioNode.connect(outputFilter.audioNode);
+                      }*/
+
+
+                      // **** COnnecting pedalOutput to webaudio output
+                      pedalOutput.audioNode.connect(this._soundOutput);
+
+                      // **** COnnecting everything inside
+
+
+                      for(var i = 0 ; i < l ; i++) // For each filter
+                      {
+                          // and for each output of the filter
+                          for(var j = 0 ; j < filters[i].outputs.length; j++)
+                          {
+                              // * get uuids of ouput
+                              var filterUUID = filters[i].outputs[j];
+                                  console.log("filterUUID:"+filterUUID);
+
+                              // * FInd the matching filter
+                              var outputFilter = undefined;
+                              // COuld be pedalOutput
+                              if(filterUUID == pedalOutput.uuid)
+                              {
+                                  console.info("conenxion: output filter was pedaloutput")
+                                  outputFilter = pedalOutput;
+                              }
+
+
+                              for(var k = 0 ; k < filters.length ; k++)
+                              {
+                                  if(filters[k].uuid == filterUUID)
+                                  {
+                                      outputFilter = filters[k];
+                                      console.info("output filter found in pedal filters")
+                                  }
+
+                              }
+                              if(outputFilter == undefined)
+                              {
+                                  console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
+                                  return;
+                              }
+
+                              // * and connect the filter to that output filter
+                              filters[i].audioNode.connect(outputFilter.audioNode);
+                          }
+
+                      }
+
+                        console.log("starting music...");
+                      this._soundInput.start(0, 0);
+                      this._isPlaying = true;
+
+                  }
+                  else
+                  {
+                      console.info("something happened.");
+                  }
+
+              }
+              else
+              {
+                  console.error("smth happened");
+              }
+          }
+
+          playSound()
+          {
+
 
               // otherwise, just play input sound
               {
@@ -86,6 +226,7 @@ angular.module('frontEndApp')
                   this._soundInput.connect(this._analyser);
 
               }
+
               this._soundInput.start(0, 0);
               this._isPlaying = true;
 

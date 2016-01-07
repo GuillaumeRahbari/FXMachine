@@ -9,18 +9,19 @@
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .service('filter2', ['context', function () {
+  .service('Filter2', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
 
-
       class Filter2 {
+
+          // TODO : ESTCE QUON A VRAIMENT BESOIN DUN TABLEAU DINPUTS ?? techniquement non... a voir.
 
         /**
          * The constructor of a filter.
          * @param {String} type - The filter's type we want to create
          */
-        constructor (type){
+        constructor (type, webaudioService){
 
             var success = true;
 
@@ -29,11 +30,11 @@ angular.module('frontEndApp')
             {
                 // Only passing the audio signal
                 case 'node':
-                    this._audioNode = context.createGain();
+                    this._audioNode = webaudioService.context.createPanner();
                     break;
 
                 case 'gain':
-                    this._audioNode = context.createGain();
+                    this._audioNode = webaudioService.context.createGain();
                     break;
 
                 default:
@@ -48,11 +49,12 @@ angular.module('frontEndApp')
             {
                 // Continue construction
                 this._type = type;
-
                 // TODO : generate real uuid
-                this._uuid = generateUUID();
+                var d = new Date();
+                this._uuid = d.getTime();
                 this._inputs = [];
                 this._outputs = [];
+                console.log("success creation filter")
             }
 
 
@@ -80,9 +82,10 @@ angular.module('frontEndApp')
           {
               var index = this._inputs.indexOf(filterId);
 
+
               if (index > -1){
                   // removing the uuid from connexions
-                  this.filters.splice(index,1);
+                  this._inputs.splice(index,1);
                   console.info("input removed")
               }
               else
@@ -97,7 +100,7 @@ angular.module('frontEndApp')
 
               if (index > -1){
                   // removing the uuid from connexions
-                  this.filters.splice(index,1);
+                  this._outputs.splice(index,1);
                   console.info("output removed")
               }
               else
@@ -107,11 +110,7 @@ angular.module('frontEndApp')
           }
 
 
-          // TODO : PROVISOIRE
-          generateUUID() {
-              var d = new Date().getTime();
-              return d;
-          }
+
 
         /**
          * Getter of the type.
@@ -159,4 +158,4 @@ angular.module('frontEndApp')
 
 
 
-  }]);
+  });
