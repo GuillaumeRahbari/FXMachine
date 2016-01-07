@@ -2,87 +2,170 @@
 
 /**
  * @ngdoc service
- * @name frontEndApp.Filter
+ * @name frontEndApp.filter2
  * @description
- * # Filter
- * Factory in the frontEndApp.
+ * # filter2
+ * The new filter !! WORK IN PROGRESS. NOT TESTED
+ * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .factory('Filter', function () {
+  .service('Filter2', function () {
+    // AngularJS will instantiate a singleton by calling "new" on this function
 
-      class Filter {
+
+      class Filter2 {
+
+          // TODO : ESTCE QUON A VRAIMENT BESOIN DUN TABLEAU DINPUTS ?? techniquement non... a voir.
 
           /**
-           * The constructor of a filter.
-           * @param {String} type - The filter's type.
-           * @param {AudioNode} audioNode - The audioNode object (WebAudio API).
+           * The onstructor of Filter
+           * @param type {String} - the type of filter we want to create.
+           * @param webaudioService - the webaudioService, that we need to create the audioNodes in the filter objects
            */
-          constructor (type, audioNode, machine){
-              this._type = type;
-              this._audioNode = audioNode;
+        constructor(type, webaudioService){
 
-              // Setup Analyzer
-              this._analyser = machine.context.createAnalyser();
-              // Default parameters
-              this._analyser.smoothingTimeConstant = 0.3;
-              this._analyser.fftSize = 1024;
+            var success = true;
 
+            // ALL OUR AVAILABLE FILTERS ARE HERE
+            switch(type)
+            {
+                // Only passing the audio signal
+                case 'node':
+                    // TODO : j'ai mis panner pour bien les differencier dans les graphes, mais a terme, mettre des gains.
+                    this._audioNode = webaudioService.context.createPanner();
+                    break;
+
+                case 'gain':
+                    this._audioNode = webaudioService.context.createGain();
+                    break;
+                case 'biquad':
+                    this._audioNode = webaudioService.context.createBiquadFilter();
+                    break;
+
+                default:
+                    success = false;
+                    console.error("FIlter2 : wrong type given to constructor :")
+                    console.error(type);
+
+                    break;
+            }
+
+            if(success)
+            {
+                // Continue construction
+                this._type = type;
+                // TODO : generate real uuid.. or not. we do'nt really care maybe
+                var d = new Date();
+                this._uuid = d.getTime();
+                this._inputs = [];
+                this._outputs = [];
+                console.log("success creation filter")
+            }
+
+
+        }
+
+
+          /**
+           * Adds a filter id to the filters input array.
+           * @param {Filter} filter - The filter to add.
+           */
+          addInput (filterId){
+              this.inputs.push(filterId);
           }
 
 
           /**
-           * Getter of the type.
+           * Adds a filter id to the filters output array.
+           * @param {Filter} filter - The filter to add.
+           */
+          addOutput (filterId){
+              this.outputs.push(filterId);
+          }
+
+          /**
+           * Removes an input
+           * @param filterId
+           */
+          removeInput(filterId)
+          {
+              var index = this._inputs.indexOf(filterId);
+
+
+              if (index > -1){
+                  // removing the uuid from connexions
+                  this._inputs.splice(index,1);
+                  console.info("input removed")
+              }
+              else
+              {
+                  console.info("no input to remove");
+              }
+          }
+
+          /**
+           * Removes an output
+           * @param filterId
+           */
+          removeOutput(filterId)
+          {
+              var index = this._outputs.indexOf(filterId);
+
+              if (index > -1){
+                  // removing the uuid from connexions
+                  this._outputs.splice(index,1);
+                  console.info("output removed")
+              }
+              else
+              {
+                  console.info("no output to remove");
+              }
+          }
+
+
+
+
+        /**
+         * Getter of the type.
+         * @returns {String} The type of the filter.
+         */
+        get type () {
+          return this._type;
+        }
+
+        /**
+         * Getter of the filter.
+         * @returns {AudioNode} The audioNode object.
+         */
+        get audioNode () {
+          return this._audioNode;
+        }
+
+          /**
+           * Getter of the filter's uuid.
            * @returns {String} The type of the filter.
            */
-          get type () {
-              return this._type;
+          get uuid () {
+              return this._uuid;
           }
 
           /**
-           * Getter of the filter.
-           * @returns {AudioNode} The audioNode object.
+           * Getter of the filter's inputs.
+           * @returns {Array of uuids} .
            */
-          get audioNode () {
-              return this._audioNode;
+          get inputs () {
+              return this._inputs;
           }
 
           /**
-           * Getter of the analyzer.
-           * @returns {AnalyzerNode} - The Analyzer node linked to the filter.
+           * Getter of the filter's outputs
+           * @returns {Array of uuids}
            */
-          get analyser () {
-              return this._analyser;
+          get outputs () {
+              return this._outputs;
           }
-
-
-          /**
-           * A static method pour get the audio node when we know the type.
-           * @param {String} type - The filter's type.
-           * @param {AudioContext} context - The audio context.
-           * @returns {AudioNode} The audio node object corresponding to the type.
-           */
-          static getAudioNodeByType (type, context){
-              var audioNode = null;
-
-              switch(type)
-              {
-                  case "gain":
-                      audioNode = context.createGain();
-                      break;
-                  case "biquad":
-                      audioNode = context.createBiquadFilter();
-                      break;
-                  // Bad type ? Let's just put a debug filter
-                  default:
-                      audioNode = context.createGain();
-                      type='debug';
-                      break;
-              }
-              return audioNode;
-
-          }
-
       }
 
-    return Filter;
+      return Filter2;
+
   });

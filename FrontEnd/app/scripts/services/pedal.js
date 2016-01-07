@@ -5,6 +5,14 @@
  * @name frontEndApp.Pedal
  * @description
  * # Pedal
+ * The pedal
+ *
+ * La pedale. Elle contient une entrée (filtre), une sortie (filtre), et un array de filtres en tous genres
+ * ainsi qu'un analyser a son output pour visualiser ce qu'il en sort
+ *
+ * contient aussi un pointeur vers le webaudio service pour creer des filtres easily
+ * TODO : passer input et output en filtres de gain, et afficher dans la vue
+ * TODO : faire le systeme de boutons de la pedale qui sont liés a quelques boutons des filtres
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
@@ -37,34 +45,6 @@ angular.module('frontEndApp')
               this._webaudio = webaudioService;
           }
 
-          /**
-           * Getter of the filter array.
-           * @returns {Array} The filter array.
-           */
-          get filters (){
-              return this._filters;
-          }
-
-          /**
-
-           */
-          get input (){
-              return this._input;
-          }
-
-          /**
-
-           */
-          get output (){
-              return this._output;
-          }
-
-          /**
-
-           */
-          get analyser (){
-              return this._analyser;
-          }
 
           /**
            * Adds a filter to the filters array.
@@ -95,8 +75,8 @@ angular.module('frontEndApp')
                   // Deconnecting the filters from all the others
                   var filterUUID = this._filters[index].uuid;
                   for (var i = 0; i < this._filters.length; i++) {
-                      filter.removeInput(filterUUID);
-                      filter.removeOutput(filterUUID);
+                      this._filters[i].removeInput(filterUUID);
+                      this._filters[i].removeOutput(filterUUID);
                   }
                   // And finally removing it
                   this._filters.splice(index, 1);
@@ -110,7 +90,7 @@ angular.module('frontEndApp')
           }
 
 
-            // TODO : temporaire. COnnecte en CHAINE.
+            // TODO : temporaire. Connecte en CHAINE. Sera remplacé + tard par un binding direct entre la vue et la Pedale avec les connexions multiples
           // NOTE : FUCK LES INPUTS. CA SERT A RIEN EN FAIT
           connectFilters()
           {
@@ -156,6 +136,41 @@ angular.module('frontEndApp')
                   this._input.addOutput(this._output.uuid);
               }
           }
+
+
+
+
+          // *************** Getters Setters
+
+           /**
+           * Getter of the filter array.
+           * @returns {Array} The filter array.
+           */
+          get filters (){
+              return this._filters;
+          }
+
+          /**
+
+           */
+          get input (){
+              return this._input;
+          }
+
+          /**
+
+           */
+          get output (){
+              return this._output;
+          }
+
+          /**
+
+           */
+          get analyser (){
+              return this._analyser;
+          }
+
 
 
       }

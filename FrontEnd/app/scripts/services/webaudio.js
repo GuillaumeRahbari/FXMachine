@@ -7,6 +7,7 @@
  * # WebAudio
  * Service in the frontEndApp.
  */
+// TODO : empecher de pouvoir lancer plusieurs fois play en meme temps
 angular.module('frontEndApp')
   .service('WebAudio', ['Sound', function () {
 
@@ -14,8 +15,6 @@ angular.module('frontEndApp')
        * This class represent a web audio object.
        */
       class WebAudio {
-
-
 
 
           /**
@@ -29,18 +28,19 @@ angular.module('frontEndApp')
               this._soundInput = null; // The first box of the graph, linked to the soundBuffer
               this._soundOutput = null; // The last box of the graph, linked to.. the speakers in buildGraph()
 
-
+              // The one and only WebAudio context
               this._context = null;
 
+              // output analyser
               this._analyser = null;
 
+              // initialise context and stuff
               this.init();
 
               this._analyser = this._context.createAnalyser();
               // Default parameters
               this._analyser.smoothingTimeConstant = 0.3;
               this._analyser.fftSize = 1024;
-
           }
 
 
@@ -64,24 +64,25 @@ angular.module('frontEndApp')
 
           /**
            * Load a sound
-           * TODO : faudrait peutetre splitter ca (jarrive pas a acceder au scope visiblement..
+           * TODO : l'utiliser (mais ca a l'air complique pour y acceder depuis une autre fonction du service)
            */
-
-
           getFilterByUUID(array, uuid)
           {
+              // Looping on all elements
               for(var i = 0 ; i < array.length ; i++)
               {
+                  // Looking for the right one
                   if(array[i].uuid == uuid)
                   return array[i];
               }
-              console.error("NO RESULT GETFILTERBYUUID:" + filters)
+              console.error("NO RESULT GETFILTERBYUUID:" + filters);
               return undefined;
 
           };
 
 
           /**
+           * Gather pedal settings and play the sound with the pedal activated
            * TODO : commenter un peu, chercher a simplifier (connexion de pedalInput...)
            * @param filters
            * @param pedalInput
@@ -90,9 +91,11 @@ angular.module('frontEndApp')
           playSoundFromPedal(filters, pedalInput, pedalOutput)
           {
 
+              // Handling input source
               this._soundInput = this._context.createBufferSource();
               this._soundOutput = this._context.destination;
               this._soundInput.buffer = this._soundBuffer;
+
 
               // TODO : utiliser les filters SI YEN A
               // if theres filters, graph and all that stuff
@@ -109,7 +112,7 @@ angular.module('frontEndApp')
 
 
                       // **** Connecting pedalInput to its filters
-                      // TODO : grosse duplication de code
+                      // TODO : grosse duplication de code, j'ai corrige en placant un truc en + dans fxMachine, mais au final 'est peutetre plus propre de le garder la. a decider afterwards
                       /*for(var i = 0 ; i < pedalInput.outputs.length ; i++)
                       {
                           // * get uuids of output
