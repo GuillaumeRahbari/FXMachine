@@ -11,18 +11,17 @@ angular.module('frontEndApp')
   .directive('egaliserVisualizer', function () {
     return {
       restrict: 'A',
-        scope: {analyzerNode: '='},
+        scope: {analyserNode: '='},
         controller: function($scope, $element, $timeout){
 
 
 
-            // TODO : refaire au propre : les dimensions du canvas, la hauteur des traits... etc
-            // TODO : cxt.height correspond pas a la hauteur du canvas.. comprendre why
-            // TODO : pouvoir modifier la fftsize, choses du genre
-            // TODO : pouvoir choisir plusieurs visualisations
+            // TODO : fftsize depend du sampling rate. besoin d'avoir une bonne fftsize. need to be handled somewhere, but not here !
 
             // The canvas context, used to draw stuff in the canvas
             var ctx = $element[0].getContext('2d');
+
+
 
             // gradient element for the meter
             var meterColor = ctx.createLinearGradient(0,0,0,10);
@@ -38,26 +37,33 @@ angular.module('frontEndApp')
              */
             var draw = function()
             {
-                console.log("draw");
+                //console.log("draw");
                 // Getting array of all frequency values
-                var array =  new Uint8Array($scope.analyzerNode.frequencyBinCount);
+                var array =  new Uint8Array($scope.analyserNode.frequencyBinCount);
                 // Utile.. pourquoi je sais pas encore
-                $scope.analyzerNode.getByteFrequencyData(array);
+                $scope.analyserNode.getByteFrequencyData(array);
 
-                // Cleaning previous visualisation
+                // Cleaning previous visualisation (redrawing background
                 ctx.fillStyle = backgroundColor;
-                ctx.fillRect(0, 0, 2000, 2000);
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
                 ctx.fillStyle = meterColor;
 
-                // TODO : ameliorer ça, prendre borne a borne, enfin bref faire un vrai truc propre
+                // Variable meterWidth depending on canvas width to fill it
+                var meterWidth = $scope.analyserNode.fftSize / (ctx.canvas.width);
+                console.log("meter" + meterWidth)
+
+                var meterHeight = 0;
+
                 for (var i = 1 ; i < array.length; i+=6)
                 {
-                    // Equalizer depuis le haut du canvas
+                    meterHeight = array[i];
+
+                    // Equalizer depuis le haut du canvas (!! OLD. pas de gestion de la largeur)
                    // ctx.fillRect(i, 0, 4,array[i]);//, 4, ctx.height);
 
-                    // Equalizer depuis le bas du canvas : valeur 100 pour la hauteur TODO mettre la hauteur du canvas
-                    ctx.fillRect(i, 100-array[i]/2, 4,array[i]);//, 4, ctx.height);
+                    // Equalizer depuis le bas du canvas
+                    ctx.fillRect(i, ctx.canvas.height-array[i]/2, meterWidth, meterHeight);
                 }
 
                 // Re-looping
