@@ -8,6 +8,10 @@ PLAYER CONTROLS
 <button id="play" ng-click="machine.playSound();" disabled>Lecture du son</button>
 <button id="stop" ng-click="machine.stopSound();" disabled>Stopper le son</button>
 
+<!-- waveform -->
+WaveForm:
+<canvas waveform-visualiser buffer="machine.machine.soundBuffer" width="400" height="100" id="whatever"
+        style="border-style: solid; border-width:thin;  border-color:black" ></canvas>
 <!-- Filters -->
 <hr>
 <h3>FILTER BANK</h3>
@@ -18,10 +22,13 @@ PLAYER CONTROLS
 <hr>
 <h3>THE Filters</h3>
 <hr width="40%" align="left">
+
+
 <!-- For AUDIO GAIN filters only -->
 <div ng-repeat="filter in machine.filters" style="border-style:solid;border-color:black;border-width:3px">
 
     <h4>Filtre : {{filter.type}}</h4>
+
 
     <button id="removeFilter" ng-click="machine.removeFilter(filter);">Remove Filter</button>
 
@@ -39,10 +46,13 @@ PLAYER CONTROLS
     </div>
 
 
+
     <!-- Ajout d'un super equalizer -->
 
-    <canvas audio-visualizer filter="filter" context="context" width="400" height="100" id="canvas"
+    <canvas audio-visualizer analyzer-node="filter.analyser" width="400" height="100" id="whateverrr"
             style="border-style: solid; border-width:thin;  border-color:black" ></canvas>
+
     <!-- separator -->
     <hr width="40%" align="left">
+
 </div>
