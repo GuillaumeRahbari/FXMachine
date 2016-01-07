@@ -20,7 +20,9 @@ angular.module('frontEndApp')
            * The default constructor of a web audio context
            */
           constructor (){
+              console.log("init good context")
               this._context = null;
+              init();
           }
 
           /**

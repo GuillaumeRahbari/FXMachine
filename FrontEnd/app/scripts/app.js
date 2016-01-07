@@ -20,9 +20,9 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/fxmachine', {
-        templateUrl: 'views/fxMachineV1.html',
+        templateUrl: 'views/fxMachineV2.html',
         controller: 'fxMachineCtrl',
-        controllerAs: 'machine'
+        controllerAs: 'fxmachine'
       })
       .when('/connection', {
         templateUrl: 'views/connection.html',

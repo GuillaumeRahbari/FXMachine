@@ -1,0 +1,64 @@
+
+
+<hr>
+FX MACHINE V2
+<hr>
+WEBAUDIO service controls (via fxMachineCtrl)
+<!-- Machine controllers -->
+<input type="file" file-model="soundFile"/>
+
+<button id="load" ng-click="fxmachine.loadSound2()">Charger le son</button>
+<button id="play" ng-click="fxmachine.playSound2();">Lecture (son initial)</button>
+<button id="stop" ng-click="fxmachine.stopSound2();">Stop (son initial)</button>
+
+<!-- waveform -->
+<canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
+        style="border-style: solid; border-width:thin;  border-color:black" ></canvas>
+
+<!-- Ajout d'un super equalizer -->
+
+<canvas egaliser-visualizer analyser-node="fxmachine.webaudio.analyser" width="400" height="100" id="whateverrr"
+        style="border-style: solid; border-width:thin;  border-color:black" ></canvas>
+
+<!-- Filters -->
+<hr>
+<h3>FILTER BANK</h3>
+<button id="addGainFilter" ng-click="fxmachine.addFilter('gain');">Add Gain Filter</button>
+<button id="addLowPassFilter" ng-click="machine.addFilter('biquad');">Add BiQuad</button>
+<button id="addDebugFilter" ng-click="machine.addFilter('lowl');">Add... something else</button>
+
+<hr>
+<h3>Pedal Structure</h3>
+<hr width="40%" align="left">
+
+
+<!-- For AUDIO GAIN filters only -->
+<div ng-repeat="filter in machine.filters" style="border-style:solid;border-color:black;border-width:3px">
+
+    <h4>Filtre : {{filter.type}}</h4>
+
+
+    <button id="removeFilter" ng-click="machine.removeFilter(filter);">Remove Filter</button>
+
+    <!-- Showing the div corresponding to the right filter -->
+    <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
+
+    <!-- The GAIN filter -->
+    <filter-gain filter="filter" ng-show="filter.type === 'gain'"></filter-gain>
+
+    <!-- The BIQUAD filter -->
+    <filter-biquad filter="filter" ng-show="filter.type === 'biquad'"></filter-biquad>
+
+    <!-- debug -->
+    <div ng-show="filter.type === 'debug' ">
+    </div>
+
+
+
+
+
+    <!-- separator -->
+    <hr width="40%" align="left">
+
+</div>
+

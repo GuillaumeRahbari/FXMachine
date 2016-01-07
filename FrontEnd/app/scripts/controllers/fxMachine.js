@@ -10,7 +10,11 @@
  * @name frontEndApp.controller:fxMachineCtrl
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', function ($scope, Machine, Filter, Sound) {
+    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', function ($scope, Machine, Filter, Sound, WebAudio) {
+
+
+
+
 
         var self = this;
 
@@ -19,17 +23,62 @@ angular.module('frontEndApp')
         // Note : the method init() is called when the controller is initialized.
 
         // The audio machine, containing all the stuff that we don't need to access from the html page (yet)
-        var machine = new Machine();
 
-        this.filters = machine.filters;
-        this.machine = machine;
+
+        var webaudio = new WebAudio();
+       // webaudio.init();
+        this.webaudio = webaudio;
+        //this.webaudio = webaudio;
+/*
+        var context = new context();
+        context.init();
+        */
+
+
 
 
         /**
-         Initialize the "Audio Context", which is kinda the environment where we create the audio graph
-         There can be only one !
+         * Load a sound
          */
-        machine.init();
+        self.loadSound2 = function() {
+
+            console.log("loadsong2!")
+            Sound.loadSound(webaudio.context, $scope.soundFile.name).then(
+                function (soundBufferDecoded) {
+                    webaudio.soundBuffer = soundBufferDecoded;
+
+                    console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
+                    webaudio.isInitialized = true;
+                    //angular.element('#play').removeAttr('disabled');
+
+                    // put in comment so we can load a new song if we want
+                    //angular.element('#load').attr('disabled', 'disabled');
+
+                }, function(errorMsg){
+                    console.log(errorMsg);
+                }
+            );
+        };
+
+        /**
+         Play the input sound (NO FILTERS HERE)
+         */
+        self.playSound2 = function () {
+
+            webaudio.playSound();
+
+        };
+
+        /**
+         * It's STOP, not PAUSE.
+         */
+        self.stopSound2 = function () {
+            webaudio.stopSound();
+
+        };
+
+
+        // ******************* OLD STUFF!!! *************************************************
 
 
         /**
