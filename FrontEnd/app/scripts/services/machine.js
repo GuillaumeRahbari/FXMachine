@@ -167,11 +167,17 @@ angular.module('frontEndApp')
               var index = this.filters.indexOf(filter);
 
               if (index > -1){
+                  this.filters[index].audioNode.disconnect();
+
                   this.filters.splice(index,1);
               }
           }
 
+
       }
+
+
+
 
       return Machine;
   });

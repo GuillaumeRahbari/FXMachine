@@ -22,12 +22,15 @@ angular.module('frontEndApp')
         var machine = new Machine();
 
         this.filters = machine.filters;
+        this.machine = machine;
+
 
         /**
          Initialize the "Audio Context", which is kinda the environment where we create the audio graph
          There can be only one !
          */
         machine.init();
+
 
         /**
          * Add a filter to the filter array.
@@ -68,7 +71,6 @@ angular.module('frontEndApp')
                 var currentTime = machine.context.currentTime;
                 self.stopSound();
                 self.playSound(currentTime);
-
             }
         };
 
@@ -84,7 +86,12 @@ angular.module('frontEndApp')
                     console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
                     machine.isInitialized = true;
                     angular.element('#play').removeAttr('disabled');
-                    angular.element('#load').attr('disabled', 'disabled');
+
+                    // put in comment so we can load a new song if we want
+                    //angular.element('#load').attr('disabled', 'disabled');
+
+                    console.log("BUFFER:" + machine.soundBuffer)
+
                 }, function(errorMsg){
                     console.log(errorMsg);
                 }
@@ -179,6 +186,7 @@ angular.module('frontEndApp')
             // Before rebuilding a graph, we disconnect everything
             machine.soundInput.disconnect();
             machine.soundOutput.disconnect();
+
             var l = machine.filters.length;
 
             for(var i = 0 ; i < l ; i++) {
