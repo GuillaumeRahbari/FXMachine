@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
         if (err) {
             console.log('Unable to connect to the mongoDB server. Error:', err);
         } else {
-
+            db.collection('users').createIndex({"name":1}, {unique:true})
         }
     });
 })();
@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
 http.listen(3000, function () {
     console.log('Server listening on port 3000');
 
-    app.get('/', function (req, res) {
+    app.post('/signin', function (req, res) {
         var mongoClient = mongodb.MongoClient;
         var url = 'mongodb://localhost:27017/FXMachine';
         var body = req.body;
@@ -55,13 +55,15 @@ http.listen(3000, function () {
                 console.log('Unable to connect to the mongoDB server. Error:', err);
             } else {
                 var collection = db.collection('users');
-                collection.find(body).toArray(function (err, result) {
+                console.log(body.name);
+                collection.find({name : body.name } ).toArray(function (err, result) {
                     if (err) {
                         console.log(err);
                     } else if (result.length) {
                         console.log('Found:', result);
                         res.send(result);
                     } else {
+                        res.send(404);
                         console.log('No document(s) found with defined "find" criteria!');
                     }
                 })
@@ -74,18 +76,18 @@ http.listen(3000, function () {
         var mongoClient = mongodb.MongoClient;
         var url = 'mongodb://localhost:27017/FXMachine';
 
-        var body = req.query;
+        var body = req.body;
         mongoClient.connect(url, function (err, db) {
             if (err) {
                 console.log('Unable to connect to the mongoDB server. Error:', err);
                 res.send(err);
             } else {
                 console.log('Connection established to', url);
-
                 var collection = db.collection('users');
+                console.log(body);
                 collection.insert([body], function (err, result) {
                     if (err) {
-                        console.log(err);
+                        res.send(409);
                     } else {
                         console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
                         res.send({ id :  result.ops[0]._id });
