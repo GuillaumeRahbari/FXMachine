@@ -5,8 +5,8 @@
 var app = require('./app/core/core.js').app;
 var router = require('./app/core/core.js').express.Router();
 var mongodb = require('mongodb');
-var userGateway = require('./user-gateway');
-var userFinder = require('./user-finder');
+var userGateway = require('./data/user-gateway');
+var userFinder = require('./data/user-finder');
 
 /**
  * This method will sign in a client if his user name is already in the database. If not it will return 404.
