@@ -36,6 +36,9 @@ angular.module('frontEndApp')
                 case 'gain':
                     this._audioNode = webaudioService.context.createGain();
                     break;
+                case 'biquad':
+                    this._audioNode = webaudioService.context.createBiquadFilter();
+                    break;
 
                 default:
                     success = false;

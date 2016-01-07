@@ -1,69 +1,81 @@
-
-
 <hr>
 FX MACHINE V2
 <hr>
+
+
+<!--** Machine controllers **-->
 <h3>WEBAUDIO service controls</h3> (via fxMachineCtrl)<br>
-<!-- Machine controllers -->
+
 <!-- Controle de l'input et de l'output + quelques visualisations -->
 <!-- c'est ici qu'on gere le son d'entree, whatever happens. c'est totalement separe des filtres, pedales, et autres -->
 <input type="file" file-model="soundFile"/>
 
+<!-- webaudio buttons -->
 <button id="load" ng-click="fxmachine.loadSound2()">Charger le son</button>
 <button id="play" ng-click="fxmachine.playSound2();">Lecture (son initial)</button>
 <button id="stop" ng-click="fxmachine.stopSound2();">Stop (son initial)</button>
 
-<!-- waveform -->
+<!-- Input Visualisation : waveform -->
 <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
         style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
 
 
 <hr>
 
-<!-- pedal div -->
-<!-- On peut imaginer ici à terme la vue avec toutes les pédales, et pouvoir les "essayer"(charger dans le webaudio) simplement -->
+<!--** pedal div **-->
+<!-- On peut imaginer ici à terme la vue avec toutes les pédales,
+et pouvoir les "essayer"(charger dans le webaudio) simplement -->
+
 <div style="border-style:solid;border-color:black;border-width:2px">
-<h3>Pedal Structure</h3>
-<hr width="40%" align="left">
 
 
-<!-- our beautiful first pedal -->
-    <button id="tryPedal" ng-click="fxmachine.tryPedal(fxmachine.pedal);">Plug pedal and play sound</button>
-<div>
-FILTER BANK
-<button id="addGainFilter" ng-click="fxmachine.pedal.addFilter('gain');">Add Gain Filter</button>
-
-</div>
-
-<!-- Ajout d'un super equalizer -->
-<canvas egaliser-visualizer analyser-node="fxmachine.pedal.analyser" width="400" height="100" id="whateverrr"
-        style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
-
-
-    <!-- the filters graph -->
-<div ng-repeat="filter in fxmachine.pedal.filters track by $index" style="border-style:solid;border-color:black;border-width:3px">
-
-
-    <h4>Filtre : {{filter.type}}</h4>
-
-    <button id="removeFilter" ng-click="fxmachine.pedal.removeFilter(filter);">Remove Filter</button>
-
-    <!-- Showing the div corresponding to the right filter -->
-    <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
-
-    <!-- The GAIN filter -->
-    <filter-gain filter="filter" ng-show="filter.type === 'gain'"></filter-gain>
-    <!-- The BIQUAD filter -->
-    <filter-biquad filter="filter" ng-show="filter.type === 'biquad'"></filter-biquad>
-    <!-- debug -->
-    <div ng-show="filter.type === 'debug' ">
-
-</div>
-
-    <!-- separator -->
+    <h3>Pedal Structure</h3>
     <hr width="40%" align="left">
 
-</div> <!-- end filter graph --<
+    <!-- our beautiful first pedal -->
+    <button id="tryPedal" ng-click="fxmachine.tryPedal(fxmachine.pedal);">Plug pedal and play sound</button>
+
+    <div>
+        FILTER BANK
+        <button id="addGainFilter" ng-click="fxmachine.pedal.addFilter('gain');">Add Gain Filter</button>
+        <button id="addEqualizerFilter" ng-click="fxmachine.pedal.addFilter('biquad');">Add BiQuad</button>
+
+    </div>
+
+    <hr>
+
+    <!-- Pedal Output Visualisation -->
+    <h4>Output Visualisation</h4>
+    <canvas egaliser-visualizer analyser-node="fxmachine.pedal.analyser" width="400" height="100" id="whateverrr"
+            style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
+
+    <hr>
+
+    <!-- TODO : here we could imagine the pedal layout (with a few buttons )-->
+
+    <!-- Pedal composition : the filters behind it -->
+    <!-- TODO : we should be able to hide this easily -->
+    <h4>Pedal composition</h4>
+
+    <!-- Filters graph -->
+    <div ng-repeat="filter in fxmachine.pedal.filters" style="border-style:solid;border-color:black;border-width:3px">
+
+        <h5>Filtre : {{filter.type}}</h5>
+
+        <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="fxmachine.pedal.removeFilter(filter);">Remove Filter</button>
+
+        <!-- Showing the div corresponding to the right filter -->
+        <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
+
+        <!-- The GAIN filter -->
+        <filter-gain filter="filter" ng-show="filter.type === 'gain'"></filter-gain>
+        <!-- The BIQUAD filter -->
+        <filter-biquad filter="filter" ng-show="filter.type === 'biquad'"></filter-biquad>
+        
+        <!-- separator -->
+        <hr width="40%" align="left">
+
+    </div> <!-- end filter graph --<
 
 </div> <!-- end pedal div -->
 
