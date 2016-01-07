@@ -17,10 +17,18 @@ angular.module('frontEndApp')
            * @param {String} type - The filter's type.
            * @param {AudioNode} audioNode - The audioNode object (WebAudio API).
            */
-          constructor (type, audioNode){
+          constructor (type, audioNode, machine){
               this._type = type;
               this._audioNode = audioNode;
+
+              // Setup Analyzer
+              this._analyser = machine.context.createAnalyser();
+              // Default parameters
+              this._analyser.smoothingTimeConstant = 0.3;
+              this._analyser.fftSize = 1024;
+
           }
+
 
           /**
            * Getter of the type.
@@ -36,6 +44,14 @@ angular.module('frontEndApp')
            */
           get audioNode () {
               return this._audioNode;
+          }
+
+          /**
+           * Getter of the analyzer.
+           * @returns {AnalyzerNode} - The Analyzer node linked to the filter.
+           */
+          get analyser () {
+              return this._analyser;
           }
 
           /**
