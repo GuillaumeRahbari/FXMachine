@@ -54,4 +54,6 @@ angular.module('frontEndApp')
               }
           }
       }
+
+      return Context;
   });

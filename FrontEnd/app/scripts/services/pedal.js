@@ -39,6 +39,7 @@ angular.module('frontEndApp')
               this.filters.push(filter);
           }
 
-
       }
+
+      return Pedal;
   });

@@ -106,4 +106,6 @@ angular.module('frontEndApp')
               this._soundOutput = soundOutput;
           }
       }
+
+      return WebAudio;
   });
