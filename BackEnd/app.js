@@ -1,5 +1,7 @@
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var mongodb = require('mongodb');
+
 
 var http = require('./app/core/core.js').getHttp();
 var app = require('./app/core/core.js').app;
@@ -22,12 +24,77 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+(function initDB() {
+    var mongoClient = mongodb.MongoClient;
+    var url = 'mongodb://localhost:27017/FXMachine';
+
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+        } else {
+
+        }
+    });
+})();
+
 /**
  * Permet de créer un serveur qui écoute sur le port 3000.
  * @type {http.Server}
  */
 http.listen(3000, function () {
+    console.log('Server listening on port 3000');
 
-    console.log('Example app listening');
+    app.get('/', function (req, res) {
+        var mongoClient = mongodb.MongoClient;
+        var url = 'mongodb://localhost:27017/FXMachine';
+        var body = req.body;
 
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+            } else {
+                var collection = db.collection('users');
+                collection.find(body).toArray(function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else if (result.length) {
+                        console.log('Found:', result);
+                        res.send(result);
+                    } else {
+                        console.log('No document(s) found with defined "find" criteria!');
+                    }
+                })
+            }
+        });
+    });
+
+
+    app.put("/subscription", function (req, res) {
+        var mongoClient = mongodb.MongoClient;
+        var url = 'mongodb://localhost:27017/FXMachine';
+
+        var body = req.query;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Unable to connect to the mongoDB server. Error:', err);
+                res.send(err);
+            } else {
+                console.log('Connection established to', url);
+
+                var collection = db.collection('users');
+                collection.insert([body], function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
+                        res.send({ id :  result.ops[0]._id });
+                        console.log(result.ops[0]._id );
+                    }
+                });
+
+
+            }
+        });
+    });
 });
