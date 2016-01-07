@@ -8,7 +8,7 @@
  * # audioVisualizer
  */
 angular.module('frontEndApp')
-  .directive('audioVisualizer', function () {
+  .directive('egaliserVisualizer', function () {
     return {
       restrict: 'A',
         scope: {analyzerNode: '='},
