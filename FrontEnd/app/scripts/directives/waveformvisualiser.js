@@ -42,7 +42,6 @@ angular.module('frontEndApp')
                 ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
                 // Waveform style
-
                 ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
 
@@ -51,7 +50,8 @@ angular.module('frontEndApp')
 
 
                 // Pixel size between two points
-                var sliceWidth = 1;
+                // We draw this one quite rarely, so we can have a very precise step
+                var sliceWidth = 0.01;
 
                 var x = 0;
 
@@ -68,12 +68,14 @@ angular.module('frontEndApp')
 
                 // step index to loop on the bufferData array
                 // chosen to have the full track inside the canvas
-                var bufferDataStep = parseInt( bufferData.length / ctx.canvas.width );
+                var bufferDataStep = parseInt( bufferData.length*sliceWidth / ctx.canvas.width );
 
                 //console.log("bufferData index step" + bufferDataStep)
+var final_i = 0;
 
+                for(var i = 0; i < bufferData.length; i+= parseInt(bufferDataStep) ) {
 
-                for(var i = 0; i < bufferData.length; i+= bufferDataStep) {
+// Quand j'arrive au bout de mon canvas, j'ai pas la fin de ma musique.
 
 
                     // values between -1 and 1. We reput them between [-canvasHeight/2 ; canvasHeight/2]
@@ -90,7 +92,10 @@ angular.module('frontEndApp')
                     }
 
                     x += sliceWidth;
+                    final_i = i;
                 }
+                console.log("last real index" + bufferData.length)
+                console.log("final index drawn" + final_i )
                 ctx.stroke();
             }
         };
@@ -100,7 +105,9 @@ angular.module('frontEndApp')
         draw();
 
 
-
+            /*
+            Watching for a buffer change (like a new sound has been loaded
+             */
           $scope.$watch('buffer', function(newValue)
           {
             console.log("waveformVisualiser : detected change in buffer !");
