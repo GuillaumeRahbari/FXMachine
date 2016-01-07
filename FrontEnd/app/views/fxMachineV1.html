@@ -47,34 +47,3 @@ PLAYER CONTROLS
     <hr width="40%" align="left">
 </div>
 
-<div ng-controller="PlumbCtrl">
-
-    <div id="container" class="drop-container" ng-click="addEvent($event)" droppable>
-        <div id="menu-container">
-            <div plumb-menu-item class="menu-item" ng-repeat="module in library" ng-style="{ 'left':module.x, 'top':module.y }"
-                 data-identifier="{{module.library_id}}" draggable>
-                <div class="summary">{{module.title}}</div>
-            </div>
-        </div>
-        <img src="../images/pedale.png" alt="Raspberry PI device" width="250" height="250" align="left">
-        <div class="verticalLine"></div>
-        <img src="../images/pedale.png" alt="Raspberry PI device" width="250" height="250" align="left">
-        <div class="verticalLine"></div>
-        <img src="../images/pedale.png" alt="Android Nexus device" width="250" height="250" align="left">
-        <div plumb-item class="item" ng-repeat="module in schema" ng-style="{ 'left':module.x, 'top':module.y }"
-             data-identifier="{{module.schema_id}}">
-            <div class="title">{{module.title}}</div>
-            {{module.description}}
-            <div plumb-connect class="connect"></div>
-        </div>
-    </div>
-
-    <p>
-        <button type="button" class="btn btn-primary" ng-click="redraw()">Redraw</button>
-    </p>
-
-    <!--  does not render what comes behind it, so it's probably wrong -->
-    <div post-render></div>
-
-    <span ng-init="init()"></span>
-</div>
