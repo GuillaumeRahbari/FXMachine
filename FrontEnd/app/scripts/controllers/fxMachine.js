@@ -70,6 +70,11 @@ angular.module('frontEndApp')
 
         };
 
+        // TODO :  a terme ici on ne fait QUE charger des graphes. la musique se lance directement depuis un bouton dans webaudio
+        // l'operation de charger le graphe et de play/pause doivent etre separees
+
+
+
         /**
          * Load pedal in webaudio service, and launch the audio
          * @param ped

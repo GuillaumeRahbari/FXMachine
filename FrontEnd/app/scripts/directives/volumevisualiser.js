@@ -46,7 +46,7 @@ angular.module('frontEndApp')
            */
           var draw = function()
           {
-            console.log("draw");
+            //console.log("draw");
             // Getting array of all frequency values
             var array =  new Uint8Array($scope.analyserNode.frequencyBinCount);
             // Utile.. pourquoi je sais pas encore

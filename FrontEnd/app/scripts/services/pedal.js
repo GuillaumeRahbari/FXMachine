@@ -16,7 +16,7 @@
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .service('Pedal', ['Filter2',function (Filter) {
+  .service('Pedal', ['Filter2',function (Filter, $timeout) {
 
       /**
        * This class represents a pedal.
@@ -28,9 +28,7 @@ angular.module('frontEndApp')
            * Contains an empty array of filters.
            */
           constructor (webaudioService){
-              // Two default nodes to put on the creation graph
-              this._input = new Filter("node",webaudioService);
-              this._output = new Filter("node", webaudioService);
+
 
               this._filters = [];
 
@@ -39,10 +37,27 @@ angular.module('frontEndApp')
               // Default parameters
               this._analyser.smoothingTimeConstant = 0.3;
               this._analyser.fftSize = 1024;
-              // Connecting pedal output to analyzer TODO
-              this._output.audioNode.connect(this._analyser);
+
+              // ******** TODO : sale. si meme millisecondes pour input et output, ca explose
+              // Input and output nodes of the pedal
+              this._input = new Filter("node",webaudioService);
+
 
               this._webaudio = webaudioService;
+
+
+              // Connecting pedal output to analyzer TODO :pour passer le temps.. pour eviter que input et output aient le meme uuid
+              // TODO : faudrait faire un uuid un peu + smart que juste la date
+              for(var i = 0 ; i < 10000000 ; i++) // prend 30ms sur mon pc.
+              {
+                  var j = 0;
+              }
+
+              // Just to be sure, needs at least 1 milliseconds between the two events
+              this._output = new Filter("node", webaudioService);
+
+              this._output.audioNode.connect(this._analyser);
+
           }
 
 
@@ -110,6 +125,9 @@ angular.module('frontEndApp')
 
                   }
               }
+
+
+
 
 
               // IF we got filters, well.. we connect them !
