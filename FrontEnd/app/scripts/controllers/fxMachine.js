@@ -32,10 +32,11 @@ angular.module('frontEndApp')
 
         /**
          * Load a sound
+         * TODO : deplacer dans webaudio service
          */
-        self.loadSound2 = function() {
+        self.loadSound = function() {
 
-            console.log("loadsong2!")
+            console.log("loadsong!")
             Sound.loadSound(webaudio.context, $scope.soundFile.name).then(
                 function (soundBufferDecoded) {
                     webaudio.soundBuffer = soundBufferDecoded;
@@ -53,22 +54,7 @@ angular.module('frontEndApp')
             );
         };
 
-        /**
-         Play the input sound (NO FILTERS HERE)
-         */
-        self.playSound2 = function () {
 
-            webaudio.playSound();
-
-        };
-
-        /**
-         * It's STOP, not PAUSE.
-         */
-        self.stopSound2 = function () {
-            webaudio.stopSound();
-
-        };
 
         // TODO :  a terme ici on ne fait QUE charger des graphes. la musique se lance directement depuis un bouton dans webaudio
         // l'operation de charger le graphe et de play/pause doivent etre separees
@@ -79,9 +65,12 @@ angular.module('frontEndApp')
          * Load pedal in webaudio service, and launch the audio
          * @param ped
          */
-        self.tryPedal = function(ped)
+        self.loadPedalToWebAudio = function(ped)
         {
-            console.log("try pedal")
+            console.log("loading pedal");
+
+            // TODO : temporaire. a terme, les connexions seront binded avec la vue du graph jsplumb. ou alors non. mais dans ce cas ICI il faudra charger les connexions
+            ped.cleanConnexions();
             ped.connectFilters();
 
             console.log("send stuff to webaudio")
@@ -93,7 +82,9 @@ angular.module('frontEndApp')
             // (main point of this architecture btw)
             var filtersArray = ped.filters.slice();
             filtersArray.push(ped.input); // Because we also need to connect input to the stuff
-            webaudio.playSoundFromPedal(filtersArray, ped.input, ped.output);
+            filtersArray.push(ped.output);
+
+            webaudio.loadGraph(filtersArray, ped.input, ped.output);
         };
 
 

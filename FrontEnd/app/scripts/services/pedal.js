@@ -52,12 +52,10 @@ angular.module('frontEndApp')
               {
                   var j = 0;
               }
-
               // Just to be sure, needs at least 1 milliseconds between the two events
               this._output = new Filter("node", webaudioService);
 
               this._output.audioNode.connect(this._analyser);
-
           }
 
 
@@ -67,7 +65,7 @@ angular.module('frontEndApp')
            */
           addFilter (type) {
 
-              var filter = new Filter(type, this._webaudio)
+              var filter = new Filter(type, this._webaudio);
               this._filters.push(filter);
 
               console.log("new filter array" + this._filters)
@@ -89,7 +87,9 @@ angular.module('frontEndApp')
 
                   // Deconnecting the filters from all the others
                   var filterUUID = this._filters[index].uuid;
-                  for (var i = 0; i < this._filters.length; i++) {
+
+                  for (var i = 0; i < this._filters.length; i++)
+                  {
                       this._filters[i].removeInput(filterUUID);
                       this._filters[i].removeOutput(filterUUID);
                   }
@@ -114,19 +114,8 @@ angular.module('frontEndApp')
               var l = this._filters.length;
 
               // We disconnect everything
-              for(var i = 0 ; i < l ; i++) {
-                  for(var j = 0 ; j < l ; j++)
-                  {
-                      if(i != j)
-                      {
-                          this._filters[i].removeInput(this._filters[j].uuid);
-                          this._filters[i].removeOutput(this._filters[j].uuid);
-                      }
-
-                  }
-              }
-
-
+              for(var i = 0 ; i < l ; i++)
+                this._filters[i].cleanConnexions();
 
 
 
@@ -134,15 +123,17 @@ angular.module('frontEndApp')
               if (l > 0)
               {
                   console.info("connecting pedal filters");
+
+                  // Input to first filter
                   this._input.addOutput(this._filters[0].uuid);
-                  this._filters[0].addInput(this._input.uuid);
+
 
                   for(var i = 0 ; i < l-1 ; i++){
                       // Connect filter to the next one
                       this._filters[i].addOutput(this._filters[i+1].uuid);
                   }
 
-                  // Final connexion to pedal output
+                  // last filter to output
                   this._filters[l-1].addOutput(this._output.uuid);
 
               }
@@ -156,6 +147,20 @@ angular.module('frontEndApp')
           }
 
 
+          // TODO : temporaire aussi je pense
+          cleanConnexions()
+          {
+              var l = this._filters.length;
+
+              // We disconnect everything
+              for(var i = 0 ; i < l ; i++) {
+                this._filters[i].cleanConnexions();
+              }
+
+              // also input and output
+              this._input.cleanConnexions();
+              this._output.cleanConnexions();
+          }
 
 
           // *************** Getters Setters

@@ -71,9 +71,20 @@ angular.module('frontEndApp')
 
             };
 
+            // Checking if its not something else than analyserNode by lookin if it got one characteristic attribute
+            // TODO : trouver une vraie solution propre qui verifie que c'est un analyserNode par prototype ou bref un truc SUR.
+            if($scope.analyserNode.fftSize != undefined)
+            {
+                // First call to draw
+                console.log('initialising egaliservisualiser !')
 
-            // First call to draw
-            draw();
+                draw();
+            }
+            else
+            {
+                console.log('canvas created. hidden because not a analyzer node given');
+            }
+
 
         }
     };

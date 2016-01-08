@@ -13,6 +13,7 @@ angular.module('frontEndApp')
         scope: {analyserNode: '='},
         controller: function($scope, $element, $timeout){
 
+          // TODO : ajouter un param pour horizontal ou vertical
 
                     // The canvas context, used to draw stuff in the canvas
           var ctx = $element[0].getContext('2d');
@@ -52,7 +53,7 @@ angular.module('frontEndApp')
             // Utile.. pourquoi je sais pas encore
             $scope.analyserNode.getByteFrequencyData(array);
 
-            var volume = average(array);
+            var volume = average(array)*ctx.canvas.height / 100
 
 
             // Cleaning previous visualisation (redrawing background

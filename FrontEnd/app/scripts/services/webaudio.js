@@ -6,6 +6,7 @@
  * @description
  * # WebAudio
  * Service in the frontEndApp.
+ * TODO : ca serait bien d'avoir un son par defaut
  */
 // TODO : empecher de pouvoir lancer plusieurs fois play en meme temps
 angular.module('frontEndApp')
@@ -22,8 +23,7 @@ angular.module('frontEndApp')
            */
           constructor (){
               console.log("webaudio contructor!")
-              this._isInitialized = false;
-              this._isPlaying = false;
+
               this._soundBuffer = null;
               this._soundInput = null; // The first box of the graph, linked to the soundBuffer
               this._soundOutput = null; // The last box of the graph, linked to.. the speakers in buildGraph()
@@ -41,6 +41,15 @@ angular.module('frontEndApp')
               // Default parameters
               this._analyser.smoothingTimeConstant = 0.3;
               this._analyser.fftSize = 1024;
+
+
+              // Some status infos
+              this._isInitialized = false;
+              this._isPlaying = false;
+              this._isGraphReady = false;
+
+              // We need to keep access of the filters we connected, to be able to delete them afterwards
+              this._connectedFilters = [];
           }
 
 
@@ -75,7 +84,7 @@ angular.module('frontEndApp')
                   if(array[i].uuid == uuid)
                   return array[i];
               }
-              console.error("NO RESULT GETFILTERBYUUID:" + filters);
+              console.error("NO RESULT GETFILTERBYUUID:" + array);
               return undefined;
 
           };
@@ -84,17 +93,27 @@ angular.module('frontEndApp')
           /**
            * Gather pedal settings and play the sound with the pedal activated
            * TODO : commenter un peu, chercher a simplifier (connexion de pedalInput...)
+           * Note : filterInput and filterOutput are inside the filters array
            * @param filters
            * @param pedalInput
            * @param pedalOutput
            */
-          playSoundFromPedal(filters, pedalInput, pedalOutput)
+          loadGraph(filters, filterInput, filterOutput)
           {
+
+              this.stopSound();
+              this.cleanGraph();
 
               // Handling input source
               this._soundInput = this._context.createBufferSource();
               this._soundOutput = this._context.destination;
               this._soundInput.buffer = this._soundBuffer;
+
+
+              // **** COnnecting webaudio to filterInput
+              this._soundInput.connect(filterInput.audioNode);
+              // **** COnnecting filterOutput to webaudio output
+              filterOutput.audioNode.connect(this._soundOutput);
 
 
               // TODO : utiliser les filters SI YEN A
@@ -107,51 +126,6 @@ angular.module('frontEndApp')
 
                   if(l >0)
                   {
-                      // **** COnnectinf webaudio to pedalInput
-                      this._soundInput.connect(pedalInput.audioNode);
-
-
-                      // **** Connecting pedalInput to its filters
-                      // TODO : grosse duplication de code, j'ai corrige en placant un truc en + dans fxMachine, mais au final 'est peutetre plus propre de le garder la. a decider afterwards
-                      /*for(var i = 0 ; i < pedalInput.outputs.length ; i++)
-                      {
-                          // * get uuids of output
-                          var filterUUID = pedalInput.outputs[i];
-                          console.log("filterUUID:"+filterUUID);
-
-                          // * FInd the matching filter
-                          var outputFilter = undefined;
-                          // COuld be pedalOutput
-                          if(filterUUID == pedalOutput.uuid)
-                          {
-                              console.info("conenxion: output filter was pedaloutput")
-                              outputFilter = pedalOutput;
-                          }
-
-
-                          for(var k = 0 ; k < filters.length ; k++)
-                          {
-                              if(filters[k].uuid == filterUUID)
-                              {
-                                  outputFilter = filters[k];
-                                  console.info("output filter found in pedal filters")
-                              }
-
-                          }
-                          if(outputFilter == undefined)
-                          {
-                              console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
-                              return;
-                          }
-
-                          // * and connect the filter to that output filter
-                          pedalInput.audioNode.connect(outputFilter.audioNode);
-                      }*/
-
-
-                      // **** COnnecting pedalOutput to webaudio output
-                      pedalOutput.audioNode.connect(this._soundOutput);
-
                       // **** COnnecting everything inside
 
 
@@ -166,23 +140,8 @@ angular.module('frontEndApp')
 
                               // * FInd the matching filter
                               var outputFilter = undefined;
-                              // COuld be pedalOutput
-                              if(filterUUID == pedalOutput.uuid)
-                              {
-                                  console.info("conenxion: output filter was pedaloutput")
-                                  outputFilter = pedalOutput;
-                              }
+                              outputFilter = this.getFilterByUUID(filters, filterUUID);
 
-
-                              for(var k = 0 ; k < filters.length ; k++)
-                              {
-                                  if(filters[k].uuid == filterUUID)
-                                  {
-                                      outputFilter = filters[k];
-                                      console.info("output filter found in pedal filters")
-                                  }
-
-                              }
                               if(outputFilter == undefined)
                               {
                                   console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
@@ -195,13 +154,10 @@ angular.module('frontEndApp')
 
                       }
 
-                        console.log("starting music...");
+                      this._connectedFilters = filters;
+                      this._isGraphReady = true;
 
-                      // Connecting webaudio input to analyzer
-                      this._soundInput.connect(this._analyser);
-
-                      this._soundInput.start(0, 0);
-                      this._isPlaying = true;
+                      console.info("everything well connected !");
 
                   }
                   else
@@ -212,56 +168,110 @@ angular.module('frontEndApp')
               }
               else
               {
-                  console.error("smth happened");
+                  console.error("BIG ERROR . S HOULD BE AT LEAST TWO FILTERS WITH FILTERINPUT AND FILTEROUTPUT");
               }
           }
 
           playSound()
           {
+            if(this._isGraphReady)
+            {
+                this._soundInput.start(0, 0);
+                this._isPlaying = true;
+            }
+             else
+            {
+                console.warn("Impossible to play sound, build graph before !");
+            }
 
-
-              // otherwise, just play input sound
-              {
-                  // quick graph
-                  console.log("playsound called without filters : playing source.")
-                  this._soundInput = this._context.createBufferSource();
-                  this._soundOutput = this._context.destination;
-                  this._soundInput.buffer = this._soundBuffer;
-                  this._soundInput.connect(this._soundOutput);
-
-                  // Connecting webaudio input to analyzer
-                  this._soundInput.connect(this._analyser);
-
-              }
-
-              this._soundInput.start(0, 0);
-              this._isPlaying = true;
 
           }
 
           stopSound() {
               if(this._isPlaying)
               {
-                  console.log("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
+                  console.info("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
                   // stop the source now.
                   // Parameter : delay before stopping
                   // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
                   // We do not need to redecode the data, just to rebuild the graph
                   this._soundInput.stop(0);
                   this._isPlaying = false;
+                  this.cleanGraph(); // Just in case, because i dont trust this stuff
+                  this._isGraphReady = false;
 
               }
               else
               {
-                  console.error("trying to stop sound but not playing");
+                  console.warn("trying to stop sound but not playing");
               }
           }
 
 
+          /**
+           * Clean the graph. as simple as that.
+           */
+          cleanGraph() {
+              if(this._isGraphReady)
+              {
+                  console.log("cleaning graph");
+                  var l = this._connectedFilters.length;
+
+                  // All filters
+                  for(var i = 0 ; i < l ; i++)
+                      this._connectedFilters[i].audioNode.disconnect();
+
+                  // Main input and output
+                  this._soundInput.disconnect();
+                  this._soundOutput.disconnect();
+
+
+                  this._connectedFilters = [];
+                  this._isGraphReady = false;
+              }
+              else
+              {
+                  console.warn("asked to clean graph, but isGraphReady value tells its clean already")
+              }
+
+          }
+
+          /*
+          Just play the input.
+           */
+          loadDefaultGraph()
+          {
+
+              // before anything, killing graph, just in case
+              console.log("loading default graph");
+              this.cleanGraph();
+
+              // quick graph
+              console.log("WebAudio : creating simple graph input->output.")
+              this._soundInput = this._context.createBufferSource();
+              this._soundOutput = this._context.destination;
+              this._soundInput.buffer = this._soundBuffer;
+              this._soundInput.connect(this._soundOutput);
+
+              // Connecting webaudio input to analyzer
+              this._soundInput.connect(this._analyser);
+
+
+              this._isGraphReady = true;
+
+
+          }
 
           //********************************** getters
 
 
+
+          /**
+           getter of the audio context
+           */
+          get isGraphReady (){
+              return this._isGraphReady;
+          }
 
           /**
            getter of the audio context

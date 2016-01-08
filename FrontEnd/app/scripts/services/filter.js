@@ -41,12 +41,15 @@ angular.module('frontEndApp')
                 case 'biquad':
                     this._audioNode = webaudioService.context.createBiquadFilter();
                     break;
+                case'visualiser':
+                    this._audioNode = webaudioService.context.createAnalyser();
+                    break;
+                    break;
 
                 default:
                     success = false;
                     console.error("FIlter2 : wrong type given to constructor :")
                     console.error(type);
-
                     break;
             }
 
@@ -123,6 +126,11 @@ angular.module('frontEndApp')
           }
 
 
+          cleanConnexions()
+          {
+              this._outputs = [];
+              this._inputs = [];
+          }
 
 
         /**
