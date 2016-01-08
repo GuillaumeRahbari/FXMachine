@@ -115,6 +115,8 @@ angular.module('frontEndApp')
               // **** COnnecting filterOutput to webaudio output
               filterOutput.audioNode.connect(this._soundOutput);
 
+              // TODO : faudrait une vraie output sur laquelle on peut se brancher, parce que sur la, soundOutput c le speaker donc on peut pas sy connecter
+              filterOutput.audioNode.connect(this._analyser);
 
               // TODO : utiliser les filters SI YEN A
               // if theres filters, graph and all that stuff

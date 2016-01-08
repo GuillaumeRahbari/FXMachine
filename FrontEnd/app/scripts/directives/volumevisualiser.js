@@ -10,23 +10,47 @@ angular.module('frontEndApp')
   .directive('volumeVisualiser', function () {
       return {
         restrict: 'A',
-        scope: {analyserNode: '='},
+        scope: {orientation: '=', analyserNode: '='},
         controller: function($scope, $element, $timeout){
 
-          // TODO : ajouter un param pour horizontal ou vertical
+
 
                     // The canvas context, used to draw stuff in the canvas
           var ctx = $element[0].getContext('2d');
 
 
-
           // gradient element for the meter
-          var meterColor = ctx.createLinearGradient(0,0,0,10);
-          // Saturation value
-          meterColor.addColorStop(0,"red");
-          // Normal value
-          meterColor.addColorStop(1,'rgb(42, 140, 252)');
+          var meterColor;
+
           var backgroundColor = 'rgb(230, 230, 230)';
+
+            if($scope.orientation =="horizontal")
+            {
+                meterColor = ctx.createLinearGradient(0,0,ctx.canvas.width,0);
+                // Saturation value
+
+                // Normal value
+                meterColor.addColorStop(0,'rgb(42, 140, 252)');
+                meterColor.addColorStop(0.9,'rgb(42, 140, 252)');
+                meterColor.addColorStop(1,"red");
+            }
+            else if($scope.orientation == "vertical")
+            {
+                meterColor = ctx.createLinearGradient(0,0,0,10);
+                // Saturation value
+
+                // Normal value
+                meterColor.addColorStop(1,'rgb(42, 140, 252)');
+                meterColor.addColorStop(0.1,'rgb(42, 140, 252)');
+                meterColor.addColorStop(0,"red");
+
+            }
+            else
+            {
+                console.error("bad orientation given !");
+                console.log($scope.orientation)
+            }
+
 
 
 
@@ -41,7 +65,7 @@ angular.module('frontEndApp')
 
             return 10*result/l;
 
-          }
+          };
           /**
            * The main rendering loop for a audiovisualizer
            */
@@ -53,23 +77,52 @@ angular.module('frontEndApp')
             // Utile.. pourquoi je sais pas encore
             $scope.analyserNode.getByteFrequencyData(array);
 
-            var volume = average(array)*ctx.canvas.height / 100
+              if($scope.orientation == "vertical")
+              {
+                  var volume = average(array)*ctx.canvas.height / 100;
 
 
-            // Cleaning previous visualisation (redrawing background
-            ctx.fillStyle = backgroundColor;
-            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                  // Cleaning previous visualisation (redrawing background
+                  ctx.fillStyle = backgroundColor;
+                  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-            ctx.fillStyle = meterColor;
+                  ctx.fillStyle = meterColor;
 
-            // Variable meterWidth depending on canvas width to fill it
-            var meterWidth = (ctx.canvas.width);
+                  // Variable meterWidth depending on canvas width to fill it
+                  var meterWidth = (ctx.canvas.width);
 
-            //for (var i = 1 ; i < array.length; i+=meterWidth)
-            {
+                  //for (var i = 1 ; i < array.length; i+=meterWidth)
+                  {
 
-              ctx.fillRect(0, ctx.canvas.height-volume/2, meterWidth, volume);
-            }
+                      ctx.fillRect(0, ctx.canvas.height-volume/2, meterWidth, volume);
+                  }
+              }
+              else if($scope.orientation == 'horizontal')
+              {
+                  var volume = average(array)*ctx.canvas.width / 100;
+
+
+                  // Cleaning previous visualisation (redrawing background
+                  ctx.fillStyle = backgroundColor;
+                  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+                  ctx.fillStyle = meterColor;
+
+                  // Variable meterWidth depending on canvas width to fill it
+                  var meterWidth = (ctx.canvas.height);
+
+                  //for (var i = 1 ; i < array.length; i+=meterWidth)
+                  {
+
+                      ctx.fillRect(0, 0, volume/2, meterWidth);
+                  }
+              }
+              else
+              {
+                  console.error('BAD ORIENTATION !');
+                  console.error($scope.orientation);
+              }
+
 
             // Re-looping
             $timeout(draw, 60)

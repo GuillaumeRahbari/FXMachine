@@ -23,8 +23,12 @@ FX MACHINE V2
 <br>
 
 <div id="output" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-    <h5>OUTPUT</h5> <!-- Input Visualisation : volume -->
-    <canvas volume-visualiser analyser-node="fxmachine.webaudio.analyser" width="10" height="20" id="whatever3"
+    <h5>OUTPUT</h5>
+
+    <canvas volume-visualiser orientation="'vertical'" analyser-node="fxmachine.webaudio.analyser"  width="10" height="20" id="whatever3"
+            style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
+
+    <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser"  width="100" height="10" id="dewhatever3"
             style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
 
     By default : SPEAKERS

@@ -18,6 +18,8 @@ angular.module('frontEndApp')
 
             // TODO : fftsize depend du sampling rate. besoin d'avoir une bonne fftsize. need to be handled somewhere, but not here !
 
+            // TODO : en tout petit c'est super moche. la hauteur des meters est mal geree. arranger ca.
+            
             // The canvas context, used to draw stuff in the canvas
             var ctx = $element[0].getContext('2d');
 
