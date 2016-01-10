@@ -9,7 +9,7 @@
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .service('Filter2', function () {
+  .service('Filter2', ['uuidGenerator', function (uuidGenerator) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
 
@@ -59,9 +59,8 @@ angular.module('frontEndApp')
             {
                 // Continue construction
                 this._type = type;
-                // TODO : generate real uuid.. or not. we do'nt really care maybe
-                var d = new Date();
-                this._uuid = d.getTime();
+                // using uuidGenerator service
+                this._uuid = uuidGenerator.generateUUID();
                 this._inputs = [];
                 this._outputs = [];
                 console.log("success creation filter")
@@ -178,4 +177,4 @@ angular.module('frontEndApp')
 
       return Filter2;
 
-  });
+  }]);

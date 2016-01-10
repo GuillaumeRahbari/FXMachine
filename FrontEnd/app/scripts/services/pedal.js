@@ -30,22 +30,13 @@ angular.module('frontEndApp')
 
               this._filters = [];
 
-              // Default parameters
-
-              // ******** TODO : quand on aura un vrai uuid, refaire ce constructeur au propre
               // Input and output nodes of the pedal
               this._input = new Filter("node",webaudioService);
+              this._output = new Filter("node", webaudioService);
 
               this._webaudio = webaudioService;
 
-              // Connecting pedal output to analyzer
-              // pour passer le temps.. pour eviter que input et output aient le meme uuid
-              for(var i = 0 ; i < 10000000 ; i++) // prend 30ms sur mon pc.
-              {
-                  var j = 0;
-              }
-              // Just to be sure, needs at least 1 milliseconds between the two events
-              this._output = new Filter("node", webaudioService);
+
 
           }
 
