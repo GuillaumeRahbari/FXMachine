@@ -45,8 +45,11 @@ angular.module('frontEndApp')
                     this._audioNode = webaudioService.context.createWaveShaper();
                     break;
                 case "delay":
-                    console.log("create delay!")
                     this._audioNode = webaudioService.context.createDelay(5.0);// represents the MAX DELAY
+                    break;
+
+                case "dynamicCompressor":
+                    this._audioNode = webaudioService.context.createDynamicsCompressor();
                     break;
 
                 case'visualiser':

@@ -1,0 +1,26 @@
+<div>
+
+
+
+
+    <input id type="range" min="-100" max="0" value="-24" step="1" ng-model="filter.audioNode.threshold.value">
+    threshold -{{filter.audioNode.threshold.value}}dB
+
+    <br>
+    <input  type="range" min="0" max="40" value="30" step="1" ng-model="filter.audioNode.knee.value">
+    knee{{filter.audioNode.knee.value}}dB
+
+    <br>
+    <input  type="range" min="1" max="20" value="10" step="1" ng-model="filter.audioNode.ratio.value">
+    ratio{{filter.audioNode.ratio.value}}:1
+    <br>
+
+    <input  type="range" min="0" max="1" value=" 0.003 " step="0.001" ng-model="filter.audioNode.attack.value">
+    attack{{filter.audioNode.attack.value}}s
+    <br>
+    <input  type="range" min="0" max="1" value="0.25" step="0.001" ng-model="filter.audioNode.release.value">
+    release{{filter.audioNode.release.value}}s
+
+    <br>
+    Reduction : {{filter.audioNode.reduction.value}} dB
+</div>
