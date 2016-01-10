@@ -243,22 +243,30 @@ angular.module('frontEndApp')
           loadDefaultGraph()
           {
 
-              // before anything, killing graph, just in case
-              console.log("loading default graph");
-              this.cleanGraph();
+              if(this._isInitialized)
+              {
+                  // before anything, killing graph, just in case
+                  console.log("loading default graph");
+                  this.cleanGraph();
 
-              // quick graph
-              console.log("WebAudio : creating simple graph input->output.")
-              this._soundInput = this._context.createBufferSource();
-              this._soundOutput = this._context.destination;
-              this._soundInput.buffer = this._soundBuffer;
-              this._soundInput.connect(this._soundOutput);
+                  // quick graph
+                  console.log("WebAudio : creating simple graph input->output.")
+                  this._soundInput = this._context.createBufferSource();
+                  this._soundOutput = this._context.destination;
+                  this._soundInput.buffer = this._soundBuffer;
+                  this._soundInput.connect(this._soundOutput);
 
-              // Connecting webaudio input to analyzer
-              this._soundInput.connect(this._analyser);
+                  // Connecting webaudio input to analyzer
+                  this._soundInput.connect(this._analyser);
 
 
-              this._isGraphReady = true;
+                  this._isGraphReady = true;
+              }
+              else
+              {
+                  console.warn("webaudio not initialised ! not loading graph before it is.");
+              }
+
 
 
           }

@@ -1,4 +1,5 @@
 <div>
-    <input id="volume" type="range" min="0" max="60" value="1" step="1" ng-model="filter.audioNode.gain.value">
-    {{filter.audioNode.gain.value}}dB'
+    <div ng-show="filter.audioNode.gain.value >= 1"> +{{filter.audioNode.gain.value-1}}dB'</div>
+    <div ng-show="filter.audioNode.gain.value == 0"> Son coupé</div>
+    <input id="volume" type="range" min="0" max="101" value="1" step="1" ng-model="filter.audioNode.gain.value">
 </div>

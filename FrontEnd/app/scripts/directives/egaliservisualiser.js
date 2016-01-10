@@ -15,7 +15,6 @@ angular.module('frontEndApp')
         controller: function($scope, $element, $timeout){
 
 
-
             // TODO : fftsize depend du sampling rate. besoin d'avoir une bonne fftsize. need to be handled somewhere, but not here !
 
             // TODO : en tout petit c'est super moche. la hauteur des meters est mal geree. arranger ca.

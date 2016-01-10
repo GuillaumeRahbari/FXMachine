@@ -43,8 +43,9 @@ angular.module('frontEndApp')
                     break;
                 case'visualiser':
                     this._audioNode = webaudioService.context.createAnalyser();
-                    this._audioNode.smoothingTimeConstant = 0.3;
-                    this._audioNode.fftSize = 1024;
+                    // y'a deja des valeurs par defautezk
+                    //this._audioNode.smoothingTimeConstant = 0.3;
+                    //this._audioNode.fftSize = 1024;
                     break;
                     break;
 
