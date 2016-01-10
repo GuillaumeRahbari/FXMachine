@@ -7,8 +7,9 @@
  * # WebAudio
  * Service in the frontEndApp.
  * TODO : ca serait bien d'avoir un son par defaut
+ * TODO : un bouton pause
+ * TODO : empecher de pouvoir lancer plusieurs fois play en meme temps
  */
-// TODO : empecher de pouvoir lancer plusieurs fois play en meme temps
 angular.module('frontEndApp')
   .service('WebAudio', ['Sound',function () {
 
@@ -91,12 +92,11 @@ angular.module('frontEndApp')
 
 
           /**
-           * Gather pedal settings and play the sound with the pedal activated
-           * TODO : commenter un peu, chercher a simplifier (connexion de pedalInput...)
+           * Load new audio graph
            * Note : filterInput and filterOutput are inside the filters array
-           * @param filters
-           * @param pedalInput
-           * @param pedalOutput
+           * @param {Array} filters - all the filters to connecy
+           * @param filterInput - the filter on which we connect the soundInput
+           * @param filterOutput - the filter on which we connect the soundOutput
            */
           loadGraph(filters, filterInput, filterOutput)
           {
@@ -115,10 +115,9 @@ angular.module('frontEndApp')
               // **** COnnecting filterOutput to webaudio output
               filterOutput.audioNode.connect(this._soundOutput);
 
-              // TODO : faudrait une vraie output sur laquelle on peut se brancher, parce que sur la, soundOutput c le speaker donc on peut pas sy connecter
+              // TODO : faudrait une vraie output sur laquelle on peut se brancher, parce que sur la, soundOutput c le speaker donc on peut pas sy connecter pour visualiser
               filterOutput.audioNode.connect(this._analyser);
 
-              // TODO : utiliser les filters SI YEN A
               // if theres filters, graph and all that stuff
 
               if(filters != undefined)

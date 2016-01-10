@@ -50,38 +50,33 @@ FX MACHINE V2
     <button id="cleangraph" ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph</button>
     <button id="loaddefaultgraph" ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio Graph</button>
     <br>
-    <button id="play" ng-click="fxmachine.webaudio.playSound();">Lecture (son initial)</button>
-    <button id="stop" ng-click="fxmachine.webaudio.stopSound();">Stop (son initial)</button>
+    <button id="play" ng-click="fxmachine.webaudio.playSound();">Lecture</button>
+    <button id="stop" ng-click="fxmachine.webaudio.stopSound();">Stop</button>
 
 
 </div>
-
-
-
-
 <br>
-
 </div>
+<button id="addPedal" ng-click="fxmachine.addPedal();">Add a new pedal</button>
 
 <br><br><br>
 <!--** pedal div **-->
 <!-- On peut imaginer ici à terme la vue avec toutes les pédales,
 et pouvoir les "essayer"(charger dans le webaudio) simplement -->
+<div ng-repeat="pedal in fxmachine.pedals" style="border-style:solid;border-color:#e97134;border-width:4px">
 
-<div style="border-style:solid;border-color:black;border-width:2px">
-
-
+    <button id="removePedal" ng-click="fxmachine.removePedal(pedal)">Remove pedal</button>
     <h3>Pedal Structure</h3>
     <hr width="40%" align="left">
 
     <!-- our beautiful first pedal -->
-    <button id="tryPedal" ng-click="fxmachine.loadPedalToWebAudio(fxmachine.pedal);">Load Pedal to webAudio Graph</button>
+    <button id="tryPedal" ng-click="fxmachine.loadPedalToWebAudio(pedal);">Load Pedal to webAudio Graph</button>
 <hr>
     <div>
         FILTER BANK
-        <button id="addGainFilter" ng-click="fxmachine.pedal.addFilter('gain');">Add Gain Filter</button>
-        <button id="addEqualizerFilter" ng-click="fxmachine.pedal.addFilter('biquad');">Add BiQuad</button>
-        <button id="visualiserFilter" ng-click="fxmachine.pedal.addFilter('visualiser');">Add egaliser visu</button>
+        <button id="addGainFilter" ng-click="pedal.addFilter('gain');">Add Gain Filter</button>
+        <button id="addEqualizerFilter" ng-click="pedal.addFilter('biquad');">Add BiQuad</button>
+        <button id="visualiserFilter" ng-click="pedal.addFilter('visualiser');">Add egaliser visu</button>
 
     </div>
 
@@ -94,11 +89,11 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
     <h4>Pedal composition</h4>
 
     <!-- Filters graph --> <!-- TODO : JSPLUMB HERE -->
-    <div ng-repeat="filter in fxmachine.pedal.filters" style="border-style:solid;border-color:black;border-width:3px">
+    <div ng-repeat="filter in pedal.filters" style="border-style:solid;border-color:black;border-width:3px">
 
         <h5>Filtre : {{filter.type}}</h5>
 
-        <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="fxmachine.pedal.removeFilter(filter);">Remove Filter</button>
+        <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="pedal.removeFilter(filter);">Remove Filter</button>
 
         <!-- Showing the div corresponding to the right filter -->
         <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
@@ -115,6 +110,5 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
 
 
     </div> <!-- end filter graph -->
-
 </div> <!-- end pedal div -->
 

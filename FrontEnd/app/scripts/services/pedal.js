@@ -8,7 +8,6 @@
  * The pedal
  *
  * La pedale. Elle contient une entrée (filtre), une sortie (filtre), et un array de filtres en tous genres
- * ainsi qu'un analyser a son output pour visualiser ce qu'il en sort
  *
  * contient aussi un pointeur vers le webaudio service pour creer des filtres easily
  * TODO : passer input et output en filtres de gain, et afficher dans la vue
@@ -29,25 +28,18 @@ angular.module('frontEndApp')
            */
           constructor (webaudioService){
 
-
               this._filters = [];
 
-              // One analyser for each pedal
-              this._analyser = webaudioService.context.createAnalyser();
               // Default parameters
-              this._analyser.smoothingTimeConstant = 0.3;
-              this._analyser.fftSize = 1024;
 
-              // ******** TODO : sale. si meme millisecondes pour input et output, ca explose
+              // ******** TODO : quand on aura un vrai uuid, refaire ce constructeur au propre
               // Input and output nodes of the pedal
               this._input = new Filter("node",webaudioService);
 
-
               this._webaudio = webaudioService;
 
-
-              // Connecting pedal output to analyzer TODO :pour passer le temps.. pour eviter que input et output aient le meme uuid
-              // TODO : faudrait faire un uuid un peu + smart que juste la date
+              // Connecting pedal output to analyzer
+              // pour passer le temps.. pour eviter que input et output aient le meme uuid
               for(var i = 0 ; i < 10000000 ; i++) // prend 30ms sur mon pc.
               {
                   var j = 0;
@@ -55,13 +47,12 @@ angular.module('frontEndApp')
               // Just to be sure, needs at least 1 milliseconds between the two events
               this._output = new Filter("node", webaudioService);
 
-              this._output.audioNode.connect(this._analyser);
           }
 
 
           /**
            * Adds a filter to the filters array.
-           * @param {Filter2} filter - The filter to add.
+           * @param {Filter} filter - The filter to add.
            */
           addFilter (type) {
 
@@ -107,7 +98,7 @@ angular.module('frontEndApp')
 
             // TODO : temporaire. Connecte en CHAINE. Sera remplacé + tard par un binding direct entre la vue et la Pedale avec les connexions multiples
           // NOTE : FUCK LES INPUTS. CA SERT A RIEN EN FAIT
-          connectFilters()
+          connectFiltersInChain()
           {
 
 
@@ -187,12 +178,7 @@ angular.module('frontEndApp')
               return this._output;
           }
 
-          /**
 
-           */
-          get analyser (){
-              return this._analyser;
-          }
 
 
 
