@@ -41,6 +41,14 @@ angular.module('frontEndApp')
                 case 'biquad':
                     this._audioNode = webaudioService.context.createBiquadFilter();
                     break;
+                case "waveShaper":
+                    this._audioNode = webaudioService.context.createWaveShaper();
+                    break;
+                case "delay":
+                    console.log("create delay!")
+                    this._audioNode = webaudioService.context.createDelay(5.0);// represents the MAX DELAY
+                    break;
+
                 case'visualiser':
                     this._audioNode = webaudioService.context.createAnalyser();
                     // y'a deja des valeurs par defautezk
@@ -51,7 +59,7 @@ angular.module('frontEndApp')
 
                 default:
                     success = false;
-                    console.error("FIlter2 : wrong type given to constructor :")
+                    console.error("Filter : wrong type given to constructor :");
                     console.error(type);
                     break;
             }

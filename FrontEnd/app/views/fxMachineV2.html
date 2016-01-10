@@ -76,6 +76,8 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
         FILTER BANK
         <button id="addGainFilter" ng-click="pedal.addFilter('gain');">Add Gain Filter</button>
         <button id="addEqualizerFilter" ng-click="pedal.addFilter('biquad');">Add BiQuad</button>
+        <button id="addwaveshaperFilter" ng-click="pedal.addFilter('waveShaper');">Add waveShaper</button>
+        <button id="addDelayFilter" ng-click="pedal.addFilter('delay');">Add delay</button>
         <button id="visualiserFilter" ng-click="pedal.addFilter('visualiser');">Add egaliser visu</button>
 
     </div>
@@ -107,6 +109,13 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
         <filter-gain filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
         <!-- The BIQUAD filter -->
         <filter-biquad filter="filter" ng-if="filter.type === 'biquad'"></filter-biquad>
+
+        <!-- The waveshaper filter -->
+        <filter-waveshaper filter="filter" ng-if="filter.type === 'waveShaper'"></filter-waveshaper>
+
+        <!-- The delay filter -->
+        <filter-delay filter="filter" ng-if="filter.type === 'delay'"></filter-delay>
+
 
 
     </div> <!-- end filter graph -->

@@ -6,6 +6,7 @@
  * @description
  * # Machine
  * Factory in the frontEndApp.
+ * TODO : DELETE THIS FILE ?
  */
 angular.module('frontEndApp')
   .factory('Machine', function () {
