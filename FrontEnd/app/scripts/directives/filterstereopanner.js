@@ -2,20 +2,18 @@
 
 /**
  * @ngdoc directive
- * @name frontEndApp.directive:filterDynamiccompressor
+ * @name frontEndApp.directive:filterStereopanner
  * @description
- * # filterDynamiccompressor
+ * # filterStereopanner
  */
 angular.module('frontEndApp')
-    .directive('filterDynamiccompressor', function () {
+    .directive('filterStereopanner', function () {
       return {
-        templateUrl: 'views/templates/filterDynamiccompressorTmpl.html',
+        templateUrl: 'views/templates/filterStereopannerTmpl.html',
         restrict: 'E',
         replace: true,
         scope: {
           filter : '='
         }
-
-
       };
     });

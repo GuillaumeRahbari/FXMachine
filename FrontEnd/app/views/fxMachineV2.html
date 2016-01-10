@@ -80,6 +80,7 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
         <button id="addDelayFilter" ng-click="pedal.addFilter('delay');">Add delay</button>
         <button id="visualiserFilter" ng-click="pedal.addFilter('visualiser');">Add egaliser visu</button>
         <button id="addDynamiccompressorFilter" ng-click="pedal.addFilter('dynamicCompressor');">Add Dyn Compressor</button>
+        <button id="addSStereopannerFilter" ng-click="pedal.addFilter('stereoPanner');">Add Stereo Panner</button>
 
     </div>
 
@@ -120,6 +121,9 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
 
         <!-- The compressor filter -->
         <filter-dynamiccompressor filter="filter" ng-if="filter.type === 'dynamicCompressor'"></filter-dynamiccompressor>
+
+        <!-- The stereopanner filter -->
+        <filter-stereopanner filter="filter" ng-if="filter.type === 'stereoPanner'"></filter-stereopanner>
 
 
 

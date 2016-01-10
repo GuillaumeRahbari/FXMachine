@@ -52,6 +52,10 @@ angular.module('frontEndApp')
                     this._audioNode = webaudioService.context.createDynamicsCompressor();
                     break;
 
+                case "stereoPanner":
+                    this._audioNode = webaudioService.context.createStereoPanner();
+                    break;
+
                 case'visualiser':
                     this._audioNode = webaudioService.context.createAnalyser();
                     // y'a deja des valeurs par defautezk

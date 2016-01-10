@@ -31,8 +31,8 @@ angular.module('frontEndApp')
 
                 this._filters = [];
                 // Input and output nodes of the pedal
-                this._input = new Filter("node",webaudioService);
-                this._output = new Filter("node", webaudioService);
+                this._input = new Filter("stereoPanner",webaudioService);
+                this._output = new Filter("stereoPanner", webaudioService);
                 this._webaudio = webaudioService;
             }
 
