@@ -90,10 +90,10 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
     <!-- TODO : here we could imagine the pedal layout (with a few buttons )-->
 
     <!-- Pedal composition : the filters behind it -->
-    <!-- TODO : we should be able to hide this easily -->
+    <!-- TODO : design : we should be able to hide this easily -->
     <h4>Pedal composition</h4>
 
-    <!-- Filters graph -->
+    <!-- Filters graph --> <!-- TODO : JSPLUMB HERE -->
     <div ng-repeat="filter in fxmachine.pedal.filters" style="border-style:solid;border-color:black;border-width:3px">
 
         <h5>Filtre : {{filter.type}}</h5>
@@ -104,14 +104,14 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
         <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
 
         <!-- The VIZU filter -->
-        <canvas egaliser-visualizer ng-show="filter.type === 'visualiser'" analyser-node="filter.audioNode" width="400" height="100" id="whateverrr"
+        <canvas egaliser-visualizer ng-if="filter.type === 'visualiser'" analyser-node="filter.audioNode" width="400" height="100" id="whateverrr"
                 style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
 
 
         <!-- The GAIN filter -->
-        <filter-gain filter="filter" ng-show="filter.type === 'gain'"></filter-gain>
+        <filter-gain filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
         <!-- The BIQUAD filter -->
-        <filter-biquad filter="filter" ng-show="filter.type === 'biquad'"></filter-biquad>
+        <filter-biquad filter="filter" ng-if="filter.type === 'biquad'"></filter-biquad>
 
 
     </div> <!-- end filter graph -->

@@ -10,7 +10,7 @@
  */
 // TODO : empecher de pouvoir lancer plusieurs fois play en meme temps
 angular.module('frontEndApp')
-  .service('WebAudio', ['Sound', function () {
+  .service('WebAudio', ['Sound',function () {
 
       /**
        * This class represent a web audio object.
@@ -22,7 +22,7 @@ angular.module('frontEndApp')
            * The default constructor of a web audio object.
            */
           constructor (){
-              console.log("webaudio contructor!")
+              console.log("webaudio contructor!");
 
               this._soundBuffer = null;
               this._soundInput = null; // The first box of the graph, linked to the soundBuffer

@@ -19,7 +19,7 @@ angular.module('frontEndApp')
             // TODO : fftsize depend du sampling rate. besoin d'avoir une bonne fftsize. need to be handled somewhere, but not here !
 
             // TODO : en tout petit c'est super moche. la hauteur des meters est mal geree. arranger ca.
-            
+
             // The canvas context, used to draw stuff in the canvas
             var ctx = $element[0].getContext('2d');
 
@@ -73,19 +73,8 @@ angular.module('frontEndApp')
 
             };
 
-            // Checking if its not something else than analyserNode by lookin if it got one characteristic attribute
-            // TODO : trouver une vraie solution propre qui verifie que c'est un analyserNode par prototype ou bref un truc SUR.
-            if($scope.analyserNode.fftSize != undefined)
-            {
-                // First call to draw
-                console.log('initialising egaliservisualiser !')
-
                 draw();
-            }
-            else
-            {
-                console.log('canvas created. hidden because not a analyzer node given');
-            }
+
 
 
         }

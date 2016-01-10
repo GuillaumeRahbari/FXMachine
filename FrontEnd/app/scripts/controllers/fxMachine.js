@@ -56,11 +56,6 @@ angular.module('frontEndApp')
 
 
 
-        // TODO :  a terme ici on ne fait QUE charger des graphes. la musique se lance directement depuis un bouton dans webaudio
-        // l'operation de charger le graphe et de play/pause doivent etre separees
-
-
-
         /**
          * Load pedal in webaudio service, and launch the audio
          * @param ped
@@ -76,7 +71,6 @@ angular.module('frontEndApp')
             console.log("send stuff to webaudio")
 
             //****************************************
-            // TODO : appeler webaudio.playSound avec la liste de filtres
             // la methode s'occupe elle meme de tout connecter ensuite
             // We work with a copy of the array, just to be sure that above here, we won't alterate our beautiful pedal
             // (main point of this architecture btw)
