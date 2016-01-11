@@ -11,8 +11,8 @@ angular.module('frontEndApp')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        jsPlumb.ready(function(){
-          jsPlumb.makeTarget(element, {
+        JsPlumb.ready(function(){
+          JsPlumb.makeTarget(element, {
             anchor: 'Continuous',
             endpoint:"Rectangle",
             maxConnections: 1

@@ -12,7 +12,7 @@ angular.module('frontEndApp')
       restrict: 'A',
       link: function (scope, element, attrs) {
         //JsPlumb.revalidate(element);
-        jsPlumb.draggable(element);
+        JsPlumb.draggable(element);
       }
     };
   });
