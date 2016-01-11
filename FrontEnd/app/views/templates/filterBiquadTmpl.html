@@ -1,28 +1,36 @@
 <div>
     Type {{filter.audioNode.type}}
     <form>
-        <input type="radio" name="biquadType" value="lowpass" ng-model="filter.audioNode.type" checked>LowPass
-        <input type="radio" name="biquadType" value="highpass" ng-model="filter.audioNode.type" >HighPass
-        <input type="radio" name="biquadType" value="bandpass" ng-model="filter.audioNode.type">BandPass
+
+        <select name="selectType"  ng-init="options[0].value" ng-model="filter.audioNode.type">
+            <option value="lowpass">Low Pass</option>
+            <option value="highpass">High Pass</option>
+            <option value="bandpass">Band Pass</option>
+            <option value="lowshelf">Low Shelf</option>
+            <option value="highshelf">High Shelf</option>
+            <option value="peaking">Peaking</option>
+            <option value="notch">Notch</option>
+            <option value="allpass">AllPass</option>
+
+        </select>
 
     </form>
 
     <!-- TODO limites de frequences de cuttof dependent de l'echantillonnage..-->
     Cuttof {{filter.audioNode.frequency.value}}
     <br>
-    <input id="cuttofFreq" type="range" min="0" max="40000" value="350" step="10" ng-model="filter.audioNode.frequency.value">
+    <input id="cuttofFreq" type="range" min="0" max="40000" value="40000" step="10" ng-model="filter.audioNode.frequency.value">
     <br>
 
-    Quality/Resonnance {{filter.audioNode.Q.value}}
+    Quality/Resonnance {{filter.audioNode.Q.value}}dB
     <br>
-
 
     <!-- Max theorique : 1000, mais deja a 100 c'est pas mal -->
-    <input id="quality" type="range" min="0.0001" max="100" value="1" step="1" ng-model="filter.audioNode.Q.value">
+    <input id="quality" type="range" min="1" max="100" value="1" step="1" ng-model="filter.audioNode.Q.value">
     <br>
 
 
-    Gain {{filter.audioNode.gain.value}}
+    Gain {{filter.audioNode.gain.value}}dB
     <!-- TODO : ca se visualise pas sur le canvas -->
 
     <br>
@@ -34,7 +42,5 @@
 
     <!-- un petit truc joli qui affiche le frequency response -->
 <!-- TODO : ameliorer le design -->
-    <!-- TODO : voir pour un drawcurve parce que la ca pompe de la memoire -->
-Frequency response
-    <canvas id="biquadvisualisation" height="100" width="400" style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
+    <canvas id="biquadvisualisation" height="200" width="600" style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
 </div>

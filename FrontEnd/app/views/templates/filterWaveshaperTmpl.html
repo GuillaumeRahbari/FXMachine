@@ -9,6 +9,10 @@
 
     <!-- TODO look for distorsion maximum value. -->
     <!-- CAREFUL : this is linked to the controller. -->
-    <input id="disto" type="range" min="0" max="5000" value="0" step="1" ng-model="distorsion">
+    <input id="disto" type="range" min="1" max="100" value="1" step="1" ng-model="distorsion">
+    {{distorsion}}%
+
+
+    <canvas id="distovisualisation" height="200" width="200" style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
 
 </div>
