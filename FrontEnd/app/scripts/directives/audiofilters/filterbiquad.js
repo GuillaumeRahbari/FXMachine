@@ -7,7 +7,7 @@
  * # filterBiquad
  */
 angular.module('frontEndApp')
-    .directive('filterBiquad', function () {
+    .directive('filterBiquad',['canvasManager', function (CanvasManager) {
         return {
             templateUrl: '../../../views/templates/filterBiquadTmpl.html',
             restrict: 'E',
@@ -20,19 +20,8 @@ angular.module('frontEndApp')
                 console.log("controller biquad !");
                 var ctx = $element[0].querySelector('#biquadvisualisation').getContext('2d');
 
-                var canvasWidth = ctx.canvas.width;
-                var canvasHeight = ctx.canvas.height;
-
-                // STYLE ELEMENTS
-
-
 
                 var textFillStyle =  'rgb(0, 0, 0)';
-                var backgroundFillStyle = 'rgb(230, 230, 230)';
-                var frequencyLineStyle = 'rgb(255, 100, 100)';
-                var zeroValueFillStyle = 'rgb(0, 0, 0)';
-
-
 
 
 
@@ -57,11 +46,9 @@ angular.module('frontEndApp')
                     //******** DRAW !
 
                     // ** Cleaning background
-                    ctx.fillStyle = backgroundFillStyle;
+                    CanvasManager.drawBackground(ctx);
 
-                    ctx.fillRect(0,0,canvasWidth,canvasHeight);
-
-                    var widthDrawStep = canvasWidth / frequencyArray.length;
+                    var widthDrawStep = ctx.canvas.width / frequencyArray.length;
 
                     // console.log("frequencyhArray length" + frequencyArray.length);
 
@@ -70,36 +57,36 @@ angular.module('frontEndApp')
 
 
                     //** Drawing frequency response line
-                    ctx.strokeStyle = frequencyLineStyle;
-                    ctx.fillStyle = frequencyLineStyle;
+                    CanvasManager.setPrimaryLineStyle(ctx);
                     ctx.lineWidth=2;
                     ctx.beginPath();
-                    ctx.moveTo(0,canvasHeight/2);
+                    ctx.moveTo(0,ctx.canvas.height/2);
 
                     
                     for(var i = 0; i <= frequencyArray.length-1;i++)
                     {
                         // magResponseOutput goes from 0 to 1. We rescale to half of size, to handle saturatio
-                        var meterHeight = magResponseOutput[i]*(canvasHeight/2);
-                        ctx.lineTo(i*widthDrawStep, canvasHeight - meterHeight);
+                        var meterHeight = magResponseOutput[i]*(ctx.canvas.height/2);
+                        ctx.lineTo(i*widthDrawStep, ctx.canvas.height - meterHeight);
                         // listItem.innerHTML = '<strong>' + frequencyArray[i] + 'Hz</strong>: Magnitude ' + magResponseOutput[i] + ', Phase ' + phaseResponseOutput[i] + ' radians.';
                     }
                     ctx.stroke();
 
 
                     // Zero dB line
+
+                    CanvasManager.setSecondaryLineStyle(ctx);
                     ctx.lineWidth = 1;
-                    ctx.strokeStyle = zeroValueFillStyle;
-                    ctx.fillStyle = zeroValueFillStyle;
-                    ctx.moveTo(0,canvasHeight/2);
-                    ctx.lineTo(canvasWidth,canvasHeight/2);
+
+                    ctx.moveTo(0,ctx.canvas.height/2);
+                    ctx.lineTo(ctx.canvas.width,ctx.canvas.height/2);
                     ctx.stroke();
 
                     // Drawing frequency legend
-                    ctx.fillStyle = textFillStyle;
+                    CanvasManager.setTextColorStyle(ctx);
                     ctx.font = "10px Arial";
-                    ctx.fillText(frequencyArray[0]+'Hz',0,canvasHeight-10);
-                    ctx.fillText(frequencyArray[frequencyArray.length-1]+'Hz',canvasWidth-50,canvasHeight-10);
+                    ctx.fillText(frequencyArray[0]+'Hz',0,ctx.canvas.height-10);
+                    ctx.fillText(frequencyArray[frequencyArray.length-1]+'Hz',ctx.canvas.width-50,ctx.canvas.height-10);
 
                 };
 
@@ -124,4 +111,4 @@ angular.module('frontEndApp')
                 })
             }
         };
-    });
+    }]);

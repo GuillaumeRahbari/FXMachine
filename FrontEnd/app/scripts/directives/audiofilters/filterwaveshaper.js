@@ -7,7 +7,7 @@
  * # filterWaveshaper
  */
 angular.module('frontEndApp')
-    .directive('filterWaveshaper', function () {
+    .directive('filterWaveshaper',['canvasManager', function (CanvasManager) {
       return {
         templateUrl: '../../../views/templates/filterWaveshaperTmpl.html',
         restrict: 'E',
@@ -26,14 +26,6 @@ angular.module('frontEndApp')
               var canvasWidth = ctx.canvas.width;
               var canvasHeight = ctx.canvas.height;
 
-              // STYLE ELEMENTS
-
-
-
-              var textFillStyle =  'rgb(0, 0, 0)';
-              var backgroundFillStyle = 'rgb(230, 230, 230)';
-              var frequencyLineStyle = 'rgb(255, 100, 100)';
-              var zeroValueFillStyle = 'rgb(0, 0, 0)';
 
 
               /**
@@ -60,16 +52,15 @@ angular.module('frontEndApp')
               {
                   console.log("draw");
                   // ** Cleaning background
-                  ctx.fillStyle = backgroundFillStyle;
-                  ctx.fillRect(0,0,canvasWidth,canvasHeight);
+                  CanvasManager.drawBackground(ctx);
 
-                  var widthDrawStep = canvasWidth / curve.length;
+                  var widthDrawStep = ctx.canvas.width / curve.length;
 
                   // console.log("frequencyhArray length" + frequencyArray.length);
 
                   //** Drawing disto response line
-                  ctx.strokeStyle = frequencyLineStyle;
-                  ctx.fillStyle = frequencyLineStyle;
+                  CanvasManager.setPrimaryLineStyle(ctx);
+
                   ctx.lineWidth=2;
                   ctx.beginPath();
                   ctx.moveTo(0,canvasHeight/2);
@@ -78,8 +69,8 @@ angular.module('frontEndApp')
                   for(var i = 0; i <= curve.length-1;i++)
                   {
                       // magResponseOutput goes from 0 to 10 for a max amount of 100
-                      var meterHeight = curve[i]*(canvasHeight/2);
-                      ctx.lineTo(i*widthDrawStep, canvasHeight/2 - meterHeight);
+                      var meterHeight = curve[i]*(ctx.canvas.height/2);
+                      ctx.lineTo(i*widthDrawStep, ctx.canvas.height/2 - meterHeight);
               }
                   ctx.stroke();
 
@@ -110,5 +101,5 @@ angular.module('frontEndApp')
 
           }
       };
-    });
+    }]);
 

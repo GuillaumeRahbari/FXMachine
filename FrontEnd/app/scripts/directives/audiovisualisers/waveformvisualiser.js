@@ -19,10 +19,6 @@ angular.module('frontEndApp')
                 var ctx = $element[0].getContext('2d');
 
 
-                var canvasWidth = ctx.canvas.width;
-                var canvasHeight = ctx.canvas.height;
-
-
                 /**
                  * The main rendering loop for a drawing the waveform
                  */

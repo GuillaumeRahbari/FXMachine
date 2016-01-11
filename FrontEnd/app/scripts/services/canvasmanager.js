@@ -10,10 +10,12 @@
 angular.module('frontEndApp')
   .service('canvasManager', function () {
 
-      var backgroundColor = 'rgb(0, 0, 0)';
-      var lineColor_primary = 'rgb(255, 0, 0)';
-      var lineColor_secondary;
-      var lineColor_third;
+      var backgroundColor = 'rgb(58, 58, 58)';
+      var lineColor_primary = 'rgb(240, 240, 240)';
+      var lineColor_secondary = 'rgb(255, 206, 58)';
+      var lineColor_third = 'rgb(118, 255, 68)';
+
+        var textColor_primary = 'rgba(255,255,255,0.7)';
 
     var meterColor_low = 'rgb(30, 119, 7)';
     var meterColor_high = 'rgb(177, 239, 5)';
@@ -42,14 +44,22 @@ angular.module('frontEndApp')
         setSecondaryLineStyle: function (context) {
 
           context.fillStyle = lineColor_secondary;
+            context.strokeStyle = lineColor_secondary;
 
         },
 
         setThirdLineStyle: function (context) {
 
           context.fillStyle = lineColor_third;
+            context.strokeStyle = lineColor_third;
 
         },
+
+          setTextColorStyle: function(context){
+              context.fillStyle = textColor_primary;
+              context.strokeStyle = textColor_primary;
+
+          },
 
           setMeterColor: function(context, orientation)
           {
