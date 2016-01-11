@@ -49,7 +49,7 @@ angular.module('frontEndApp')
 
                   $scope.filter.audioNode.getFrequencyResponse(frequencyArray,magResponseOutput,phaseResponseOutput);
 
-
+//lol
 
                   ctx.fillStyle = backgroundFillStyle;
                   ctx.fillRect(0,0,canvasWidth,canvasHeight);
