@@ -9,7 +9,7 @@
 angular.module('frontEndApp')
   .directive('connectable', function (JsPlumb) {
     return {
-      restrict: 'E',
+      restrict: 'A',
       link: function (scope, element, attrs) {
         JsPlumb.ready(function(){
           element.text('this is the connectable directive');
