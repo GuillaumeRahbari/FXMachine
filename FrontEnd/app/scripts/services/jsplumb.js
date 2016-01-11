@@ -10,5 +10,6 @@
 angular.module('frontEndApp')
   .service('JsPlumb', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
+
       return  jsPlumb.getInstance();
   });
