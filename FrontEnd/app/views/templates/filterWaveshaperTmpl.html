@@ -1,16 +1,14 @@
 <div>
 
-    Oversampling
+    Oversampling : {{filter.audioNode.oversample}}
+    <br>
     <input type="radio" name="waveShaperSampling" value="none" ng-model="filter.audioNode.oversample" checked>None
     <input type="radio" name="waveShaperSampling" value="2x" ng-model="filter.audioNode.oversample">2x
     <input type="radio" name="waveShaperSampling" value="4x" ng-model="filter.audioNode.oversample">4x
     <br>
 
-    <!-- TODO a faire bien. methode dans le controller. -->
-    <input id="distorsion" type="range" min="0" max="500" value="0" step="1" ng-model="filter.audioNode.curve">
+    <!-- TODO look for distorsion maximum value. -->
+    <!-- CAREFUL : this is linked to the controller. -->
+    <input id="disto" type="range" min="0" max="5000" value="0" step="1" ng-model="distorsion">
 
-<br>
-    TODO : ajouter la distorsion curve (un peu compliqué)
-    exemple ici
-    https://developer.mozilla.org/en-US/docs/Web/API/WaveShaperNode
 </div>

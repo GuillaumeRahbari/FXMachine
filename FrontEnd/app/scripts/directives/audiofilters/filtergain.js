@@ -9,7 +9,7 @@
 angular.module('frontEndApp')
   .directive('filterGain', function () {
       return {
-          templateUrl: 'views/templates/filterGainTmpl.html',
+          templateUrl: '../../../views/templates/filterGainTmpl.html',
           restrict: 'E',
           replace: true,
           scope: {

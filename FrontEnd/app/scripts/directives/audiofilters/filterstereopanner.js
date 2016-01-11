@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc directive
- * @name frontEndApp.directive:filterDelay
+ * @name frontEndApp.directive:filterStereopanner
  * @description
- * # filterDelay
+ * # filterStereopanner
  */
 angular.module('frontEndApp')
-    .directive('filterDelay', function () {
+    .directive('filterStereopanner', function () {
       return {
-        templateUrl: 'views/templates/filterDelayTmpl.html',
+        templateUrl: '../../../views/templates/filterStereopannerTmpl.html',
         restrict: 'E',
         replace: true,
         scope: {

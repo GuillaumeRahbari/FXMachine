@@ -69,11 +69,10 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
     <h3>Pedal Structure</h3>
     <hr width="40%" align="left">
 
-    <!-- our beautiful first pedal -->
-    <button id="tryPedal" ng-click="fxmachine.loadPedalToWebAudio(pedal);">Load Pedal to webAudio Graph</button>
+    <button id="loadpedaltoaudiograph" ng-click="fxmachine.loadPedalToWebAudio(pedal);">Load Pedal to webAudio Graph</button>
 <hr>
     <div>
-        FILTER BANK
+        FILTER BANK<br>
         <button id="addGainFilter" ng-click="pedal.addFilter('gain');">Add Gain Filter</button>
         <button id="addEqualizerFilter" ng-click="pedal.addFilter('biquad');">Add BiQuad</button>
         <button id="addwaveshaperFilter" ng-click="pedal.addFilter('waveShaper');">Add waveShaper</button>
@@ -128,5 +127,6 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
 
 
     </div> <!-- end filter graph -->
+    <br>
 </div> <!-- end pedal div -->
 

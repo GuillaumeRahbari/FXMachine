@@ -2,20 +2,18 @@
 
 /**
  * @ngdoc directive
- * @name frontEndApp.directive:filterDynamiccompressor
+ * @name frontEndApp.directive:filterDelay
  * @description
- * # filterDynamiccompressor
+ * # filterDelay
  */
 angular.module('frontEndApp')
-    .directive('filterDynamiccompressor', function () {
+    .directive('filterDelay', function () {
       return {
-        templateUrl: 'views/templates/filterDynamiccompressorTmpl.html',
+        templateUrl: '../../../views/templates/filterDelayTmpl.html',
         restrict: 'E',
         replace: true,
         scope: {
           filter : '='
         }
-
-
       };
     });

@@ -74,7 +74,6 @@ angular.module('frontEndApp')
 
           /**
            * Load a sound
-           * TODO : l'utiliser (mais ca a l'air complique pour y acceder depuis une autre fonction du service)
            */
           getFilterByUUID(array, uuid)
           {
@@ -187,6 +186,8 @@ angular.module('frontEndApp')
 
 
           }
+
+
 
           stopSound() {
               if(this._isPlaying)

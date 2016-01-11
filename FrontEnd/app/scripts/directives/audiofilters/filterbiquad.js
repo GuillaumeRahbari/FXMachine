@@ -9,7 +9,7 @@
 angular.module('frontEndApp')
   .directive('filterBiquad', function () {
       return {
-          templateUrl: 'views/templates/filterBiquadTmpl.html',
+          templateUrl: '../../../views/templates/filterBiquadTmpl.html',
           restrict: 'E',
           replace: true,
           scope: {
