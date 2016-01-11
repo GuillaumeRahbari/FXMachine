@@ -13,6 +13,7 @@ angular.module('frontEndApp')
       link: function (scope, element, attrs) {
         //JsPlumb.revalidate(element);
         JsPlumb.draggable(element);
+
       }
     };
   });

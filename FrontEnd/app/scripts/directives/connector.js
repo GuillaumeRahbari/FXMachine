@@ -12,7 +12,7 @@ angular.module('frontEndApp')
       restrict: 'A',
       link: function (scope, element, attrs) {
         JsPlumb.makeSource(element.parent(), {
-
+          //parent:element.parent(),
           anchor:"Continuous",
           endPoint:"Rectangle",
           maxConnections:1
