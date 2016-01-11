@@ -11,9 +11,11 @@ angular.module('frontEndApp')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        JsPlumb.makeSource(element, {
+        jsPlumb.makeSource(element.parent(), {
+            
           anchor:"Continuous",
-          endPoint:"Rectangle"
+          endPoint:"Rectangle",
+          maxConnections:1
         });
       }
     };

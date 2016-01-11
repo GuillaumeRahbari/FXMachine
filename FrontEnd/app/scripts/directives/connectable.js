@@ -11,12 +11,11 @@ angular.module('frontEndApp')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        JsPlumb.ready(function(){
-          console.log("element: ",element);
-          element.text('this is the connectable directive');
-          JsPlumb.makeTarget(element, {
+        jsPlumb.ready(function(){
+          jsPlumb.makeTarget(element, {
             anchor: 'Continuous',
-            maxConnections: 2
+            endpoint:"Rectangle",
+            maxConnections: 1
           })
         });
       }
