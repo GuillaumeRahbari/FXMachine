@@ -24,6 +24,14 @@ router.post('/signout', function(req, res) {
 
 });
 
+
+router.get('/users', function(req, res) {
+    userFinder.findAll(function(response) {
+        res.send(response);
+    })
+});
+
+
 /**
  * This method will communicate with the userGateway to add the user put in the body of the request to the database.
  * If the login of the user is free, then the user is added and an idea is returned, otherwise 409 is returned.
