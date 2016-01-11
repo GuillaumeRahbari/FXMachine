@@ -4,6 +4,8 @@
 var mongodb = require('mongodb');
 var url = 'mongodb://localhost:27017/FXMachine';
 var mongoClient = mongodb.MongoClient;
+var ObjectID = require('mongodb').ObjectID;
+
 
 /**
  * This function try to find the user in the database FXMachine and in the collection users. If the user is found
@@ -12,7 +14,7 @@ var mongoClient = mongodb.MongoClient;
  * @param user      {json}      JSONObject with at least one information about the user
  * @param callback  {function}  Function that will be call when the result is found or not.
  */
-function findOne(user, callback) {
+function myfindOne(user, callback) {
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -36,24 +38,43 @@ function findOne(user, callback) {
     });
 }
 
-function findAll(callback) {
+function findAll(id, callback) {
     mongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Error in findAll users")
            callback(500);
        } else {
-           var collection = db.collection('users')
-           collection.find({ }).toArray(function(err, result) {
-                if(err) {
-                    callback(500);
-                } else {
-                    callback(result);
-                }
+           var collection = db.collection('users');
+           checkRights(id, collection, function(isAdmin) {
+               if(isAdmin) {
+                   collection.find({ }).toArray(function(err, result) {
+                       if(err) {
+                           callback(500);
+                       } else {
+                           callback(result);
+                       }
+                   });
+               } else {
+                   callback(403);
+               }
            });
        }
     });
 }
 
-exports.findOne = findOne;
+// admin : 5693be97da0e725c1d0d431a
+function checkRights(id, collection, callback) {
+    var o_id = new ObjectID(id);
+    collection.findOne({ _id : o_id} , function(err, result) {
+        if(result.role == "admin") {
+            callback(true);
+        } else {
+            callback(false);
+        }
+    });
+}
+
+
+exports.findOne = myfindOne;
 
 exports.findAll = findAll;

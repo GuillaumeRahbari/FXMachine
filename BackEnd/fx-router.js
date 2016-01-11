@@ -25,10 +25,14 @@ router.post('/signout', function(req, res) {
 });
 
 
-router.get('/users', function(req, res) {
-    userFinder.findAll(function(response) {
-        res.send(response);
-    })
+router.post('/users', function(req, res) {
+    if (req.body.id != undefined) {
+        userFinder.findAll(req.body.id, function (response) {
+            res.send(response);
+        });
+    } else {
+        res.send(400);
+    }
 });
 
 
