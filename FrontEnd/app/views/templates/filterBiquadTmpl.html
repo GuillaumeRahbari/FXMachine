@@ -13,12 +13,28 @@
     <input id="cuttofFreq" type="range" min="0" max="40000" value="350" step="10" ng-model="filter.audioNode.frequency.value">
     <br>
 
-    Quality {{filter.audioNode.Q.value}}
+    Quality/Resonnance {{filter.audioNode.Q.value}}
     <br>
+
+
     <!-- Max theorique : 1000, mais deja a 100 c'est pas mal -->
     <input id="quality" type="range" min="0.0001" max="100" value="1" step="1" ng-model="filter.audioNode.Q.value">
     <br>
 
 
-    <!-- TODO : un petit truc joli qui affiche le frequency response -->
+    Gain {{filter.audioNode.gain.value}}
+    <!-- TODO : ca se visualise pas sur le canvas -->
+
+    <br>
+    <input id="gain" type="range" min="-40" max="40" value="0" step="1" ng-model="filter.audioNode.gain.value">
+    <br>
+
+
+
+
+    <!-- un petit truc joli qui affiche le frequency response -->
+<!-- TODO : ameliorer le design -->
+    <!-- TODO : voir pour un drawcurve parce que la ca pompe de la memoire -->
+Frequency response
+    <canvas id="biquadvisualisation" height="100" width="400" style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
 </div>
