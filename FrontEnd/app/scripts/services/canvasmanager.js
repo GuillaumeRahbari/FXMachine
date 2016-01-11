@@ -12,10 +12,12 @@ angular.module('frontEndApp')
 
       var backgroundColor = 'rgb(58, 58, 58)';
       var lineColor_primary = 'rgb(240, 240, 240)';
-      var lineColor_secondary = 'rgb(255, 206, 58)';
+      var lineColor_secondary = 'rgb(255, 58, 85)';
       var lineColor_third = 'rgb(118, 255, 68)';
 
         var textColor_primary = 'rgba(255,255,255,0.7)';
+
+        var gridColor = 'rgba(145, 145, 145, 0.3)';
 
     var meterColor_low = 'rgb(30, 119, 7)';
     var meterColor_high = 'rgb(177, 239, 5)';
@@ -93,7 +95,6 @@ angular.module('frontEndApp')
                   console.error("bad orientation given !!");
               }
 
-
           },
 
           drawForeground(context)
@@ -108,6 +109,34 @@ angular.module('frontEndApp')
               context.fillStyle = grd;
               context.fillRect(0,0,context.canvas.width, context.canvas.height);
               context.fillStyle = prev;*/
+          },
+
+          drawGrid(context, lineWidth, lineHeight)
+          {
+              context.fillStyle = gridColor;
+              context.strokeStyle = gridColor;
+              context.lineWidth = 1;
+
+
+              for(var i = 0 ; i < context.canvas.width; i+= lineWidth)
+              {
+
+                  context.beginPath();
+                  context.moveTo(i,0);
+                  context.lineTo(i, context.canvas.height);
+                  context.stroke();
+                  context.closePath();
+              }
+
+              for(var i = 0 ; i < context.canvas.height; i+= lineHeight)
+              {
+
+                  context.beginPath();
+                  context.moveTo(0,i);
+                  context.lineTo( context.canvas.width, i);
+                  context.stroke();
+                  context.closePath();
+              }
           }
 
 

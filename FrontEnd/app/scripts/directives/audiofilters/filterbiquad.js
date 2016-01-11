@@ -21,20 +21,17 @@ angular.module('frontEndApp')
                 var ctx = $element[0].querySelector('#biquadvisualisation').getContext('2d');
 
 
-                var textFillStyle =  'rgb(0, 0, 0)';
-
-
-
-                var draw = function()
+      var draw = function()
                 {
                     // Setting up the array values we want, and the array containers
                     var frequencyArray = new Float32Array(100);
                     for(var i = 0 ; i < frequencyArray.length ; i++)
                     {
 
-                        frequencyArray[i] = i*40
+                        frequencyArray[i] = i*400
                     }
 
+                    //console.log('frequency bin count' + $scope.filter.audioNode.frequencyBinCount);
                     // Frequency response
                     var magResponseOutput = new Float32Array(100);
                     // Phase response
@@ -47,6 +44,7 @@ angular.module('frontEndApp')
 
                     // ** Cleaning background
                     CanvasManager.drawBackground(ctx);
+                    CanvasManager.drawGrid(ctx, 10,10);
 
                     var widthDrawStep = ctx.canvas.width / frequencyArray.length;
 
@@ -58,7 +56,7 @@ angular.module('frontEndApp')
 
                     //** Drawing frequency response line
                     CanvasManager.setPrimaryLineStyle(ctx);
-                    ctx.lineWidth=2;
+                    ctx.lineWidth=3;
                     ctx.beginPath();
                     ctx.moveTo(0,ctx.canvas.height/2);
 
@@ -71,6 +69,7 @@ angular.module('frontEndApp')
                         // listItem.innerHTML = '<strong>' + frequencyArray[i] + 'Hz</strong>: Magnitude ' + magResponseOutput[i] + ', Phase ' + phaseResponseOutput[i] + ' radians.';
                     }
                     ctx.stroke();
+                    ctx.closePath();
 
 
                     // Zero dB line
@@ -78,15 +77,17 @@ angular.module('frontEndApp')
                     CanvasManager.setSecondaryLineStyle(ctx);
                     ctx.lineWidth = 1;
 
+                    ctx.beginPath();
                     ctx.moveTo(0,ctx.canvas.height/2);
                     ctx.lineTo(ctx.canvas.width,ctx.canvas.height/2);
                     ctx.stroke();
+                    ctx.closePath();
 
                     // Drawing frequency legend
                     CanvasManager.setTextColorStyle(ctx);
                     ctx.font = "10px Arial";
                     ctx.fillText(frequencyArray[0]+'Hz',0,ctx.canvas.height-10);
-                    ctx.fillText(frequencyArray[frequencyArray.length-1]+'Hz',ctx.canvas.width-50,ctx.canvas.height-10);
+                    ctx.fillText(frequencyArray.length*400+'Hz',ctx.canvas.width-50,ctx.canvas.height-10);
 
                 };
 

@@ -30,6 +30,7 @@ angular.module('frontEndApp')
                         // Cleaning the canvas
                         CanvasManager.drawBackground(ctx);
 
+
                         // Waveform style
                         CanvasManager.setPrimaryLineStyle(ctx);
 
@@ -81,6 +82,7 @@ angular.module('frontEndApp')
                         //console.log("last real index" + bufferData.length)
                         //console.log("final index drawn" + final_i )
                         ctx.stroke();
+                        ctx.closePath();
 
                         CanvasManager.drawForeground(ctx);
                     }

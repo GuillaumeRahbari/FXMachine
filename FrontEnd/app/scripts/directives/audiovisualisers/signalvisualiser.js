@@ -40,6 +40,7 @@ angular.module('frontEndApp')
                     // ** Cleaning background
                     CanvasManager.drawBackground(ctx);
 
+
                     var widthDrawStep = ctx.canvas.width / array.length;
 
                     // console.log("frequencyhArray length" + frequencyArray.length);
@@ -59,6 +60,7 @@ angular.module('frontEndApp')
                         ctx.lineTo(i*widthDrawStep,  line_y);
                     }
                     ctx.stroke();
+                    ctx.closePath();
 
                     // Re-looping
                     $timeout(draw, 60)

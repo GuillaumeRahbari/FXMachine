@@ -53,6 +53,7 @@ angular.module('frontEndApp')
                   console.log("draw");
                   // ** Cleaning background
                   CanvasManager.drawBackground(ctx);
+                  CanvasManager.drawGrid(ctx, 10,10);
 
                   var widthDrawStep = ctx.canvas.width / curve.length;
 
@@ -73,6 +74,7 @@ angular.module('frontEndApp')
                       ctx.lineTo(i*widthDrawStep, ctx.canvas.height/2 - meterHeight);
               }
                   ctx.stroke();
+                  ctx.closePath();
 
               };
 
