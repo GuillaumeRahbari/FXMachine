@@ -2,18 +2,17 @@
 
 /**
  * @ngdoc directive
- * @name frontEndApp.directive:connector
+ * @name frontEndApp.directive:draggable
  * @description
- * # connector
+ * # draggable
  */
 angular.module('frontEndApp')
-  .directive('connector', function (JsPlumb) {
+  .directive('draggable', function (JsPlumb) {
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        JsPlumb.makeSource(element, {
-          anchor:"Continuous",
-          endPoint:"Rectangle"
+        JsPlumb.draggable(element, {
+          containment:"parent"
         });
       }
     };
