@@ -5,6 +5,7 @@
     <title>FXMachine</title>
     <meta name="description" content="">
       <meta name="viewport" content="width=device-width">
+
       <!--
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
@@ -26,6 +27,7 @@
     <div ng-view=""></div>
     </div>
 
+    <script src="scripts/jsPlumb-2.0.5.js"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -74,6 +76,8 @@
         <script src="scripts/directives/audiofilters/filterdelay.js"></script>
         <script src="scripts/directives/audiofilters/filterdynamiccompressor.js"></script>
         <script src="scripts/directives/audiofilters/filterstereopanner.js"></script>
+        <script src="scripts/services/jsplumb.js"></script>
+        <script src="scripts/directives/connectable.js"></script>
         <!-- endbuild -->
 </body>
 </html>
