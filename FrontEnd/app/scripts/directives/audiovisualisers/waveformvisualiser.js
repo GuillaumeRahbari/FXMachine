@@ -8,12 +8,11 @@
  * # waveformVisualiser
  */
 angular.module('frontEndApp')
-    .directive('waveformVisualiser', function () {
+    .directive('waveformVisualiser',['canvasManager', function (CanvasManager) {
         return {
             restrict: 'A',
             scope: {buffer: '='},
             controller: function ($scope, $element, $timeout) {
-
 
 
                 // The canvas context, used to draw stuff in the canvas
@@ -22,11 +21,6 @@ angular.module('frontEndApp')
 
                 var canvasWidth = ctx.canvas.width;
                 var canvasHeight = ctx.canvas.height;
-
-                // STYLE ELEMENTS
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = 'rgb(42, 140, 252)';
-                ctx.fillStyle = 'rgb(230, 230, 230)';
 
 
                 /**
@@ -38,22 +32,19 @@ angular.module('frontEndApp')
                     if($scope.buffer != null)
                     {
                         // Cleaning the canvas
-                        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                        CanvasManager.drawBackground(ctx);
 
                         // Waveform style
-                        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                        CanvasManager.setPrimaryLineStyle(ctx);
 
 
                         // Starting the drawing of a line
                         ctx.beginPath();
 
-
                         // Pixel size between two points
                         // We draw this one quite rarely, so we can have a very precise step
                         var sliceWidth = 0.01;
-
                         var x = 0;
-
                         // Getting a buffer channel (0 should always be available, coz there's at least one channel
                         var bufferData = $scope.buffer.getChannelData(0);
 
@@ -91,9 +82,11 @@ angular.module('frontEndApp')
                             x += sliceWidth;
                             final_i = i;
                         }
-                        console.log("last real index" + bufferData.length)
-                        console.log("final index drawn" + final_i )
+                        //console.log("last real index" + bufferData.length)
+                        //console.log("final index drawn" + final_i )
                         ctx.stroke();
+
+                        CanvasManager.drawForeground(ctx);
                     }
                 };
 
@@ -112,4 +105,4 @@ angular.module('frontEndApp')
                 });
             }
         };
-    });
+    }]);

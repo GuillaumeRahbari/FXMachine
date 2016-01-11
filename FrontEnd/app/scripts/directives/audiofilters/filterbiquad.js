@@ -39,17 +39,17 @@ angular.module('frontEndApp')
                 var draw = function()
                 {
                     // Setting up the array values we want, and the array containers
-                    var frequencyArray = new Float32Array(40);
+                    var frequencyArray = new Float32Array(100);
                     for(var i = 0 ; i < frequencyArray.length ; i++)
                     {
 
-                        frequencyArray[i] = i*100
+                        frequencyArray[i] = i*40
                     }
 
                     // Frequency response
-                    var magResponseOutput = new Float32Array(40);
+                    var magResponseOutput = new Float32Array(100);
                     // Phase response
-                    var phaseResponseOutput = new Float32Array(40);
+                    var phaseResponseOutput = new Float32Array(100);
 
                     // Getting frequency response
                     $scope.filter.audioNode.getFrequencyResponse(frequencyArray,magResponseOutput,phaseResponseOutput);
