@@ -7,13 +7,16 @@
  * # draggable
  */
 angular.module('frontEndApp')
-  .directive('draggable', function (JsPlumb) {
-    return {
-      restrict: 'A',
-      link: function (scope, element, attrs) {
-        //JsPlumb.revalidate(element);
-        JsPlumb.draggable(element);
+    .directive('draggable', function (JsPlumb) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                //JsPlumb.revalidate(element);
+                console.log("element: ",element);
+                JsPlumb.draggable(element,{
+                    revert: true,
+                });
 
-      }
-    };
-  });
+            }
+        };
+    });
