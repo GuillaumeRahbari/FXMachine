@@ -16,7 +16,6 @@ angular.module('frontEndApp')
                 JsPlumb.draggable(element,{
                     revert: true,
                 });
-
             }
         };
     });

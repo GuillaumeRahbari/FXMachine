@@ -11,7 +11,8 @@ angular.module('frontEndApp')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        JsPlumb.makeSource(element.parent(), {
+        //JsPlumb.makeSource(element.parent, {
+        JsPlumb.makeSource(element, {
           //parent:element.parent(),
           anchor:"Continuous",
           endPoint:"Rectangle",
