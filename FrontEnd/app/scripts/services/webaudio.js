@@ -73,7 +73,7 @@ angular.module('frontEndApp')
 
 
           /**
-           * Load a sound
+           *
            */
           getFilterByUUID(array, uuid)
           {

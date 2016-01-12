@@ -4,23 +4,22 @@
  * @ngdoc service
  * @name frontEndApp.filter2
  * @description
- * # filter2
- * The new filter !! WORK IN PROGRESS. NOT TESTED
+ * # filter
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .service('Filter2', ['uuidGenerator', function (uuidGenerator) {
+  .service('Filter', ['uuidGenerator', function (uuidGenerator) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
 
-      class Filter2 {
+      class Filter {
 
           // TODO : ESTCE QUON A VRAIMENT BESOIN DUN TABLEAU DINPUTS ?? techniquement non... a voir.
 
           /**
-           * The onstructor of Filter
+           * The constructor of Filter
            * @param type {String} - the type of filter we want to create.
-           * @param webaudioService - the webaudioService, that we need to create the audioNodes in the filter objects
+           * @param webaudioService - the webaudioService, that we need know in which audio context we create the audioNodes
            */
         constructor(type, webaudioService){
 
@@ -34,7 +33,6 @@ angular.module('frontEndApp')
                     // TODO : j'ai mis panner pour bien les differencier dans les graphes, mais a terme, mettre des gains.
                     this._audioNode = webaudioService.context.createPanner();
                     break;
-
                 case 'gain':
                     this._audioNode = webaudioService.context.createGain();
                     break;
@@ -45,23 +43,16 @@ angular.module('frontEndApp')
                     this._audioNode = webaudioService.context.createWaveShaper();
                     break;
                 case "delay":
-                    this._audioNode = webaudioService.context.createDelay(5.0);// represents the MAX DELAY
+                    this._audioNode = webaudioService.context.createDelay(5.0);// represents the maximum delay time
                     break;
-
                 case "dynamicCompressor":
                     this._audioNode = webaudioService.context.createDynamicsCompressor();
                     break;
-
                 case "stereoPanner":
                     this._audioNode = webaudioService.context.createStereoPanner();
                     break;
-
                 case'visualiser':
                     this._audioNode = webaudioService.context.createAnalyser();
-                    // y'a deja des valeurs par defautezk
-                    //this._audioNode.smoothingTimeConstant = 0.3;
-                    //this._audioNode.fftSize = 1024;
-                    break;
                     break;
 
                 default:
@@ -79,7 +70,7 @@ angular.module('frontEndApp')
                 this._uuid = uuidGenerator.generateUUID();
                 this._inputs = [];
                 this._outputs = [];
-                console.log("success creation filter")
+                console.log("Filter : success creation filter");
             }
 
 
@@ -143,6 +134,9 @@ angular.module('frontEndApp')
           }
 
 
+          /**
+           * Clean all connexions of the filter
+           */
           cleanConnexions()
           {
               this._outputs = [];
@@ -191,6 +185,6 @@ angular.module('frontEndApp')
           }
       }
 
-      return Filter2;
+      return Filter;
 
   }]);

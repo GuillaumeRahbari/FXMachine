@@ -17,11 +17,11 @@ angular.module('frontEndApp')
             },
             controller: function($scope, $element, $timeout)
             {
-                console.log("controller biquad !");
+                //console.log("controller biquad !");
                 var ctx = $element[0].querySelector('#biquadvisualisation').getContext('2d');
 
 
-      var draw = function()
+                var draw = function()
                 {
                     // Setting up the array values we want, and the array containers
                     var frequencyArray = new Float32Array(100);
@@ -60,7 +60,7 @@ angular.module('frontEndApp')
                     ctx.beginPath();
                     ctx.moveTo(0,ctx.canvas.height/2);
 
-                    
+
                     for(var i = 0; i <= frequencyArray.length-1;i++)
                     {
                         // magResponseOutput goes from 0 to 1. We rescale to half of size, to handle saturatio

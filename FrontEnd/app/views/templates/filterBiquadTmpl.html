@@ -1,7 +1,6 @@
 <div>
-    Type {{filter.audioNode.type}}
+    Type : {{filter.audioNode.type}}
     <form>
-
         <select name="selectType"  ng-init="options[0].value" ng-model="filter.audioNode.type">
             <option value="lowpass">Low Pass</option>
             <option value="highpass">High Pass</option>
@@ -11,18 +10,16 @@
             <option value="peaking">Peaking</option>
             <option value="notch">Notch</option>
             <option value="allpass">AllPass</option>
-
         </select>
-
     </form>
 
     <!-- TODO limites de frequences de cuttof dependent de l'echantillonnage..-->
-    Cuttof {{filter.audioNode.frequency.value}}
+    Cuttof :{{filter.audioNode.frequency.value}}Hz
     <br>
     <input id="cuttofFreq" type="range" min="0" max="40000" value="40000" step="10" ng-model="filter.audioNode.frequency.value">
     <br>
 
-    Quality/Resonnance {{filter.audioNode.Q.value}}dB
+    Quality/Resonnance :{{filter.audioNode.Q.value}}dB
     <br>
 
     <!-- Max theorique : 1000, mais deja a 100 c'est pas mal -->
@@ -30,17 +27,13 @@
     <br>
 
 
-    Gain {{filter.audioNode.gain.value}}dB
+    Gain :{{filter.audioNode.gain.value}}dB
     <!-- TODO : ca se visualise pas sur le canvas -->
 
     <br>
     <input id="gain" type="range" min="-40" max="40" value="0" step="1" ng-model="filter.audioNode.gain.value">
     <br>
 
-
-
-
     <!-- un petit truc joli qui affiche le frequency response -->
-<!-- TODO : ameliorer le design -->
     <canvas id="biquadvisualisation" height="200" width="600" style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
 </div>

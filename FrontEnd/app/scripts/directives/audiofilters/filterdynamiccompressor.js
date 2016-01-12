@@ -15,7 +15,5 @@ angular.module('frontEndApp')
         scope: {
           filter : '='
         }
-
-
       };
     });

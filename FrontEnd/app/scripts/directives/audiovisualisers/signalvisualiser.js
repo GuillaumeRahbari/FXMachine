@@ -17,10 +17,6 @@ angular.module('frontEndApp')
                 // The canvas context, used to draw stuff in the canvas
                 var ctx = $element[0].getContext('2d');
 
-                // STYLE ELEMENTS
-                var backgroundFillStyle = 'rgb(230, 230, 230)';
-                var frequencyLineStyle = 'rgb(255, 100, 100)';
-
 
                 /**
                  * The main rendering loop for a audiovisualizer

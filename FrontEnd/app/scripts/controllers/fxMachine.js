@@ -8,10 +8,10 @@
 /**
  * @ngdoc function
  * @name frontEndApp.controller:fxMachineCtrl
- * TODO : deplacer loadSound dans webaudio service (guigui, tu geres, parce que loadSound y'en a partout..)
+ * TODO : deplacer loadSound dans webaudio service (guigui, tu t'en occupes, parce que loadSound y'en a partout)
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter2', 'Sound', 'WebAudio', 'Pedal', function ($scope, Machine, Filter, Sound, WebAudio, Pedal) {
+    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', 'Pedal', function ($scope, Machine, Filter, Sound, WebAudio, Pedal) {
 
         var self = this;
 
@@ -26,7 +26,7 @@ angular.module('frontEndApp')
          */
         self.addPedal = function()
         {
-            console.log("add pedal!!")
+            console.log("add pedal!!");
             pedals.push(new Pedal(webaudio));
         };
 
@@ -55,7 +55,7 @@ angular.module('frontEndApp')
          */
         self.loadSound = function() {
 
-            console.log("loadsong!")
+            console.log("loadsong!");
             Sound.loadSound(webaudio.context, $scope.soundFile.name).then(
                 function (soundBufferDecoded) {
                     webaudio.soundBuffer = soundBufferDecoded;
@@ -88,7 +88,7 @@ angular.module('frontEndApp')
                 ped.cleanConnexions();
                 ped.connectFiltersInChain();
 
-                console.log("send stuff to webaudio")
+                console.log("send stuff to webaudio");
 
                 //****************************************
                 // la methode s'occupe elle meme de tout connecter ensuite

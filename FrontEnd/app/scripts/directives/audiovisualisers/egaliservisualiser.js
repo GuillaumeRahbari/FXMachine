@@ -35,8 +35,6 @@ angular.module('frontEndApp')
                 $scope.analyserNode.getByteFrequencyData(array);
 
                 // Cleaning previous visualisation (redrawing background
-               // ctx.fillStyle = backgroundColor;
-                //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                 CanvasManager.drawBackground(ctx);
 
                 CanvasManager.setMeterColor(ctx, "vertical");
@@ -49,7 +47,6 @@ angular.module('frontEndApp')
                 for (var i = 1 ; i < array.length; i+=6)
                 {
                     meterHeight = array[i];
-
                     // Equalizer depuis le bas du canvas
                     ctx.fillRect(i, ctx.canvas.height-array[i]/2, meterWidth, meterHeight);
                 }

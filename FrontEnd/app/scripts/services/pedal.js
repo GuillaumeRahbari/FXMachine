@@ -10,12 +10,12 @@
  * La pedale. Elle contient une entrée (filtre), une sortie (filtre), et un array de filtres en tous genres
  *
  * contient aussi un pointeur vers le webaudio service pour creer des filtres easily
- * TODO : passer input et output en filtres de gain, et les afficher dans la vue jsplumb
- * TODO : faire le systeme de boutons de la pedale qui sont liés a quelques boutons des filtres
+ * TODO : passer input et output en filtres de gain, et les afficher proprement dans la vue jsplumb
+ * TODO : faire l'interface "superieure" de la pedale, où on a deux boutons et un theme personnalise
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-    .service('Pedal', ['Filter2',function (Filter, $timeout) {
+    .service('Pedal', ['Filter',function (Filter, $timeout) {
 
         /**
          * This class represents a pedal.
@@ -78,7 +78,7 @@ angular.module('frontEndApp')
                 else {
                     console.error("no filter to delete. couldnt find the object");
                 }
-                console.log("new filter array" + this._filters)
+                //console.log("new filter array" + this._filters)
             }
 
 
