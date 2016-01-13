@@ -13,7 +13,7 @@ angular.module('frontEndApp')
       link: function (scope, element, attrs) {
         JsPlumb.ready(function(){
           JsPlumb.makeTarget(element, {
-            //parent: $(element).parent(),
+            parent: $(element).parent(),
             anchor: 'Continuous',
             endpoint:"Rectangle",
             maxConnections: 1
