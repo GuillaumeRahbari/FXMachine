@@ -10,6 +10,7 @@ angular.module('frontEndApp')
   .directive('connector', function (JsPlumb) {
     return {
       restrict: 'A',
+      replace: true,
       link: function (scope, element, attrs) {
         //JsPlumb.makeSource(element.parent, {
         JsPlumb.makeSource(element, {
