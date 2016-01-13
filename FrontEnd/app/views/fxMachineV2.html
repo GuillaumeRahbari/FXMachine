@@ -140,30 +140,31 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
 </div> <!-- end pedal div -->
 
 
-<div id="globalPlumb">
-    <div id="testplumb" class="testplumb" draggable connectable>
-        <div id="element1" class="item" connector> pouet</div>
-        <br/>
-        <!--<div id="element2" class="item" connectable > pouet2 </div>-->
-    </div>
-    <br/>
-    <br/>
-    <br/>
 
-    <div id="testplumb2" class="testplumb" draggable connectable>
-        <div id="element2" class="item" connector> pouet2</div>
-        <br/>
-        <!--<div id="element2" class="item" connectable > pouet2 </div>-->
+<div id="containerPlumb">
+    <div id="globalPlumb">
+        <div id="testplumb" class="testplumb" draggable connectable>
+            <div id="element1" class="item" connector> pouet</div>
+        </div>
+
+        <div id="testplumb2" class="testplumb" draggable connectable>
+            <div id="element2" class="item" connector> pouet2</div>
+        </div>
     </div>
 </div>
 
 
 <style>
+    #containerPlumb {
+        position: relative;
+    }
+
     #globalPlumb {
         padding: 20px;
         width: 80%;
         height: 400px;
         border: 1px solid gray;
+        position: absolute;
     }
 
     .testplumb{

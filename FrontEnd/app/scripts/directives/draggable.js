@@ -1,6 +1,12 @@
 'use strict';
 
 /**
+ * This directive allows an element to be draggable.
+ * It requires that the element and his parent have the property 'position: absolute'.
+ * So the element is only draggable in the parent container.
+ *
+ * To use it you just need to add the attribute 'draggable' to an element.
+ *
  * @ngdoc directive
  * @name frontEndApp.directive:draggable
  * @description
@@ -11,10 +17,8 @@ angular.module('frontEndApp')
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                //JsPlumb.revalidate(element);
-                console.log("element: ",element);
                 JsPlumb.draggable(element,{
-                    revert: true,
+                    containment: 'parent'
                 });
             }
         };
