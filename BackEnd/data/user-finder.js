@@ -21,8 +21,8 @@ function myfindOne(user, callback) {
             callback(500);
         } else {
             var collection = db.collection('users');
-            console.log(user.name);
-            collection.find({name : user.name } ).toArray(function (err, result) {
+            console.log(user.email);
+            collection.find({name : user.email } ).toArray(function (err, result) {
                 if (err) {
                     console.log(err);
                     callback(500);
