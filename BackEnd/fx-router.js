@@ -2,11 +2,12 @@
  * Created by Quentin on 1/7/2016.
  */
 
-var app = require('./app/core/core.js').app;
-var router = require('./app/core/core.js').express.Router();
-var mongodb = require('mongodb');
-var userGateway = require('./data/user-gateway');
-var userFinder = require('./data/user-finder');
+var app = require('./app/core/core.js').app,
+    router = require('./app/core/core.js').express.Router(),
+    userGateway = require('./data/user-gateway'),
+    userFinder = require('./data/user-finder'),
+    userController = require('./controllers/user-controller');
+
 
 /**
  * This method will sign in a client if his user name is already in the database. If not it will return 404.
@@ -26,13 +27,23 @@ router.post('/signout', function(req, res) {
 
 
 router.post('/users', function(req, res) {
-    if (req.body.id != undefined) {
-        userFinder.findAll(req.body.id, function (response) {
+    if (req.body.id == undefined) {
+        userFinder.findAllUser(req.body.id, function (response) {
             res.send(response);
         });
     } else {
         res.send(400);
     }
+});
+
+router.get('/users/pedals', function(req, res) {
+   if(req.query.id == undefined) {
+       userController.pedalRetriever(req.query.id, function(response) {
+
+       });
+   } else {
+       res.send(404);
+   }
 });
 
 

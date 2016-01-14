@@ -38,7 +38,7 @@ function myfindOne(user, callback) {
     });
 }
 
-function findAll(id, callback) {
+function findAllUser(id, callback) {
     mongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Error in findAll users")
@@ -74,7 +74,29 @@ function checkRights(id, collection, callback) {
     });
 }
 
+function getUserPedal(id, callback) {
+    mongoClient.connect(url, function(err, db) {
+        if(err) {
+            callback(500);
+        } else {
+            var o_id = new ObjectID(id);
+            var collection = db.collection('users');
+            collection.findOne({ _id : o_id} , function(err, result) {
+                if(err) {
+                    console.log(err);
+                    callback(err);
+                } else {
+                    console.log(result.pedals);
+                    callback(result.pedals);
+                }
+            });
+        }
+    });
+}
+
+
+exports.getUserPedal = getUserPedal;
 
 exports.findOne = myfindOne;
 
-exports.findAll = findAll;
+exports.findAllUser = findAllUser;
