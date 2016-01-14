@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
         if (err) {
             console.log('Unable to connect to the mongoDB server. Error:', err);
         } else {
-            db.collection('users').createIndex({"name":1}, {unique:true})
+            db.collection('users').createIndex({"email":1}, {unique:true})
         }
     });
 })();
