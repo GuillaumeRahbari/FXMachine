@@ -15,7 +15,7 @@
  * Service in the frontEndApp.
  */
 angular.module('frontEndApp')
-    .service('Pedal', ['Filter',function (Filter, $timeout) {
+    .service('Pedal', ['Filter',function (Filter) {
 
         /**
          * This class represents a pedal.
@@ -93,8 +93,9 @@ angular.module('frontEndApp')
                 var l = this._filters.length;
 
                 // We disconnect everything
-                for(var i = 0 ; i < l ; i++)
+                for(var i = 0 ; i < l ; i++) {
                     this._filters[i].cleanConnexions();
+                }
 
 
 
@@ -107,9 +108,9 @@ angular.module('frontEndApp')
                     this._input.addOutput(this._filters[0].uuid);
 
 
-                    for(var i = 0 ; i < l-1 ; i++){
+                    for(var j = 0 ; j < l-1 ; j++){
                         // Connect filter to the next one
-                        this._filters[i].addOutput(this._filters[i+1].uuid);
+                        this._filters[j].addOutput(this._filters[j+1].uuid);
                     }
 
                     // last filter to output
