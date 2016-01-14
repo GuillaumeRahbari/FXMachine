@@ -30,19 +30,25 @@ angular
         controllerAs: 'connection'
       })
       .otherwise({
-        redirectTo: '/connection'
+        redirectTo: '/'
       });
   }
   )
 
-.run(['$location', '$cookieStore', function($location, $cookieStore) {
+.run(['$rootScope', '$cookieStore', function($rootScope, $cookieStore) {
+
+    $rootScope.header = 'default';
+
+    $rootScope.$on( '$routeChangeStart', function() {
         // On essaye de récupérer le cookie de connection.
         if($cookieStore.get('userId') !== undefined) {
-            $location.path('/fxmachine');
+            console.log('cookie ok');
+            $rootScope.header = 'connected';
         }
-        // On va quand meme dans fxMachine parce que merde.
-      else
-        {
-          $location.path('/fxmachine');
+        // Sinon on propose le header où on peut se connecter.
+        else {
+            console.log('cookie not ok');
+            $rootScope.header = 'default';
         }
+    });
 }]);
