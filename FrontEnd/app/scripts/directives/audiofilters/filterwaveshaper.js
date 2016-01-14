@@ -64,21 +64,40 @@ angular.module('frontEndApp')
 
                             x = i * 2 / n_samples - 1;
 
- 
 
-                            var t0 = 1;
-                            var t1 = x;
-                            var t2 = 2*Math.pow(x,2)-1;
-                            var t3 = 4*Math.pow(x,3) - 3*x;
-                            var t4 = 8*Math.pow(x,4) - 8*Math.pow(x,2) +1;
-                            var t5 = 16*Math.pow(x,5) - 20*Math.pow(x,3) + 5*x;
-                            var t6 = 32*Math.pow(x,6) - 48*Math.pow(x,4) + 18*Math.pow(x,2) -1;
-                            var t7 = 64*Math.pow(x,7) -112 *Math.pow(x,5) + 160*Math.pow(x,4) -32*Math.pow(x,2) +1;
 
+                            var polys = new Float32Array(8);
+                            polys[0] = 1;
+                            polys[1] = x;
+                            for (var u = 2 ; u < harmonics.length ; u++)
+                            {
+                                // tn = 2*x *t[n-1](x)- t[n-2](x)
+                               polys[u] = 2*x + polys[u-1] - polys[u-2];
+                            }
+
+
+                            //  y = k0*T0(x) + k1*T1(x) + k2*T2(x) + k3*T3(x) + ...
+                            curve[i] = 0;
+                            for(var u = 0 ; u < harmonics.length ; u++)
+                            {
+                                curve[i] = curve[i] + harmonics[u] * polys[u];
+                            }
+                            //curve[i] = harmonics[0]*t0 + harmonics[1]*t1 + harmonics[2]*t2 + harmonics[3]*t3 + harmonics[4]*t4 + harmonics[5]*t5 + harmonics[6]*t6 + harmonics[7]*t7;
+
+
+                            /* var t0 = 1;
+                             var t1 = x;
+                             var t2 = 2*Math.pow(x,2)-1;
+                             var t3 = 4*Math.pow(x,3) - 3*x;
+                             var t4 = 8*Math.pow(x,4) - 8*Math.pow(x,2) +1;
+                             var t5 = 16*Math.pow(x,5) - 20*Math.pow(x,3) + 5*x;
+                             var t6 = 32*Math.pow(x,6) - 48*Math.pow(x,4) + 18*Math.pow(x,2) -1;
+                             var t7 = 64*Math.pow(x,7) -112 *Math.pow(x,5) + 160*Math.pow(x,4) -32*Math.pow(x,2) +1;
+ */
 
                             // Looping on harmonics
-                            curve[i] = 0;
-                            curve[i] = harmonics[0]*t0 + harmonics[1]*t1 + harmonics[2]*t2 + harmonics[3]*t3 + harmonics[4]*t4 + harmonics[5]*t5 + harmonics[6]*t6 + harmonics[7]*t7;
+                           // curve[i] = 0;
+                           // curve[i] = harmonics[0]*t0 + harmonics[1]*t1 + harmonics[2]*t2 + harmonics[3]*t3 + harmonics[4]*t4 + harmonics[5]*t5 + harmonics[6]*t6 + harmonics[7]*t7;
 
 
 
@@ -124,7 +143,7 @@ angular.module('frontEndApp')
                     for(var i = 0; i <= curve.length-1;i++)
                     {
                         // Actually no. it goes way higher
-                        var meterHeight = curve[i]*(ctx.canvas.height/2) / 200;//maxValue;
+                        var meterHeight = curve[i]*(ctx.canvas.height/2) / 100; //maxValue;
                         ctx.lineTo(i*widthDrawStep, ctx.canvas.height/2 - meterHeight);
                     }
                     ctx.stroke();
