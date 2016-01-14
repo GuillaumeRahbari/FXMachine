@@ -14,6 +14,7 @@ var mongodb = require('mongodb');
             console.log('Unable to connect to the mongoDB server. Error:', err);
         } else {
             var collection = db.collection('users');
+            var collection2 = db.collection('pedals');
             var user = {name : 'admin', password:"admin", role :"admin"};
             collection.insert(user, function(err, result) {
                if(err){
