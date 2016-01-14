@@ -50,6 +50,47 @@ angular.module('frontEndApp')
                     return error.status;
                 }
             );
+        },
+
+        /**
+         * This function disconnect asynchronously a user.
+         * This function returns a promise.
+         * @example Here is how to use it :
+         * UserSrv.signout().then(
+         *    // Success callback
+         *    function (data) {
+           *      console.log(data);
+           *    },
+         *    // Error callback.
+         *    function (response) {
+           *      console.log(response);
+           *    }
+         *  );
+         *
+         * @returns {Promise.<T>} Returns the $http promise with :
+         * <ul>
+         *     <li>either the success status</li>
+         *     <li>either an error</li>
+         * </ul>
+         */
+        signout: function () {
+            return $http({
+                method: 'POST',
+                url: 'http://localhost:3000/signout',
+                data: $cookieStore.get('userId'),
+                headers: {'Content-Type': 'application/json'}
+            }).then(
+                // success
+                function (response) {
+                    $cookieStore.delete('userId');
+                    $location.path('/connection');
+                    return response.data;
+                },
+                //error
+                function (error) {
+                    return error.status;
+                }
+            );
         }
     };
   });

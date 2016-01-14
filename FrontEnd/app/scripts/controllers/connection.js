@@ -10,8 +10,11 @@
 angular.module('frontEndApp')
   .controller('ConnectionCtrl', function (UserSrv, $scope) {
 
+      /**
+       * This function is here to sign in.
+       * @param {Object} user - The user object that contains an email and a password.
+       */
       $scope.signin = function (user) {
-          console.log('cc');
           UserSrv.signin(user).then(
               function (data) {
                   console.log(data);
@@ -19,7 +22,7 @@ angular.module('frontEndApp')
               function (error) {
                   console.log(error);
               }
-          )
+          );
       };
 
   });

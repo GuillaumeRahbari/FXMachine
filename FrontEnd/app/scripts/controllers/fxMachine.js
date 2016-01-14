@@ -11,7 +11,7 @@
  * TODO : deplacer loadSound dans webaudio service (guigui, tu t'en occupes, parce que loadSound y'en a partout)
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', 'Pedal', function ($scope, Machine, Filter, Sound, WebAudio, Pedal) {
+    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', 'Pedal', 'JsPlumb', function ($scope, Machine, Filter, Sound, WebAudio, Pedal,JsPlumb) {
 
         var self = this;
 
@@ -31,16 +31,18 @@ angular.module('frontEndApp')
         };
 
         /**
-         * Remove a pedal
+         * This function removes a pedal from the pedal list.
+         * @param {Pedal} ped - The pedal to be removed.
          */
         self.removePedal = function(ped)
         {
             var index = this.pedals.indexOf(ped);
+            JsPlumb.remove(ped);
 
             if (index > -1){
                 // removing the pedal
                 this.pedals.splice(index,1);
-                console.info("pedal removed")
+                console.info("pedal removed");
             }
             else
             {
@@ -102,10 +104,13 @@ angular.module('frontEndApp')
             }
             else
             {
-                console.warn("Webaudio not initialised yet, not loading any graph until it is")
+                console.warn("Webaudio not initialised yet, not loading any graph until it is");
             }
 
         };
+
+
+
 
 
     }]);

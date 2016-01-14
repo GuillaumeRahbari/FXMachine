@@ -5,57 +5,61 @@ FX MACHINE V2
 <!--** Machine controllers **-->
 <div id="webaudiocontrols" style="border-style:dashed;border-color:black;border-width:2px">
 
-<h3>WEBAUDIO controls</h3> (via fxMachineCtrl)
-<br>
-
-<div id="input" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-    <h5>INPUT</h5>
-
-    <!-- Controle de l'input -->
-    <!-- c'est ici qu'on gere le son d'entree, whatever happens. c'est totalement separe des filtres, pedales, et autres -->
-    <input type="file" file-model="soundFile"/>
-    <button id="load" ng-click="fxmachine.loadSound()">Charger le son</button>
-    <!-- Input Visualisation : waveform -->
-    <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
-            style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
-</div>
-
-<br>
-
-<div id="output" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-    <h5>OUTPUT</h5>
-
-    <canvas volume-visualiser orientation="'vertical'" analyser-node="fxmachine.webaudio.analyser"  width="20" height="100" id="whatever3"
-            style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
-
-    <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser"  width="100" height="20" id="dewhatever3"
-            style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
-
-    By default : SPEAKERS
-</div>
-
-<br>
-
-<div id="status" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-<h5>STATUS</h5>
-    <div>webaudio Initialisation : {{fxmachine.webaudio.isInitialized}}</div>
-    <div>webaudio Player status : {{fxmachine.webaudio.isPlaying}}</div>
-    <div>webaudio Graph status : {{fxmachine.webaudio.isGraphReady}}</div>
-</div>
-
-<br>
-
-<div id="controls" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-    <h5>CONTROLS</h5>
-    <button id="cleangraph" ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph</button>
-    <button id="loaddefaultgraph" ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio Graph</button>
+    <h3>WEBAUDIO controls</h3> (via fxMachineCtrl)
     <br>
-    <button id="play" ng-click="fxmachine.webaudio.playSound();">Lecture</button>
-    <button id="stop" ng-click="fxmachine.webaudio.stopSound();">Stop</button>
+
+    <div id="input" style="border-style:dashed;border-color:darkslategray;border-width:1px">
+        <h5>INPUT</h5>
+
+        <!-- Controle de l'input -->
+        <!-- c'est ici qu'on gere le son d'entree, whatever happens. c'est totalement separe des filtres, pedales, et autres -->
+        <input type="file" file-model="soundFile"/>
+        <button id="load" ng-click="fxmachine.loadSound()">Charger le son</button>
+        <!-- Input Visualisation : waveform -->
+        <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
+                style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
+    </div>
+
+    <br>
+
+    <div id="output" style="border-style:dashed;border-color:darkslategray;border-width:1px">
+        <h5>OUTPUT</h5>
+
+        <canvas volume-visualiser orientation="'vertical'" analyser-node="fxmachine.webaudio.analyser" width="10"
+                height="20" id="whatever3"
+                style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
+
+        <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser" width="100"
+                height="10" id="dewhatever3"
+                style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
+
+        By default : SPEAKERS
+    </div>
+
+    <br>
+
+    <div id="status" style="border-style:dashed;border-color:darkslategray;border-width:1px">
+        <h5>STATUS</h5>
+
+        <div>webaudio Initialisation : {{fxmachine.webaudio.isInitialized}}</div>
+        <div>webaudio Player status : {{fxmachine.webaudio.isPlaying}}</div>
+        <div>webaudio Graph status : {{fxmachine.webaudio.isGraphReady}}</div>
+    </div>
+
+    <br>
+
+    <div id="controls" style="border-style:dashed;border-color:darkslategray;border-width:1px">
+        <h5>CONTROLS</h5>
+        <button id="cleangraph" ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph</button>
+        <button id="loaddefaultgraph" ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio Graph
+        </button>
+        <br>
+        <button id="play" ng-click="fxmachine.webaudio.playSound();">Lecture</button>
+        <button id="stop" ng-click="fxmachine.webaudio.stopSound();">Stop</button>
 
 
-</div>
-<br>
+    </div>
+    <br>
 </div>
 <button id="addPedal" ng-click="fxmachine.addPedal();">Add a new pedal</button>
 
@@ -69,8 +73,9 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
     <h3>Pedal Structure</h3>
     <hr width="40%" align="left">
 
-    <button id="loadpedaltoaudiograph" ng-click="fxmachine.loadPedalToWebAudio(pedal);">Load Pedal to webAudio Graph</button>
-<hr>
+    <button id="loadpedaltoaudiograph" ng-click="fxmachine.loadPedalToWebAudio(pedal);">Load Pedal to webAudio Graph
+    </button>
+    <hr>
     <div>
         FILTER BANK<br>
         <button id="addGainFilter" ng-click="pedal.addFilter('gain');">Add Gain Filter</button>
@@ -78,7 +83,8 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
         <button id="addwaveshaperFilter" ng-click="pedal.addFilter('waveShaper');">Add waveShaper</button>
         <button id="addDelayFilter" ng-click="pedal.addFilter('delay');">Add delay</button>
         <button id="visualiserFilter" ng-click="pedal.addFilter('visualiser');">Add egaliser visu</button>
-        <button id="addDynamiccompressorFilter" ng-click="pedal.addFilter('dynamicCompressor');">Add Dyn Compressor</button>
+        <button id="addDynamiccompressorFilter" ng-click="pedal.addFilter('dynamicCompressor');">Add Dyn Compressor
+        </button>
         <button id="addSStereopannerFilter" ng-click="pedal.addFilter('stereoPanner');">Add Stereo Panner</button>
 
     </div>
@@ -96,14 +102,16 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
 
         <h5>Filtre : {{filter.type}}</h5>
 
-        <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="pedal.removeFilter(filter);">Remove Filter</button>
+        <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="pedal.removeFilter(filter);">Remove Filter
+        </button>
 
         <!-- Showing the div corresponding to the right filter -->
         <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
 
         <!-- The VIZU filter -->
-        <canvas egaliser-visualizer ng-if="filter.type === 'visualiser'" analyser-node="filter.audioNode" width="400" height="100" id="whateverrr"
-                style="border-style: solid; border-width:thin;  border-color:lightslategray" ></canvas>
+        <canvas egaliser-visualizer ng-if="filter.type === 'visualiser'" analyser-node="filter.audioNode" width="400"
+                height="100" id="whateverrr"
+                style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
 
 
         <!-- The VIZU filter -->
@@ -124,14 +132,59 @@ et pouvoir les "essayer"(charger dans le webaudio) simplement -->
 
 
         <!-- The compressor filter -->
-        <filter-dynamiccompressor filter="filter" ng-if="filter.type === 'dynamicCompressor'"></filter-dynamiccompressor>
+        <filter-dynamiccompressor filter="filter"
+                                  ng-if="filter.type === 'dynamicCompressor'"></filter-dynamiccompressor>
 
         <!-- The stereopanner filter -->
         <filter-stereopanner filter="filter" ng-if="filter.type === 'stereoPanner'"></filter-stereopanner>
 
 
-
-    </div> <!-- end filter graph -->
+    </div>
+    <!-- end filter graph -->
     <br>
 </div> <!-- end pedal div -->
+
+
+
+<div id="containerPlumb">
+    <div id="globalPlumb">
+        <div id="testplumb" class="testplumb" draggable connectable>
+            <div id="element1" class="item" connector> pouet</div>
+        </div>
+
+        <div id="testplumb2" class="testplumb" draggable connectable>
+            <div id="element2" class="item" connector> pouet2</div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    #containerPlumb {
+        position: relative;
+    }
+
+    #globalPlumb {
+        padding: 20px;
+        width: 80%;
+        height: 400px;
+        border: 1px solid gray;
+        position: absolute;
+    }
+
+    .testplumb{
+        width:70px;
+        height: 70px;
+        border: 1px solid blue;
+        position:absolute;
+    }
+
+    .item {
+        height: 30px;
+        width: 70px;
+        border: 1px solid red;
+    }
+
+
+</style>
 

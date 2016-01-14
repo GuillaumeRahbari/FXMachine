@@ -106,7 +106,7 @@ angular.module('frontEndApp')
               if (index > -1){
                   // removing the uuid from connexions
                   this._inputs.splice(index,1);
-                  console.info("input removed")
+                  console.info("input removed");
               }
               else
               {
@@ -125,7 +125,7 @@ angular.module('frontEndApp')
               if (index > -1){
                   // removing the uuid from connexions
                   this._outputs.splice(index,1);
-                  console.info("output removed")
+                  console.info("output removed");
               }
               else
               {

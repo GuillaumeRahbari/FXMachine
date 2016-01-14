@@ -81,13 +81,13 @@ angular.module('frontEndApp')
               for(var i = 0 ; i < array.length ; i++)
               {
                   // Looking for the right one
-                  if(array[i].uuid == uuid)
-                  return array[i];
+                  if(array[i].uuid === uuid) {
+                      return array[i];
+                  }
               }
               console.error("NO RESULT GETFILTERBYUUID:" + array);
               return undefined;
-
-          };
+          }
 
 
           /**
@@ -119,7 +119,7 @@ angular.module('frontEndApp')
 
               // if theres filters, graph and all that stuff
 
-              if(filters != undefined)
+              if(filters !== undefined)
               {
                   //Need to build graph with filters here
                   var l = filters.length;
@@ -139,10 +139,10 @@ angular.module('frontEndApp')
                                   console.log("filterUUID:"+filterUUID);
 
                               // * FInd the matching filter
-                              var outputFilter = undefined;
+                              var outputFilter;
                               outputFilter = this.getFilterByUUID(filters, filterUUID);
 
-                              if(outputFilter == undefined)
+                              if(outputFilter === undefined)
                               {
                                   console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
                                   return;
@@ -220,8 +220,9 @@ angular.module('frontEndApp')
                   var l = this._connectedFilters.length;
 
                   // All filters
-                  for(var i = 0 ; i < l ; i++)
+                  for(var i = 0 ; i < l ; i++) {
                       this._connectedFilters[i].audioNode.disconnect();
+                  }
 
                   // Main input and output
                   this._soundInput.disconnect();
@@ -233,7 +234,7 @@ angular.module('frontEndApp')
               }
               else
               {
-                  console.warn("asked to clean graph, but isGraphReady value tells its clean already")
+                  console.warn("asked to clean graph, but isGraphReady value tells its clean already");
               }
 
           }
@@ -251,7 +252,7 @@ angular.module('frontEndApp')
                   this.cleanGraph();
 
                   // quick graph
-                  console.log("WebAudio : creating simple graph input->output.")
+                  console.log("WebAudio : creating simple graph input->output.");
                   this._soundInput = this._context.createBufferSource();
                   this._soundOutput = this._context.destination;
                   this._soundInput.buffer = this._soundBuffer;
@@ -284,7 +285,8 @@ angular.module('frontEndApp')
           }
 
           /**
-           getter of the audio context
+           * Getter of the audio context.
+           * @returns {AudioContext} The audio context.
            */
           get context (){
               return this._context;
