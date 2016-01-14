@@ -28,4 +28,4 @@ function myfindOne(pedalId, callback) {
 }
 
 
-exports.findOne = findOne;
+exports.myfindOne = myfindOne;

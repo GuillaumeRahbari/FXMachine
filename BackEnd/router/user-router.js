@@ -1,13 +1,12 @@
-/**
- * Created by Quentin on 1/7/2016.
+    /**
+ * Created by Quentin on 1/14/2016.
  */
 
-var app = require('./app/core/core.js').app,
-    router = require('./app/core/core.js').express.Router(),
-    userGateway = require('./data/user-gateway'),
-    userFinder = require('./data/user-finder'),
-    userController = require('./controllers/user-controller');
-
+var app = require('../app/core/core.js').app,
+    router = require('../app/core/core.js').express.Router(),
+    userGateway = require('../data/user-gateway'),
+    userFinder = require('../data/user-finder'),
+    userController = require('../controllers/user-controller');
 
 /**
  * This method will sign in a client if his user name is already in the database. If not it will return 404.
@@ -22,10 +21,11 @@ router.post('/signin', function (req, res) {
  * This method will only update the connection data base and log that the user is now offline
  */
 router.post('/signout', function(req, res) {
-
+    res.send(200);
 });
 
 
+// TODO update le post en GET + changer l'URI
 router.post('/users', function(req, res) {
     if (req.body.id == undefined) {
         userFinder.findAllUser(req.body.id, function (response) {
@@ -34,16 +34,6 @@ router.post('/users', function(req, res) {
     } else {
         res.send(400);
     }
-});
-
-router.get('/users/pedals', function(req, res) {
-   if(req.query.id == undefined) {
-       userController.pedalRetriever(req.query.id, function(response) {
-            res.send(response);
-       });
-   } else {
-       res.send(404);
-   }
 });
 
 
@@ -57,8 +47,4 @@ router.put("/subscription", function (req, res) {
     });
 });
 
-
-
-
 module.exports = router;
-
