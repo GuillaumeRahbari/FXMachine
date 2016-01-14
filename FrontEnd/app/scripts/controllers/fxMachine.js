@@ -31,7 +31,8 @@ angular.module('frontEndApp')
         };
 
         /**
-         * Remove a pedal
+         * This function removes a pedal from the pedal list.
+         * @param {Pedal} ped - The pedal to be removed.
          */
         self.removePedal = function(ped)
         {
@@ -40,7 +41,7 @@ angular.module('frontEndApp')
             if (index > -1){
                 // removing the pedal
                 this.pedals.splice(index,1);
-                console.info("pedal removed")
+                console.info("pedal removed");
             }
             else
             {
@@ -102,7 +103,7 @@ angular.module('frontEndApp')
             }
             else
             {
-                console.warn("Webaudio not initialised yet, not loading any graph until it is")
+                console.warn("Webaudio not initialised yet, not loading any graph until it is");
             }
 
         };
