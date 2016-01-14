@@ -29,6 +29,10 @@ angular.module('frontEndApp')
 
         return {
 
+            /**
+             * This function draws the background.
+             * @param {AudioContext} context - The web audio context.
+             */
             drawBackground: function (context) {
 
                 context.fillStyle = backgroundColor;
@@ -36,6 +40,10 @@ angular.module('frontEndApp')
 
             },
 
+            /**
+             * This function defines the style of the primary line.
+             * @param {AudioContext} context - The web audio context.
+             */
             setPrimaryLineStyle: function (context) {
 
                 context.fillStyle = lineColor_primary;
@@ -43,6 +51,10 @@ angular.module('frontEndApp')
 
             },
 
+            /**
+             * This function defines the style of the secondary line.
+             * @param {AudioContext} context - The web audio context.
+             */
             setSecondaryLineStyle: function (context) {
 
                 context.fillStyle = lineColor_secondary;
@@ -50,6 +62,10 @@ angular.module('frontEndApp')
 
             },
 
+            /**
+             * This function defines the style of the third line.
+             * @param {AudioContext} context - The web audio context.
+             */
             setThirdLineStyle: function (context) {
 
                 context.fillStyle = lineColor_third;
@@ -57,17 +73,27 @@ angular.module('frontEndApp')
 
             },
 
+            /**
+             * This function defines the color text.
+             * @param {AudioContext} context - The web audio context.
+             */
             setTextColorStyle: function(context){
                 context.fillStyle = textColor_primary;
                 context.strokeStyle = textColor_primary;
 
             },
 
+            /**
+             * This function defines the color meter.
+             * @param {AudioContext} context - The web audio context.
+             * @param {String} orientation - The vertical or horizontal orientation.
+             */
             setMeterColor: function(context, orientation)
             {
-                if(orientation =='vertical')
+                var meterColor;
+                if(orientation ==='vertical')
                 {
-                    var meterColor = context.createLinearGradient(0,0,0,context.canvas.height);
+                    meterColor = context.createLinearGradient(0,0,0,context.canvas.height);
 
                     meterColor.addColorStop(1,meterColor_low);
                     meterColor.addColorStop(0.1,meterColor_high);
@@ -77,7 +103,7 @@ angular.module('frontEndApp')
                     context.strokeStyle = meterColor;
 
                 }
-                else if(orientation == 'horizontal')
+                else if(orientation === 'horizontal')
                 {
                     meterColor = context.createLinearGradient(0,0,context.canvas.width,0);
                     // Saturation value
@@ -97,10 +123,10 @@ angular.module('frontEndApp')
 
             },
 
-            drawForeground(context)
+            /*drawForeground(context)
             {
 
-                /*var grd = context.createLinearGradient(0, 0, 0, context.canvas.height);
+                var grd = context.createLinearGradient(0, 0, 0, context.canvas.height);
                  grd.addColorStop(0, "rgba(255,255,255,0.3)");
                  grd.addColorStop(0.5, "rgba(0,0,0,0)");
                  grd.addColorStop(0.8, "rgba(255,255,255,0.1)");
@@ -108,9 +134,15 @@ angular.module('frontEndApp')
                  var prev = context.fillStyle ;
                  context.fillStyle = grd;
                  context.fillRect(0,0,context.canvas.width, context.canvas.height);
-                 context.fillStyle = prev;*/
-            },
+                 context.fillStyle = prev;
+            },*/
 
+            /**
+             * This function draws the grid.
+             * @param {AudioContext} context - The web audio context.
+             * @param {int} lineWidth - The x axis number.
+             * @param {int} lineHeight - The y axis number.
+             */
             drawGrid(context, lineWidth, lineHeight)
             {
                 context.fillStyle = gridColor;
@@ -128,12 +160,12 @@ angular.module('frontEndApp')
                     context.closePath();
                 }
 
-                for(var i = 0 ; i < context.canvas.height; i+= lineHeight)
+                for(var j = 0 ; j < context.canvas.height; j+= lineHeight)
                 {
 
                     context.beginPath();
-                    context.moveTo(0,i);
-                    context.lineTo( context.canvas.width, i);
+                    context.moveTo(0,j);
+                    context.lineTo( context.canvas.width, j);
                     context.stroke();
                     context.closePath();
                 }
