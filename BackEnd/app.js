@@ -1,10 +1,9 @@
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var mongodb = require('mongodb');
-var router = require('./fx-router');
-
-var http = require('./app/core/core.js').getHttp();
-var app = require('./app/core/core.js').app;
+var logger = require('morgan'),
+    bodyParser = require('body-parser'),
+    mongodb = require('mongodb'),
+    userRouter = require('./router/user-router'),
+    http = require('./app/core/core.js').getHttp(),
+    app = require('./app/core/core.js').app;
 
 /**
  * Utilisation du logger en mode développement.
@@ -39,7 +38,7 @@ app.use(function(req, res, next) {
     });
 })();
 
-app.use("/", router);
+app.use("/user", userRouter);
 
 app.listen(3000);
 console.log('Server listening on port 3000');
