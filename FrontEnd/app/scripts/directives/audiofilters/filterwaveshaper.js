@@ -16,12 +16,14 @@ angular.module('frontEndApp')
                 filter : '=',
                 distorsion : '=',
                 distotype :'=',
-                harmonics : '='
+                harmonics : '=',
+                fondfreq :'='
             },
             controller: function ($scope, $element, $timeout) {
 
+$scope.fondfreq = 5;
                 // Initialising scope values
-                $scope.distorsion = 0;
+                $scope.distorsion = 1;
                 $scope.distotype = "atan";
 
                 $scope.harmonics = [0,0,0,0,0,0,0,0];
@@ -37,6 +39,10 @@ angular.module('frontEndApp')
                  */
                 var makeDistortionCurve = function(amount, harmonics, distorsionType) {
 
+
+
+
+
                     if(distorsionType == 'atan')
                     {
 
@@ -46,13 +52,44 @@ angular.module('frontEndApp')
                             i = 0,
                             x;
 
+
                         for ( ; i < n_samples; ++i ) {
                             x = i * 2 / n_samples - 1;
+                            //curve[i] = Math.sin(x);
                             curve[i] = ( k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) ); // avant c'etait (3+k)
                         }
                     }
-                    else if(distorsionType == 'chebyshev')
+                    else if(distorsionType == 'chebyshev') {
+
+
+
+                        var k =  amount  , n_samples = 44100,
+                            curve = new Float32Array(n_samples),
+                            deg = Math.PI / 180,
+                            i = 0,
+                            x;
+
+
+                        for ( ; i < n_samples; ++i ) {
+                            x = i * 2 / n_samples - 1;
+                            //curve[i] = Math.sin(x);
+
+                            //f(x) = A sin(wt + p)
+                            for(var u = 0 ; u < harmonics.length ; u++)
+                            {
+                                var w = u*$scope.fondfreq;
+                                curve[i] += harmonics[u] * Math.sin(w*x);// * 20 * deg / ( Math.PI + k * Math.abs(x) ); // avant c'etait (3+k)
+                            }
+
+                            // gestion de la saturation de curve
+                            if(curve[i] > 1) curve[i] = 1;
+                            if(curve[i] < -1) curve[i] = -1;
+
+                        }
+                    }
+                    else if(distorsionType == 'oldcheby')
                     {
+
                         console.log("chebyshev make curve !");
                         var k =  amount  , n_samples = 44100,
                             curve = new Float32Array(n_samples),
@@ -61,6 +98,8 @@ angular.module('frontEndApp')
                             x;
 
                         for ( ; i < n_samples; ++i ) {
+
+                            // X is a sin
 
                             x = i * 2 / n_samples - 1;
 
@@ -83,6 +122,8 @@ angular.module('frontEndApp')
                                 curve[i] = curve[i] + harmonics[u] * polys[u];
                             }
                             //curve[i] = harmonics[0]*t0 + harmonics[1]*t1 + harmonics[2]*t2 + harmonics[3]*t3 + harmonics[4]*t4 + harmonics[5]*t5 + harmonics[6]*t6 + harmonics[7]*t7;
+
+                            curve[i] *= Math.sin(x);
 
 
                             /* var t0 = 1;
@@ -119,6 +160,7 @@ angular.module('frontEndApp')
                 {
                     //console.log("draw");
 
+                    // We actually draw the result on a sin curve
 
                     // ** Cleaning background
                     CanvasManager.drawBackground(ctx);
@@ -129,7 +171,8 @@ angular.module('frontEndApp')
 
                     // console.log("frequencyhArray length" + frequencyArray.length);
 
-                    //var maxValue = Math.max.apply(null, curve);
+                    var maxValue = Math.max.apply(null, curve);
+                    if(maxValue == 0) maxValue = 1; // If empty, we put it to 1 to draw a line
 
                     //** Drawing disto response line
                     CanvasManager.setPrimaryLineStyle(ctx);
@@ -138,12 +181,13 @@ angular.module('frontEndApp')
                     ctx.beginPath();
                     ctx.moveTo(0,ctx.canvas.height/2);
 
-                    //   console.log("curve" + curve);
+                      // console.log("curve" + curve);
 
                     for(var i = 0; i <= curve.length-1;i++)
                     {
                         // Actually no. it goes way higher
-                        var meterHeight = curve[i]*(ctx.canvas.height/2) / 100; //maxValue;
+                        var meterHeight = curve[i]*(ctx.canvas.height/2);
+
                         ctx.lineTo(i*widthDrawStep, ctx.canvas.height/2 - meterHeight);
                     }
                     ctx.stroke();
@@ -181,6 +225,26 @@ angular.module('frontEndApp')
                 $scope.$watch('harmonics', function(newValue)
                 {
                     update();
+
+                }, true);
+
+                /*
+                 Watching for a change in type
+                 */
+                $scope.$watch('distotype', function(newValue)
+                {
+                    update();
+
+                }, true);
+
+
+                /*
+                 Watching for a change in fondamental frequency
+                 */
+                $scope.$watch('fondfreq', function(newValue)
+                {
+                    update();
+
 
                 }, true);
 

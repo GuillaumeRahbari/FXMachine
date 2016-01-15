@@ -37,7 +37,7 @@ angular
 
 .run(['$rootScope', '$cookieStore', function($rootScope, $cookieStore) {
 
-    $rootScope.header = 'connected'; // Sorry guigui
+    $rootScope.header = 'connected'; // TODO : Sorry guigui
 
       /*
     $rootScope.$on( '$routeChangeStart', function() {
