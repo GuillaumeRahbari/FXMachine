@@ -22,7 +22,7 @@ function myfindOne(user, callback) {
         } else {
             var collection = db.collection('users');
             console.log(user.email);
-            collection.find({name : user.email } ).toArray(function (err, result) {
+            collection.find({email : user.email } ).toArray(function (err, result) {
                 if (err) {
                     console.log(err);
                     callback(500);
@@ -30,6 +30,7 @@ function myfindOne(user, callback) {
                     console.log('Found:', result);
                     callback(result);
                 } else {
+                    console.log(result);
                     callback(404);
                     console.log('No document(s) found with defined "find" criteria!');
                 }
