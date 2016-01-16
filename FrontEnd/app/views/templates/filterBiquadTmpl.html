@@ -23,16 +23,21 @@
     <br>
 
     <!-- Max theorique : 1000, mais deja a 100 c'est pas mal -->
+
     <input id="quality" type="range" min="1" max="100" value="1" step="1" ng-model="filter.audioNode.Q.value">
     <br>
 
 
-    Gain :{{filter.audioNode.gain.value}}dB
-    <!-- TODO : ca se visualise pas sur le canvas -->
+    <div ng-show="filter.audioNode.type == 'lowshelf' || filter.audioNode.type == 'highshelf' || filter.audioNode.type =='peaking'">
 
-    <br>
-    <input id="gain" type="range" min="-40" max="40" value="0" step="1" ng-model="filter.audioNode.gain.value">
-    <br>
+        Gain :{{filter.audioNode.gain.value}}dB
+        <br>
+        <input id="gain" type="range" min="-40" max="40" value="0" step="1" ng-model="filter.audioNode.gain.value">
+        <br>
+
+    </div>
+
+
 
     <!-- un petit truc joli qui affiche le frequency response -->
     <canvas id="biquadvisualisation" height="200" width="600" style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>

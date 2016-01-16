@@ -14,16 +14,16 @@ angular.module('frontEndApp')
             replace: true,
             scope: {
                 filter : '=',
-                distorsion : '=',
+                amount : '=',
                 distotype :'=',
                 harmonics : '=',
                 fondfreq :'='
             },
             controller: function ($scope, $element, $timeout) {
 
-$scope.fondfreq = 5;
+                $scope.fondfreq = 5;
                 // Initialising scope values
-                $scope.distorsion = 1;
+                $scope.amount = 1;
                 $scope.distotype = "atan";
 
                 $scope.harmonics = [0,0,0,0,0,0,0,0];
@@ -37,14 +37,7 @@ $scope.fondfreq = 5;
                  * @param amount - the amount of distorsion we want
                  * @returns {Float32Array} - the curve
                  */
-                var makeDistortionCurve = function(amount, harmonics, distorsionType) {
-
-
-
-
-
-                    if(distorsionType == 'atan')
-                    {
+                var makeAtanDistortionCurve = function(amount) {
 
                         var k =  amount  , n_samples = 44100,
                             curve = new Float32Array(n_samples),
@@ -58,102 +51,41 @@ $scope.fondfreq = 5;
                             //curve[i] = Math.sin(x);
                             curve[i] = ( k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) ); // avant c'etait (3+k)
                         }
-                    }
-                    else if(distorsionType == 'chebyshev') {
 
 
 
-                        var k =  amount  , n_samples = 44100,
-                            curve = new Float32Array(n_samples),
-                            deg = Math.PI / 180,
-                            i = 0,
-                            x;
+                    return curve;
+                };
+
+                var makeChebyshevDistortionCurve = function(harmonics, fondamentalFreq)
+                {
+                    var n_samples = 44100,
+                        curve = new Float32Array(n_samples),
+                        i = 0,
+                        x;
 
 
-                        for ( ; i < n_samples; ++i ) {
-                            x = i * 2 / n_samples - 1;
-                            //curve[i] = Math.sin(x);
+                    for ( ; i < n_samples; ++i ) {
+                        x = i * 2 / n_samples - 1;
+                        //curve[i] = Math.sin(x);
 
-                            //f(x) = A sin(wt + p)
-                            for(var u = 0 ; u < harmonics.length ; u++)
-                            {
-                                var w = u*$scope.fondfreq;
-                                curve[i] += harmonics[u] * Math.sin(w*x);// * 20 * deg / ( Math.PI + k * Math.abs(x) ); // avant c'etait (3+k)
-                            }
-
-                            // gestion de la saturation de curve
-                            if(curve[i] > 1) curve[i] = 1;
-                            if(curve[i] < -1) curve[i] = -1;
-
-                        }
-                    }
-                    else if(distorsionType == 'oldcheby')
-                    {
-
-                        console.log("chebyshev make curve !");
-                        var k =  amount  , n_samples = 44100,
-                            curve = new Float32Array(n_samples),
-                            deg = Math.PI / 180,
-                            i = 0,
-                            x;
-
-                        for ( ; i < n_samples; ++i ) {
-
-                            // X is a sin
-
-                            x = i * 2 / n_samples - 1;
-
-
-
-                            var polys = new Float32Array(8);
-                            polys[0] = 1;
-                            polys[1] = x;
-                            for (var u = 2 ; u < harmonics.length ; u++)
-                            {
-                                // tn = 2*x *t[n-1](x)- t[n-2](x)
-                               polys[u] = 2*x + polys[u-1] - polys[u-2];
-                            }
-
-
-                            //  y = k0*T0(x) + k1*T1(x) + k2*T2(x) + k3*T3(x) + ...
-                            curve[i] = 0;
-                            for(var u = 0 ; u < harmonics.length ; u++)
-                            {
-                                curve[i] = curve[i] + harmonics[u] * polys[u];
-                            }
-                            //curve[i] = harmonics[0]*t0 + harmonics[1]*t1 + harmonics[2]*t2 + harmonics[3]*t3 + harmonics[4]*t4 + harmonics[5]*t5 + harmonics[6]*t6 + harmonics[7]*t7;
-
-                            curve[i] *= Math.sin(x);
-
-
-                            /* var t0 = 1;
-                             var t1 = x;
-                             var t2 = 2*Math.pow(x,2)-1;
-                             var t3 = 4*Math.pow(x,3) - 3*x;
-                             var t4 = 8*Math.pow(x,4) - 8*Math.pow(x,2) +1;
-                             var t5 = 16*Math.pow(x,5) - 20*Math.pow(x,3) + 5*x;
-                             var t6 = 32*Math.pow(x,6) - 48*Math.pow(x,4) + 18*Math.pow(x,2) -1;
-                             var t7 = 64*Math.pow(x,7) -112 *Math.pow(x,5) + 160*Math.pow(x,4) -32*Math.pow(x,2) +1;
- */
-
-                            // Looping on harmonics
-                           // curve[i] = 0;
-                           // curve[i] = harmonics[0]*t0 + harmonics[1]*t1 + harmonics[2]*t2 + harmonics[3]*t3 + harmonics[4]*t4 + harmonics[5]*t5 + harmonics[6]*t6 + harmonics[7]*t7;
-
-
-
-
-                            //curve[i] = ( k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) ); // avant c'etait (3+k)
+                        //f(x) = A sin(wt + p)
+                        for(var u = 0 ; u < harmonics.length ; u++)
+                        {
+                            var w = (u+1)*fondamentalFreq;
+                            var w = (u+1)*fondamentalFreq;
+                            curve[i] += harmonics[u] * Math.sin(w*x);
                         }
 
-                    }
-                    else
-                    {
-                        console.error("BAD VALUE DISTOTYPE");
+                        // gestion de la saturation de curve
+                        if(curve[i] > 1) curve[i] = 1;
+                        if(curve[i] < -1) curve[i] = -1;
+
                     }
 
                     return curve;
                 };
+
 
 
                 var drawCurve = function(curve)
@@ -201,9 +133,18 @@ $scope.fondfreq = 5;
                  */
                 var update = function()
                 {
-                    console.log("update disto : " + $scope.distorsion);
+                    //console.log("update disto : " + $scope.distorsion);
 
-                    var curve = makeDistortionCurve($scope.distorsion, $scope.harmonics, $scope.distotype);
+                    var curve;
+
+                    if($scope.distotype =="atan")
+                       curve = makeAtanDistortionCurve($scope.amount);
+                    else if($scope.distotype == "chebyshev")
+                        curve = makeChebyshevDistortionCurve($scope.harmonics, $scope.fondfreq);
+                    else
+                        console.error("bad disto type given");
+
+
 
                     $scope.filter.audioNode.curve = curve;
 
@@ -212,15 +153,15 @@ $scope.fondfreq = 5;
 
 
                 /*
-                 Watching for a change in the distorsion inputrange
+                 Watching for a change in the distorsion amount inputrange
                  */
-                $scope.$watch('distorsion', function(newValue)
+                $scope.$watch('amount', function(newValue)
                 {
                     update();
                 });
 
                 /*
-                 Watching for a change in the distorsion inputrange
+                 Watching for a change in the harmonics inputrange
                  */
                 $scope.$watch('harmonics', function(newValue)
                 {

@@ -51,7 +51,7 @@ angular.module('frontEndApp')
                     ctx.fillRect(i, ctx.canvas.height-array[i]/2, meterWidth, meterHeight);
                 }
 
-                CanvasManager.drawForeground(ctx);
+               // CanvasManager.drawForeground(ctx);
 
                 // Re-looping
                 $timeout(draw, 60)

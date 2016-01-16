@@ -84,7 +84,7 @@ angular.module('frontEndApp')
                         ctx.stroke();
                         ctx.closePath();
 
-                        CanvasManager.drawForeground(ctx);
+                        //CanvasManager.drawForeground(ctx);
                     }
                 };
 
