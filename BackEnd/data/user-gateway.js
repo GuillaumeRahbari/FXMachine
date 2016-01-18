@@ -14,8 +14,6 @@ function createUser(user ,callback) {
         } else {
             console.log('Connection established to', url);
             var collection = db.collection('users');
-            console.log("yolo");
-            console.log(user);
             user.role = "user";
             collection.insert([user], function (err, result) {
                 if (err) {

@@ -2,6 +2,7 @@ var logger = require('morgan'),
     bodyParser = require('body-parser'),
     mongodb = require('mongodb'),
     userRouter = require('./router/user-router'),
+    pedalRouter = require('./router/pedals-router'),
     http = require('./app/core/core.js').getHttp(),
     app = require('./app/core/core.js').app;
 
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
 })();
 
 app.use("/user", userRouter);
+app.use("/user/:user_id/pedals", pedalRouter);
 
 app.listen(3000);
 console.log('Server listening on port 3000');

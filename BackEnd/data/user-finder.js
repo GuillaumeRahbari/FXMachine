@@ -82,13 +82,17 @@ function getUserPedal(id, callback) {
         } else {
             var o_id = new ObjectID(id);
             var collection = db.collection('users');
-            collection.findOne({ _id : o_id} , function(err, result) {
+            collection.find({ _id : o_id} , function(err, result) {
                 if(err) {
                     console.log(err);
                     callback(err);
                 } else {
                     console.log(result.pedals);
-                    callback(result.pedals);
+                    if(typeof result.pedals === 'undefined') {
+                        callback([]);
+                    } else {
+                        callback(result.pedals);
+                    }
                 }
             });
         }

@@ -4,9 +4,8 @@
 var userFinder = require('../data/user-finder'),
     pedalFinder = require('../data/pedal-finder');
 
-
 function pedalRetriever(userId, callback) {
-    userGateway.getUserPedal(userId, function(pedalList) {
+    userFinder.getUserPedal(userId, function(pedalList) {
         var result = [];
         for(var pedal in pedalList) {
             (function(pedal) {
@@ -15,6 +14,7 @@ function pedalRetriever(userId, callback) {
                 })
             })(pedal)
         }
+        callback(result);
     });
 }
 
