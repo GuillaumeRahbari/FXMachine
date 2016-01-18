@@ -3,10 +3,11 @@
  */
 
 var app = require('../app/core/core.js').app,
-    router = require('../app/core/core.js').express.Router(),
+    router = require('../app/core/core.js').express.Router({mergeParams: true}),
     userGateway = require('../data/user-gateway'),
     userFinder = require('../data/user-finder'),
-    userController = require('../controllers/user-controller');
+    userController = require('../controllers/user-controller'),
+    logsController = require('../controllers/logs-controller');
 
 /**
  * This method will sign in a client if his user name is already in the database. If not it will return 404.
@@ -21,6 +22,9 @@ router.post('/signin', function (req, res) {
  * This method will only update the connection data base and log that the user is now offline
  */
 router.post('/signout', function(req, res) {
+    console.log("in the signout");
+    console.log(req.params.user_id);
+    logsController.connectionLog(req.params.user_id, "out");
     res.send(200);
 });
 
