@@ -2,8 +2,8 @@
  * Created by Quentin on 1/18/2016.
  */
 
-var logGateway = require('../data/logs-gateway'),
-    userFinder = require('../data/user-finder');
+var logGateway = require('../../data/logs-gateway'),
+    userFinder = require('../../data/user-finder');
 
 /**
  * This function will retrieve the information about the client to put in a log that will be push in

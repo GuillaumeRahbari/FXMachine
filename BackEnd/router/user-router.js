@@ -6,8 +6,8 @@ var app = require('../app/core/core.js').app,
     router = require('../app/core/core.js').express.Router({mergeParams: true}),
     userGateway = require('../data/user-gateway'),
     userFinder = require('../data/user-finder'),
-    userController = require('../controllers/user-controller'),
-    logsController = require('../controllers/logs-controller');
+    userController = require('../domain/controllers/user-controller'),
+    logsController = require('../domain/controllers/logs-controller');
 
 /**
  * This method will sign in a client if his user name is already in the database. If not it will return 404.

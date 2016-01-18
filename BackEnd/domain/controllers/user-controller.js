@@ -1,8 +1,8 @@
 /**
  * Created by Quentin on 1/14/2016.
  */
-var userFinder = require('../data/user-finder'),
-    pedalFinder = require('../data/pedal-finder');
+var userFinder = require('../../data/user-finder'),
+    pedalFinder = require('../../data/pedal-finder');
 
 function pedalRetriever(userId, callback) {
     userFinder.getUserPedal(userId, function(pedalList) {

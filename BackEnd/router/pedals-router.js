@@ -4,7 +4,7 @@
 
 var app = require('../app/core/core.js').app,
     router = require('../app/core/core.js').express.Router({mergeParams: true}),
-    userController = require('../controllers/user-controller'),
+    userController = require('../domain/controllers/user-controller'),
     pedalGateway = require('../data/pedal-gateway');
 
 
