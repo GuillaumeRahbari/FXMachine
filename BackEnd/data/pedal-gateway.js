@@ -16,13 +16,13 @@ function savePedal(pedal, callback) {
            var collection = db.collection('pedal');
            collection.insert([pedal], function(err, result) {
               if(err) {
-                  callback(409);
+                  callback(false, err);
               } else {
-                  callback(200);
+                  callback(true, result);
               }
            });
        }
     });
 }
 
-
+exports.savePedal = savePedal;

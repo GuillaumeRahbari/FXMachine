@@ -4,7 +4,8 @@
 
 var app = require('../app/core/core.js').app,
     router = require('../app/core/core.js').express.Router({mergeParams: true}),
-    userController = require('../controllers/user-controller');
+    userController = require('../controllers/user-controller'),
+    pedalGateway = require('../data/pedal-gateway');
 
 
 router.get("/all", function(req, res) {
@@ -17,5 +18,16 @@ router.get("/all", function(req, res) {
         res.sendStatus(404);
     }
 });
+
+router.put("/", function(req, res) {
+    pedalGateway.savePedal(req.body, function(response, message) {
+        if(response) {
+            res.send(message);
+        } else {
+            res.sendStatus(400);
+        }
+    });
+});
+
 
 module.exports = router;
