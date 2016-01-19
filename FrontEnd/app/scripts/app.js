@@ -35,21 +35,17 @@ angular
   }
   )
 
-.run(['$rootScope', '$cookieStore', function($rootScope, $cookieStore) {
+.run(['$rootScope', '$cookies', function($rootScope, $cookies) {
 
-    $rootScope.header = 'connected'; // TODO : Sorry guigui
 
-      /*
     $rootScope.$on( '$routeChangeStart', function() {
         // On essaye de récupérer le cookie de connection.
-        if($cookieStore.get('userId') !== undefined) {
-            console.log('cookie ok');
+        if($cookies.get('userId') !== undefined) {
             $rootScope.header = 'connected';
         }
         // Sinon on propose le header où on peut se connecter.
         else {
-            console.log('cookie not ok');
             $rootScope.header = 'default';
         }
-    });*/
+    });
 }]);
