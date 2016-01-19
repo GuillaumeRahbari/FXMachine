@@ -14,7 +14,7 @@ angular.module('frontEndApp')
           UserSrv.logout().then(
               function (data) {
                   $rootScope.header = 'default';
-                  $location.path('/');
+                  $location.path('/connection');
               },
               function (error) {
                   console.log(error);

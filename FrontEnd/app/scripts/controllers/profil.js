@@ -9,9 +9,8 @@
  */
 angular.module('frontEndApp')
   .controller('ProfilCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+      // TODO Get the real pedals of the user.
+      this.pedals = [];
+
   });

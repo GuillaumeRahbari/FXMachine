@@ -35,7 +35,7 @@ angular
         controllerAs: 'profil'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/profil'
       });
   }
   )
