@@ -8,7 +8,7 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-  .controller('ConnectionCtrl', function (UserSrv, $location) {
+  .controller('ConnectionCtrl', function (UserSrv, $location, $rootScope) {
 
       /**
        * This function is here to subscribe.
@@ -17,6 +17,7 @@ angular.module('frontEndApp')
       this.subscribe = function (user) {
           UserSrv.subscribe(user).then(
               function (data) {
+                  $rootScope.header = 'connected';
                   $location.path('/');
               },
               function (error) {
@@ -32,6 +33,7 @@ angular.module('frontEndApp')
       this.login = function (user) {
           UserSrv.login(user).then(
               function (data) {
+                  $rootScope.header = 'connected';
                   $location.path('/');
               },
               function (error) {
