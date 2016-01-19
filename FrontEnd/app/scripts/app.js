@@ -34,6 +34,11 @@ angular
         controller: 'ProfilCtrl',
         controllerAs: 'profil'
       })
+      .when('/pedal', {
+        templateUrl: 'views/pedal.html',
+        controller: 'PedalCtrl',
+        controllerAs: 'pedal'
+      })
       .otherwise({
         redirectTo: '/profil'
       });
