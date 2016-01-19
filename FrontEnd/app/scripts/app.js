@@ -29,6 +29,11 @@ angular
         controller: 'ConnectionCtrl',
         controllerAs: 'connection'
       })
+      .when('/profil', {
+        templateUrl: 'views/profil.html',
+        controller: 'ProfilCtrl',
+        controllerAs: 'profil'
+      })
       .otherwise({
         redirectTo: '/'
       });
