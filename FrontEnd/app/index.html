@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>FXMachine</title>
     <meta name="description" content="">
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
       <!--
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -18,12 +18,15 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/connection.css">
+      <link rel="stylesheet" href="styles/header.css">
+      <link rel="stylesheet" href="styles/pedalcreation.css">
     <!-- endbuild -->
   </head>
   <body>
 
-    <ng-include src="'views/header.html'"></ng-include>
+    <ng-include src="'views/header/header.html'"></ng-include>
 
 
     <ng-view></ng-view>
@@ -51,14 +54,12 @@
 
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/fxMachine.js"></script>
-        <script src="scripts/services/machine.js"></script>
 
         <script src="scripts/services/sound.js"></script>
         <script src="scripts/directives/filemodel.js"></script>
         <script src="scripts/directives/audiofilters/filtergain.js"></script>
         <script src="scripts/directives/audiofilters/filterbiquad.js"></script>
         <script src="scripts/directives/postRender.js"></script>
-        <script src="scripts/directives/draggablediv.js"></script>
         <script src="scripts/controllers/connection.js"></script>
         <script src="scripts/services/usersrv.js"></script>
 
@@ -88,6 +89,9 @@
         <script src="scripts/directives/draggable.js"></script>
         <script src="scripts/directives/disconnect.js"></script>
         <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/services/expiredate.js"></script>
+        <script src="scripts/controllers/profil.js"></script>
+        <script src="scripts/controllers/pedal.js"></script>
         <!-- endbuild -->
 </body>
 </html>

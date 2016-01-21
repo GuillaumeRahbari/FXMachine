@@ -17,7 +17,7 @@ angular.module('frontEndApp')
       this.subscribe = function (user) {
           UserSrv.subscribe(user).then(
               function (data) {
-                  $location.path('/');
+                  $location.path('/profil');
               },
               function (error) {
                   console.log(error);
@@ -32,7 +32,7 @@ angular.module('frontEndApp')
       this.login = function (user) {
           UserSrv.login(user).then(
               function (data) {
-                  $location.path('/');
+                  $location.path('/profil');
               },
               function (error) {
                   console.log(error);

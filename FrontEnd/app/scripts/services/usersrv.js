@@ -8,7 +8,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .factory('UserSrv', function ($cookieStore, $location, $http) {
+  .factory('UserSrv', function ($cookies, $location, $http, ExpireDate) {
     return {
         /**
          * This function register asynchronously a user.
@@ -33,6 +33,7 @@ angular.module('frontEndApp')
          * </ul>
          */
         subscribe: function (user) {
+            var exp = ExpireDate.expireDate();
             return $http({
                 method: 'PUT',
                 url: 'http://localhost:3000/user/subscription',
@@ -41,7 +42,7 @@ angular.module('frontEndApp')
             }).then(
                 // success
                 function (response) {
-                    $cookieStore.put('userId', response.data.id);
+                    $cookies.put('userId', response.data.id, {expires: exp});
                     return response.data;
                 },
                 //error
@@ -75,6 +76,7 @@ angular.module('frontEndApp')
          * </ul>
          */
         login: function (user) {
+            var exp = ExpireDate.expireDate();
             return $http({
                 method: 'POST',
                 url: 'http://localhost:3000/user/signin',
@@ -83,7 +85,7 @@ angular.module('frontEndApp')
             }).then(
                 // success
                 function (response) {
-                    $cookieStore.put('userId', response.data.id);
+                    $cookies.put('userId', response.data[0]._id, {expires: exp});
                     return response.data;
                 },
                 //error
@@ -119,12 +121,12 @@ angular.module('frontEndApp')
             return $http({
                 method: 'POST',
                 url: 'http://localhost:3000/user/signout',
-                data: {id : $cookieStore.get('userId')},
+                data: {id : $cookies.get('userId')},
                 headers: {'Content-Type': 'application/json'}
             }).then(
                 // success
                 function (response) {
-                    $cookieStore.remove('userId');
+                    $cookies.remove('userId');
                     return response.data;
                 },
                 //error
