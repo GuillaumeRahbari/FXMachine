@@ -1,17 +1,18 @@
 
 .main-web-audio {
-  background-color: #848788;
-
+  background-color: #666666;
   border:2px solid #d3d3d3;
   border-top: 2px solid #292929;
   box-shadow : 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 
+  color:rgba(255,255,255,0.8);
+  font-size:14px;
 }
 
 .web-audio-elem {
-  border-left: 3px solid#737677;
-  border-right: 3px solid #737677;
-  min-height:90px;
+  border-left: 1px solid #929292;
+  border-right: 1px solid #949494;
+  min-height:70px;
 }
 
 .inputs-web-audio {
@@ -26,10 +27,25 @@
 .outputs-web-audio {
 }
 
+/** valid and invalid colors **/
 .valid-box {
-  background-color:lightgreen;
+  background-color: #69af69;
+  border : 2px solid rgba(0,0,0,0.5)
 }
-
 .invalid-box {
   background-color:indianred;
+  border : 2px solid rgba(0,0,0,0.5)
+}
+
+/** Different button styles depending on their importance **/
+.webaudio-control-btn-primary {
+  background-color: #a09693;
+  border : 2px dashed dimgray;
+  color:white;
+}
+
+.webaudio-control-btn-secondary {
+  background-color: #514c4b;
+  border : 2px dashed dimgray;
+  color:white;
 }

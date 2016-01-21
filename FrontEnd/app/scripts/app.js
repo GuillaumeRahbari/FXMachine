@@ -63,9 +63,6 @@ angular
             $rootScope.header = 'connected';//todo: sorry guigui
 
 
-
-
-
         }
     });
 }]);

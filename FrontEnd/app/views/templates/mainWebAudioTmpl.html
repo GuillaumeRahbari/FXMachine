@@ -3,8 +3,9 @@
 
             <!-- Controle de l'input -->
             <!-- c'est ici qu'on gere le son d'entree, whatever happens. c'est totalement separe des filtres, pedales, et autres -->
-            <input type="file" file-model="soundFile"/>
-            <button id="load" class="btn btn-sm" ng-click="fxmachine.webaudio.loadsound(soundFile.name)">loadSound</button>
+        <!-- TODO : est sur la classe bouton mais c'est pas vraiment un bouton -->
+        <input class="webaudio-control-btn-secondary" type="file" file-model="soundFile"/>
+            <button id="load" class="btn btn-sm webaudio-control-btn-secondary" ng-click="fxmachine.webaudio.loadsound(soundFile.name)">loadSound</button>
 
 
             <!-- Input Visualisation : waveform -->
@@ -26,22 +27,25 @@
         <div ng-if="!fxmachine.webaudio.isPlaying" class="invalid-box">Playing</div>
     </div>
 
-    <div class="web-audio-elem controls-web-audio  col-lg-5">
-        <button id="cleangraph" class="btn btn-default btn-sm" ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph</button>
-        <button id="loaddefaultgraph" class="btn btn-default btn-sm" ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio Graph
+    <div class="web-audio-elem controls-web-audio  col-lg-4">
+        <button id="cleangraph" class="btn btn-default btn-sm webaudio-control-btn-secondary" ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph</button>
+        <button id="loaddefaultgraph" class="btn btn-default btn-sm webaudio-control-btn-secondary" ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio Graph
         </button>
 
         <br>
-        <div class="">
-            <button type="button" id="button_play" class="btn btn-sm" ng-click='fxmachine.webaudio.playSound();'>
+        <!-- we use all the size available for those control buttons -->
+        <div class="btn-group btn-group-justified"><!-- TODO : j'ai essaye de centrer les boutons et de les faire remplir toute la largeur, mais j'y arirve pas euh -->
+
+
+            <button type="button" id="button_play" class="btn webaudio-control-btn-primary btn-group" ng-click='fxmachine.webaudio.playSound();'>
                 Play
             </button>
             <!-- TODO: un vrai bouton play/pause, ou ne seraitce que un pause. -->
-            <button type="button" id="button_pause" class="btn btn-sm" ng-click='' disabled>
+            <button type="button" id="button_pause" class="btn webaudio-control-btn-primary btn-group" ng-click='' disabled>
                 Pause
             </button>
 
-            <button type="button" id="button_stop" class="btn btn-sm" ng-click='fxmachine.webaudio.stopSound();'>
+            <button type="button" id="button_stop" class="btn webaudio-control-btn-primary btn-group" ng-click='fxmachine.webaudio.stopSound();'>
                 Stop
             </button>
         </div>
@@ -50,20 +54,31 @@
 
     </div>
 
-    <div class="web-audio-elem outputs-web-audio  col-lg-3">
+    <div class="web-audio-elem outputs-web-audio  col-lg-4">
 
         <div class="col-lg-4">
-            By default : speakers
+            <!--By default : speakers-->
+            <canvas signal-visualiser analyser-node="fxmachine.webaudio.analyser"
+                    width="100" height="50"
+                    class="canvas-basic"></canvas>
+
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
 
             <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser" width="100"
-                    height="30"
+                    height="20"
+                    class="canvas-basic"></canvas>
+            <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser" width="100"
+                    height="20"
+                    class="canvas-basic"></canvas>
+        </div>
+
+        <div class="col-lg-2">
+
+            <canvas volume-visualiser orientation="'vertical'" analyser-node="fxmachine.webaudio.analyser" width="20"
+                    height="50"
                     class="canvas-basic"></canvas>
 
-            <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser" width="100"
-                    height="30"
-                    class="canvas-basic"></canvas>
         </div>
 
 
