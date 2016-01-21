@@ -15,10 +15,9 @@ angular.module('frontEndApp')
          * @returns {Date} The date 7 days later.
          */
         expireDate : function () {
-            var now = new Date(),
-                // this will set the expiration to 7 jours
-                exp = new Date(now.getFullYear(), now.getMonth(), now.getDate()+7);
-            return exp;
+            var now = new Date();
+            // this will set the expiration to 7 jours
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7);
         }
     };
   });
