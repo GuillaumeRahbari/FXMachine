@@ -29,13 +29,14 @@
             </li>
         </ul>
     </div>
+
     <div id="containerPlumb">
         <div id="globalPlumb">
-            <div class="container-fluid divPlumb" draggable connectable ng-repeat="filter in pedal.pedal.filters" style="border-style:solid;border-color:black;border-width:3px">
+            <div class="container-fluid divPlumb" draggable ng-repeat="filter in pedal.pedal.filters" style="border-style:solid;border-color:black;border-width:3px">
 
                 <h5>Filtre : {{filter.type}}</h5>
 
-                <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="pedal.removeFilter(filter);">Remove
+                <button id="removeFilter" ng-hide="filter.type==='node'" ng-click="pedal.pedal.removeFilter(filter);">Remove
                     Filter
                 </button>
 
@@ -74,7 +75,8 @@
                 <!-- The stereopanner filter -->
                 <filter-stereopanner filter="filter" ng-if="filter.type === 'stereoPanner'"></filter-stereopanner>
 
-                <div class="connector" connector> Connect!</div>
+                <div class="connector" connector> out</div>
+                <div class="connector" connectable> in</div>
 
             </div>
         </div>
