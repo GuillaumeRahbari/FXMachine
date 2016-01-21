@@ -11,7 +11,7 @@
  * TODO : deplacer loadSound dans webaudio service (guigui, tu t'en occupes, parce que loadSound y'en a partout)
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', 'Pedal', 'JsPlumb', function ($scope, Machine, Filter, Sound, WebAudio, Pedal,JsPlumb) {
+    .controller('fxMachineCtrl',['$scope', 'Filter', 'Sound', 'WebAudio', 'Pedal', 'JsPlumb', function ($scope, Filter, Sound, WebAudio, Pedal,JsPlumb) {
 
         var self = this;
 

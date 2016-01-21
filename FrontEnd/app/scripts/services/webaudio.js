@@ -381,4 +381,5 @@ angular.module('frontEndApp')
       }
 
       return WebAudio;
+
   }]);
