@@ -8,10 +8,11 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-  .controller('PedalCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('PedalCtrl',['WebAudio', 'Pedal', function (WebAudio, Pedal) {
+
+      var self = this;
+
+      self.webaudio = new WebAudio();
+
+      self.pedal = new Pedal(self.webaudio);
+  }]);
