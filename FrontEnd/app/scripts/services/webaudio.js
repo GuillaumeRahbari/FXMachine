@@ -379,16 +379,18 @@ angular.module('frontEndApp')
               this._soundOutput = soundOutput;
           }
 
+          /**
+           * This function loads a sound.
+           * @param {String} fileName - The file to load.
+           */
           loadsound (fileName) {
-              Sound.loadSound(this.context, fileName).then(
+              var self = this;
+              Sound.loadSound(self.context, fileName).then(
                   function (soundBufferDecoded) {
-                      this.soundBuffer = soundBufferDecoded;
+                      self.soundBuffer = soundBufferDecoded;
 
                       console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
-                      this.isInitialized = true;
-                      //angular.element('#play').removeAttr('disabled');
-                      // put in comment so we can load a new song if we want
-                      //angular.element('#load').attr('disabled', 'disabled');
+                      self.isInitialized = true;
 
                   }, function(errorMsg){
                       console.log(errorMsg);

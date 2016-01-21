@@ -5,7 +5,7 @@
         <!-- Controle de l'input -->
         <!-- c'est ici qu'on gere le son d'entree, whatever happens. c'est totalement separe des filtres, pedales, et autres -->
         <input type="file" file-model="soundFile"/>
-        <button id="load" ng-click="fxmachine.webaudio.loadSound(fxmachine.fileName)">Charger le son</button>
+        <button id="load" ng-click="fxmachine.webaudio.loadsound(soundFile.name)">Charger le son</button>
         <!-- Input Visualisation : waveform -->
         <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
                 style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
