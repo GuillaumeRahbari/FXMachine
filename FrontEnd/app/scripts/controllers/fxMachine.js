@@ -50,6 +50,8 @@ angular.module('frontEndApp')
             }
         };
 
+        this.fileName = $scope.soundFile.name;
+
 
         /**
          * Load a sound

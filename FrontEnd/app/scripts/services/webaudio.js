@@ -11,7 +11,7 @@
  * TODO : empecher de pouvoir lancer plusieurs fois play en meme temps
  */
 angular.module('frontEndApp')
-  .service('WebAudio', ['Sound',function () {
+  .service('WebAudio', ['Sound',function (Sound) {
 
       /**
        * This class represent a web audio object.
@@ -377,6 +377,24 @@ angular.module('frontEndApp')
            */
           set soundOutput (soundOutput) {
               this._soundOutput = soundOutput;
+          }
+
+          loadsound (fileName) {
+              Sound.loadSound(this.context, fileName).then(
+                  function (soundBufferDecoded) {
+                      this.soundBuffer = soundBufferDecoded;
+
+                      console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
+                      this.isInitialized = true;
+                      //angular.element('#play').removeAttr('disabled');
+                      // put in comment so we can load a new song if we want
+                      //angular.element('#load').attr('disabled', 'disabled');
+
+                  }, function(errorMsg){
+                      console.log(errorMsg);
+                  }
+              );
+
           }
       }
 
