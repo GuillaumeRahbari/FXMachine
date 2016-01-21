@@ -60,7 +60,12 @@ angular
         }
         // Sinon on propose le header où on peut se connecter.
         else {
-            $rootScope.header = 'default';
+            $rootScope.header = 'connected';//todo: sorry guigui
+
+
+
+
+
         }
     });
 }]);

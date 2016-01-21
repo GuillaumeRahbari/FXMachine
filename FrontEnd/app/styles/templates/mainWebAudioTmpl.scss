@@ -1,0 +1,35 @@
+
+.main-web-audio {
+  background-color: #848788;
+
+  border:2px solid #d3d3d3;
+  border-top: 2px solid #292929;
+  box-shadow : 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+
+}
+
+.web-audio-elem {
+  border-left: 3px solid#737677;
+  border-right: 3px solid #737677;
+  min-height:90px;
+}
+
+.inputs-web-audio {
+
+}
+.status-web-audio {
+}
+
+.controls-web-audio {
+}
+
+.outputs-web-audio {
+}
+
+.valid-box {
+  background-color:lightgreen;
+}
+
+.invalid-box {
+  background-color:indianred;
+}

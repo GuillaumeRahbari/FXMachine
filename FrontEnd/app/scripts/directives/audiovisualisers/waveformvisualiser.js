@@ -24,11 +24,13 @@ angular.module('frontEndApp')
                  */
                 var draw = function()
                 {
+
+                    // Cleaning the canvas
+                    CanvasManager.drawBackground(ctx);
                     // If buffer has been initialized already
                     if($scope.buffer != null)
                     {
-                        // Cleaning the canvas
-                        CanvasManager.drawBackground(ctx);
+
 
 
                         // Waveform style
