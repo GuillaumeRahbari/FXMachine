@@ -5,7 +5,8 @@
 var app = require('../app/core/core.js').app,
     router = require('../app/core/core.js').express.Router({mergeParams: true}),
     userController = require('../domain/controllers/user-controller'),
-    pedalGateway = require('../data/pedal-gateway');
+    pedalGateway = require('../data/pedal-gateway'),
+    pedalFinder = require('../data/pedal-finder');
 
 
 router.get("/all", function(req, res) {
@@ -25,6 +26,16 @@ router.put("/", function(req, res) {
             res.send(message);
         } else {
             res.sendStatus(400);
+        }
+    });
+});
+
+router.get("/:pedalId", function(req, res) {
+    pedalFinder.myfindOne(req.params.pedalId, function(err, result) {
+        if(err == null) {
+            res.send(result);
+        } else {
+            res.sendStatus(404);
         }
     });
 });
