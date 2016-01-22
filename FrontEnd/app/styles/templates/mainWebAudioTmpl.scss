@@ -72,9 +72,9 @@ $height: 90px;
 
 }
 
-.webaudio-control-btn:disabled {
+/*.webaudio-control-btn:disabled {
   border : 2px solid #c6c6c6;
-}
+}*/
 
 /* TODO : different colors depending on buttons primary/secondary .. ? */
 
@@ -104,6 +104,14 @@ $height: 90px;
   padding-left:0;
   padding-right:0;
 
+}
+
+.nopaddingright {
+  padding-right:0;
+}
+
+.nopaddingleft {
+  padding-left:0;
 }
 
 .nomargin {
