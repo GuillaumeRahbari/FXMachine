@@ -4,9 +4,9 @@
 
 var app = require('./app/core/core.js').app,
     router = require('./app/core/core.js').express.Router(),
-    userGateway = require('./data/user-gateway'),
-    userFinder = require('./data/user-finder'),
-    userController = require('./domain/controllers/user-controller');
+    userGateway = require('./src/data/user-gateway'),
+    userFinder = require('./src/data/user-finder'),
+    userController = require('./src/domain/controllers/user-controller');
 
 
 /**

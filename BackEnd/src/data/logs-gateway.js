@@ -25,4 +25,24 @@ function saveLog(log, callback) {
     });
 }
 
+function deleteLog(log, callback) {
+    mongoClient.connect(url, function(err, db) {
+       if(err) {
+           console.log("")
+           callback(err, null) ;
+       } else {
+           var collection = db.collection('logs');
+           collection.deleteOne([log], function(err, result) {
+              if(err) {
+                console.log("Error during insertion of log in the collection")
+                callback(err, null);
+              } else {
+                  callback(null, result);
+              }
+           });
+       }
+    });
+}
+
+exports.deleteLog = deleteLog;
 exports.saveLog = saveLog;

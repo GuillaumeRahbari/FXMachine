@@ -2,8 +2,8 @@
  * Created by Quentin on 1/14/2016.
  */
 
-var app = require('../app/core/core.js').app,
-    router = require('../app/core/core.js').express.Router({mergeParams: true}),
+var app = require('../../app/core/core.js').app,
+    router = require('../../app/core/core.js').express.Router({mergeParams: true}),
     userGateway = require('../data/user-gateway'),
     userFinder = require('../data/user-finder'),
     userController = require('../domain/controllers/user-controller'),

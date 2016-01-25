@@ -2,8 +2,8 @@
  * Created by Quentin on 1/14/2016.
  */
 
-var app = require('../app/core/core.js').app,
-    router = require('../app/core/core.js').express.Router({mergeParams: true}),
+var app = require('../../app/core/core.js').app,
+    router = require('../../app/core/core.js').express.Router({mergeParams: true}),
     userController = require('../domain/controllers/user-controller'),
     pedalGateway = require('../data/pedal-gateway'),
     pedalFinder = require('../data/pedal-finder');

@@ -1,8 +1,8 @@
 var logger = require('morgan'),
     bodyParser = require('body-parser'),
     mongodb = require('mongodb'),
-    userRouter = require('./router/user-router'),
-    pedalRouter = require('./router/pedals-router'),
+    userRouter = require('./src/router/user-router'),
+    pedalRouter = require('./src/router/pedals-router'),
     http = require('./app/core/core.js').getHttp(),
     app = require('./app/core/core.js').app;
 
