@@ -7,7 +7,7 @@ var assert = require('assert'),
     logsGateway = require("../../src/data/logs-gateway"),
     logsFinder = require("../../src/data/logs-finder");
 
-suite('Log Gateway test suite', function() {
+suite('Logs data manager test suite', function() {
     setup("Set up of the suite", function(){
         logsGateway.saveLog("test", function(err, result) {
             if(err) {

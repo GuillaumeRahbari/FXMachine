@@ -25,4 +25,23 @@ function savePedal(pedal, callback) {
     });
 }
 
+function deletePedal(pedal, callback) {
+    mongoClient.connect(url, function(err, db) {
+        if(err) {
+            callback(err, null) ;
+        } else {
+            var collection = db.collection('pedal');
+            collection.deleteOne([pedal], function(err, result) {
+                if(err) {
+                    console.log("Error during insertion of log in the collection")
+                    callback(err, null);
+                } else {
+                    callback(null, result);
+                }
+            });
+        }
+    });
+}
+
+exports.deletePedal = deletePedal;
 exports.savePedal = savePedal;
