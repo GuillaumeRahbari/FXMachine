@@ -8,10 +8,9 @@
 /**
  * @ngdoc function
  * @name frontEndApp.controller:fxMachineCtrl
- * TODO : deplacer loadSound dans webaudio service (guigui, tu t'en occupes, parce que loadSound y'en a partout)
  */
 angular.module('frontEndApp')
-    .controller('fxMachineCtrl',['$scope', 'Machine', 'Filter', 'Sound', 'WebAudio', 'Pedal', 'JsPlumb', function ($scope, Machine, Filter, Sound, WebAudio, Pedal,JsPlumb) {
+    .controller('fxMachineCtrl',['$scope', 'Filter', 'Sound', 'WebAudio', 'Pedal', 'JsPlumb', function ($scope, Filter, Sound, WebAudio, Pedal,JsPlumb) {
 
         var self = this;
 
@@ -49,32 +48,6 @@ angular.module('frontEndApp')
                 console.warn("no pedal to remove");
             }
         };
-
-
-        /**
-         * Load a sound
-         * TODO : deplacer dans webaudio service
-         */
-        self.loadSound = function() {
-
-            console.log("loadsong!");
-            Sound.loadSound(webaudio.context, $scope.soundFile.name).then(
-                function (soundBufferDecoded) {
-                    webaudio.soundBuffer = soundBufferDecoded;
-
-                    console.log("sample ready to be played, decoded. It just needs to be inserted into an audio graph");
-                    webaudio.isInitialized = true;
-                    //angular.element('#play').removeAttr('disabled');
-                    // put in comment so we can load a new song if we want
-                    //angular.element('#load').attr('disabled', 'disabled');
-
-                }, function(errorMsg){
-                    console.log(errorMsg);
-                }
-            );
-        };
-
-
 
         /**
          * Load pedal in webaudio service, and launch the audio

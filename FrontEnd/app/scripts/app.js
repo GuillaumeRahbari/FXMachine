@@ -39,8 +39,13 @@ angular
         controller: 'PedalCtrl',
         controllerAs: 'pedal'
       })
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl',
+        controllerAs: 'home'
+      })
       .otherwise({
-        redirectTo: '/profil'
+        redirectTo: '/home'
       });
   }
   )
@@ -55,7 +60,9 @@ angular
         }
         // Sinon on propose le header où on peut se connecter.
         else {
-            $rootScope.header = 'default';
+            $rootScope.header = 'connected';//todo: sorry guigui
+
+
         }
     });
 }]);

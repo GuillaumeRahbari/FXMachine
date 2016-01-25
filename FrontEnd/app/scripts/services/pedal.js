@@ -37,6 +37,7 @@ angular.module('frontEndApp')
             }
 
 
+
             /**
              * Adds a filter to the filters array.
              * @param {Filter} filter - The filter to add.

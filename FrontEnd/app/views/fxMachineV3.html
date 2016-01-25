@@ -1,67 +1,13 @@
+<main-web-audio fxmachine="fxmachine"></main-web-audio>
 <section class="container">
     <hr>
     FX MACHINE V2
     <hr>
     <!--** Machine controllers **-->
     <!-- TODO webaudio control sur toutes les pages en forme de barre de cntrole -->
-    <div id="webaudiocontrols" style="border-style:dashed;border-color:black;border-width:2px">
-
-        <h3>WEBAUDIO controls</h3> (via fxMachineCtrl)
-        <br>
-
-        <div id="input" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-            <h5>INPUT</h5>
-
-            <!-- Controle de l'input -->
-            <!-- c'est ici qu'on gere le son d'entree, whatever happens. c'est totalement separe des filtres, pedales, et autres -->
-            <input type="file" file-model="soundFile"/>
-            <button id="load" ng-click="fxmachine.loadSound()">Charger le son</button>
-            <!-- Input Visualisation : waveform -->
-            <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer" width="400" height="100" id="whatever"
-                    style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
-        </div>
-
-        <br>
-
-        <div id="output" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-            <h5>OUTPUT</h5>
-
-            <canvas volume-visualiser orientation="'vertical'" analyser-node="fxmachine.webaudio.analyser" width="10"
-                    height="20" id="whatever3"
-                    style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
-
-            <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser" width="100"
-                    height="10" id="dewhatever3"
-                    style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
-
-            By default : SPEAKERS
-        </div>
-
-        <br>
-
-        <div id="status" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-            <h5>STATUS</h5>
-
-            <div>webaudio Initialisation : {{fxmachine.webaudio.isInitialized}}</div>
-            <div>webaudio Player status : {{fxmachine.webaudio.isPlaying}}</div>
-            <div>webaudio Graph status : {{fxmachine.webaudio.isGraphReady}}</div>
-        </div>
-
-        <br>
-
-        <div id="controls" style="border-style:dashed;border-color:darkslategray;border-width:1px">
-            <h5>CONTROLS</h5>
-            <button id="cleangraph" ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph</button>
-            <button id="loaddefaultgraph" ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio Graph
-            </button>
-            <br>
-            <button id="play" ng-click="fxmachine.webaudio.playSound();">Lecture</button>
-            <button id="stop" ng-click="fxmachine.webaudio.stopSound();">Stop</button>
 
 
-        </div>
-        <br>
-    </div>
+
     <button id="addPedal" ng-click="fxmachine.addPedal();">Add a new pedal</button>
 
     <br><br><br>
@@ -119,13 +65,13 @@
                     <canvas egaliser-visualizer ng-if="filter.type === 'visualiser'" analyser-node="filter.audioNode"
                             width="400"
                             height="100" id="whateverrr"
-                            style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
+                            class="canvas-basic"></canvas>
 
 
                     <!-- The VIZU filter -->
                     <canvas signal-visualiser ng-if="filter.type === 'visualiser'" analyser-node="filter.audioNode"
                             width="400" height="100" id="whanteverrr"
-                            style="border-style: solid; border-width:thin;  border-color:lightslategray"></canvas>
+                            class="canvas-basic"></canvas>
 
 
                     <!-- The GAIN filter -->

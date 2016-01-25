@@ -12,6 +12,7 @@ angular.module('frontEndApp')
 
       var self = this;
 
+      // TODO : je sais pas ce que c'est que ce délire mais le webaudio dans la pedale doit etre le web audio de main-web-audio
       self.webaudio = new WebAudio();
 
       self.pedal = new Pedal(self.webaudio);
