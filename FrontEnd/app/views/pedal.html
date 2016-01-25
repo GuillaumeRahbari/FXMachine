@@ -35,16 +35,27 @@
             <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.pedal.filters" >
 
                 <div class="">
-                    <h5>{{filter.type.toUpperCase()}}</h5>
+
+                    <div class="row">
+                   <!-- <div class="connector col-lg-3" connectable> in</div>--->
+                    <h5 class="col-lg-4">{{filter.type.toUpperCase()}}</h5>
                     <button id="removeFilter" class="btn btn-danger btn-sm" ng-hide="filter.type==='node'" ng-click="pedal.pedal.removeFilter(filter);">Remove
                         Filter
                     </button>
-<hr>
 
-                        <div class="connector" connectable> in</div>
+                     <!-- <p>  <span class="glyphicon glyphicon-remove"></span></p>
+                        <!-- glyphicon glyphicon-remove
+
+                        <img src="../images/cross.png" class="img-responsive">--->
+
+                    <!--<div class="connector col-lg-3" connector> out</div>--->
+                    </div>
+<hr>
+                    <div class="row">
+                        <div class="connector col-lg-3" connectable> in</div>
 
                         <!-- The filter container -->
-                        <div class="filter-basic">
+                        <div class="filter-basic col-lg-6">
 
                             <!-- Showing the div corresponding to the right filter -->
                             <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
@@ -84,8 +95,8 @@
 
                         </div>
 
-                        <div class="connector" connector> out</div>
-
+                        <div class="connector col-lg-3" connector> out</div>
+                    </div>
                 </div>
 
             </div>

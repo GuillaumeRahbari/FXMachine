@@ -22,7 +22,7 @@
 
       .connector {
         height:100%;
-        width: 100%;
+        //width: 20%;
         min-width:50px;
 
         color:white;
@@ -31,6 +31,10 @@
         background-color:indianred;
         text-transform: uppercase;
         font-weight:bold;
+      }
+
+      .row{
+
       }
     }
 
