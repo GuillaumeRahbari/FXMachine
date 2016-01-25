@@ -26,6 +26,19 @@ app.use(function(req, res, next) {
 });
 
 
+(function initDB() {
+    var mongoClient = mongodb.MongoClient;
+    var url = 'mongodb://localhost:27017/FXMachine';
+
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+        } else {
+            db.collection('users').createIndex({"email":1}, {unique:true})
+        }
+    });
+})();
+
 app.use("/user", userRouter);
 app.use("/user/:user_id/pedals", pedalRouter);
 
