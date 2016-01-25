@@ -98,12 +98,12 @@ class User {
  */
 function JsonToUser(json, callback) {
     var user;
-    if(typeof json.email == 'undefined' || typeof json.password == 'undefined') {
+    if(!(json.email && json.password)) {
         callback("Bad json", null);
-    } else if(typeof json.pedals !== 'undefined') {
+    } else if(!(json.pedals)) {
         user = new User(json.email, json.password, json.pedals);
     } else {
-        user = new User(json.email, json.password);
+        user = new User(json.email, json.password, undefined);
     }
     callback(null, user);
 }
