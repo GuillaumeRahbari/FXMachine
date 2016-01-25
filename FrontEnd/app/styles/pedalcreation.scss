@@ -33,9 +33,22 @@
         font-weight:bold;
       }
 
-      .row{
+      .filter-basic{
+        height:100%;
+      }
+
+      .imageClose{
+        width:100%;
+      }
+
+      #removeFilter{
+        background:none;
+        border:none;
+        width:50px;
 
       }
+
+
     }
 
   }
