@@ -11,9 +11,7 @@ suite('Logs data manager test suite', function() {
     setup("Set up of the suite", function(){
         logsGateway.saveLog("test", function(err, result) {
             if(err) {
-                console.log("init failed")
-            } else {
-                console.log("init ok")
+                throw err;
             }
         })
     });

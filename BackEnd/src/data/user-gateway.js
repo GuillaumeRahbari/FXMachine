@@ -28,4 +28,21 @@ function createUser(user ,callback) {
     });
 }
 
+function deleteUser(pedal, callback) {
+    mongoClient.connect(url, function(err, db) {
+        if(err) {
+            callback(err, null) ;
+        } else {
+            var collection = db.collection('users');
+            collection.deleteOne([pedal], function(err, result) {
+                if(err) {
+                    callback(err, null);
+                } else {
+                    callback(null, result);
+                }
+            });
+        }
+    });
+}
+exports.deleteUser = deleteUser;
 exports.createUser = createUser;
