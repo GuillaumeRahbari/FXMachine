@@ -62,10 +62,10 @@
 
                     <hr>
                     <div class="row">
-                        <div class="connector col-lg-3" connectable> in</div>
+                        <div class="connector in col-lg-2" connectable> </div>
 
                         <!-- The filter container -->
-                        <div class="filter-basic col-lg-6">
+                        <div class="filter-basic col-lg-8">
 
                             <!-- Showing the div corresponding to the right filter -->
                             <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
@@ -86,7 +86,7 @@
 
 
                             <!-- The GAIN filter -->
-                            <filter-gain filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
+                            <filter-gain class="filtergain" filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
                             <!-- The BIQUAD filter -->
                             <filter-biquad filter="filter" ng-if="filter.type === 'biquad'"></filter-biquad>
 
@@ -108,7 +108,7 @@
 
                         </div>
 
-                        <div class="connector col-lg-3" connector> out</div>
+                        <div class="connector out col-lg-2" connector> </div>
                     </div>
                 </div>
 
