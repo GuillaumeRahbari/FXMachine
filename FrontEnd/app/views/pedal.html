@@ -1,32 +1,32 @@
-<section class="container-fluid">
-    <h2>Create your pedal</h2>
+<section class="container-fluid pedalContainer">
+    <h2 class="title-pedal">Create your pedal</h2>
 
     <button class="btn btn-success" ng-click="pedal.sidebar = !pedal.sidebar">test</button>
 
     <div id="side-bar" class="col-lg-2 col-md-3 animated" ng-show="pedal.sidebar">
         <ul>
             <li>
-                <button id="addGainFilter" ng-click="pedal.pedal.addFilter('gain');">Add Gain Filter</button>
+                <button class="btn btn-secondary-outline" id="addGainFilter" ng-click="pedal.pedal.addFilter('gain');">Add Gain Filter</button>
             </li>
             <li>
-                <button id="addEqualizerFilter" ng-click="pedal.pedal.addFilter('biquad');">Add BiQuad</button>
+                <button class="btn btn-secondary-outline" id="addEqualizerFilter" ng-click="pedal.pedal.addFilter('biquad');">Add BiQuad</button>
             </li>
             <li>
-                <button id="addwaveshaperFilter" ng-click="pedal.pedal.addFilter('waveShaper');">Add waveShaper</button>
+                <button class="btn btn-secondary-outline" id="addwaveshaperFilter" ng-click="pedal.pedal.addFilter('waveShaper');">Add waveShaper</button>
             </li>
             <li>
-                <button id="addDelayFilter" ng-click="pedal.pedal.addFilter('delay');">Add delay</button>
+                <button class="btn btn-secondary-outline" id="addDelayFilter" ng-click="pedal.pedal.addFilter('delay');">Add delay</button>
             </li>
             <li>
-                <button id="visualiserFilter" ng-click="pedal.pedal.addFilter('visualiser');">Add egaliser visu</button>
+                <button class="btn btn-secondary-outline" id="visualiserFilter" ng-click="pedal.pedal.addFilter('visualiser');">Add egaliser visu</button>
             </li>
             <li>
-                <button id="addDynamiccompressorFilter" ng-click="pedal.pedal.addFilter('dynamicCompressor');">
+                <button class="btn btn-secondary-outline" id="addDynamiccompressorFilter" ng-click="pedal.pedal.addFilter('dynamicCompressor');">
                     Add Dyn Compressor
                 </button>
             </li>
             <li>
-                <button id="addSStereopannerFilter" ng-click="pedal.pedal.addFilter('stereoPanner');">
+                <button class="btn btn-secondary-outline" id="addSStereopannerFilter" ng-click="pedal.pedal.addFilter('stereoPanner');">
                     Add Stereo Panner
                 </button>
             </li>

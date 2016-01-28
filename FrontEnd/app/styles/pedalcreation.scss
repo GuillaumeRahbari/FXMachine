@@ -1,19 +1,57 @@
 @import "variables";
 
-#side-bar {
-  position: fixed;
-  left: 0;
-  top: 70px;
-  bottom: 0;
-  z-index: 3000;
+.title-pedal{
+  color:#adadad;
+}
+
+.container-side-bar{
 
 }
+
+#side-bar {
+  position: fixed;
+  margin-top:15%;
+  left: 0;
+  top: 70px;
+
+  z-index: 3001;
+  bottom: 0;
+  height:35%;
+  background-color:transparent;
+  text-align:left;
+
+  ul {
+    list-style: none;
+  }
+
+  #addGainFilter{
+    margin-top:5%;
+  }
+
+  li{
+    margin-top:5px;
+  }
+
+  .btn-secondary-outline:hover{
+    color:black;
+  }
+
+  .btn-secondary-outline:focus{
+    color:black;
+  }
+
+
+}
+
 /* when hiding the picture */
 .ng-hide-add         { animation:0.5s zoomOut ease; }
 
 /* when showing the picture */
 .ng-hide-remove      { animation:0.5s rollIn ease; }
 
+.pedalContainer{
+  background-color:#1f1f1f; //#141414;
+}
 
 #containerPlumb {
   position: relative;
@@ -66,6 +104,7 @@
 
       .filtergain{
         min-width:150px;
+        left:40%;
       }
 
       .in{
