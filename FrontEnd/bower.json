@@ -11,10 +11,18 @@
     "angular-touch": "^1.4.0",
     "bootstrap": "v4.0.0-alpha.2",
     "animate.css": "~3.5.1"
+    "font-awesome": "fontawesome#~4.5.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "frontEndApp"
+  "moduleName": "frontEndApp",
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css"
+      ]
+    }
+  }
 }
