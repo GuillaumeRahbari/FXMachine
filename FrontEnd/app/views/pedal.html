@@ -45,6 +45,8 @@
                 <div class="row">
                     <span class="connector" connectable> In</span>
 
+                    <h5>{{filter.type.toUpperCase()}}</h5>
+
                     <span class="connectable" connector filter="filter"> out</span>
 
                     <span type="button" id="removeFilter" class="btn-close"
@@ -52,8 +54,6 @@
                           ng-click="pedal.pedal.removeFilter(filter);">
                         <i class="fa fa-times"></i>
                     </span>
-
-                    <h5 class="col-xs-12">{{filter.type.toUpperCase()}}</h5>
                 </div>
 
                 <div class="row">

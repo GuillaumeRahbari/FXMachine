@@ -91,32 +91,19 @@
 
       box-shadow : 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 
-      .connector {
-        position: absolute;
-        left: 0;
-        //height:250px;
-        //width: 20%;
-        min-width:50px;
+      > div {
+        justify-content: space-between;
 
-        color:white;
-        font-size:20px;
-        text-align: center;
-        background-color:indianred;
-        text-transform: uppercase;
-        font-weight:bold;
-      }
+        .connector {
 
-      .connectable {
-        position: absolute;
-        right: 0;
+        }
+
+        .connectable {
+        }
       }
 
       .filter-basic{
         height:100%;
-      }
-
-      .imageClose{
-        width:100%;
       }
 
       #removeFilter{
@@ -129,10 +116,6 @@
       .filtergain{
         min-width:150px;
         left:40%;
-      }
-
-      .in{
-        background-color:rgb(149,215,156);
       }
 
     }
