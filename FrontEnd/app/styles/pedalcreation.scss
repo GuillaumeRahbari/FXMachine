@@ -1,19 +1,75 @@
 @import "variables";
 
+.title-pedal{
+  color:#adadad;
+}
+
+#buttonSideBar{
+  position:fixed;
+  left:35px;
+  top: 35%;
+  z-index:3002;
+  color:#adadad;
+  font-size:3em;
+}
+#buttonSideBar2{
+  position:fixed;
+  left:35px;
+  top: 35%;
+  z-index:3002;
+  color:#adadad;
+  font-size:3em;
+}
+
+#buttonSideBar:hover{
+  color:white;
+}
+
+
 #side-bar {
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 40%;
+
+  z-index: 3001;
   bottom: 0;
-  z-index: 3000;
+  height:35%;
+  background-color:transparent;
+  text-align:left;
+
+  ul {
+    list-style: none;
+  }
+
+  #addGainFilter{
+    margin-top:5%;
+  }
+
+  li{
+    margin-top:5px;
+  }
+
+  .btn-secondary-outline:hover{
+    color:black;
+  }
+
+  .btn-secondary-outline:focus{
+    color:black;
+  }
+
+
+
+  /* when hiding the picture */
+  &.ng-hide-add         { animation:0.5s zoomOut ease; }
+
+  /* when showing the picture */
+  &.ng-hide-remove      { animation:0.5s rollIn ease; }
 
 }
-/* when hiding the picture */
-.ng-hide-add         { animation:0.5s zoomOut ease; }
 
-/* when showing the picture */
-.ng-hide-remove      { animation:0.5s rollIn ease; }
-
+.pedalContainer{
+  background-color:#1f1f1f; //#141414;
+}
 
 #containerPlumb {
   position: relative;
@@ -72,6 +128,7 @@
 
       .filtergain{
         min-width:150px;
+        left:40%;
       }
 
       .in{
