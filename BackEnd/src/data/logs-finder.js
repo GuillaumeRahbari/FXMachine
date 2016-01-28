@@ -13,7 +13,7 @@ function myfindOne(logsId, callback) {
             console.log("Unable to connect to mongoDB", err);
         } else {
             var collection = db.collection('logs');
-            var o_id = new ObjectId(pedalId);
+            var o_id = new ObjectId(logsId);
             collection.findOne({ _id : o_id}, function(err, result) {
                 if(err) {
                     console.log(err);
