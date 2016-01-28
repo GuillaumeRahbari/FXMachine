@@ -119,7 +119,7 @@ function findUserWithId(id, callback) {
        } else {
            var o_id = new ObjectID(id);
            var collection = db.collection('users');
-           collection.find({ _id : o_id}, function(err, result) {
+           collection.findOne({ _id : o_id}, function(err, result) {
                 if(err) {
                     callback(err, null);
                 } else {

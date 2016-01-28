@@ -15,6 +15,7 @@ var app = require('../../app/core/core.js').app,
 router.post('/signin', function (req, res) {
     userFinder.findOne(req.body, function(response) {
         res.send(response);
+        logsController.connectionLog(response[0]._id, "in")
     });
 });
 
@@ -22,9 +23,7 @@ router.post('/signin', function (req, res) {
  * This method will only update the connection data base and log that the user is now offline
  */
 router.post('/signout', function(req, res) {
-    console.log("in the signout");
-    console.log(req.params.user_id);
-    logsController.connectionLog(req.params.user_id, "out");
+    logsController.connectionLog(req.body._id, "out");
     res.send(200);
 });
 
