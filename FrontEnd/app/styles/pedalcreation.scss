@@ -6,10 +6,18 @@
 
 #buttonSideBar{
   position:fixed;
-  left:30px;
+  left:35px;
   top: 35%;
   z-index:3002;
+  color:#adadad;
+  font-size:3em;
 }
+
+#buttonSideBar:hover{
+  color:white;
+}
+
+
 #side-bar {
   position: fixed;
   left: 0;
