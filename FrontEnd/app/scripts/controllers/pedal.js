@@ -12,6 +12,8 @@ angular.module('frontEndApp')
 
            var self = this;
 
+           self.sidebar = false;
+
            var webaudio = WebAudioSrv.getMainWebAudio();
            this.webaudio = webaudio;
 

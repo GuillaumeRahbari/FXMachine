@@ -1,6 +1,9 @@
-<section class="container">
+<section class="container-fluid">
     <h2>Create your pedal</h2>
-    <div id="side-bar">
+
+    <button class="btn btn-success" ng-click="pedal.sidebar = !pedal.sidebar">test</button>
+
+    <div id="side-bar" class="col-lg-2 col-md-3" ng-show="pedal.sidebar">
         <ul>
             <li>
                 <button id="addGainFilter" ng-click="pedal.pedal.addFilter('gain');">Add Gain Filter</button>
@@ -30,7 +33,7 @@
         </ul>
     </div>
 
-    <div id="containerPlumb">
+    <div id="containerPlumb" class="col-xs-12">
         <div id="globalPlumb">
             <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.pedal.filters">
 
@@ -38,25 +41,54 @@
 
                     <div class="row">
                         <!-- <div class="connector col-lg-3" connectable> in</div>--->
-                        <h5 class="col-lg-4">{{filter.type.toUpperCase()}}</h5>
-                        <button id="removeFilter" class="btn btn-danger btn-sm" ng-hide="filter.type==='node'"
-                                ng-click="pedal.pedal.removeFilter(filter);">Remove
-                            Filter
+
+                        <button id="removeFilter" class="btn btn-danger btn-sm col-lg-offset-10 col-lg-2" ng-hide="filter.type==='node'"
+                                ng-click="pedal.pedal.removeFilter(filter);">
+                            <img src="../images/cross.png" class="imageClose img-responsive">
                         </button>
+                    </div>
+                    <h5 class="">{{filter.type.toUpperCase()}}</h5>
 
-                        <!-- <p>  <span class="glyphicon glyphicon-remove"></span></p>
-                           <!-- glyphicon glyphicon-remove
 
-                           <img src="../images/cross.png" class="img-responsive">--->
+                    <!--
+                     <button id="removeFilter" class="btn btn-danger btn-sm" ng-hide="filter.type==='node'" ng-click="pedal.pedal.removeFilter(filter);">Remove
+                       Filter
+                   </button>
 
-                        <!--<div class="connector col-lg-3" connector> out</div>--->
+                     <p>  <span class="glyphicon glyphicon-remove"></span></p>
+                       <!-- glyphicon glyphicon-remove
+
+                       <img src="../images/cross.png" class="img-responsive">--->
+
+                    <!--<div class="connector col-lg-3" connector> out</div>--->
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="connector in col-lg-2" connectable> In </div>
+
+                        <!-- MEEEEEEEEEEEEEEEEEERGEEEEEEEEEEEEEEEEEEEE TO DO
+                                                <h5 class="col-lg-4">{{filter.type.toUpperCase()}}</h5>
+                                                <button id="removeFilter" class="btn btn-danger btn-sm" ng-hide="filter.type==='node'"
+                                                        ng-click="pedal.pedal.removeFilter(filter);">Remove
+                                                    Filter
+                                                </button>
+
+                                                <!-- <p>  <span class="glyphicon glyphicon-remove"></span></p>
+                                                   <!-- glyphicon glyphicon-remove
+
+                                                   <img src="../images/cross.png" class="img-responsive">--->
+
+                        <!--<div class="connector col-lg-3" connector> out</div>-
                     </div>
                     <hr>
                     <div class="row">
                         <div class="connector col-lg-3" connectable uuid="{{filter.uuid}}"> in</div>
+                        -->
+
 
                         <!-- The filter container -->
-                        <div class="filter-basic col-lg-6">
+                        <div class="filter-basic col-lg-8">
 
                             <!-- Showing the div corresponding to the right filter -->
                             <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
@@ -77,7 +109,7 @@
 
 
                             <!-- The GAIN filter -->
-                            <filter-gain filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
+                            <filter-gain class="filtergain" filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
                             <!-- The BIQUAD filter -->
                             <filter-biquad filter="filter" ng-if="filter.type === 'biquad'"></filter-biquad>
 
@@ -98,6 +130,7 @@
 
 
                         </div>
+
 
                         <div class="connector col-lg-3" connector filter="filter"> out</div>
                     </div>

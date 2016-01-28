@@ -4,16 +4,16 @@
 
 @import "variables";
 
-html {
+html, body, section {
   width: 100%;
   height: 100%;
+}
 
-  body {
-    background-color: $background-color;
+body {
+  background-color: $background-color;
 
-    section {
-      margin-top: 40px;
-      text-align: center;
-    }
+  section {
+    margin-top: 40px;
+    text-align: center;
   }
 }
