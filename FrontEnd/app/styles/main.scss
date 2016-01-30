@@ -1,7 +1,6 @@
 // bower:scss
 @import "../../bower_components/bootstrap/scss/bootstrap.scss";
 // endbower
-
 @import "variables";
 
 html, body, section {
@@ -15,5 +14,18 @@ body {
   section {
     margin-top: 40px;
     text-align: center;
+  }
+}
+
+.btn-close {
+  font-size: 1.4em;
+  position: absolute;
+  right: -15px;
+  top: -30px;
+  color: white;
+
+  &:hover i, &:active i {
+    color: grey;
+    cursor: pointer;
   }
 }
