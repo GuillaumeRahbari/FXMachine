@@ -4,16 +4,41 @@ md-slider {
   width: 100%;
 }
 
+@font-face {
+  font-family: "rockFont";
+  src: url('../../fonts/Rockit.ttf');
+}
 .filterGainTmpl{
   //background-color:white;
+  height:80px;
 }
+
+.valueContent{
+  background-color:rgb(217,83,79);
+  border-radius:5px;
+  width:45%;
+  color:white;
+  margin-left: 25%;
+  margin-top: 10px;
+}
+
+.rangeContent{
+  margin-top:15px;
+}
+/*
+.filterName{
+
+  font-family:"rockFont";
+  font-size:10px;
+}
+
 
 /**
 ** Style for input range
 **/
 input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
+  -webkit-appearance: none;
+  width: 100%;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -38,16 +63,28 @@ input[type=range]::-ms-track {
 /* Special styling for WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  border: 3px solid white;
+  border: 3px solid rgb(236,237,255);
   height: 23px;
   width: 23px;
   border-radius: 5px;
   background: #000000;
   cursor: pointer;
-  margin-top: -9px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* Add cool effects to your sliders! */
+  margin-top: -9px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
 }
 
+
+input[type=range]::-webkit-slider-thumb:hover {
+  -webkit-appearance: none;
+  border: 3px solid rgb(236,237,255);
+  height: 26px;
+  width: 26px;
+  border-radius: 5px;
+  background: #000000;
+  cursor: pointer;
+  margin-top: -11px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
+}
 
 /**
 ** Style for the bar
