@@ -21,8 +21,9 @@
   font-size:3em;
 }
 
-#buttonSideBar:hover{
+#buttonSideBar:hover, #buttonSideBar2:hover{
   color:white;
+  cursor:pointer;
 }
 
 
@@ -56,8 +57,6 @@
   .btn-secondary-outline:focus{
     color:black;
   }
-
-
 
   /* when hiding the picture */
   &.ng-hide-add         { animation:0.5s zoomOut ease; }
