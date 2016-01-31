@@ -16,9 +16,9 @@ md-slider {
 .valueContent{
   background-color:rgb(217,83,79);
   border-radius:5px;
-  width:45%;
+  width:60%;
   color:white;
-  margin-left: 25%;
+  margin-left: 20%;
   margin-top: 10px;
 }
 
@@ -64,10 +64,10 @@ input[type=range]::-ms-track {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: 3px solid rgb(236,237,255);
-  height: 23px;
-  width: 23px;
+  height: 25px;
+  width: 55px;
   border-radius: 5px;
-  background: #000000;
+  background: url('../../images/buttonslider-rotated.png');
   cursor: pointer;
   margin-top: -9px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
@@ -77,10 +77,10 @@ input[type=range]::-webkit-slider-thumb {
 input[type=range]::-webkit-slider-thumb:hover {
   -webkit-appearance: none;
   border: 3px solid rgb(236,237,255);
-  height: 26px;
-  width: 26px;
+  height: 25px;
+  width: 55px;
   border-radius: 5px;
-  background: #000000;
+  background: url('../../images/buttonslider-rotated.png');
   cursor: pointer;
   margin-top: -11px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
