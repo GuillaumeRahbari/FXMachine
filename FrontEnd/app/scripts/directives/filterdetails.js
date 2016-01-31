@@ -7,28 +7,42 @@
  * # filterDetails
  */
 angular.module('frontEndApp')
-  .directive('filterDetails', function () {
-    return {
-      templateUrl: '../../views/templates/filterDetailsTmpl.html',
-      restrict: 'E',
-        scope: {
-            filter : '='
-        },
-        controller : function ($scope, uuidGenerator) {
-            $scope.uuid = uuidGenerator.generateUUID();
+       .directive('filterDetails', function () {
+           return {
+               templateUrl: '../../views/templates/filterDetailsTmpl.html',
+               restrict   : 'E',
+               scope      : {
+                   filter: '='
+               },
+               controller : function ($scope, uuidGenerator) {
+                   /**
+                    * A unique id for every filter details container.
+                    * @type {*|String}
+                    */
+                   $scope.uuid = uuidGenerator.generateUUID();
 
-            $scope.show = false;
+                   /**
+                    * A toggle variable
+                    * @type {boolean}
+                    */
+                   $scope.show = false;
 
-            $scope.showFilter = function () {
-                angular.element('div[uuid=' + $scope.uuid + ']').collapse('show');
-                $scope.show = true;
-            };
+                   /**
+                    * This function shows the filter details container.
+                    */
+                   $scope.showFilter = function () {
+                       angular.element('div[uuid=' + $scope.uuid + ']').collapse('show');
+                       $scope.show = true;
+                   };
 
-            $scope.hideFilter = function () {
-                angular.element('div[uuid=' + $scope.uuid + ']').collapse('hide');
-                $scope.show = false;
-            };
+                   /**
+                    * This function hides the filter details container.
+                    */
+                   $scope.hideFilter = function () {
+                       angular.element('div[uuid=' + $scope.uuid + ']').collapse('hide');
+                       $scope.show = false;
+                   };
 
-        }
-    };
-  });
+               }
+           };
+       });
