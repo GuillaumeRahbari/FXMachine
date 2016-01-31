@@ -94,7 +94,7 @@ angular.module('frontEndApp')
                    return $http({
                        method : 'POST',
                        url    : 'http://localhost:3000/user/signout',
-                       data   : {id: $cookies.get('userId')},
+                       data   : {_id: $cookies.get('userId')},
                        headers: {'Content-Type': 'application/json'}
                    }).then(
                        // success
