@@ -1,7 +1,18 @@
-<div>
+<div class="contentStereopanner">
 
 
-    <div>L <--  <input id="pan" type="range" min="-1" max="1" value="0" step="0.1" ng-model="filter.audioNode.pan.value"> --> R</div>
+    <div class="contentStereo">
+        <div class="row">
+
+            <div class="valueStereo col-lg-5 ">L <i class="fa fa-arrow-circle-left"></i></div>
+            <div class="col-lg-2"></div>
+            <div class="valueStereo col-lg-5"><i class="fa fa-arrow-circle-right"></i> R</div>
+        </div>
+        <br>
+        <input id="pan" type="range" min="-1" max="1"
+               value="0" step="0.1" ng-model="filter.audioNode.pan.value">
+
+    </div>
 
     {{filter.audioNode.pan.value}}
 </div>
