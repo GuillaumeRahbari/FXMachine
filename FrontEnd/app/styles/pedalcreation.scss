@@ -84,9 +84,13 @@
 
 
     .divPlumb {
-      background-color: $background-filter;
+      //background-color: $background-filter;
+
+      background-color: rgb(123,130,136);
       border: 2px solid #686f73;
+      border-radius: 6px;
       position: absolute;
+      color:white;
 
       box-shadow : 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 

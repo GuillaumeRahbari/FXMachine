@@ -9,11 +9,16 @@
   background-color:black;
 }
 
-.waveshaper {
+h5{
+  margin-top:5px;
+}
+.filterDelayTmpl{
+  width:200px;
 }
 
 .filter-basic {
-  border: 2px solid black;
+  //border: 2px solid black;
+  background-color: rgb(123,130,136);
   margin-bottom: 20px;
 }
 
@@ -39,4 +44,75 @@
     color: white;
     cursor: pointer;
   }
+}
+
+
+/**
+** Style for input range
+**/
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* We remove the blue border which appears after clicking*/
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+/**
+** The button slider style
+**/
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  //border: 3px solid rgb(236,237,255);
+  height: 20px;
+  width: 48px;
+  border-radius: 5px;
+  background: url('../../images/buttonslider-rotated-small.png');
+  cursor: pointer;
+  margin-top: -8px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  //box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
+}
+
+//169 187 197
+input[type=range]::-webkit-slider-thumb:hover {
+  -webkit-appearance: none;
+  //border: 3px solid rgb(236,237,255);
+  height: 23px;
+  width: 55px;
+  border-radius: 5px;
+  background: url('../../images/buttonslider-rotated.png');
+  cursor: pointer;
+  margin-top: -9px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic *
+  box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
+}
+
+/**
+** Style for the bar
+**/
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #000000;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #000000;
 }
