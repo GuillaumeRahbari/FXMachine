@@ -7,6 +7,10 @@
 
     <!--<button class="btn btn-secondary" id="buttonSideBar" ng-click="pedal.sidebar = !pedal.sidebar">MENU</button>-->
 
+    <button id="loadpedaltoaudiograph" ng-click="pedal.loadPedalToWebAudio();">Load Pedal to webAudio
+        Graph
+    </button>
+
     <i class="fa fa-arrow-right" id="buttonSideBar" ng-hide="pedal.iconmenu" ng-click="pedal.updateMenu()"></i>
 
     <i class="fa fa-arrow-right fa-rotate-90" ng-show="pedal.iconmenu" id="buttonSideBar2"
@@ -56,6 +60,12 @@
 
     <div id="containerPlumb" class="col-xs-12">
         <div id="globalPlumb">
+
+
+            <!-- the INPUT and OUTPUT of the pedal. particular cases, they need to be connected. -->
+
+            
+            <!-- ALl our beloved filters -->
             <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.pedal.filters">
 
                 <div class="row">
