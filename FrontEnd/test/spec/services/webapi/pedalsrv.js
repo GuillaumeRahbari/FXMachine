@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: filter2', function () {
+describe('Service: PedalSrv', function () {
 
   // load the service's module
   beforeEach(module('frontEndApp'));
 
   // instantiate service
-  var filter2;
-  beforeEach(inject(function (_filter2_) {
-    filter2 = _filter2_;
+  var PedalSrv;
+  beforeEach(inject(function (_PedalSrv_) {
+    PedalSrv = _PedalSrv_;
   }));
 
   it('should do something', function () {
-    expect(!!filter2).toBe(true);
+    expect(!!PedalSrv).toBe(true);
   });
 
 });
