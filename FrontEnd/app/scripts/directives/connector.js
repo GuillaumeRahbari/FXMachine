@@ -28,6 +28,7 @@ angular.module('frontEndApp')
                    JsPlumb.bind('connection', function (info) {
                        var tmp = angular.element(info.target).attr('uuid');
                        scope.filter.addOutput(tmp);
+                       console.log(scope.filter);
                    });
                }
            };
