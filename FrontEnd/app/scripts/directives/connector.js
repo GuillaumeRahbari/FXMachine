@@ -26,9 +26,10 @@ angular.module('frontEndApp')
                        endPoint: "Rectangle"
                    });
                    JsPlumb.bind('connection', function (info) {
-                       var tmp = angular.element(info.target).attr('uuid');
-                       scope.filter.addOutput(tmp);
-                       console.log(scope.filter);
+                       if (element[0] === info.source) {
+                           var tmp = angular.element(info.target).attr('uuid');
+                           scope.filter.addOutput(tmp);
+                       }
                    });
                }
            };
