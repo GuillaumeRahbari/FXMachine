@@ -116,3 +116,31 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #000000;
 }
+
+
+/**
+* Select design
+**/
+
+form{
+  color:black;
+}
+select {
+  //background: rgb(74,79,83);
+
+  background: url('../images/downarrowwith.png') no-repeat right rgb(74,79,83);
+  text-align:center;
+  color:white;
+  width:150px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 5px;
+  height: 34px;
+  -webkit-appearance: none;
+}
+
+select:focus{
+  outline: none;
+}

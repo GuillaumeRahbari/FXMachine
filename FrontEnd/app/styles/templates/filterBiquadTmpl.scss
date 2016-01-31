@@ -1,0 +1,36 @@
+.biquad{
+  height:350px;
+}
+.valueContentBiquad{
+  background-color:rgb(217,83,79);
+  border-radius:5px;
+  width:80%;
+  color:white;
+  margin-left: 10%;
+  margin-top: 10px;
+}
+
+.valueContentBiquadHeader{
+  background-color:rgb(217,83,79);
+  border-radius:5px;
+  width:50%;
+  color:white;
+  margin-left: 25%;
+  margin-top: 0px;
+  margin-bottom:5px;
+}
+
+.biquadRange > #track{
+  height:200px;
+}
+
+
+.biquadRange > input[type=range] {
+  width: 80%;
+  height: 5.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #000000;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
