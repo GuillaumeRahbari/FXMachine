@@ -66,19 +66,18 @@
             <!--<div id="input" connector filter="pedal.input" style="width:30px">
                 in
             </div>
-
            <div id="output" connectable uuid="pedal.output.uuid" style="width:30px">
                OUTPUT
             </div>
 -->
-            
+
             <!-- ALl our beloved filters -->
             <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.getAllFilters()">
 
                 <div class="row">
                     <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'"></span>
 
-                    <h5 class="filterName">{{filter.type.toUpperCase()}}</h5>
+                    <h5>{{filter.type.toUpperCase()}}</h5>
 
                     <span class="connector" connector filter="filter" ng-if="filter.type != 'output'"></span>
 
@@ -88,7 +87,6 @@
                         <i class="fa fa-times"></i>
                     </span>
                 </div>
-
 
                 <filter-details filter="filter"></filter-details>
 
