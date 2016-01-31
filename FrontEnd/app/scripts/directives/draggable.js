@@ -18,7 +18,13 @@ angular.module('frontEndApp')
             restrict: 'A',
             link: function (scope, element, attrs) {
                 JsPlumb.draggable(element,{
-                    containment: 'parent'
+                    containment: 'parent',
+                    drag : function () {
+                        JsPlumb.revalidate(element.children(0).children(2));
+                    },
+                    stop : function () {
+                        JsPlumb.revalidate(element.children(0).children(2));
+                    }
                 });
             }
         };
