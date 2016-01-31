@@ -11,7 +11,10 @@ angular.module('frontEndApp')
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        JsPlumb.remove(element);
+          element.click(function () {
+              JsPlumb.removeAllEndpoints(element.parent().children(0)[0]);
+              JsPlumb.removeAllEndpoints(element.parent().children(0)[2]);
+          });
       }
     };
   });
