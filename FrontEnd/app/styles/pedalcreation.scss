@@ -82,6 +82,20 @@
     position: absolute;
     border: 1px solid gray;
 
+    #input {
+      position: absolute;
+      left:0;
+      bottom: 400px;
+      background-color: white;
+    }
+
+    #output {
+      position: absolute;
+      right: 0;
+      bottom: 400px;
+      background-color: white;
+    }
+
 
     .divPlumb {
       //background-color: $background-filter;
@@ -98,14 +112,14 @@
         justify-content: space-between;
 
         .connector {
-          background-color: #00A000;
+          background-color: indianred;
           border-radius: 50%;
           width: 25px;
           height: 25px;
         }
 
         .connectable {
-          background-color: indianred;
+          background-color: #00A000;
           border-radius: 50%;
           width: 25px;
           height: 25px;
