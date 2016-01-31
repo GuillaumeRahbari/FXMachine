@@ -16,4 +16,29 @@
 
 .filter-basic {
   border: 2px solid black;
+  margin-bottom: 20px;
+}
+
+.btn-down {
+  font-size: 2em;
+  position: absolute;
+  color: white;
+  top: 6px;
+
+  &:hover i, &:active i {
+    color: grey;
+    cursor: pointer;
+  }
+}
+
+.btn-up {
+  font-size: 2em;
+  position: absolute;
+  color: grey;
+  margin-top: -20px;
+
+  &:hover i, &:active i {
+    color: white;
+    cursor: pointer;
+  }
 }
