@@ -8,16 +8,21 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-  .factory('PedalSrv', function () {
-    // Service logic
-    // ...
+       .factory('PedalSrv', function ($cookies) {
 
-    var meaningOfLife = 42;
+           var url = 'http://localhost:3000/user/' + $cookies.get('userId') + '/pedals';
 
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
-  });
+           return {
+               /**
+                * Return all pedals of the user.
+                * @returns {HttpPromise}
+                */
+               getAllPedals: function () {
+                   return $http({
+                       method : 'GET',
+                       url    : url + '/all',
+                       headers: {'Content-Type': 'application/json'}
+                   });
+               }
+           };
+       });
