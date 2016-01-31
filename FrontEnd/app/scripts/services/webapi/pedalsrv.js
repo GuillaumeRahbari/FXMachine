@@ -23,6 +23,39 @@ angular.module('frontEndApp')
                        url    : url + '/all',
                        headers: {'Content-Type': 'application/json'}
                    });
+               },
+
+               /**
+                * Save a pedal.
+                * @param pedal
+                */
+               putPedal: function (pedal) {
+                   $http({
+                       method : 'PUT',
+                       url    : url + '/',
+                       data   : pedal,
+                       headers: {'Content-Type': 'application/json'}
+                   }).then(
+                       function (data) {
+
+                       },
+                       function (error) {
+
+                       }
+                   )
+               },
+
+               /**
+                * Return a pedal.
+                * @param pedalId
+                * @returns {HttpPromise}
+                */
+               getPedal: function (pedalId) {
+                   return $http({
+                       method : 'GET',
+                       url    : url + '/' + pedalId,
+                       headers: {'Content-Type': 'application/json'}
+                   });
                }
            };
        });
