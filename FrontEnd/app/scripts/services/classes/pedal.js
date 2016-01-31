@@ -31,8 +31,8 @@ angular.module('frontEndApp')
 
                    this._filters = [];
                    // Input and output nodes of the pedal
-                   this._input    = new Filter("stereoPanner", webaudioService);
-                   this._output   = new Filter("stereoPanner", webaudioService);
+                   this._input    = new Filter("input", webaudioService);
+                   this._output   = new Filter("output", webaudioService);
                    this._webaudio = webaudioService;
                }
 
@@ -75,7 +75,7 @@ angular.module('frontEndApp')
 
 
                    else {
-                       console.error("no filter to delete. couldnt find the object");
+                       console.error("no filter to delete. couldnt find the object MAYBE you tried to delete input or output, which is not permitted bitch!");
                    }
                }
 

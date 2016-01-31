@@ -63,26 +63,26 @@
 
 
             <!-- the INPUT and OUTPUT of the pedal. particular cases, they need to be connected. -->
-            <div id="input" connector>
+            <!--<div id="input" connector filter="pedal.input" style="width:30px">
                 in
             </div>
 
-            <div id="output" connectable>
-                out
+           <div id="output" connectable uuid="pedal.output.uuid" style="width:30px">
+               OUTPUT
             </div>
-
+-->
             
             <!-- ALl our beloved filters -->
-            <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.pedal.filters">
+            <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.getAllFilters()">
 
                 <div class="row">
-                    <span class="connectable" connectable uuid="{{filter.uuid}}"></span>
+                    <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'"></span>
 
                     <h5>{{filter.type.toUpperCase()}}</h5>
 
-                    <span class="connector" connector filter="filter"></span>
+                    <span class="connector" connector filter="filter" ng-if="filter.type != 'output'"></span>
 
-                    <span type="button" id="removeFilter" class="btn-close"
+                    <span ng-if="filter.type != 'input' && filter.type != 'output'"type="button" id="removeFilter" class="btn-close"
                           ng-hide="filter.type==='node'"
                           ng-click="pedal.pedal.removeFilter(filter);" disconnect>
                         <i class="fa fa-times"></i>

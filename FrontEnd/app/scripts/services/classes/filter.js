@@ -29,9 +29,19 @@ angular.module('frontEndApp')
                    switch (type) {
                        // Only passing the audio signal
                        case 'node':
+                           // TODO: doit disparaitre
                            // TODO : j'ai mis panner pour bien les differencier dans les graphes, mais a terme, mettre des gains.
                            this._audioNode = webaudioService.context.createPanner();
                            break;
+
+                       // SPECIAL filters, to represent input and output of a graph
+                       case 'input':
+                           this._audioNode = webaudioService.context.createGain();
+                           break;
+                       case 'output':
+                           this._audioNode = webaudioService.context.createGain();
+                           break;
+
                        case 'gain':
                            this._audioNode = webaudioService.context.createGain();
                            break;

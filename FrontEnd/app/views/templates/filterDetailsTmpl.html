@@ -4,6 +4,16 @@
         <!-- Showing the div corresponding to the right filter -->
         <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
 
+    <!-- The input filter -->
+        <div filter="filter" ng-if="filter.type === 'input'">
+            INPUT OF PEDAL !
+        </div>
+
+        <!-- The output filter -->
+        <div filter="filter" ng-if="filter.type === 'output'">
+OUTPUT OF PEDAL !
+        </div>
+
         <!-- The VIZU filter -->
         <canvas egaliser-visualizer ng-if="filter.type === 'visualiser'"
                 analyser-node="filter.audioNode"
