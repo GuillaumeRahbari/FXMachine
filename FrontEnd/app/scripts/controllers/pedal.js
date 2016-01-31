@@ -34,6 +34,7 @@ angular.module('frontEndApp')
                 // la methode s'occupe elle meme de tout connecter ensuite
                 // We work with a copy of the array, just to be sure that above here, we won't alterate our beautiful pedal
                 // (main point of this architecture btw)
+                
                 var filtersArray = ped.filters.slice();
                 filtersArray.push(ped.input); // Because we also need to connect input to the stuff
                 filtersArray.push(ped.output);

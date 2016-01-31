@@ -18,14 +18,14 @@
                 <div class="col-lg-4 nopadding">
                     <button id="load"
                             class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent threequartsheight"
-                            ng-click="fxmachine.webaudio.loadsound(soundFile.name)">loadSound
+                            ng-click="webaudio.loadsound(soundFile.name)">loadSound
                     </button>
 
                 </div>
                 <div class="col-lg-8 nopadding">
 
                     <!-- Input Visualisation : waveform -->
-                    <canvas waveform-visualiser buffer="fxmachine.webaudio.soundBuffer"
+                    <canvas waveform-visualiser buffer="webaudio.soundBuffer"
                             class="canvas-basic fullwidthoparent threequartsheight"></canvas>
                 </div>
 
@@ -35,13 +35,13 @@
         </div>
 
         <div class="web-audio-elem status-web-audio  col-lg-1">
-            <div ng-if="fxmachine.webaudio.isInitialized" class="statusbox valid-box thirdheight">Init</div>
-            <div ng-if="fxmachine.webaudio.isGraphReady" class="statusbox valid-box thirdheight">Graph</div>
-            <div ng-if="fxmachine.webaudio.isPlaying" class="statusbox valid-box thirdheight">Playing</div>
+            <div ng-if="webaudio.isInitialized" class="statusbox valid-box thirdheight">Init</div>
+            <div ng-if="webaudio.isGraphReady" class="statusbox valid-box thirdheight">Graph</div>
+            <div ng-if="webaudio.isPlaying" class="statusbox valid-box thirdheight">Playing</div>
 
-            <div ng-if="!fxmachine.webaudio.isInitialized" class="statusbox invalid-box thirdheight">Init</div>
-            <div ng-if="!fxmachine.webaudio.isGraphReady" class="statusbox invalid-box thirdheight">Graph</div>
-            <div ng-if="!fxmachine.webaudio.isPlaying" class="statusbox invalid-box thirdheight">Playing</div>
+            <div ng-if="!webaudio.isInitialized" class="statusbox invalid-box thirdheight">Init</div>
+            <div ng-if="!webaudio.isGraphReady" class="statusbox invalid-box thirdheight">Graph</div>
+            <div ng-if="!webaudio.isPlaying" class="statusbox invalid-box thirdheight">Playing</div>
         </div>
 
         <div class="web-audio-elem controls-web-audio col-lg-4">
@@ -67,12 +67,12 @@
                 <div class="col-lg-6 nopadding">
                     <button id="cleangraph"
                             class="btn btn-defaultwebaudio-control-btn  webaudio-control-btn-secondary quartheight smalltext nopadding fullwidthoparent"
-                            ng-click="fxmachine.webaudio.cleanGraph();">Clean Audio Graph
+                            ng-click="webaudio.cleanGraph();">Clean Audio Graph
                     </button>
 
                     <button id="loaddefaultgraph"
                             class="btn btn-default webaudio-control-btn webaudio-control-btn-secondary quartheight smalltext nopadding fullwidthoparent"
-                            ng-click="fxmachine.webaudio.loadDefaultGraph();">Load Default Audio graph
+                            ng-click="webaudio.loadDefaultGraph();">Load Default Audio graph
                     </button>
                 </div>
 
@@ -86,7 +86,7 @@
 
                             <button type="button" id="button_play"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
-                                    ng-click='fxmachine.webaudio.playSound();'>
+                                    ng-click='webaudio.playSound();'>
                                 Play
                             </button>
 
@@ -106,7 +106,7 @@
                         <div class="col-lg-4 nopadding">
                             <button type="button" id="button_stop"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
-                                    ng-click='fxmachine.webaudio.stopSound();'>
+                                    ng-click='webaudio.stopSound();'>
                                 Stop
                             </button>
 
@@ -125,7 +125,7 @@
                 <!-- Extremite: need un nomargin -->
                 <div class="col-lg-4 nopadding">
                     <!--By default : speakers-->
-                    <canvas signal-visualiser analyser-node="fxmachine.webaudio.analyser"
+                    <canvas signal-visualiser analyser-node="webaudio.analyser"
 
                             class="canvas-basic fullheight fullwidthoparent nopadding"></canvas>
 
@@ -133,17 +133,17 @@
                 <div class="col-lg-7 nopadding">
 
                     <div class="row quartheight nomargin">
-                        <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser"
+                        <canvas volume-visualiser orientation="'horizontal'" analyser-node="webaudio.analyser"
                                 class="canvas-basic quartheight fullwidthoparent"></canvas>
                     </div>
 
                     <div class="row quartheight nomargin">
-                        <canvas volume-visualiser orientation="'horizontal'" analyser-node="fxmachine.webaudio.analyser"
+                        <canvas volume-visualiser orientation="'horizontal'" analyser-node="webaudio.analyser"
                                 class="canvas-basic quartheight fullwidthoparent"></canvas>
                     </div>
 
                     <div class="row halfheight nomargin">
-                        <canvas egaliser-visualizer analyser-node="fxmachine.webaudio.analyser"
+                        <canvas egaliser-visualizer analyser-node="webaudio.analyser"
 
                                 class="canvas-basic halfheight fullwidthoparent"></canvas>
 
@@ -154,7 +154,7 @@
 
                 <div class="col-lg-1 nopadding">
 
-                    <canvas volume-visualiser orientation="'vertical'" analyser-node="fxmachine.webaudio.analyser"
+                    <canvas volume-visualiser orientation="'vertical'" analyser-node="webaudio.analyser"
                             class="canvas-basic fullheight fullwidthoparent"></canvas>
 
                 </div>

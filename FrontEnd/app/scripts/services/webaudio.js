@@ -54,6 +54,7 @@ angular.module('frontEndApp')
           }
 
 
+
           /**
            * Initialize the "Audio Context", which is kinda the environment where we create the audio graph
            * There can be only one !
@@ -384,6 +385,7 @@ angular.module('frontEndApp')
            * @param {String} fileName - The file to load.
            */
           loadsound (fileName) {
+              console.log("load sond")
               var self = this;
               Sound.loadSound(self.context, fileName).then(
                   function (soundBufferDecoded) {
