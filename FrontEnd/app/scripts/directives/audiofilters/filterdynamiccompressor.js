@@ -17,14 +17,9 @@ angular.module('frontEndApp')
         },
           controller:function($scope){
               $scope.link=function(){
-                  console.log(" start scope filter", $scope.filter.audioNode.attack);
                   var tmp= $scope.filter.audioNode.attack.value;
                   tmp= Math.round(tmp*100)/100;
-                  console.log("tmp: ", tmp);
-                  $scope.tmp=tmp;
-                  $scope.filter.audioNode.attack.value=tmp;
-                  //$scope.filter.audioNode.attack.value*=0.01;
-                  console.log(" end scope filter", $scope.filter.audioNode.attack.value);
+                  $scope.dynamicCompressorValue=tmp;
               }
           }
       };
