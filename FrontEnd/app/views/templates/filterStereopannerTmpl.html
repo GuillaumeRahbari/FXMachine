@@ -2,11 +2,17 @@
 
 
     <div class="contentStereo">
-        <div class="row">
 
-            <div class="valueStereo col-lg-5 ">L <i class="fa fa-arrow-circle-left"></i></div>
-            <div class="col-lg-2"></div>
-            <div class="valueStereo col-lg-5"><i class="fa fa-arrow-circle-right"></i> R</div>
+        <div class="container">
+            <button class="valueStereo valueStereoLeft" ng-click="reduceValue()"
+                    ng-model="filter.audioNode.pan.value">
+                L <i class="fa fa-arrow-circle-left"></i>
+            </button>
+            <button class="valueStereo valueStereoRight" ng-click="increaseValue()"
+                    ng-model="filter.audioNode.pan.value">
+                <i class="fa fa-arrow-circle-right"></i> R
+            </button>
+
         </div>
         <br>
         <input id="pan" type="range" min="-1" max="1"
