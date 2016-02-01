@@ -1,11 +1,13 @@
-
+.dynamicCompressor{
+  margin:0px;
+}
 .valueContentDynamic{
   background-color:rgb(217,83,79);
   border-radius:5px;
   width:80%;
   color:white;
   margin-left: 10%;
-  margin-top: 20px;
+  margin-bottom: 0px;
 }
 
 
@@ -26,17 +28,11 @@
   margin-top:80px;
 }
 
-.dynamicCompressorRow{
-  height: 200px;
-  max-width:860px;
-
-}
-
 .firstElement{
   height:100%;
 }
 
 .dynamicRange{
-  height:80%;
+  height:170px;
 }
 
