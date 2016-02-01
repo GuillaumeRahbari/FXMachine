@@ -27,7 +27,7 @@
         <div class="firstElement col-lg-2">
 
             <div class="dynamicRange">
-                <input type="range" min="0" max="1" value="0.5" step="0.001"
+                <input type="range" min="0" max="1" value="0.5" step="0.001" ng-change="link()"
                        ng-model="filter.audioNode.attack.value">
             </div>
             <div class="valueContentDynamic"> Attack <br/>{{filter.audioNode.attack.value}}s</div>
