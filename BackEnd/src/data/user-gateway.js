@@ -14,7 +14,9 @@ function createUser(user ,callback) {
         } else {
             console.log('Connection established to', url);
             var collection = db.collection('users');
-            user.role = "user";
+            user._role = "user";
+            user._pedals = [];
+            console.log(user);
             collection.insert([user], function (err, result) {
                 if (err) {
                     callback(409);
@@ -28,13 +30,13 @@ function createUser(user ,callback) {
     });
 }
 
-function deleteUser(pedal, callback) {
+function deleteUser(user, callback) {
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(err, null) ;
         } else {
             var collection = db.collection('users');
-            collection.deleteOne([pedal], function(err, result) {
+            collection.deleteOne([user], function(err, result) {
                 if(err) {
                     callback(err, null);
                 } else {
@@ -44,5 +46,26 @@ function deleteUser(pedal, callback) {
         }
     });
 }
+
+function updateUser(user, callback) {
+    console.log("in user");
+    console.log(user);
+    mongoClient.connect(url, function(err, db) {
+       if(err) {
+           callback(err, null);
+       } else {
+           var collection = db.collection('users');
+           collection.updateOne( {_id : user._id }  ,user, function(err, result) {
+              if(err) {
+                  callback(err, null);
+              } else {
+                  callback(null, result);
+              }
+           });
+       }
+    });
+}
+
+exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
 exports.createUser = createUser;

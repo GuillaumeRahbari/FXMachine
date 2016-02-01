@@ -13,7 +13,8 @@ function savePedal(pedal, callback) {
            console.log("Unable to save the pedal in the db", err);
            callback(500)
        } else {
-           var collection = db.collection('pedal');
+           var collection = db.collection('pedals');
+           console.log(pedal);
            collection.insert([pedal], function(err, result) {
               if(err) {
                   callback(false, err);
