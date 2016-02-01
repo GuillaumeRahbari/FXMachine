@@ -14,13 +14,12 @@ function myfindOne(pedalId, callback) {
             console.log("Unable to connect to mongoDB", err);
         } else {
             var collection = db.collection('pedals');
-            var o_id = new ObjectId(pedalId);
-            collection.findOne({ _id : o_id}, function(err, result) {
-                if(err) {
-                    console.log(err);
-                    callback(err);
+            var o_id =  new mongodb.ObjectId(pedalId);
+            collection.find({_id: o_id }).toArray(function(error, result) {
+                if(error) {
+                    callback(err, null);
                 } else {
-                    callback(result);
+                    callback(null, result);
                 }
             })
         }

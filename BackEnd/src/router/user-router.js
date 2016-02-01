@@ -45,6 +45,21 @@ router.post('/users', function(req, res) {
  * If the login of the user is free, then the user is added and an idea is returned, otherwise 409 is returned.
  */
 router.put("/subscription", function (req, res) {
+    // TODO : rajouter le model pour que le json soit :
+    /**
+     * {
+    "_email":"coucou@test.fr",
+    "_password": "dontTestME"
+}
+     et qu'on saved :
+
+
+     { _email: 'coucou@test.fr',
+      _password: 'dontTestME',
+      _role: 'user',
+      _pedals: [],
+      _id: 56af6be39abd8adc195e2da2 }
+     */
     userGateway.createUser(req.body, function(response) {
         res.send(response);
     });
