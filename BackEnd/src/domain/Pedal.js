@@ -51,30 +51,30 @@ class Pedal {
             callback(new Error("Missing attribute in pedal"), null);
         } else {
             callback(null, {
-                filters: this._filters,
-                input: this._input,
-                output: this._output,
-                name: this._name,
-                comments: this._comments,
-                rate: this._rate
+                _filters: this._filters,
+                _input: this._input,
+                _output: this._output,
+                _name: this._name,
+                _comments: this._comments,
+                _rate: this._rate
             });
         }
     }
 }
 
 function JsonToPedal(json, callback) {
-    if(!(json.filters && json.input && json.output && json.name)) {
+    if(!(json._filters && json._input && json._output && json._name)) {
         callback(new Error("Bad json"), null);
     } else {
         var comments = [];
         var rate = 0;
-        if(json.comments) {
-            comments = json.comments;
+        if(json._comments) {
+            comments = json._comments;
         }
-        if(json.rate) {
-            rate = json.rate;
+        if(json._rate) {
+            rate = json._rate;
         }
-        var pedal = new Pedal(json.filters, json.input, json.output, json.name, rate, comments);
+        var pedal = new Pedal(json._filters, json._input, json._output, json._name, rate, comments);
         callback(null, pedal);
     }
 }

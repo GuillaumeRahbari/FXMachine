@@ -20,7 +20,7 @@ function createUser(user ,callback) {
                     callback(409);
                 } else {
                     console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
-                    callback({ id :  result.ops[0]._id });
+                    callback({ _id :  result.ops[0]._id });
                     console.log(result.ops[0]._id );
                 }
             });
