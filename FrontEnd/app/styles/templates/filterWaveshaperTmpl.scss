@@ -1,0 +1,24 @@
+.valueContentWaveshaper{
+  background-color:rgb(217,83,79);
+  border-radius:5px;
+  width:80%;
+  color:white;
+  margin-left: 10%;
+}
+body {
+  background: #555;
+}
+
+h1 {
+  color: #eee;
+  font: 30px Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0px 1px black;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+

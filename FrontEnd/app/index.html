@@ -15,6 +15,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -26,6 +29,12 @@
     <link rel="stylesheet" href="styles/canvasStyles.css">
     <link rel="stylesheet" href="styles/filters.css">
     <link rel="stylesheet" href="styles/sliders.css">
+    <link rel="stylesheet" href="styles/templates/filterGainTmpl.css">
+    <link rel="stylesheet" href="styles/templates/filterDelayTmpl.css">
+    <link rel="stylesheet" href="styles/templates/filterDynamiccompressorTmpl.css">
+    <link rel="stylesheet" href="styles/templates/filterBiquadTmpl.css">
+    <link rel="stylesheet" href="styles/templates/filterWaveshaperTmpl.css">
+    <link rel="stylesheet" href="styles/templates/filterStereopannerTmpl.css">
     <!-- endbuild -->
 </head>
 <body>
@@ -48,6 +57,9 @@
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -59,22 +71,22 @@
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/fxMachine.js"></script>
 
-<script src="scripts/services/sound.js"></script>
+<script src="scripts/services/webapi/sound.js"></script>
 <script src="scripts/directives/filemodel.js"></script>
 <script src="scripts/directives/audiofilters/filtergain.js"></script>
 <script src="scripts/directives/audiofilters/filterbiquad.js"></script>
 <script src="scripts/directives/postRender.js"></script>
 <script src="scripts/controllers/connection.js"></script>
-<script src="scripts/services/usersrv.js"></script>
+<script src="scripts/services/webapi/usersrv.js"></script>
 
 <!-- audio visualisation directives -->
 <script src="scripts/directives/audiovisualisers/egaliservisualiser.js"></script>
 <script src="scripts/directives/audiovisualisers/waveformvisualiser.js"></script>
 
 <!-- New architecture WORK IN PROGRESS -->
-<script src="scripts/services/filter.js"></script>
-<script src="scripts/services/pedal.js"></script>
-<script src="scripts/services/webaudio.js"></script>
+<script src="scripts/services/classes/filter.js"></script>
+<script src="scripts/services/classes/pedal.js"></script>
+<script src="scripts/services/classes/webaudio.js"></script>
 
 <script src="scripts/directives/audiovisualisers/volumevisualiser.js"></script>
 
@@ -99,6 +111,8 @@
 <script src="scripts/directives/mainwebaudio.js"></script>
 <script src="scripts/controllers/home.js"></script>
 <script src="scripts/services/webaudiosrv.js"></script>
+<script src="scripts/directives/filterdetails.js"></script>
+<script src="scripts/services/webapi/pedalsrv.js"></script>
 <!-- endbuild -->
 </body>
 </html>

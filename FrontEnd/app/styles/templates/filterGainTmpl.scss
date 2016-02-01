@@ -1,0 +1,32 @@
+md-slider {
+  display: inline-block;
+  margin-top: 2px;
+  width: 100%;
+}
+
+@font-face {
+  font-family: "rockFont";
+  src: url('../../fonts/Rockit.ttf');
+}
+
+.filterGainTmpl{
+  //background-color:white;
+  height:60px;
+}
+
+
+.rangeContent{
+  margin-top:15px;
+}
+
+
+//GAIN
+.valueContentSmall{
+  background-color:rgb(217,83,79);
+  border-radius:5px;
+  width:60%;
+  color:white;
+  margin-left: 20%;
+  margin-top: 20px;
+}
+

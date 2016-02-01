@@ -1,123 +1,133 @@
 @import "variables";
 
+.title-pedal{
+  color:#adadad;
+}
+
+#buttonSideBar{
+  position:fixed;
+  left:35px;
+  top: 35%;
+  z-index:3002;
+  color:#adadad;
+  font-size:3em;
+}
+#buttonSideBar2{
+  position:fixed;
+  left:35px;
+  top: 35%;
+  z-index:3002;
+  color:#adadad;
+  font-size:3em;
+}
+
+#buttonSideBar:hover, #buttonSideBar2:hover{
+  color:white;
+  cursor:pointer;
+}
+
+
 #side-bar {
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 40%;
+
+  z-index: 3001;
   bottom: 0;
-  z-index: 3000;
+  height:35%;
+  background-color:transparent;
+  text-align:left;
+
+  ul {
+    list-style: none;
+  }
+
+  #addGainFilter{
+    margin-top:5%;
+  }
+
+  li{
+    margin-top:5px;
+  }
+
+  .btn-secondary-outline:hover{
+    color:black;
+  }
+
+  .btn-secondary-outline:focus{
+    color:black;
+  }
+
+  /* when hiding the picture */
+  &.ng-hide-add         { animation:0.5s zoomOut ease; }
+
+  /* when showing the picture */
+  &.ng-hide-remove      { animation:0.5s rollIn ease; }
 
 }
-/* when hiding the picture */
-.ng-hide-add         { animation:0.5s lightSpeedOut ease; }
 
-/* when showing the picture */
-.ng-hide-remove      { animation:0.5s flipInX ease; }
-
-/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
-/* flip in */
-@keyframes flipInX {
-  0% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    transition-timing-function: ease-in;
-    opacity: 0;
-  }
-
-  40% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transition-timing-function: ease-in;
-    transition-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
-
-  100% {
-    transform: perspective(400px);
-    transform: perspective(400px);
-    transform: perspective(400px);
-  }
+.pedalContainer{
+  background-color:#1f1f1f; //#141414;
 }
-
-/* light speed out */
-@keyframes lightSpeedOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    opacity: 0;
-  }
-}
-
-@keyframes lightSpeedOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    opacity: 0;
-  }
-}
-
 
 #containerPlumb {
   position: relative;
   height: 100%;
+  padding-left: 0;
+  padding-right: 0;
 
   #globalPlumb {
-    padding: 20px;
     width: 100%;
     height: 800px;
-    border: 1px solid gray;
     position: absolute;
+    border: 1px solid gray;
+
+    #input {
+      position: absolute;
+      left:0;
+      bottom: 400px;
+      background-color: white;
+    }
+
+    #output {
+      position: absolute;
+      right: 0;
+      bottom: 400px;
+      background-color: white;
+    }
 
 
     .divPlumb {
-      background-color: $background-filter;
-     /* width: 560px;*/
-      /*height: 400px;*/
+      //background-color: $background-filter;
+
+      background-color: rgb(123,130,136);
       border: 2px solid #686f73;
+      border-radius: 6px;
       position: absolute;
+      color:white;
 
       box-shadow : 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 
-      .connector {
-        //height:250px;
-        //width: 20%;
-        min-width:50px;
+      > div {
+        justify-content: space-between;
 
-        color:white;
-        font-size:20px;
-        text-align: center;
-        background-color:indianred;
-        text-transform: uppercase;
-        font-weight:bold;
+        .connector {
+          background-color: indianred;
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+        }
+
+        .connectable {
+          background-color: #00A000;
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+        }
       }
 
       .filter-basic{
         height:100%;
-      }
-
-      .imageClose{
-        width:100%;
       }
 
       #removeFilter{
@@ -129,10 +139,7 @@
 
       .filtergain{
         min-width:150px;
-      }
-
-      .in{
-        background-color:rgb(149,215,156);
+        left:40%;
       }
 
     }

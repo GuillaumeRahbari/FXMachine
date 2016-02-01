@@ -11,7 +11,7 @@ angular.module('frontEndApp')
     return {
       templateUrl: '../../views/templates/mainWebAudioTmpl.html',
       restrict: 'E',
-
+scope : { webaudio:'='},
       link: function postLink(scope, element, attrs) {
         //element.text('this is the MainWebAudio directive');
       }

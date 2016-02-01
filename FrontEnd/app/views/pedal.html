@@ -1,32 +1,57 @@
-<section class="container-fluid">
-    <h2>Create your pedal</h2>
+<!-- The main web audio player -->
+<main-web-audio webaudio="pedal.webaudio"></main-web-audio>
 
-    <button class="btn btn-success" ng-click="pedal.sidebar = !pedal.sidebar">test</button>
+<section class="container-fluid pedalContainer">
+    <br/>
+    <h2 class="title-pedal">Create your pedal</h2>
 
-    <div id="side-bar" class="col-lg-2 col-md-3" ng-show="pedal.sidebar">
+    <!--<button class="btn btn-secondary" id="buttonSideBar" ng-click="pedal.sidebar = !pedal.sidebar">MENU</button>-->
+
+    <button id="loadpedaltoaudiograph" ng-click="pedal.loadPedalToWebAudio();">Load Pedal to webAudio
+        Graph
+    </button>
+
+    <i class="fa fa-arrow-right" id="buttonSideBar" ng-hide="pedal.iconmenu" ng-click="pedal.updateMenu()"></i>
+
+    <i class="fa fa-arrow-right fa-rotate-90" ng-show="pedal.iconmenu" id="buttonSideBar2"
+       ng-click="pedal.updateMenu()"></i>
+
+    <div id="side-bar" class="col-lg-2 col-md-3 animated" ng-show="pedal.sidebar">
         <ul>
             <li>
-                <button id="addGainFilter" ng-click="pedal.pedal.addFilter('gain');">Add Gain Filter</button>
+                <button class="btn btn-secondary-outline" id="addGainFilter" ng-click="pedal.pedal.addFilter('gain');">
+                    Add Gain Filter
+                </button>
             </li>
             <li>
-                <button id="addEqualizerFilter" ng-click="pedal.pedal.addFilter('biquad');">Add BiQuad</button>
+                <button class="btn btn-secondary-outline" id="addEqualizerFilter"
+                        ng-click="pedal.pedal.addFilter('biquad');">Add BiQuad
+                </button>
             </li>
             <li>
-                <button id="addwaveshaperFilter" ng-click="pedal.pedal.addFilter('waveShaper');">Add waveShaper</button>
+                <button class="btn btn-secondary-outline" id="addwaveshaperFilter"
+                        ng-click="pedal.pedal.addFilter('waveShaper');">Add waveShaper
+                </button>
             </li>
             <li>
-                <button id="addDelayFilter" ng-click="pedal.pedal.addFilter('delay');">Add delay</button>
+                <button class="btn btn-secondary-outline" id="addDelayFilter"
+                        ng-click="pedal.pedal.addFilter('delay');">Add delay
+                </button>
             </li>
             <li>
-                <button id="visualiserFilter" ng-click="pedal.pedal.addFilter('visualiser');">Add egaliser visu</button>
+                <button class="btn btn-secondary-outline" id="visualiserFilter"
+                        ng-click="pedal.pedal.addFilter('visualiser');">Add egaliser visu
+                </button>
             </li>
             <li>
-                <button id="addDynamiccompressorFilter" ng-click="pedal.pedal.addFilter('dynamicCompressor');">
+                <button class="btn btn-secondary-outline" id="addDynamiccompressorFilter"
+                        ng-click="pedal.pedal.addFilter('dynamicCompressor');">
                     Add Dyn Compressor
                 </button>
             </li>
             <li>
-                <button id="addSStereopannerFilter" ng-click="pedal.pedal.addFilter('stereoPanner');">
+                <button class="btn btn-secondary-outline" id="addSStereopannerFilter"
+                        ng-click="pedal.pedal.addFilter('stereoPanner');">
                     Add Stereo Panner
                 </button>
             </li>
@@ -35,108 +60,38 @@
 
     <div id="containerPlumb" class="col-xs-12">
         <div id="globalPlumb">
-            <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.pedal.filters">
-
-                <div class="">
-
-                    <div class="row">
-                        <!-- <div class="connector col-lg-3" connectable> in</div>--->
-
-                        <button id="removeFilter" class="btn btn-danger btn-sm col-lg-offset-10 col-lg-2" ng-hide="filter.type==='node'"
-                                ng-click="pedal.pedal.removeFilter(filter);">
-                            <img src="../images/cross.png" class="imageClose img-responsive">
-                        </button>
-                    </div>
-                    <h5 class="">{{filter.type.toUpperCase()}}</h5>
 
 
-                    <!--
-                     <button id="removeFilter" class="btn btn-danger btn-sm" ng-hide="filter.type==='node'" ng-click="pedal.pedal.removeFilter(filter);">Remove
-                       Filter
-                   </button>
+            <!-- the INPUT and OUTPUT of the pedal. particular cases, they need to be connected. -->
+            <!--<div id="input" connector filter="pedal.input" style="width:30px">
+                in
+            </div>
+           <div id="output" connectable uuid="pedal.output.uuid" style="width:30px">
+               OUTPUT
+            </div>
+-->
 
-                     <p>  <span class="glyphicon glyphicon-remove"></span></p>
-                       <!-- glyphicon glyphicon-remove
+            <!-- ALl our beloved filters -->
+            <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.getAllFilters()">
 
-                       <img src="../images/cross.png" class="img-responsive">--->
+                <div class="row">
+                    <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'"></span>
 
-                    <!--<div class="connector col-lg-3" connector> out</div>--->
+                    <h5>{{filter.type.toUpperCase()}}</h5>
 
+                    <span class="connector" connector filter="filter" ng-if="filter.type != 'output'"></span>
 
-                    <hr>
-                    <div class="row">
-                        <div class="connector in col-lg-2" connectable> In </div>
-
-                        <!-- MEEEEEEEEEEEEEEEEEERGEEEEEEEEEEEEEEEEEEEE TO DO
-                                                <h5 class="col-lg-4">{{filter.type.toUpperCase()}}</h5>
-                                                <button id="removeFilter" class="btn btn-danger btn-sm" ng-hide="filter.type==='node'"
-                                                        ng-click="pedal.pedal.removeFilter(filter);">Remove
-                                                    Filter
-                                                </button>
-
-                                                <!-- <p>  <span class="glyphicon glyphicon-remove"></span></p>
-                                                   <!-- glyphicon glyphicon-remove
-
-                                                   <img src="../images/cross.png" class="img-responsive">--->
-
-                        <!--<div class="connector col-lg-3" connector> out</div>-
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="connector col-lg-3" connectable uuid="{{filter.uuid}}"> in</div>
-                        -->
-
-
-                        <!-- The filter container -->
-                        <div class="filter-basic col-lg-8">
-
-                            <!-- Showing the div corresponding to the right filter -->
-                            <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
-
-                            <!-- The VIZU filter -->
-                            <canvas egaliser-visualizer ng-if="filter.type === 'visualiser'"
-                                    analyser-node="filter.audioNode"
-                                    width="400"
-                                    height="100" id="whateverrr"
-                                    class="canvas-basic"></canvas>
-
-
-                            <!-- The VIZU filter -->
-                            <canvas signal-visualiser ng-if="filter.type === 'visualiser'"
-                                    analyser-node="filter.audioNode"
-                                    width="400" height="100" id="whanteverrr"
-                                    class="canvas-basic"></canvas>
-
-
-                            <!-- The GAIN filter -->
-                            <filter-gain class="filtergain" filter="filter" ng-if="filter.type === 'gain'"></filter-gain>
-                            <!-- The BIQUAD filter -->
-                            <filter-biquad filter="filter" ng-if="filter.type === 'biquad'"></filter-biquad>
-
-                            <!-- The waveshaper filter -->
-                            <filter-waveshaper filter="filter" ng-if="filter.type === 'waveShaper'"></filter-waveshaper>
-
-                            <!-- The delay filter -->
-                            <filter-delay filter="filter" ng-if="filter.type === 'delay'"></filter-delay>
-
-
-                            <!-- The compressor filter -->
-                            <filter-dynamiccompressor filter="filter"
-                                                      ng-if="filter.type === 'dynamicCompressor'"></filter-dynamiccompressor>
-
-                            <!-- The stereopanner filter -->
-                            <filter-stereopanner filter="filter"
-                                                 ng-if="filter.type === 'stereoPanner'"></filter-stereopanner>
-
-
-                        </div>
-
-
-                        <div class="connector col-lg-3" connector filter="filter"> out</div>
-                    </div>
+                    <span ng-if="filter.type != 'input' && filter.type != 'output'"type="button" id="removeFilter" class="btn-close"
+                          ng-hide="filter.type==='node'"
+                          ng-click="pedal.pedal.removeFilter(filter);" disconnect>
+                        <i class="fa fa-times"></i>
+                    </span>
                 </div>
 
+                <filter-details filter="filter"></filter-details>
+
             </div>
+
         </div>
     </div>
 </section>
