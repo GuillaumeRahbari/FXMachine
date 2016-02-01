@@ -1,47 +1,47 @@
 <div class="dynamicCompressor">
-    <div class="row dynamicCompressorRow">
-        <div class="col-lg-1 divToHide"></div>
-        <div class="firstElement col-lg-2">
+    <div class="container">
+        <div class="firstElement">
             <div class="dynamicRange">
                 <input id type="range" min="-100" max="0" value="-24" step="1"
                        ng-model="filter.audioNode.threshold.value">
             </div>
-            <div class="valueContentDynamic">Threshold  <br/> -{{filter.audioNode.threshold.value}}dB</div>
+            <div class="valueContentDynamic">Threshold <br/> {{filter.audioNode.threshold.value}}dB</div>
         </div>
 
-        <div class="firstElement col-lg-2">
-            <div class="dynamicRange">
-                <input type="range" min="0" max="40" value="30" step="1" ng-model="filter.audioNode.knee.value">
+
+            <div class="firstElement ">
+                <div class="dynamicRange">
+                    <input type="range" min="0" max="40" value="30" step="1" ng-model="filter.audioNode.knee.value">
+                </div>
+                <div class="valueContentDynamic"> Knee <br/>{{filter.audioNode.knee.value}}dB</div>
             </div>
-            <div class="valueContentDynamic"> Knee <br/>{{filter.audioNode.knee.value}}dB</div>
-        </div>
 
-        <div class="firstElement col-lg-2">
+            <div class="firstElement ">
 
-            <div class="dynamicRange">
-                <input type="range" min="1" max="20" value="10" step="1" ng-model="filter.audioNode.ratio.value">
+                <div class="dynamicRange">
+                    <input type="range" min="1" max="20" value="10" step="1" ng-model="filter.audioNode.ratio.value">
+                </div>
+                <div class="valueContentDynamic"> Ratio <br/>{{filter.audioNode.ratio.value}}:1</div>
             </div>
-            <div class="valueContentDynamic"> Ratio <br/>{{filter.audioNode.ratio.value}}:1</div>
-        </div>
 
-        <div class="firstElement col-lg-2">
+            <div class="firstElement ">
 
-            <div class="dynamicRange">
-                <input type="range" min="0" max="1" value="0.5" step="0.001"
-                       ng-model="filter.audioNode.attack.value" ng-change="linkAttack()">
+                <div class="dynamicRange">
+                    <input type="range" min="0" max="1" value="0.5" step="0.001"
+                           ng-model="filter.audioNode.attack.value" ng-change="linkAttack()">
+                </div>
+                <div class="valueContentDynamic"> Attack <br/>{{dynamicCompressorAttackValue}}s</div>
             </div>
-            <div class="valueContentDynamic"> Attack <br/>{{dynamicCompressorAttackValue}}s</div>
-        </div>
 
-        <div class="firstElement col-lg-2">
-            <div class="dynamicRange">
-                <input type="range" min="0" max="1" value="0.25" step="0.001" ng-change="linkRelease()" ng-model="filter.audioNode.release.value">
+            <div class="firstElement ">
+                <div class="dynamicRange">
+                    <input type="range" min="0" max="1" value="0.25" step="0.001" ng-change="linkRelease()"
+                           ng-model="filter.audioNode.release.value">
+                </div>
+                <div class="valueContentDynamic">Release <br/>{{dynamicCompressorReleaseValue}}s</div>
             </div>
-            <div class="valueContentDynamic">Release <br/>{{dynamicCompressorReleaseValue}}s</div>
-        </div>
-
-        <div class="col-lg-1 divToHide"></div>
     </div>
     <br/>
+
     <div class="valueContentDynamic">Reduction : {{filter.audioNode.reduction.value}} dB</div>
 </div>
