@@ -4,11 +4,10 @@
 "use strict"
 
 class Pedal {
-    constructor(filters, input, output, name, rate, comments) {
+    constructor(filters, input, output, rate, comments) {
         this._input = input;
         this._output = output;
         this._filters = filters;
-        this._name = name;
         if(typeof rate == "undefined") {
             this._rate = 0;
         } else {
@@ -20,11 +19,6 @@ class Pedal {
             this._comments = comments;
         }
     }
-
-    get name() {
-        return this._name;
-    }
-
 
     get filters() {
         return this._filters;
@@ -47,14 +41,13 @@ class Pedal {
     }
 
     pedalToJSON(callback) {
-        if(!(this._filters && this._input && this._output && this._name)) {
+        if(!(this._filters && this._input && this._output)) {
             callback(new Error("Missing attribute in pedal"), null);
         } else {
             callback(null, {
                 _filters: this._filters,
                 _input: this._input,
                 _output: this._output,
-                _name: this._name,
                 _comments: this._comments,
                 _rate: this._rate
             });
@@ -63,7 +56,7 @@ class Pedal {
 }
 
 function JsonToPedal(json, callback) {
-    if(!(json._filters && json._input && json._output && json._name)) {
+    if(!(json._filters && json._input && json._output)) {
         callback(new Error("Bad json"), null);
     } else {
         var comments = [];
@@ -74,7 +67,7 @@ function JsonToPedal(json, callback) {
         if(json._rate) {
             rate = json._rate;
         }
-        var pedal = new Pedal(json._filters, json._input, json._output, json._name, rate, comments);
+        var pedal = new Pedal(json._filters, json._input, json._output, rate, comments);
         callback(null, pedal);
     }
 }
