@@ -25,7 +25,6 @@ angular.module('frontEndApp')
                 // Initialising scope values
                 $scope.amount = 1;
                 $scope.distotype = "atan";
-
                 $scope.harmonics = [0,0,0,0,0,0,0,0];
 
 
