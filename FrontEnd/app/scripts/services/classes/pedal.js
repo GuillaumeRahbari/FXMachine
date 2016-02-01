@@ -69,6 +69,10 @@ angular.module('frontEndApp')
                            this._filters[i].removeInput(filterUUID);
                            this._filters[i].removeOutput(filterUUID);
                        }
+                       this._input.removeOutput(filterUUID);
+                       this._input.removeInput(filterUUID);
+                       this._output.removeOutput(filterUUID);
+                       this._output.removeInput(filterUUID);
                        // And finally removing it
                        this._filters.splice(index, 1);
                    }
