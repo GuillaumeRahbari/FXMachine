@@ -3,8 +3,28 @@
 
     <div class="valueContentWaveshaper">Type : {{filter.type}}</div>
 
+    <!--
+        <div ng-class="distotype">
+            Oversampling : {{filter.audioNode.oversample}}
+            <br>
+            <input type="radio" name="waveShaperSampling" value="none" ng-model="filter.audioNode.oversample" checked>None
+            <input type="radio" name="waveShaperSampling" value="2x" ng-model="filter.audioNode.oversample">2x
+            <input type="radio" name="waveShaperSampling" value="4x" ng-model="filter.audioNode.oversample">4x
+            <br>
 
-    <div ng-class="distotype">
+
+            Disto Curve Model : {{distotype}}
+            <form>
+                <select name="selectType" ng-model="distotype">
+                    <option value="atan">Atan</option>
+                    <option value="chebyshev">Chebyshev</option>
+                </select>
+            </form>
+        </div>-->
+
+    <!-- atan parameters -->
+    <div ng-show="distotype == 'atan'">
+
         Oversampling : {{filter.audioNode.oversample}}
         <br>
         <input type="radio" name="waveShaperSampling" value="none" ng-model="filter.audioNode.oversample" checked>None
@@ -20,10 +40,6 @@
                 <option value="chebyshev">Chebyshev</option>
             </select>
         </form>
-    </div>
-
-    <!-- atan parameters -->
-    <div ng-show="distotype == 'atan'">
 
         <!-- TODO look for distorsion maximum value. -->
         <!-- CAREFUL : this is linked to the controller. -->
@@ -34,12 +50,37 @@
 
     <!-- chebyshev parameters -->
     <div ng-show="distotype == 'chebyshev'">
-
-
         <br>
 
+        <div class="container">
+            <div class="row">
+                <div class="radioContent col-lg-5">
+                    Oversampling  <!--:{{filter.audioNode.oversample}} --><br>
+                    <input type="radio" name="waveShaperSampling" value="none" ng-model="filter.audioNode.oversample"
+                           checked>
 
-        Fondamental Frequency:
+                    <label>None</label>
+                    <input type="radio" name="waveShaperSampling" value="2x" ng-model="filter.audioNode.oversample">
+                    <label>2x</label>
+                    <input type="radio" name="waveShaperSampling" value="4x" ng-model="filter.audioNode.oversample">
+                    <label>4x</label>
+                    <br>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="selectContent col-lg-5">
+                    Disto Curve Model  <!--:{{distotype}}-->
+                    <form>
+                        <select name="selectType" ng-model="distotype">
+                            <option value="atan">Atan</option>
+                            <option value="chebyshev">Chebyshev</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        Fondamental Frequency
         <div class="fondamentalElement">
             <div class="waveShaperRangeFF">
                 <input id="fondfreq" type="range" min="1" max="50" value="5" step="1" ng-model="fondfreq">
@@ -51,7 +92,8 @@
         <div class="container">
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
-                    <input class="nomargin" id="harm0" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[0]">
+                    <input class="nomargin" id="harm0" type="range" min="-1" max="1" value="1" step="0.1"
+                           ng-model="harmonics[0]">
                 </div>
                 {{harmonics[0]}}
             </div>
