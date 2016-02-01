@@ -26,7 +26,7 @@ h5{
   font-size: 2em;
   position: absolute;
   color: white;
-  top: 6px;
+  top: 11px;
 
   &:hover i, &:active i {
     color: grey;
@@ -37,7 +37,7 @@ h5{
 .btn-up {
   font-size: 2em;
   position: absolute;
-  color: grey;
+  color: white;
   margin-top: -20px;
 
   &:hover i, &:active i {
@@ -81,7 +81,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 48px;
   border-radius: 5px;
-  background: url('../../images/buttonslider-rotated-small.png');
+  background: url('../images/buttonslider-rotated-small.png');
   cursor: pointer;
   margin-top: -8px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic */
   //box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
@@ -94,7 +94,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   height: 23px;
   width: 55px;
   border-radius: 5px;
-  background: url('../../images/buttonslider-rotated.png');
+  background: url('../images/buttonslider-rotated.png');
   cursor: pointer;
   margin-top: -9px; /* to specify a margin in Chrome, but in Firefox and IE it is automatic *
   box-shadow: 1px 1px 1px #ffffff, 0px 0px 1px #ffffff; /* TO CHECK: this line adds cool effect for the slider */
