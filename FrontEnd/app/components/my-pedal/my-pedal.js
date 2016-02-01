@@ -8,5 +8,8 @@
  */
 angular.module('frontEndApp')
        .component('myPedal', {
-           templateUrl: 'components/my-pedal/my-pedal.html'
+           templateUrl: 'components/my-pedal/my-pedal.html',
+           bindings   : {
+               pedal: '='
+           }
        });
