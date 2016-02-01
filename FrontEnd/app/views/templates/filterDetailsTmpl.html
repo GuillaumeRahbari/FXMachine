@@ -1,5 +1,5 @@
 <div>
-    <div class="container filter-basic collapse" uuid="{{uuid}}">
+    <div id="filterDetails" class="container filter-basic collapse" uuid="{{uuid}}">
 
         <!-- Showing the div corresponding to the right filter -->
         <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
@@ -35,7 +35,7 @@ OUTPUT OF PEDAL !
         <filter-biquad filter="filter" ng-if="filter.type === 'biquad'"></filter-biquad>
 
         <!-- The waveshaper filter -->
-        <filter-waveshaper filter="filter" ng-if="filter.type === 'waveShaper'"></filter-waveshaper>
+        <filter-waveshaper filter="filter" distotype="atan" amount="1" harmonics="[0,0,0,0,0,0,0,0]" fondfreq="5" ng-if="filter.type === 'waveShaper'"></filter-waveshaper>
 
         <!-- The delay filter -->
         <filter-delay filter="filter" ng-if="filter.type === 'delay'"></filter-delay>

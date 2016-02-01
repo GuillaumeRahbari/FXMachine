@@ -1,7 +1,7 @@
 <div>
 
 
-    <div class="valueContentWaveshaper">Type : {{filter.audioNode.type}}</div>
+    <div class="valueContentWaveshaper">Type : {{filter.type}}</div>
 
     Oversampling : {{filter.audioNode.oversample}}
     <br>
@@ -13,7 +13,7 @@
 
     Disto Curve Model : {{distotype}}
     <form>
-        <select name="selectType"  ng-init="atan" ng-model="distotype">
+        <select name="selectType"   ng-model="distotype">
             <option value="atan">Atan</option>
             <option value="chebyshev">Chebyshev</option>
         </select>
