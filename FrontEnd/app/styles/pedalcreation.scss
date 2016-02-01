@@ -113,16 +113,31 @@
 
         .connector {
           background-color: indianred;
-          border-radius: 50%;
-          width: 25px;
-          height: 25px;
+          border-radius: 5px;
+          width: 33px;
+          height: 33px;
+          margin-left:5px;
+          //margin-top:3px;
         }
 
         .connectable {
-          background-color: #00A000;
-          border-radius: 50%;
-          width: 25px;
-          height: 25px;
+          background-color:#00A000;
+          //background: url('../images/input-icon.png') no-repeat right #00A000;
+          border-radius: 5px;
+          width: 33px;
+          height: 33px;
+          margin-right:5px;
+          //margin-top:4px;
+        }
+
+        .fa-share-alt{
+          margin-top:4px;
+          font-size:24px;
+        }
+
+        .fa-plug{
+          margin-top:5px;
+          font-size:21px;
         }
       }
 

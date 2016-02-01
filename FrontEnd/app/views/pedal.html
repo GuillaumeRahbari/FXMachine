@@ -80,11 +80,15 @@
                  ng-repeat="filter in pedal.getAllFilters()">
 
                 <div class="row">
-                    <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'"></span>
+                    <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'">
+                        <i class="fa fa-share-alt"></i>
+                    </span>
 
                     <h5>{{filter.type.toUpperCase()}}</h5>
 
-                    <span class="connector" connector filter="filter" ng-if="filter.type != 'output'"></span>
+                    <span class="connector" connector filter="filter" ng-if="filter.type != 'output'">
+                        <i class="fa fa-plug"></i>
+                    </span>
 
                     <span ng-if="filter.type != 'input' && filter.type != 'output'" type="button" id="removeFilter"
                           class="btn-close"
