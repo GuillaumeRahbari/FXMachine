@@ -8,7 +8,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-       .factory('PedalSrv', function ($cookies) {
+       .factory('PedalSrv', function ($cookies, $http) {
 
            var url = 'http://localhost:3000/user/' + $cookies.get('userId') + '/pedals';
 
@@ -36,11 +36,11 @@ angular.module('frontEndApp')
                        data   : pedal,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
-                       function (data) {
-
+                       function (response) {
+                           console.log(response);
                        },
                        function (error) {
-
+                           console.log(error);
                        }
                    )
                },

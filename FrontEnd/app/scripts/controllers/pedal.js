@@ -8,7 +8,7 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-    .controller('PedalCtrl', ['WebAudio', 'Pedal', 'WebAudioSrv', function (WebAudio, Pedal, WebAudioSrv) {
+    .controller('PedalCtrl', ['WebAudio', 'Pedal', 'WebAudioSrv', 'PedalSrv', function (WebAudio, Pedal, WebAudioSrv, PedalSrv) {
 
         var self = this;
 
@@ -46,6 +46,10 @@ angular.module('frontEndApp')
                 console.warn("Webaudio not initialised yet, not loading any graph until it is");
             }
 
+        };
+
+        self.save = function () {
+            PedalSrv.putPedal(self.pedal);
         };
 
         self.updateMenu=function(){

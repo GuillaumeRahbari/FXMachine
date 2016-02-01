@@ -11,9 +11,9 @@ var app = require('../../app/core/core.js').app,
 
 
 router.get("/all", function(req, res) {
-    console.log(req.params.user_id);
     if(!(req.params.user_id && typeof req.params.user_id === 'undefined')) {
-        userController.pedalRetriever(req.query.id, function(response) {
+        userController.pedalRetriever(req.params.user_id, function(response) {
+            console.log(response);
             res.send(response);
         });
     } else {
@@ -22,13 +22,17 @@ router.get("/all", function(req, res) {
 });
 
 router.put("/", function(req, res) {
+    console.log(req.params.user_id);
     pedal.JsonToPedal(req.body, function(err, result) {
         if(err) {
             res.sendStatus(400);
         } else {
             pedalGateway.savePedal(req.body, function(response, message) {
                 if(response) {
-                    res.send(message);
+                    userController.updateUserPedals(req.params.user_id, message.ops, function() {
+
+                    });
+                    res.send(message.ops);
                 } else {
                     res.sendStatus(500);
                 }
@@ -40,10 +44,10 @@ router.put("/", function(req, res) {
 
 router.get("/:pedalId", function(req, res) {
     pedalFinder.myfindOne(req.params.pedalId, function(err, result) {
-        if(err == null) {
-            res.send(result);
-        } else {
+        if(err) {
             res.sendStatus(404);
+        } else {
+            res.send(result);
         }
     });
 });

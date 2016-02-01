@@ -49,7 +49,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
         tasks: ['compass:server', 'postcss:server']
       },
       gruntfile: {
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/**/*.html',
-          '.tmp/styles/{,*/}*.css',
+          '.tmp/**/*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -186,6 +186,11 @@ module.exports = function (grunt) {
           cwd: '.tmp/styles/',
           src: '{,*/}*.css',
           dest: '.tmp/styles/'
+        },{
+          expand: true,
+          cwd: '.tmp/components/',
+          src: '{,*/}*.css',
+          dest: '.tmp/components/'
         }]
       },
       dist: {
@@ -228,8 +233,8 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        sassDir: '<%= yeoman.app %>',
+        cssDir: '.tmp',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',

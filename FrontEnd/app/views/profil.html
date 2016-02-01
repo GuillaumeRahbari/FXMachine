@@ -1,8 +1,5 @@
-<section class="container">
-    <a  ng-href="#/pedal" class="btn btn-success" type="button">Add a Pedal</a>
-    <md-slider min="0" max="255" aria-label="red" id="red-slider" class>
-    </md-slider>
-    <div class="container">
-        <pedal ng-repeat="pedal in profil.pedals"></pedal>
-    </div>
+<section id="profil" class="container">
+    <my-pedal-list></my-pedal-list>
+
+    <pedal-creation></pedal-creation>
 </section>

@@ -27,12 +27,15 @@ angular.module('frontEndApp')
                 * Contains an empty array of filters.
                 * @param webaudioService - we keep a copy of it in the pedal because hey. we need it to create filters
                 */
-               constructor (webaudioService) {
+               constructor (webaudioService, name) {
+
+                   this._name = name;
 
                    this._filters = [];
                    // Input and output nodes of the pedal
                    this._input    = new Filter("input", webaudioService);
                    this._output   = new Filter("output", webaudioService);
+                   // TODO : this._input.addOutput(this._output.uuid);
                    this._webaudio = webaudioService;
                }
 
@@ -164,6 +167,10 @@ angular.module('frontEndApp')
                 */
                get output () {
                    return this._output;
+               }
+
+               get name () {
+                   return this._name;
                }
 
            }
