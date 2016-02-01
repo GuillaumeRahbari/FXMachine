@@ -134,6 +134,11 @@ angular.module('frontEndApp')
                 {
                     //console.log("update disto : " + $scope.distorsion);
 
+                    if($scope.distotype == undefined)
+                    {
+                        console.warn("degeu passage atan");
+                        $scope.distotype = "atan";
+                    }
                     var curve;
 
                     if($scope.distotype =="atan")
