@@ -68,6 +68,25 @@
 
 .pedalContainer{
   background-color:#1f1f1f; //#141414;
+
+  .btn-info{
+    background-color:rgb(58,58,58);
+    border-color:rgb(160,150,147);
+  }
+
+  .loadpedaltoaudiograph{
+    position:center;
+  }
+
+  .btn-info:hover{
+    background-color:rgb(58,58,58);
+    border-color:rgb(160,150,147);
+  }
+
+  .fa-upload, .fa-floppy-o{
+    margin-right:8px;
+  }
+
 }
 
 #containerPlumb {

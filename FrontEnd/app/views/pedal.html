@@ -8,12 +8,18 @@
 
     <!--<button class="btn btn-secondary" id="buttonSideBar" ng-click="pedal.sidebar = !pedal.sidebar">MENU</button>-->
 
-    <div>
-        <button id="loadpedaltoaudiograph" ng-click="pedal.loadPedalToWebAudio();">Load Pedal to webAudio
-            Graph
-        </button>
-        <button ng-click="pedal.save()">Save Pedal</button>
-    </div>
+
+    <button class="btn btn-info" id="loadpedaltoaudiograph" ng-click="pedal.loadPedalToWebAudio();">
+        <i class="fa fa-upload"></i>
+        Load Pedal to webAudio Graph
+    </button>
+
+    <button class="btn btn-info" ng-click="pedal.save()">
+        <i class="fa fa-floppy-o"></i>
+        Save Pedal
+    </button>
+     
+    <br>
 
     <i class="fa fa-arrow-right" id="buttonSideBar" ng-hide="pedal.iconmenu" ng-click="pedal.updateMenu()"></i>
 
