@@ -52,7 +52,7 @@
     <div ng-show="distotype == 'chebyshev'">
         <br>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="radioContent col-lg-5">
                     Oversampling  <!--:{{filter.audioNode.oversample}} --><br>
@@ -77,15 +77,23 @@
                     </form>
                 </div>
             </div>
-        </div>
 
-        <br>
-        Fondamental Frequency
-        <div class="fondamentalElement">
-            <div class="waveShaperRangeFF">
-                <input id="fondfreq" type="range" min="1" max="50" value="5" step="1" ng-model="fondfreq">
+            <br>
+
+            <div class="row">
+                <div class="fondamentalElement col-lg-5">
+                    Fondamental Frequency<br>
+
+                    <div class="waveShaperRangeFF">
+                        <input id="fondfreq" type="range" min="1" max="50" value="5" step="1" ng-model="fondfreq">
+                    </div>
+                    {{fondfreq}}Hz
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="canvasContainer col-lg-5">
+                    <canvas id="distovisualisation" height="80" width="160" class="canvas-basic"></canvas>
+                </div>
             </div>
-            {{fondfreq}}Hz
         </div>
         <!-- TODO look for distorsion maximum value. -->
         <!-- CAREFUL : this is linked to the controller. -->
@@ -95,55 +103,54 @@
                     <input class="nomargin" id="harm0" type="range" min="-1" max="1" value="1" step="0.1"
                            ng-model="harmonics[0]">
                 </div>
-                {{harmonics[0]}}
+                <div class="chebyValue">{{harmonics[0]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm1" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[1]">
                 </div>
-                {{harmonics[1]}}
+                <div class="chebyValue"> {{harmonics[1]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm2" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[2]">
                 </div>
-                {{harmonics[2]}}
+                <div class="chebyValue">{{harmonics[2]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm3" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[3]">
                 </div>
-                {{harmonics[3]}}
+                <div class="chebyValue"> {{harmonics[3]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm4" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[4]">
                 </div>
-                {{harmonics[4]}}
+                <div class="chebyValue">{{harmonics[4]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm5" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[5]">
                 </div>
-                {{harmonics[5]}}
+                <div class="chebyValue">{{harmonics[5]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm6" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[6]">
                 </div>
-                {{harmonics[6]}}
+                <div class="chebyValue">{{harmonics[6]}}</div>
             </div>
             <div class="boxWaveShaper">
                 <div class="waveShaperRange">
                     <input id="harm7" type="range" min="-1" max="1" value="1" step="0.1" ng-model="harmonics[7]">
                 </div>
-                {{harmonics[7]}}
+                <div class="chebyValue">{{harmonics[7]}}</div>
             </div>
         </div>
     </div>
 
 
     <br>
-    <canvas id="distovisualisation" height="80" width="160" class="canvas-basic"></canvas>
 
 </div>
