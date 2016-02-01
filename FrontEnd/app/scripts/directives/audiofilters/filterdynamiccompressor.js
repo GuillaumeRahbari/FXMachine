@@ -16,17 +16,16 @@ angular.module('frontEndApp')
           filter : '='
         },
           controller:function($scope){
-              $scope.link=function(){
-                  console.log(" start scope filter", $scope.filter.audioNode.attack.value);
-                  var tmp= $scope.filter.audioNode.attack.value;
-                  tmp= Math.round(tmp*100)/100;
-                  console.log("tmp: ", tmp);
-                  $scope.tmp=tmp;
-                  $scope.filter.audioNode.attack.setValueAtTime(tmp,0);
-                  //$scope.filter.audioNode.attack.value=tmp;
-                  //$scope.filter.audioNode.attack.value*=0.01;
-                  console.log(" end scope filter", $scope.filter.audioNode.attack.value);
+              $scope.linkAttack=function(){
+                  $scope.dynamicCompressorAttackValue= Math.round($scope.filter.audioNode.attack.value*100)/100;
               }
+              $scope.linkRelease=function(){
+                  $scope.dynamicCompressorReleaseValue= Math.round($scope.filter.audioNode.release.value*100)/100;
+              }
+          },
+          link:function(scope){
+              scope.dynamicCompressorAttackValue=0.5;
+              scope.dynamicCompressorReleaseValue=0.25;
           }
       };
     });

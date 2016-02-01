@@ -14,6 +14,14 @@ angular.module('frontEndApp')
         replace: true,
         scope: {
           filter : '='
-        }
+        },
+          controller:function($scope){
+              $scope.linkDelayTime=function(){
+                  $scope.delayTime= Math.round($scope.filter.audioNode.delayTime.value*100)/100;
+              }
+          },
+          link:function(scope){
+              scope.delayTime=1;
+          }
       };
     });
