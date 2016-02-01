@@ -16,11 +16,16 @@ angular.module('frontEndApp')
           filter : '='
         },
           controller:function($scope){
-              $scope.link=function(){
-                  var tmp= $scope.filter.audioNode.attack.value;
-                  tmp= Math.round(tmp*100)/100;
-                  $scope.dynamicCompressorValue=tmp;
+              $scope.linkAttack=function(){
+                  $scope.dynamicCompressorAttackValue= Math.round($scope.filter.audioNode.attack.value*100)/100;
               }
+              $scope.linkRelease=function(){
+                  $scope.dynamicCompressorReleaseValue= Math.round($scope.filter.audioNode.release.value*100)/100;
+              }
+          },
+          link:function(scope){
+              scope.dynamicCompressorAttackValue=0.5;
+              scope.dynamicCompressorReleaseValue=0.25;
           }
       };
     });

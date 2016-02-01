@@ -28,17 +28,16 @@
 
             <div class="dynamicRange">
                 <input type="range" min="0" max="1" value="0.5" step="0.001"
-                       ng-model="filter.audioNode.attack.value" ng-change="link()">
+                       ng-model="filter.audioNode.attack.value" ng-change="linkAttack()">
             </div>
-            <div class="valueContentDynamic"> Attack <br/>{{dynamicCompressorValue}}s</div>
+            <div class="valueContentDynamic"> Attack <br/>{{dynamicCompressorAttackValue}}s</div>
         </div>
 
         <div class="firstElement col-lg-2">
-
             <div class="dynamicRange">
-                <input type="range" min="0" max="1" value="0.25" step="0.001" ng-model="filter.audioNode.release.value">
+                <input type="range" min="0" max="1" value="0.25" step="0.001" ng-change="linkRelease()" ng-model="filter.audioNode.release.value">
             </div>
-            <div class="valueContentDynamic">Release <br/>{{filter.audioNode.release.value}}s</div>
+            <div class="valueContentDynamic">Release <br/>{{dynamicCompressorReleaseValue}}s</div>
         </div>
 
         <div class="col-lg-1 divToHide"></div>
