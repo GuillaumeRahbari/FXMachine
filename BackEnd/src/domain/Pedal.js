@@ -4,11 +4,10 @@
 "use strict"
 
 class Pedal {
-    constructor(filters, input, output, name, rate, comments) {
+    constructor(filters, input, output, rate, comments) {
         this._input = input;
         this._output = output;
         this._filters = filters;
-        this._name = name;
         if(typeof rate == "undefined") {
             this._rate = 0;
         } else {
@@ -20,11 +19,6 @@ class Pedal {
             this._comments = comments;
         }
     }
-
-    get name() {
-        return this._name;
-    }
-
 
     get filters() {
         return this._filters;
@@ -47,34 +41,33 @@ class Pedal {
     }
 
     pedalToJSON(callback) {
-        if(!(this._filters && this._input && this._output && this._name)) {
+        if(!(this._filters && this._input && this._output)) {
             callback(new Error("Missing attribute in pedal"), null);
         } else {
             callback(null, {
-                filters: this._filters,
-                input: this._input,
-                output: this._output,
-                name: this._name,
-                comments: this._comments,
-                rate: this._rate
+                _filters: this._filters,
+                _input: this._input,
+                _output: this._output,
+                _comments: this._comments,
+                _rate: this._rate
             });
         }
     }
 }
 
 function JsonToPedal(json, callback) {
-    if(!(json.filters && json.input && json.output && json.name)) {
+    if(!(json._filters && json._input && json._output)) {
         callback(new Error("Bad json"), null);
     } else {
         var comments = [];
         var rate = 0;
-        if(json.comments) {
-            comments = json.comments;
+        if(json._comments) {
+            comments = json._comments;
         }
-        if(json.rate) {
-            rate = json.rate;
+        if(json._rate) {
+            rate = json._rate;
         }
-        var pedal = new Pedal(json.filters, json.input, json.output, json.name, rate, comments);
+        var pedal = new Pedal(json._filters, json._input, json._output, rate, comments);
         callback(null, pedal);
     }
 }

@@ -5,7 +5,8 @@
 
 var assert = require("assert"),
     pedalsFinder = require("../../src/data/pedal-finder"),
-    pedalGateway = require("../../src/data/pedal-gateway");
+    pedalGateway = require("../../src/data/pedal-gateway"),
+    pedalClass = require("../../src/domain/Pedal");
 
 suite("Pedal data manager test suite", function() {
    setup("Set up of the suite", function() {
@@ -33,4 +34,28 @@ suite("Pedal data manager test suite", function() {
             assert.ifError(err);
         });
     })
+
+    test("Update pedal test", function() {
+        var myPedal = new pedalClass.Pedal([], [], [], "test", undefined, undefined);
+        console.log(myPedal);
+
+        myPedal.pedalToJSON(function(err, res) {
+
+            pedalGateway.savePedal(res, function(error, resonse) {
+                if(err) {
+                    throw error;
+                }
+            });
+            pedalClass.JsonToPedal(res, function(err, res) {
+                if(! err) {
+                    pedalGateway.updatePedal(res, function(error, response) {
+
+                    });
+                }
+            })
+
+        });
+
+
+    });
 });

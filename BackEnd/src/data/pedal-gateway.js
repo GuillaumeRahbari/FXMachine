@@ -43,5 +43,47 @@ function deletePedal(pedal, callback) {
     });
 }
 
+function updatePedal(pedal, callback) {
+    mongoClient.connect(url, function(err, db) {
+       if(err) {
+           callback(err, null);
+       } else {
+           var collection = db.collection('pedal');
+           collection.updateOne([pedal], function(err, result) {
+              if(err) {
+                  console.log(err);
+                  callback(err, null);
+              } else {
+                  callback(null, res);
+              }
+           });
+       }
+    });
+}
+
+function updatePedalNote(pedal, callback) {
+    mongoClient.connect(url, function(err, db) {
+        if(err) {
+            callback(err, null);
+        } else {
+            var collection = db.collection('pedal');
+            collection.updateOne(
+                { "_name": pedal.name },
+                { $set : { "_note": pedal.note }}
+            , function(err, res) {
+                if(err) {
+                    console.log(err);
+                    callback(err, null);
+                } else {
+                    callback(null, res);
+                }
+            });
+        }
+    });
+}
+
+
+
 exports.deletePedal = deletePedal;
 exports.savePedal = savePedal;
+exports.updatePedal = updatePedal;

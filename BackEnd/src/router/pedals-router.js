@@ -6,7 +6,8 @@ var app = require('../../app/core/core.js').app,
     router = require('../../app/core/core.js').express.Router({mergeParams: true}),
     userController = require('../domain/controllers/user-controller'),
     pedalGateway = require('../data/pedal-gateway'),
-    pedalFinder = require('../data/pedal-finder');
+    pedalFinder = require('../data/pedal-finder'),
+    pedal = require("../domain/Pedal");
 
 
 router.get("/all", function(req, res) {
@@ -21,13 +22,20 @@ router.get("/all", function(req, res) {
 });
 
 router.put("/", function(req, res) {
-    pedalGateway.savePedal(req.body, function(response, message) {
-        if(response) {
-            res.send(message);
-        } else {
+    pedal.JsonToPedal(req.body, function(err, result) {
+        if(err) {
             res.sendStatus(400);
+        } else {
+            pedalGateway.savePedal(req.body, function(response, message) {
+                if(response) {
+                    res.send(message);
+                } else {
+                    res.sendStatus(500);
+                }
+            });
         }
     });
+
 });
 
 router.get("/:pedalId", function(req, res) {
@@ -39,6 +47,24 @@ router.get("/:pedalId", function(req, res) {
         }
     });
 });
+
+router.put("/:pedalId", function(req, res) {
+    var myPedal = req.body;
+    pedal.JsonToPedal(myPedal, function(err, response) {
+        if(err) {
+            res.sendStatus(400);
+        } else {
+            pedalGateway.updatePedal(req.body, function(response, message) {
+                if(response) {
+                    res.sendStatus(200)
+                } else {
+                    res.sendStatus(404);
+                }
+            });
+        }
+    });
+});
+
 
 
 module.exports = router;
