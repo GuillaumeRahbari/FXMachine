@@ -12,5 +12,16 @@
  */
 angular.module('frontEndApp')
        .component('pedalCreation', {
-           templateUrl: '/components/pedal-creation/pedal-creation.html'
+           templateUrl: '/components/pedal-creation/pedal-creation.html',
+           controller: PedalCreationController
        });
+
+function PedalCreationController (PedalSrv, Pedal, WebAudioSrv){
+
+    var self = this;
+
+    self.submit = function () {
+        PedalSrv.putPedal(new Pedal(WebAudioSrv.getMainWebAudio(), self.pedalName));
+    }
+
+}
