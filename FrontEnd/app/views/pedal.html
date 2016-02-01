@@ -3,6 +3,7 @@
 
 <section class="container-fluid pedalContainer">
     <br/>
+
     <h2 class="title-pedal">Create your pedal</h2>
 
     <!--<button class="btn btn-secondary" id="buttonSideBar" ng-click="pedal.sidebar = !pedal.sidebar">MENU</button>-->
@@ -72,7 +73,8 @@
 -->
 
             <!-- ALl our beloved filters -->
-            <div class="container-fluid divPlumb filter-container" draggable ng-repeat="filter in pedal.getAllFilters()">
+            <div class="container-fluid divPlumb filter-container" draggable
+                 ng-repeat="filter in pedal.getAllFilters()">
 
                 <div class="row">
                     <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'"></span>
@@ -81,7 +83,8 @@
 
                     <span class="connector" connector filter="filter" ng-if="filter.type != 'output'"></span>
 
-                    <span ng-if="filter.type != 'input' && filter.type != 'output'"type="button" id="removeFilter" class="btn-close"
+                    <span ng-if="filter.type != 'input' && filter.type != 'output'" type="button" id="removeFilter"
+                          class="btn-close"
                           ng-hide="filter.type==='node'"
                           ng-click="pedal.pedal.removeFilter(filter);" disconnect>
                         <i class="fa fa-times"></i>

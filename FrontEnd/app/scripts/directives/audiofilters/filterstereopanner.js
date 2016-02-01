@@ -19,9 +19,21 @@ angular.module('frontEndApp')
                 $scope.linkPanValue = function () {
                     $scope.panValue = Math.round($scope.filter.audioNode.pan.value * 100) / 100;
                 }
+                $scope.increaseValue = function () {
+                    if($scope.filter.audioNode.pan.value<1){
+                        $scope.filter.audioNode.pan.value += 0.1;
+                        $scope.panValue = (Math.round($scope.filter.audioNode.pan.value * 100) / 100);
+                    }
+                }
+                $scope.reduceValue = function () {
+                    if ($scope.filter.audioNode.pan.value > -1) {
+                        $scope.filter.audioNode.pan.value -= 0.1;
+                        $scope.panValue = (Math.round($scope.filter.audioNode.pan.value * 100) / 100);
+                    }
+                }
             },
             link: function (scope) {
-                scope.panValue = 1;
+                scope.panValue = 0;
             }
         };
     });
