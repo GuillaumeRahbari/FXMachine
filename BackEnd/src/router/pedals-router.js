@@ -47,7 +47,7 @@ router.get("/:pedalId", function(req, res) {
         if(err) {
             res.sendStatus(404);
         } else {
-            res.send(result);
+            res.send(result[0]);
         }
     });
 });

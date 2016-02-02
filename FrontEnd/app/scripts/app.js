@@ -52,7 +52,7 @@ angular
                         'pedal' : function (PedalSrv, $route) {
                             return PedalSrv.getPedal($route.current.params.pedalId).then(
                                 function(data){
-                                    return data.data[0];
+                                    return data.data;
                                 },
                                 function (error){
                                     return error;
