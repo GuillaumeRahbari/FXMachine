@@ -47,7 +47,19 @@ angular
                 .when('/pedal/:pedalId', {
                     templateUrl : 'views/pedal.html',
                     controller  : 'PedalCtrl',
-                    controllerAs: 'pedal'
+                    controllerAs: 'pedal',
+                    resolve : {
+                        'pedal' : function (PedalSrv, $route) {
+                            return PedalSrv.getPedal($route.current.params.pedalId).then(
+                                function(data){
+                                    return data.data[0];
+                                },
+                                function (error){
+                                    return error;
+                                }
+                            )
+                        }
+                    }
                 })
                 .otherwise({
                     redirectTo: '/home'
