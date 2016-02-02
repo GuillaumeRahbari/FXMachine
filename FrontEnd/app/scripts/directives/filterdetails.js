@@ -14,7 +14,7 @@ angular.module('frontEndApp')
                scope      : {
                    filter: '='
                },
-               controller : function ($scope, uuidGenerator, JsPlumb, $timeout) {
+               controller : function ($scope, $element, uuidGenerator, JsPlumb, $timeout) {
                    /**
                     * A unique id for every filter details container.
                     * @type {*|String}
@@ -32,7 +32,7 @@ angular.module('frontEndApp')
                     */
                    $scope.showFilter = function () {
                        angular.element('div[uuid=' + $scope.uuid + ']').collapse('show');
-                       JsPlumb.revalidate($scope.element.offsetParent().children(0).children(2));
+                       JsPlumb.revalidate($element.offsetParent().children(0).children(2));
                        $scope.show = true;
                    };
 
@@ -42,15 +42,12 @@ angular.module('frontEndApp')
                    $scope.hideFilter = function () {
                        angular.element('div[uuid=' + $scope.uuid + ']').collapse('hide');
                        $timeout(function () {
-                           JsPlumb.revalidate($scope.element.offsetParent().children(0).children(2));
+                           JsPlumb.revalidate($element.offsetParent().children(0).children(2));
 
                        },500);
                        $scope.show = false;
                    };
 
-               },
-               link : function (scope, element, attrs) {
-                   scope.element = element;
                }
            };
        });
