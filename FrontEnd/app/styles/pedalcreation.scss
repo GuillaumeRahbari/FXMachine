@@ -26,7 +26,6 @@
   cursor:pointer;
 }
 
-
 #side-bar {
   position: fixed;
   left: 0;
@@ -150,14 +149,25 @@
         }
 
         .fa-share-alt{
-          margin-top:4px;
+          margin-top:5px;
           font-size:24px;
+        }
+
+        .fa-share-alt:hover{
+          margin-top:3px;
+          font-size:28px;
         }
 
         .fa-plug{
           margin-top:5px;
           font-size:21px;
         }
+
+        .fa-plug:hover{
+          margin-top:3px;
+          font-size:25px;
+        }
+
       }
 
       .filter-basic{
