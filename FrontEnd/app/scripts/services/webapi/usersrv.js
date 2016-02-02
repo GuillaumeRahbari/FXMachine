@@ -33,7 +33,7 @@ angular.module('frontEndApp')
                    }).then(
                        // success
                        function (response) {
-                           $cookies.put('userId', response.data.id, {expires: exp});
+                           $cookies.put('userId', response.data._id, {expires: exp});
                            $location.path('/profil');
                        },
                        //error

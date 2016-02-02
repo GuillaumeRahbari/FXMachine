@@ -1,7 +1,26 @@
 my-pedal {
 
-  .card:hover {
-    outline: 1px solid blue;
+  a {
+    color: inherit;
+
+    &:hover {
+      color:inherit;
+      text-decoration: none;
+    }
+  }
+
+  .card {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+
+    &:hover, &:focus, &:active {
+      transform: scale(1.1);
+      cursor:pointer
+    }
   }
 }
 

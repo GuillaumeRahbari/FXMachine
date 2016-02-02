@@ -8,7 +8,7 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-    .controller('PedalCtrl', ['WebAudio', 'Pedal', 'WebAudioSrv', 'PedalSrv', function (WebAudio, Pedal, WebAudioSrv, PedalSrv) {
+    .controller('PedalCtrl', ['WebAudio', 'Pedal', 'WebAudioSrv', 'PedalSrv', 'pedal', function (WebAudio, Pedal, WebAudioSrv, PedalSrv, pedal) {
 
         var self = this;
 
@@ -18,6 +18,8 @@ angular.module('frontEndApp')
         var webaudio = WebAudioSrv.getMainWebAudio();
         this.webaudio = webaudio;
 
+        // TODO Max, ici y'a la pedal qu'on veut editer. Faut connecter maintenant.
+        // self.pedal = pedal;
         self.pedal = new Pedal(self.webaudio);
 
         /**
@@ -49,7 +51,7 @@ angular.module('frontEndApp')
         };
 
         self.save = function () {
-            PedalSrv.putPedal(self.pedal);
+            PedalSrv.updatePedal(self.pedal);
         };
 
         self.updateMenu=function(){

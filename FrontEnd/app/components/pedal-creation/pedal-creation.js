@@ -22,6 +22,12 @@ function PedalCreationController (PedalSrv, Pedal, WebAudioSrv){
 
     self.submit = function () {
         PedalSrv.putPedal(new Pedal(WebAudioSrv.getMainWebAudio(), self.pedalName));
+    };
+
+    self.show = false;
+
+    self.toggle = function () {
+        self.show = !self.show;
     }
 
 }
