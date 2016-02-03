@@ -1,0 +1,156 @@
+$height: 90px;
+
+
+.main-web-audio {
+  background-color: #666666;
+  border:2px solid #d3d3d3;
+  border-top: 2px solid #292929;
+  box-shadow : 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+
+  color:rgba(255,255,255,0.8);
+  font-size:14px;
+}
+
+.web-audio-elem {
+  border-right: 1px solid #e1e1e1;
+  min-height:$height;
+  max-height:$height;
+  height:$height;
+
+  padding-left:0px;
+  padding-right:0px;
+}
+
+.inputs-web-audio {
+
+}
+.status-web-audio {
+
+}
+
+.controls-web-audio {
+}
+
+.outputs-web-audio {
+}
+
+/** valid and invalid colors **/
+
+.statusbox {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.valid-box {
+  background-color: #69af69;
+  border : 2px solid rgba(0,0,0,0.5)
+
+}
+.invalid-box {
+  background-color:indianred;
+  border : 2px solid rgba(0,0,0,0.5)
+}
+
+.blue-box {
+  background-color: #797acd;
+  border : 2px solid rgba(0,0,0,0.5)
+}
+
+
+
+/** Different button styles depending on their importance **/
+
+.webaudio-control-btn {
+  border : 2px solid #7d936f;
+  color:white;
+  background-color:rgba(255,255,255,0.5);
+}
+
+.webaudio-control-btn:hover {
+  border : 2px solid #9eed7e;
+  -webkit-transition: 0.5s;
+
+}
+
+/*.webaudio-control-btn:disabled {
+  border : 2px solid #c6c6c6;
+}*/
+
+/* TODO : different colors depending on buttons primary/secondary .. ? */
+
+.webaudio-control-btn:active {
+  border : 2px solid #fdfdff;
+}
+.webaudio-control-btn-primary {
+
+  background-color: #a09693;
+}
+
+.webaudio-control-btn-secondary {
+  background-color: #514c4b;
+
+}
+
+.smalltext {
+  font-size: 10px;
+}
+
+.emptyspace {
+  background-color:#666666;
+}
+/** Trucs varies que j'essaie **/
+
+.nopadding {
+  padding-left:0;
+  padding-right:0;
+
+}
+
+.nopaddingright {
+  padding-right:0;
+}
+
+.nopaddingleft {
+  padding-left:0;
+}
+
+.nomargin {
+  margin-left:0;
+  margin-right:0;
+}
+
+.limitText {
+  overflow: hidden;
+}
+
+
+
+
+.fullwidthoparent {
+  width:100%;
+}
+
+
+
+/** Controlleurs de hauteur**/
+
+
+.fullheight {
+  height:$height;
+}
+
+.halfheight {
+  height:$height/2;
+}
+
+.thirdheight {
+  height:$height/3;
+}
+
+.quartheight {
+  height:$height/4;
+}
+
+.threequartsheight {
+  height:3*$height/4;
+}
