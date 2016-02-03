@@ -9,9 +9,7 @@ var userFinder = require('../../data/user-finder'),
 function pedalRetriever(userId, callback) {
     userFinder.getUserPedal(userId, function(pedalList) {
         var pedals = [];
-        console.log("olo");
         async.each(pedalList, function iterator (item, callbackIter) {
-            console.log(item);
             pedals.push(item);
             callbackIter(null);
         }, function join (err) {
@@ -29,7 +27,8 @@ function updateUserPedals(userId, pedals ,callback) {
         if(err) {
             callback(err, null);
         } else {
-            res._pedals = pedals;
+            console.log(pedals);
+            res._pedals.push(pedals);
             usergateway.updateUser(res, function(err, res) {
                 if(err) {
                     callback(err, null);
