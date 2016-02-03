@@ -1,0 +1,47 @@
+<div class="dynamicCompressor">
+    <div class="container">
+        <div class="firstElement">
+            <div class="dynamicRange">
+                <input id type="range" min="-100" max="0" value="-24" step="1"
+                       ng-model="$ctrl.filter.audioNode.threshold.value">
+            </div>
+            <div class="valueContentDynamic">Threshold <br/> {{$ctrl.filter.audioNode.threshold.value}}dB</div>
+        </div>
+
+
+        <div class="firstElement ">
+            <div class="dynamicRange">
+                <input type="range" min="0" max="40" value="30" step="1" ng-model="$ctrl.filter.audioNode.knee.value">
+            </div>
+            <div class="valueContentDynamic"> Knee <br/>{{$ctrl.filter.audioNode.knee.value}}dB</div>
+        </div>
+
+        <div class="firstElement ">
+
+            <div class="dynamicRange">
+                <input type="range" min="1" max="20" value="10" step="1" ng-model="$ctrl.filter.audioNode.ratio.value">
+            </div>
+            <div class="valueContentDynamic"> Ratio <br/>{{$ctrl.filter.audioNode.ratio.value}}:1</div>
+        </div>
+
+        <div class="firstElement ">
+
+            <div class="dynamicRange">
+                <input type="range" min="0" max="1" value="0.5" step="0.001"
+                       ng-model="$ctrl.filter.audioNode.attack.value" ng-change="$ctrl.linkAttack()">
+            </div>
+            <div class="valueContentDynamic"> Attack <br/>{{$ctrl.dynamicCompressorAttackValue}}s</div>
+        </div>
+
+        <div class="firstElement ">
+            <div class="dynamicRange">
+                <input type="range" min="0" max="1" value="0.25" step="0.001" ng-change="$ctrl.linkRelease()"
+                       ng-model="$ctrl.filter.audioNode.release.value">
+            </div>
+            <div class="valueContentDynamic">Release <br/>{{$ctrl.dynamicCompressorReleaseValue}}s</div>
+        </div>
+    </div>
+    <br/>
+
+    <div class="valueContentDynamic">Reduction : {{$ctrl.filter.audioNode.reduction.value}} dB</div>
+</div>

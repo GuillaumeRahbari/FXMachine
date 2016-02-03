@@ -100,5 +100,5 @@ function FilterBiquadController ($element, canvasManager, $scope) {
     });
     $scope.$watch('$ctrl.filter.audioNode.type', function (newValue) {
         draw();
-    })
+    });
 }

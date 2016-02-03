@@ -29,5 +29,5 @@ function FilterDelayController () {
      */
     self.linkDelayTime = function () {
         self.delayTime = Math.round(self.filter.audioNode.delayTime.value * 100) / 100;
-    }
+    };
 }
