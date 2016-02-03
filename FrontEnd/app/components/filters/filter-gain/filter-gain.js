@@ -4,9 +4,9 @@
 
 /**
  * @ngdoc component
- * @name frontEndApp.component:mainWebAudio
+ * @name frontEndApp.component:filterGain
  * @description
- * # mainWebAudio
+ * # filterGain
  */
 angular.module('frontEndApp')
        .component('filterGain', {
@@ -42,5 +42,5 @@ function FilterGainController () {
         if (self.filter.audioNode.gain.value == 0) {
             self.gainValue = "Son coupé";
         }
-    }
+    };
 }
