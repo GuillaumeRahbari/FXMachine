@@ -1,0 +1,75 @@
+<div>
+
+
+    <div class="valueContentWaveshaper">Type : {{$ctrl.filter.type}}</div>
+
+    Oversampling : {{$ctrl.filter.audioNode.oversample}}
+    <br>
+    <input type="radio" name="waveShaperSampling" value="none" ng-model="$ctrl.filter.audioNode.oversample" checked>None
+    <input type="radio" name="waveShaperSampling" value="2x" ng-model="$ctrl.filter.audioNode.oversample">2x
+    <input type="radio" name="waveShaperSampling" value="4x" ng-model="$ctrl.filter.audioNode.oversample">4x
+    <br>
+
+
+    Disto Curve Model : {{$ctrl.distotype}}
+    <form>
+        <select name="selectType" ng-model="$ctrl.distotype">
+            <option value="atan">Atan</option>
+            <option value="chebyshev">Chebyshev</option>
+        </select>
+    </form>
+
+
+    <!-- atan parameters -->
+    <div ng-show="$ctrl.distotype === 'atan'">
+
+        <!-- TODO look for distorsion maximum value. -->
+        <!-- CAREFUL : this is linked to the controller. -->
+        <input id="disto1" type="range" min="1" max="100" value="1" step="1" ng-model="$ctrl.amount">
+        {{$ctrl.amount}}%
+
+    </div>
+
+    <!-- chebyshev parameters -->
+    <div ng-show="$ctrl.distotype === 'chebyshev'">
+
+        LOL CHEBYSHEV
+
+        <br>
+        Fondamental Frequency:
+        <input id="fondfreq" type="range" min="1" max="50" value="5" step="1" ng-model="$ctrl.fondfreq">
+        {{$ctrl.fondfreq}}Hz
+        <!-- TODO look for distorsion maximum value. -->
+        <!-- CAREFUL : this is linked to the controller. -->
+        <br>
+        <input id="harm0" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[0]">
+        {{$ctrl.harmonics[0]}}
+        <br>
+        <input id="harm1" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[1]">
+        {{$ctrl.harmonics[1]}}
+        <br>
+        <input id="harm2" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[2]">
+        {{$ctrl.harmonics[2]}}
+        <br>
+        <input id="harm3" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[3]">
+        {{$ctrl.harmonics[3]}}
+        <br>
+        <input id="harm4" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[4]">
+        {{$ctrl.harmonics[4]}}
+        <br>
+        <input id="harm5" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[5]">
+        {{$ctrl.harmonics[5]}}
+        <br>
+        <input id="harm6" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[6]">
+        {{$ctrl.harmonics[6]}}
+        <br>
+        <input id="harm7" type="range" min="-1" max="1" value="1" step="0.1" ng-model="$ctrl.harmonics[7]">
+        {{$ctrl.harmonics[7]}}
+
+    </div>
+
+
+    <br>
+    <canvas id="distovisualisation" height="80" width="160" class="canvas-basic"></canvas>
+
+</div>

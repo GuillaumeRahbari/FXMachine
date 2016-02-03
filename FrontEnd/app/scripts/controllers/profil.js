@@ -11,7 +11,4 @@
 angular.module('frontEndApp')
   .controller('ProfilCtrl', function () {
 
-      // TODO Get the real pedals of the user.
-      this.pedals = [];
-
   });

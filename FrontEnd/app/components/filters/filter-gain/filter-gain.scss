@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "rockFont";
+  src: url('../../../fonts/Rockit.ttf');
+}
+
+.filterGainTmpl {
+  height: 130px;
+}
+
+.valueGainRight, .valueGainLeft {
+  width: 80px;
+}
+
+.rangeContent {
+  margin-top: 15px;
+}
+
+//GAIN
+.valueContentSmall {
+  background-color: rgb(217, 83, 79);
+  border-radius: 5px;
+  width: 60%;
+  color: white;
+  margin-left: 20%;
+  margin-top: 20px;
+}
+

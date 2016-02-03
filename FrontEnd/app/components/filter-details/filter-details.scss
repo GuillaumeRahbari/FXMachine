@@ -1,0 +1,23 @@
+.btn-down {
+  font-size: 2em;
+  position: absolute;
+  color: white;
+  top: 11px;
+
+  &:hover i, &:active i {
+    color: grey;
+    cursor: pointer;
+  }
+}
+
+.btn-up {
+  font-size: 2em;
+  position: absolute;
+  color: white;
+  margin-top: -20px;
+
+  &:hover i, &:active i {
+    color: white;
+    cursor: pointer;
+  }
+}

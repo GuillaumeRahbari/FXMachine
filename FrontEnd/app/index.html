@@ -24,18 +24,24 @@
     <link rel="stylesheet" href="styles/connection.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/pedalcreation.css">
-    <link rel="stylesheet" href="styles/templates/mainWebAudioTmpl.css">
     <link rel="stylesheet" href="styles/canvasStyles.css">
     <link rel="stylesheet" href="styles/filters.css">
     <link rel="stylesheet" href="styles/sliders.css">
-    <link rel="stylesheet" href="styles/templates/filterGainTmpl.css">
-    <link rel="stylesheet" href="styles/templates/filterDelayTmpl.css">
-    <link rel="stylesheet" href="styles/templates/filterDynamiccompressorTmpl.css">
-    <link rel="stylesheet" href="styles/templates/filterBiquadTmpl.css">
-    <link rel="stylesheet" href="styles/templates/filterWaveshaperTmpl.css">
-    <link rel="stylesheet" href="styles/templates/filterStereopannerTmpl.css">
     <link rel="stylesheet" href="styles/profil.css">
+
+    <!-- Components -->
     <link rel="stylesheet" href="components/my-pedal/my-pedal.css">
+    <link rel="stylesheet" href="components/pedal-creation/pedal-creation.css">
+    <link rel="stylesheet" href="components/my-pedal-list/my-pedal-list.css">
+    <link rel="stylesheet" href="components/main-web-audio/main-web-audio.css">
+    <link rel="stylesheet" href="components/filter-details/filter-details.css">
+    <!-- Filters components -->
+    <link rel="stylesheet" href="components/filters/filter-gain/filter-gain.css">
+    <link rel="stylesheet" href="components/filters/filter-stereopanner/filter-stereopanner.css">
+    <link rel="stylesheet" href="components/filters/filter-biquad/filter-biquad.css">
+    <link rel="stylesheet" href="components/filters/filter-delay/filter-delay.css">
+    <link rel="stylesheet" href="components/filters/filter-dynamiccompressor/filter-dynamiccompressor.css">
+    <link rel="stylesheet" href="components/filters/filter-waveshaper/filter-waveshaper.css">
     <!-- endbuild -->
 </head>
 <body>
@@ -71,8 +77,6 @@
 
 <script src="scripts/services/webapi/sound.js"></script>
 <script src="scripts/directives/filemodel.js"></script>
-<script src="scripts/directives/audiofilters/filtergain.js"></script>
-<script src="scripts/directives/audiofilters/filterbiquad.js"></script>
 <script src="scripts/directives/postRender.js"></script>
 <script src="scripts/controllers/connection.js"></script>
 <script src="scripts/services/webapi/usersrv.js"></script>
@@ -89,10 +93,6 @@
 <script src="scripts/directives/audiovisualisers/volumevisualiser.js"></script>
 
 <script src="scripts/services/uuidgenerator.js"></script>
-<script src="scripts/directives/audiofilters/filterwaveshaper.js"></script>
-<script src="scripts/directives/audiofilters/filterdelay.js"></script>
-<script src="scripts/directives/audiofilters/filterdynamiccompressor.js"></script>
-<script src="scripts/directives/audiofilters/filterstereopanner.js"></script>
 
 <script src="scripts/directives/audiovisualisers/signalvisualiser.js"></script>
 <script src="scripts/services/canvasmanager.js"></script>
@@ -106,13 +106,23 @@
 <script src="scripts/services/expiredate.js"></script>
 <script src="scripts/controllers/profil.js"></script>
 <script src="scripts/controllers/pedal.js"></script>
-<script src="scripts/directives/mainwebaudio.js"></script>
 <script src="scripts/controllers/home.js"></script>
 <script src="scripts/services/webaudiosrv.js"></script>
-<script src="scripts/directives/filterdetails.js"></script>
 <script src="scripts/services/webapi/pedalsrv.js"></script>
+
+<!-- Components -->
 <script src="components/my-pedal-list/my-pedal-list.js"></script>
 <script src="components/my-pedal/my-pedal.js"></script>
+<script src="components/pedal-creation/pedal-creation.js"></script>
+<script src="components/main-web-audio/main-web-audio.js"></script>
+<script src="components/filter-details/filter-details.js"></script>
+<!-- Filters components -->
+<script src="components/filters/filter-gain/filter-gain.js"></script>
+<script src="components/filters/filter-stereopanner/filter-stereopanner.js"></script>
+<script src="components/filters/filter-biquad/filter-biquad.js"></script>
+<script src="components/filters/filter-delay/filter-delay.js"></script>
+<script src="components/filters/filter-dynamiccompressor/filter-dynamiccompressor.js"></script>
+<script src="components/filters/filter-waveshaper/filter-waveshaper.js"></script>
 <!-- endbuild -->
 </body>
 </html>

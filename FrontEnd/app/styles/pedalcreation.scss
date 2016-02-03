@@ -6,7 +6,7 @@
 
 #buttonSideBar{
   position:fixed;
-  left:35px;
+  right:35px;
   top: 35%;
   z-index:3002;
   color:#adadad;
@@ -14,7 +14,7 @@
 }
 #buttonSideBar2{
   position:fixed;
-  left:35px;
+  right:35px;
   top: 35%;
   z-index:3002;
   color:#adadad;
@@ -29,14 +29,14 @@
 
 #side-bar {
   position: fixed;
-  left: 0;
+  right: 0;
   top: 40%;
 
   z-index: 3001;
   bottom: 0;
   height:35%;
   background-color:transparent;
-  text-align:left;
+  text-align:right;
 
   ul {
     list-style: none;

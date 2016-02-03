@@ -56,6 +56,26 @@ angular.module('frontEndApp')
                        url    : url + '/' + pedalId,
                        headers: {'Content-Type': 'application/json'}
                    });
+               },
+
+               /**
+                * Update a pedal.
+                * @param pedalId
+                */
+               updatePedal: function (pedal) {
+                   $http({
+                       method : 'PUT',
+                       url : url + '/' + pedal._id,
+                             data   : pedal,
+                             headers: {'Content-Type': 'application/json'}
+                         }).then(
+                       function (response) {
+                           console.log(response);
+                       },
+                       function (error) {
+                           console.log(error);
+                       }
+                   )
                }
            };
        });
