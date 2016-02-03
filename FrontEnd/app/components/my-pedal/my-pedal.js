@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name frontEndApp.directive:myPedal
+ * @ngdoc component
+ * @name frontEndApp.component:myPedal
  * @description
  * # myPedal
  */

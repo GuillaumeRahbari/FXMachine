@@ -3,7 +3,7 @@
  */
 
 /**
- * @ngdoc directive
+ * @ngdoc component
  * @name frontEndApp.component:mainWebAudio
  * @description
  * # mainWebAudio
