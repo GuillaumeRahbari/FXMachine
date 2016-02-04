@@ -28,7 +28,7 @@ function updateUserPedals(userId, pedals ,callback) {
             callback(err, null);
         } else {
             console.log(pedals);
-            res._pedals.push(pedals);
+            res._pedals.push(pedals[0]);
             usergateway.updateUser(res, function(err, res) {
                 if(err) {
                     callback(err, null);

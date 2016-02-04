@@ -33,7 +33,7 @@ router.put("/", function(req, res) {
                     userController.updateUserPedals(req.params.user_id, message.ops, function() {
 
                     });
-                    res.send(message.ops);
+                    res.send(message.ops[0]);
                 } else {
                     res.sendStatus(500);
                 }
