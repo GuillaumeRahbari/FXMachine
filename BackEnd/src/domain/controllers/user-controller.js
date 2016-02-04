@@ -38,5 +38,16 @@ function updateUserPedals(userId, pedals ,callback) {
     });
 }
 
+function retrieveAllUser(callback) {
+    userFinder.findAllUser(function(err, res) {
+        if(err) {
+            callback(err, null);
+        } else {
+            callback(null, res)
+        }
+    })
+}
+
 exports.updateUserPedals = updateUserPedals;
 exports.pedalRetriever = pedalRetriever;
+exports.retrieveAllUser = retrieveAllUser;

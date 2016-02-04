@@ -28,6 +28,21 @@ router.post('/signout', function(req, res) {
 });
 
 
+router.get("/all", function(req, res) {
+    userController.retrieveAllUser(function(err ,result) {
+        if(err) {
+            res.sendStatus(400);
+        } else {
+            console.log("result in the router");
+            console.log(result);
+            res.sendStatus(result);
+        }
+    });
+});
+
+
+
+
 // TODO update le post en GET + changer l'URI
 router.post('/users', function(req, res) {
     if (req.body.id == undefined) {
