@@ -15,10 +15,28 @@ angular.module('frontEndApp')
         controller: MyProfilListControllers
     });
 
-function MyProfilListControllers($scope){
+function MyProfilListControllers($scope, $http){
 
-    this.numberOfMembers=4;
-    this.names=["Quentin Cornevin", "Rémi Pourtier", "Guillaume Rahbari", "Maxime Touroute"];
-    this.description=["A really big noob who love cocks", "A smart good looking modest man",
+    var names=["Quentin Cornevin", "Remi Pourtier", "Guillaume Rahbari", "Maxime Touroute"];
+    var description=["A really big noob who love cocks", "A smart good looking modest man",
     "A man who costs 5000 euros ", "A man who has never worked"];
+
+    $scope.membersList={};
+    $http.get('json/homePage.json')
+        .success(function(data) {
+            console.log("memberlist: ", data);
+            $scope.membersList = data;
+        })
+        .error(function(error) {
+            console.log(error);
+        });
+
+    /*this.membersList=[];
+    for(var i=0;i<names.length;i++){
+        var tmpArray=[];
+        tmpArray.push(names[i]);
+        tmpArray.push(description[i]);
+        this.membersList.push(tmpArray);
+    }*/
+
 }
