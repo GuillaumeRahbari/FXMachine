@@ -40,24 +40,18 @@ function myfindOne(user, callback) {
 }
 
 
-function findAllUser(id, callback) {
+function findAllUser(callback) {
     mongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Error in findAll users")
            callback(500);
        } else {
            var collection = db.collection('users');
-           checkRights(id, collection, function(isAdmin) {
-               if(isAdmin) {
-                   collection.find({ }).toArray(function(err, result) {
-                       if(err) {
-                           callback(500);
-                       } else {
-                           callback(result);
-                       }
-                   });
-               } else {
-                   callback(403);
+           collection.find({ }).toArray(function(err, result) {
+               if(err) {
+                   callback(err, null);
+               } else {;
+                   callback(null, result);
                }
            });
        }
