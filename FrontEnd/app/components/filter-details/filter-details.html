@@ -1,0 +1,63 @@
+<div>
+    <div id="filterDetails" class="container filter-basic collapse" uuid="{{$ctrl.uuid}}">
+
+        <!-- Showing the div corresponding to the right filter -->
+        <!--- All min max and default values of ranges corresponds to the min/max/default values of the web audio API
+
+    <!-- The input filter -->
+        <div filter="$ctrl.filter" ng-if="$ctrl.filter.type === 'input'">
+            INPUT OF PEDAL !
+        </div>
+
+        <!-- The output filter -->
+        <div filter="$ctrl.filter" ng-if="$ctrl.filter.type === 'output'">
+            OUTPUT OF PEDAL !
+        </div>
+
+        <!-- The VIZU filter -->
+        <canvas egaliser-visualizer ng-if="$ctrl.filter.type === 'visualiser'"
+                analyser-node="$ctrl.filter.audioNode"
+                width="400"
+                height="100" id="whateverrr"
+                class="canvas-basic"></canvas>
+
+
+        <!-- The VIZU filter -->
+        <canvas signal-visualiser ng-if="$ctrl.filter.type === 'visualiser'"
+                analyser-node="$ctrl.filter.audioNode"
+                width="400" height="100" id="whanteverrr"
+                class="canvas-basic"></canvas>
+
+
+        <!-- The GAIN filter -->
+        <filter-gain class="filtergain" filter="$ctrl.filter" ng-if="$ctrl.filter.type === 'gain'"></filter-gain>
+        <!-- The BIQUAD filter -->
+        <filter-biquad filter="$ctrl.filter" ng-if="$ctrl.filter.type === 'biquad'"></filter-biquad>
+
+        <!-- The waveshaper filter -->
+        <filter-waveshaper filter="$ctrl.filter" distotype="atan" amount="1" harmonics="[0,0,0,0,0,0,0,0]" fondfreq="5"
+                           ng-if="$ctrl.filter.type === 'waveShaper'"></filter-waveshaper>
+
+        <!-- The delay filter -->
+        <filter-delay filter="$ctrl.filter" ng-if="$ctrl.filter.type === 'delay'"></filter-delay>
+
+
+        <!-- The compressor filter -->
+        <filter-dynamiccompressor filter="$ctrl.filter"
+                                  ng-if="$ctrl.filter.type === 'dynamicCompressor'"></filter-dynamiccompressor>
+
+        <!-- The stereopanner filter -->
+        <filter-stereopanner filter="$ctrl.filter"
+                             ng-if="$ctrl.filter.type === 'stereoPanner'"></filter-stereopanner>
+
+
+    </div>
+
+    <span class="btn-down" type="button" ng-click="$ctrl.showFilter()" ng-if="!$ctrl.show">
+        <i class="fa fa-sort-desc"></i>
+    </span>
+
+    <span class="btn-up" type="button" ng-click="$ctrl.hideFilter()" ng-if="$ctrl.show">
+        <i class="fa fa-sort-asc"></i>
+    </span>
+</div>

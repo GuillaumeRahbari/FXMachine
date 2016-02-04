@@ -8,7 +8,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-       .factory('PedalSrv', function ($cookies, $http) {
+       .factory('PedalSrv', function ($cookies, $http, $rootScope) {
 
            var url = 'http://localhost:3000/user/' + $cookies.get('userId') + '/pedals';
 
@@ -38,6 +38,7 @@ angular.module('frontEndApp')
                    }).then(
                        function (response) {
                            console.log(response);
+                           $rootScope.$broadcast('updatePedals');
                        },
                        function (error) {
                            console.log(error);

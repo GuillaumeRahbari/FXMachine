@@ -12,17 +12,30 @@ angular.module('frontEndApp')
            controller : MyPedalListController
        });
 
-function MyPedalListController (PedalSrv) {
+function MyPedalListController (PedalSrv, $scope, $timeout) {
 
     var self = this;
 
-    PedalSrv.getAllPedals().then(
-        function (data) {
-            self.pedals = data.data;
-        },
-        function (error) {
-            console.log(error);
-        }
-    );
+    /**
+     * This function gets all pedals.
+     */
+    function getAllPedals (){
+        PedalSrv.getAllPedals().then(
+            function (data) {
+                self.pedals = data.data;
+            },
+            function (error) {
+                console.log(error);
+            }
+        );
+    }
+
+    getAllPedals();
+
+    $scope.$on('updatePedals', function () {
+        $timeout(function () {
+            getAllPedals();
+        },500);
+    });
 
 }

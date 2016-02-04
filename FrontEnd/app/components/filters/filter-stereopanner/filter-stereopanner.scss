@@ -1,0 +1,20 @@
+.contentStereopanner {
+  width: 200px;
+}
+
+.valueStereo {
+  background-color: rgb(217, 83, 79);
+  border-radius: 5px;
+  width: 100%;
+  color: white;
+  margin-top: 20px;
+}
+
+.valueStereo:focus {
+  outline: none;
+}
+
+.valueStereoRight {
+  margin-left: 25px;
+
+}

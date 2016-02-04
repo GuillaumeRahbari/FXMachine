@@ -1,0 +1,41 @@
+<div class="biquad">
+    <div class="valueContentBiquadHeader">Type : {{$ctrl.filter.audioNode.type}}</div>
+
+    <form>
+        <select name="selectType" ng-model="$ctrl.filter.audioNode.type">
+            <option value="lowpass">Low Pass</option>
+            <option value="highpass">High Pass</option>
+            <option value="bandpass">Band Pass</option>
+            <option value="lowshelf">Low Shelf</option>
+            <option value="highshelf">High Shelf</option>
+            <option value="peaking">Peaking</option>
+            <option value="notch">Notch</option>
+            <option value="allpass">AllPass</option>
+        </select>
+    </form>
+    <br>
+
+    <div class="biquadRange">
+        <input id="cuttofFreq" type="range" min="0" max="40000" value="40000" step="10"
+               ng-model="$ctrl.filter.audioNode.frequency.value">
+    </div>
+    <div class="valueContentBiquad">Cuttof :{{$ctrl.filter.audioNode.frequency.value}}Hz</div>
+    <br>
+
+    <div class="biquadRange">
+        <input id="quality" type="range" min="1" max="100" value="1" step="1"
+               ng-model="$ctrl.filter.audioNode.Q.value">
+    </div>
+
+    <div class="valueContentBiquad">Quality/Resonnance :{{$ctrl.filter.audioNode.Q.value}}dB</div>
+    <br>
+
+    <div ng-show="$ctrl.filter.audioNode.type == 'lowshelf' || $ctrl.filter.audioNode.type == 'highshelf' || $ctrl.filter.audioNode.type =='peaking'">
+        <div class="biquadRange">
+            <input id="gain" type="range" min="-40" max="40" value="0" step="1"
+                   ng-model="$ctrl.filter.audioNode.gain.value">
+        </div>
+        <div class="valueContentBiquad"> Gain :{{$ctrl.filter.audioNode.gain.value}}dB</div>
+    </div>
+    <canvas id="biquadvisualisation" height="80" width="160" class="canvas-basic"></canvas>
+</div>
