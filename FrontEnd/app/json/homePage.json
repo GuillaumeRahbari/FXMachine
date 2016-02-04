@@ -2,19 +2,63 @@
   "memberList" : [
     {
       "name" : "Quentin Cornevin ",
-      "description" : "A really big noob who love cocks"
+      "description" : "Back-end development",
+      "pathImage": "images/HomePage/quentincornevin.png",
+      "socialNetwork" : [
+        {
+          "link" : "https://www.linkedin.com/in/quentin-cornevin-b05557b0?authType=NAME_SEARCH&authToken=BGCV&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CentityType%3AentityHistoryName%2CclickedEntityId%3Amynetwork_395511413%2Cidx%3A0",
+          "icon" : "fa fa-linkedin"
+        },
+        {
+          "link" : "#",
+          "icon" : "fa fa-envelope"
+        }
+      ]
     },
     {
       "name" : "Remi Pourtier",
-      "description" : "A smart good looking modest man"
+      "description" : "Front-end development",
+      "pathImage": "images/HomePage/remipourtier.png",
+      "socialNetwork" : [
+        {
+          "link" : "https://www.linkedin.com/profile/view?id=AAIAABGUc2YBDcpT4cHCOd3cs7wb-hrYD3arOg4&trk=nav_responsive_tab_profile",
+          "icon" : "fa fa-linkedin"
+        },
+        {
+          "link" : "#",
+          "icon" : "fa fa-envelope"
+        }
+      ]
     },
     {
       "name" : "Guillaume Rahbari",
-      "description" : "A man who costs 5000 euros "
+      "description" : "Front-end development",
+      "pathImage": "images/HomePage/guillaumerahbari.png",
+      "socialNetwork" : [
+        {
+          "link" : "https://www.linkedin.com/in/guillaume-rahbari-948a25a9?authType=NAME_SEARCH&authToken=c6of&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A387731720%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1454624414824%2Ctas%3Agui",
+          "icon" : "fa fa-linkedin"
+        },
+        {
+          "link" : "#",
+          "icon" : "fa fa-envelope"
+        }
+      ]
     },
     {
       "name" : "Maxime Touroute",
-      "description" : "A man who has never worked"
+      "description" : "Music components development",
+      "pathImage": "images/HomePage/maximetouroute.png",
+      "socialNetwork" : [
+        {
+          "link" : "https://www.linkedin.com/in/maxime-touroute-1998b6b6?authType=NAME_SEARCH&authToken=7cbF&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CentityType%3AentityHistoryName%2CclickedEntityId%3Amynetwork_414295173%2Cidx%3A1",
+          "icon" : "fa fa-linkedin"
+        },
+        {
+          "link" : "#",
+          "icon" : "fa fa-envelope"
+        }
+      ]
     }
   ]
 }
