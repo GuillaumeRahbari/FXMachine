@@ -1,5 +1,5 @@
 .card-img-top{
-  margin-top:5px;
+  margin-top:10px;
 }
 
 .itemMember{
@@ -12,4 +12,39 @@
 
 .infoMember{
   padding:2px;
+  margin-top:4px;
+  padding-bottom:0px;
+}
+
+.mail{
+  font-size:34px;
+}
+
+
+.social{
+
+  margin-bottom:0px;
+}
+.linkedinIcon{
+  color:white;
+  font-size:20px;
+  margin-top:6px;
+}
+
+.linkedin{
+  background-color:rgb(29,135,184);
+  border-radius:5px;
+  margin-top:11px;
+}
+
+.linkedin:hover, .linkedinIcon:hover{
+  background-color:rgb(29,163,184);
+}
+
+.mailIcon{
+  color:rgb(29,135,184);
+}
+
+.mailIcon:hover{
+  color:rgb(29,163,184);
 }

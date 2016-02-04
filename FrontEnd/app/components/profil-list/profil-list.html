@@ -1,4 +1,10 @@
 <div class="container">
+
+
+
+
+
+
     <div class="row rowMember">
         <div class="card col-lg-2 itemMember" ng-repeat="member in membersList.memberList">
             <img class="card-img-top" ng-src="{{member.pathImage}}" alt="Card image cap">
@@ -7,13 +13,14 @@
                 <h4 class="card-title">{{member.name}}</h4>
 
                 <p class="card-text">{{member.description}}</p>
+                <p class="card-text">{{member.description2}}</p>
             </div>
             <div class="card-block">
                 <div class="row">
                     <div class="emptyDiv col-lg-2"></div>
 
                     <ul class="social list-inline col-lg-4" ng-repeat="social in member.socialNetwork">
-                        <li>
+                        <li class="{{social.classLi}}">
                             <a ng-href="{{social.link}}" target="_blank"><i class="{{social.icon}}"></i></a>
                         </li>
                     </ul>
