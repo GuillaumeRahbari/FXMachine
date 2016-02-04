@@ -4,16 +4,23 @@
 <section class="container-fluid pedalContainer">
     <br/>
 
+
     <h2 class="title-pedal">Create your pedal</h2>
 
     <!--<button class="btn btn-secondary" id="buttonSideBar" ng-click="pedal.sidebar = !pedal.sidebar">MENU</button>-->
 
     <div>
-        <button id="loadpedaltoaudiograph" ng-click="pedal.loadPedalToWebAudio();">Load Pedal to webAudio
-            Graph
+        <button class="btn btn-info" id="loadpedaltoaudiograph" ng-click="pedal.loadPedalToWebAudio();">
+            <i class="fa fa-upload"></i>
+            Load Pedal to webAudio Graph
         </button>
-        <button ng-click="pedal.save()">Save Pedal</button>
+
+        <button class="btn btn-info" ng-click="pedal.save()">
+            <i class="fa fa-floppy-o"></i>
+            Save Pedal
+        </button>
     </div>
+    <br>
 
     <i class="fa fa-arrow-left" id="buttonSideBar" ng-hide="pedal.iconmenu" ng-click="pedal.updateMenu()"></i>
 
@@ -80,11 +87,15 @@
                  ng-repeat="filter in pedal.getAllFilters()">
 
                 <div class="row">
-                    <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'"></span>
+                    <span class="connectable" connectable uuid="{{filter.uuid}}" ng-if="filter.type != 'input'">
+                        <i class="fa fa-share-alt"></i>
+                    </span>
 
                     <h5>{{filter.type.toUpperCase()}}</h5>
 
-                    <span class="connector" connector filter="filter" ng-if="filter.type != 'output'"></span>
+                    <span class="connector" connector filter="filter" ng-if="filter.type != 'output'">
+                        <i class="fa fa-plug"></i>
+                    </span>
 
                     <span ng-if="filter.type != 'input' && filter.type != 'output'" type="button" id="removeFilter"
                           class="btn-close"

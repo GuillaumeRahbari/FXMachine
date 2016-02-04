@@ -8,7 +8,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-       .factory('PedalSrv', function ($cookies, $http) {
+       .factory('PedalSrv', function ($cookies, $http, $rootScope) {
 
            var url = 'http://localhost:3000/user/' + $cookies.get('userId') + '/pedals';
 
@@ -26,8 +26,8 @@ angular.module('frontEndApp')
                },
 
                /**
-                * Save a pedal.
-                * @param pedal
+                * Create a pedal.
+                * @param {Pedal} pedal - The pedal to add.
                 */
                putPedal: function (pedal) {
                    $http({
@@ -38,6 +38,7 @@ angular.module('frontEndApp')
                    }).then(
                        function (response) {
                            console.log(response);
+                           $rootScope.$broadcast('updatePedals');
                        },
                        function (error) {
                            console.log(error);
@@ -46,8 +47,8 @@ angular.module('frontEndApp')
                },
 
                /**
-                * Return a pedal.
-                * @param pedalId
+                * Getter of a pedal.
+                * @param {int} pedalId - The pedal id.
                 * @returns {HttpPromise}
                 */
                getPedal: function (pedalId) {
@@ -60,15 +61,15 @@ angular.module('frontEndApp')
 
                /**
                 * Update a pedal.
-                * @param pedalId
+                * @param {Pedal} pedal - The pedal to update.
                 */
                updatePedal: function (pedal) {
                    $http({
                        method : 'PUT',
-                       url : url + '/' + pedal._id,
-                             data   : pedal,
-                             headers: {'Content-Type': 'application/json'}
-                         }).then(
+                       url    : url + '/' + pedal._id,
+                       data   : pedal,
+                       headers: {'Content-Type': 'application/json'}
+                   }).then(
                        function (response) {
                            console.log(response);
                        },
