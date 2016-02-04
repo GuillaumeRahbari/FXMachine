@@ -70,9 +70,17 @@ router.put("/:pedalId", function(req, res) {
     });
 });
 
-
+/**
+ *
+ * {
+ *      "_note": 0...5
+ *
+ * }
+ *
+ *
+ */
 router.put("/:pedalId/note/", function(req, res){
-    if(req.query.note && req.params.pedalId) {
+    if(req.body.note && req.params.pedalId) {
         pedalController.updatePedalNote(req.params.pedalId, req.query.note, function(err, result) {
 
         });
@@ -80,8 +88,17 @@ router.put("/:pedalId/note/", function(req, res){
 });
 
 
+/**
+ * {
+ *      "_id" : " .... "
+ *      "_comment": "....."
+ * }
+ *
+ *
+ *
+ */
 router.put("/:pedalId/comment", function(req, res){
-    if(req.query.comment && req.params.pedalId) {
+    if(req.body.comment && req.params.pedalId) {
         pedalController.updatePedalComment( req.params.pedalId, req.query.comment, function(err, result){
 
         });
