@@ -26,8 +26,8 @@ angular.module('frontEndApp')
                },
 
                /**
-                * Save a pedal.
-                * @param pedal
+                * Create a pedal.
+                * @param {Pedal} pedal - The pedal to add.
                 */
                putPedal: function (pedal) {
                    $http({
@@ -47,8 +47,8 @@ angular.module('frontEndApp')
                },
 
                /**
-                * Return a pedal.
-                * @param pedalId
+                * Getter of a pedal.
+                * @param {int} pedalId - The pedal id.
                 * @returns {HttpPromise}
                 */
                getPedal: function (pedalId) {
@@ -61,15 +61,15 @@ angular.module('frontEndApp')
 
                /**
                 * Update a pedal.
-                * @param pedalId
+                * @param {Pedal} pedal - The pedal to update.
                 */
                updatePedal: function (pedal) {
                    $http({
                        method : 'PUT',
-                       url : url + '/' + pedal._id,
-                             data   : pedal,
-                             headers: {'Content-Type': 'application/json'}
-                         }).then(
+                       url    : url + '/' + pedal._id,
+                       data   : pedal,
+                       headers: {'Content-Type': 'application/json'}
+                   }).then(
                        function (response) {
                            console.log(response);
                        },
