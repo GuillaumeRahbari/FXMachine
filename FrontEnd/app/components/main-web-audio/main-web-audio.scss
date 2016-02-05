@@ -100,10 +100,16 @@ $height: 90px;
 }
 /** Trucs varies que j'essaie **/
 
+//** TODO : refactor en nopaddinghorizontal **/
 .nopadding {
   padding-left:0;
   padding-right:0;
 
+}
+
+.nopaddingvertical {
+  padding-top:0;
+  padding-bottom:0;
 }
 
 .nopaddingright {
@@ -129,6 +135,12 @@ $height: 90px;
 .fullwidthoparent {
   width:100%;
 }
+
+
+.halfwidthoparent {
+  width:50%;
+}
+
 
 
 

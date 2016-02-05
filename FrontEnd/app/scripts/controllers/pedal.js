@@ -15,13 +15,14 @@ angular.module('frontEndApp')
         self.sidebar = false;
         self.iconmenu=false;
 
+        console.log("Allo")
         var webaudio = WebAudioSrv.getMainWebAudio();
         this.webaudio = webaudio;
-
+        console.log("Allo")
         // TODO Max, ici y'a la pedal qu'on veut editer. Faut connecter maintenant.
         // self.pedal = pedal;
         self.pedal = new Pedal(self.webaudio);
-
+console.log("Allo")
         /**
          * Load the pedal in webaudio service, and launch the audio
          */
