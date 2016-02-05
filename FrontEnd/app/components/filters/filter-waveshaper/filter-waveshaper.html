@@ -6,6 +6,7 @@
     <!-- atan parameters -->
     <div ng-show="$ctrl.distotype == 'atan'">
 
+        <!-- Oversampling control -->
         Oversampling : {{$ctrl.filter.audioNode.oversample}}
         <br>
         <input type="radio" name="waveShaperSampling" value="none" ng-model="$ctrl.filter.audioNode.oversample" checked>None
@@ -13,7 +14,7 @@
         <input type="radio" name="waveShaperSampling" value="4x" ng-model="$ctrl.filter.audioNode.oversample">4x
         <br>
 
-
+        <!-- Disto curve model control -->
         Disto Curve Model : {{$ctrl.distotype}}
         <form>
             <select name="selectType" ng-model="$ctrl.distotype">

@@ -1,7 +1,4 @@
 'use strict';
-/**
- * Created by guillaume on 03/02/2016.
- */
 
 /**
  * @ngdoc component
@@ -25,9 +22,11 @@ function FilterBiquadController ($element, canvasManager, $scope) {
     var ctx = $element[0].querySelector('#biquadvisualisation').getContext('2d');
 
     /**
-     * This function draws.
+     * This function draws the canvas.
+     * Called everytime something changes
      */
     var draw = function () {
+
         // Setting up the array values we want, and the array containers
         var frequencyArray = new Float32Array(100);
         for (let i = 0; i < frequencyArray.length; i++) {
@@ -39,11 +38,9 @@ function FilterBiquadController ($element, canvasManager, $scope) {
         var magResponseOutput = new Float32Array(100);
         // Phase response
         var phaseResponseOutput = new Float32Array(100);
-
         // Getting frequency response
         self.filter.audioNode.getFrequencyResponse(frequencyArray, magResponseOutput, phaseResponseOutput);
 
-        //******** DRAW !
 
         // ** Cleaning background
         canvasManager.drawBackground(ctx);
@@ -56,10 +53,8 @@ function FilterBiquadController ($element, canvasManager, $scope) {
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(0, ctx.canvas.height / 2);
-
-
         for (let i = 0; i <= frequencyArray.length - 1; i++) {
-            // magResponseOutput goes from 0 to 1. We rescale to half of size, to handle saturatio
+            // magResponseOutput goes from 0 to 1. We rescale to half of size, to handle high values properly
             var meterHeight = magResponseOutput[i] * (ctx.canvas.height / 2);
             ctx.lineTo(i * widthDrawStep, ctx.canvas.height - meterHeight);
         }
@@ -67,7 +62,7 @@ function FilterBiquadController ($element, canvasManager, $scope) {
         ctx.closePath();
 
 
-        // Zero dB line
+        //** Drawing zero dB line
 
         canvasManager.setSecondaryLineStyle(ctx);
         ctx.lineWidth = 1;
@@ -78,7 +73,7 @@ function FilterBiquadController ($element, canvasManager, $scope) {
         ctx.stroke();
         ctx.closePath();
 
-        // Drawing frequency legend
+        //** Drawing frequency legend TODO : marche pas top
         canvasManager.setTextColorStyle(ctx);
         ctx.font = "10px Arial";
         ctx.fillText(frequencyArray[0] + 'Hz', 0, ctx.canvas.height - 10);

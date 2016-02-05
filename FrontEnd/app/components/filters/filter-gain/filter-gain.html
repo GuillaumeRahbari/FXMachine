@@ -1,5 +1,6 @@
 <div class="filterGainTmpl">
 
+    <!-- Unit buttons of gain-->
     <div class="container">
         <button class="valueStereo valueGainLeft" ng-click="$ctrl.reduceValue()"
                 ng-model="$ctrl.filter.audioNode.gain.value">
@@ -11,6 +12,7 @@
         </button>
     </div>
 
+    <!-- Input range of gain -->
     <div class="rangeContent">
         <input id="volume" type="range" min="0" max="101" value="1" step="1"
                ng-model="$ctrl.filter.audioNode.gain.value">
