@@ -70,6 +70,7 @@ angular.module('frontEndApp')
 
                   navigator.webkitGetUserMedia({audio:true}, function(stream){
 
+                      console.log('mic loaded');
 
                       self._micBuffer = stream;
                       self._isInitialized = true;
@@ -77,6 +78,7 @@ angular.module('frontEndApp')
                   }, function(){altert('lol fail')});
               }
               else {
+
                   console.log('asked to load Mic but input mode not good:');
                   console.log(this._inputMode);
               }
@@ -114,8 +116,6 @@ angular.module('frontEndApp')
 
               this.killMic();
               this.killSound();
-              this._isInitialized = false; // todo : sale
-
 
               this._inputMode = input;
           }
@@ -144,10 +144,11 @@ angular.module('frontEndApp')
            */
           preLoadGraph()
           {
+              console.log('preload graph');
               if(this._isInitialized)
               {
-                  this.stopSound();
-                  this.pauseMic();
+                  /*this.killSound();
+                  this.pauseMic();*/
 
                   this.cleanGraph();
 
@@ -159,9 +160,11 @@ angular.module('frontEndApp')
                   {
                       this._soundInput = this._context.createBufferSource();
                       this._soundInput.buffer = this._soundBuffer;
+                      console.log('file load graph');
                   }
                   else if(this._inputMode =='micMode')
                   {
+                      console.log('mic load graph');
                       this._soundInput = this._context.createMediaStreamSource( this._micBuffer );
                   }
                   else
@@ -174,7 +177,7 @@ angular.module('frontEndApp')
                   this._soundInput.connect(this._analyser);
               }
               else {
-                  console.warn('preloading failed !');
+                  console.error('preloading failed !');
               }
 
           }
@@ -264,17 +267,14 @@ angular.module('frontEndApp')
           loadDefaultGraph()
           {
 
-
+              console.log("load default graph");
               if(this._isInitialized)
               {
                   // before anything, killing graph, just in case
-                  console.log("loading default graph");
+                  console.log("loading default graph OK nitialized");
 
                   this.preLoadGraph();
                   this._soundInput.connect(this._soundOutput);
-
-
-
 
                   this._isGraphReady = true;
               }
@@ -293,6 +293,7 @@ angular.module('frontEndApp')
           startMic()
           {
               this.loadDefaultGraph();
+
 
               // It's a bit different than fileMode, we load default graph here directly because mic sound starts automatically
               if(this._inputMode =='micMode')
@@ -365,19 +366,27 @@ angular.module('frontEndApp')
 
           killMic()
           {
-              if(this._isPlaying)
+              if(this._inputMode == 'micMode')
               {
-                  this.stopMic();
-              }
-              if(this._micBuffer != null)
-              {
-                  this._micBuffer.getAudioTracks()[0].stop();
-                  this._micBuffer = null;
-                  this._isInitialized = false;
+                  if(this._isPlaying)
+                  {
+
+                      this.stopMic();
+                  }
+                  if(this._micBuffer != null)
+                  {
+                      this._micBuffer.getAudioTracks()[0].stop();
+                      this._micBuffer = null;
+                      this._isInitialized = false;
+                  }
+                  else {
+                      console.info("killmic : already killed");
+                  }
               }
               else {
-                  console.info("killmic : already killed");
+                  console.info('killmic tried not in mic mode');
               }
+
 
           }
 
@@ -438,21 +447,28 @@ angular.module('frontEndApp')
 
 
           killSound() {
-              //this.stopSound();
-              if(this._isPlaying)
+              if(this._inputMode == 'fileMode')
               {
-                  this.stopSound();
-              }
-              if(this._soundBuffer != null)
-              {
+                  //this.stopSound();
+                  if(this._isPlaying)
+                  {
+                      this.stopSound();
+                  }
+                  if(this._soundBuffer != null)
+                  {
 
-                  this._soundBuffer = null;
-                  this._soundInput = null;
-                  this._isInitialized = false;
+                      this._soundBuffer = null;
+                      this._soundInput = null;
+                      this._isInitialized = false;
+                  }
+                  else {
+                      console.info("killSound : already killed");
+                  }
               }
               else {
-                  console.info("killSound : already killed");
+                  console.info("kill sound tried not in file mode");
               }
+
           }
           /**
            * Clean the graph. as simple as that.
