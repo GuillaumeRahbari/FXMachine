@@ -29,7 +29,6 @@ console.log("Allo")
         self.loadPedalToWebAudio = function () {
             if (webaudio.isInitialized) {
                 console.log("loading pedal");
-
                 console.log("send stuff to webaudio");
                 console.log("If it works it's crazy.");
 

@@ -1,5 +1,7 @@
 <div class="container-fluid main-web-audio">
 
+    <!-- TODO  duplication de code au niveau du selecteur file/mic -->
+
     <!-- FOR FILEMODE -->
     <div class="row" ng-if="$ctrl.webaudio.inputMode == 'fileMode' ">
 
@@ -13,10 +15,10 @@
             <div class="row threequartsheight fullwidthoparent nomargin">
 
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
+                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
                 </div>
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
+                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
 
                 </div>
             </div>
@@ -97,7 +99,7 @@
 
                 <div class="col-lg-6 nopadding">
                     <button id="cleangraph"
-                            class="btn btn-defaultwebaudio-control-btn  webaudio-control-btn-secondary quartheight smalltext nopadding fullwidthoparent"
+                            class="btn btn-default webaudio-control-btn  webaudio-control-btn-secondary quartheight smalltext nopadding fullwidthoparent"
                             ng-click="$ctrl.webaudio.cleanGraph();">Clean Audio Graph
                     </button>
 
@@ -209,10 +211,10 @@
             <div class="row threequartsheight fullwidthoparent nomargin">
 
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
+                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
                 </div>
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
+                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
 
                 </div>
             </div>
