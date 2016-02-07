@@ -80,8 +80,8 @@ router.put("/:pedalId", function(req, res) {
  *
  */
 router.put("/:pedalId/note/", function(req, res){
-    if(req.body.note && req.params.pedalId) {
-        pedalController.updatePedalNote(req.params.pedalId, req.query.note, function(err, result) {
+    if(req.body._note && req.params.pedalId) {
+        pedalController.updatePedalNote(req.params.pedalId, req.query._note, function(err, result) {
 
         });
     }

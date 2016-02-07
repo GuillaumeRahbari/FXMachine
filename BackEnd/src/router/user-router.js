@@ -75,9 +75,20 @@ router.put("/subscription", function (req, res) {
       _pedals: [],
       _id: 56af6be39abd8adc195e2da2 }
      */
-    userGateway.createUser(req.body, function(response) {
-        res.send(response);
+    userGateway.createUser(req.body, function(err ,response) {
+        if(err) {
+            res.send(400)
+        } else {
+            res.send(response);
+        }
     });
 });
+
+
+
+
+
+
+
 
 module.exports = router;
