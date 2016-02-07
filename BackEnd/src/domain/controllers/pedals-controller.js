@@ -30,7 +30,13 @@ function updatePedalNote(pedalId, pedalNote, callback) {
 }
 
 function updatePedalComment(pedalId, comment, callback) {
-
+    pedalFinder.myfindOne(pedalId, function(err, res){
+        if(err) {
+            callback(err, null);
+        } else {
+            console.log(res);
+        }
+    })
 }
 
 exports.updatePedalComment = updatePedalComment;
