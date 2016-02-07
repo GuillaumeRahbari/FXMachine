@@ -98,7 +98,7 @@ class User {
  */
 function JsonToUser(json, callback) {
     var user;
-    if(!(json._email && json._password && json._firstName && json._lastName)) {
+    if(!(json.email && json.password)) {
         callback("Bad json", null);
     } else if(!(json.pedals)) {
         user = new User(json.email, json.password, json.pedals);
