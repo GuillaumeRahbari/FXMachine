@@ -64,8 +64,7 @@ angular
                 .when('/users', {
                     templateUrl : 'views/users.html',
                     controller  : 'UsersCtrl',
-                    controllerAs: 'users',
-                    resolve     : {}
+                    controllerAs: 'users'
                 })
                 .otherwise({
                     redirectTo: '/home'

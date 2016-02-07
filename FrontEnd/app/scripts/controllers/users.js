@@ -13,5 +13,4 @@
  */
 angular.module('frontEndApp')
        .controller('UsersCtrl', function () {
-
        });
