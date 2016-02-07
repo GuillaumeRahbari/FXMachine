@@ -51,10 +51,10 @@ angular.module('frontEndApp')
                 * @param {int} pedalId - The pedal id.
                 * @returns {HttpPromise}
                 */
-               getPedal: function (pedalId) {
+               getPedal: function (userId, pedalId) {
                    return $http({
                        method : 'GET',
-                       url    : url + '/' + pedalId,
+                       url    : 'http://localhost:3000/user/' + userId + '/pedals/' + pedalId,
                        headers: {'Content-Type': 'application/json'}
                    });
                },

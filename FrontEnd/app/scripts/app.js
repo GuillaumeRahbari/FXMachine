@@ -49,8 +49,8 @@ angular
                     controller  : 'PedalCtrl',
                     controllerAs: 'pedal',
                     resolve     : {
-                        'pedal': function (PedalSrv, $route) {
-                            return PedalSrv.getPedal($route.current.params.pedalId).then(
+                        'pedal': function (PedalSrv, $route, $cookies) {
+                            return PedalSrv.getPedal($cookies.get('userId'),$route.current.params.pedalId).then(
                                 function (data) {
                                     return data.data;
                                 },
@@ -66,8 +66,8 @@ angular
                     controller  : 'UsersCtrl',
                     controllerAs: 'users'
                 })
-                .when('/users/:userId', {
-                    template: '<section class="container"><my-pedal-list pedals="$resolve.pedals"></my-pedal-list></section>',
+                .when('/users/:userId/pedals', {
+                    template: '<section class="container"><user-pedal-list pedals="$resolve.pedals"></user-pedal-list></section>',
                     resolve : {
                         'pedals': function (PedalSrv, $route) {
                             return PedalSrv.getAllPedals($route.current.params.userId).then(
@@ -80,6 +80,9 @@ angular
                             )
                         }
                     }
+                })
+                .when('/users/:userId/pedals/:pedalId', {
+
                 })
                 .otherwise({
                     redirectTo: '/home'
