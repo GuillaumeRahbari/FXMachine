@@ -49,7 +49,7 @@ angular
                     controller  : 'PedalCtrl',
                     controllerAs: 'pedal',
                     resolve     : {
-                        'pedal': function (PedalSrv, $route, $cookies) {
+                        pedal: function (PedalSrv, $route, $cookies) {
                             return PedalSrv.getPedal($cookies.get('userId'),$route.current.params.pedalId).then(
                                 function (data) {
                                     return data.data;
@@ -62,16 +62,15 @@ angular
                     }
                 })
                 .when('/users', {
-                    templateUrl : 'views/users.html',
-                    controller  : 'UsersCtrl',
-                    controllerAs: 'users'
+                    template : '<section id="users" class="container"><users-list></users-list></section>'
                 })
                 .when('/users/:userId/pedals', {
                     template: '<section class="container"><user-pedal-list pedals="$resolve.pedals"></user-pedal-list></section>',
                     resolve : {
-                        'pedals': function (PedalSrv, $route) {
+                        pedals: function (PedalSrv, $route) {
                             return PedalSrv.getAllPedals($route.current.params.userId).then(
                                 function (response) {
+                                    console.log(response.data);
                                     return response.data;
                                 },
                                 function (error) {

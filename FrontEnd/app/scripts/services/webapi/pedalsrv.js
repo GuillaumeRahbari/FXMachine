@@ -20,7 +20,7 @@ angular.module('frontEndApp')
                getAllPedals: function (userId) {
                    return $http({
                        method : 'GET',
-                       url    : 'http://localhost:3000/user/' + userId + '/pedals//all',
+                       url    : 'http://localhost:3000/user/' + userId + '/pedals/all',
                        headers: {'Content-Type': 'application/json'}
                    });
                },

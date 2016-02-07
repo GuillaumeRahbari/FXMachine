@@ -19,8 +19,8 @@ function UserPedalListController () {
 angular.module('frontEndApp')
        .component('userPedalList', {
            templateUrl: '/components/user-pedal-list/user-pedal-list.html',
-           controller : UserPedalListController,
            bindings   : {
                pedals: '='
-           }
+           },
+           controller : UserPedalListController
        });
