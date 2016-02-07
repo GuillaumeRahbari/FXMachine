@@ -19,5 +19,8 @@ function UserController () {
 angular.module('frontEndApp')
        .component('myUser', {
            templateUrl: 'components/my-user/my-user.html',
-           controller : UserController
+           controller : UserController,
+           bindings   : {
+               user: '='
+           }
        });
