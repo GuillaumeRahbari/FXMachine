@@ -66,6 +66,21 @@ angular
                     controller  : 'UsersCtrl',
                     controllerAs: 'users'
                 })
+                .when('/users/:userId', {
+                    template: '<section class="container"><my-pedal-list pedals="$resolve.pedals"></my-pedal-list></section>',
+                    resolve : {
+                        'pedals': function (PedalSrv, $route) {
+                            return PedalSrv.getAllPedals($route.current.params.userId).then(
+                                function (response) {
+                                    return response.data;
+                                },
+                                function (error) {
+                                    return error;
+                                }
+                            )
+                        }
+                    }
+                })
                 .otherwise({
                     redirectTo: '/home'
                 });

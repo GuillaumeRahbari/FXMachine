@@ -17,10 +17,10 @@ angular.module('frontEndApp')
                 * Return all pedals of the user.
                 * @returns {HttpPromise}
                 */
-               getAllPedals: function () {
+               getAllPedals: function (userId) {
                    return $http({
                        method : 'GET',
-                       url    : url + '/all',
+                       url    : 'http://localhost:3000/user/' + userId + '/pedals//all',
                        headers: {'Content-Type': 'application/json'}
                    });
                },
