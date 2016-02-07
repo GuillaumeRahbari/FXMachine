@@ -12,18 +12,21 @@ function createUser(user ,callback) {
             console.log('Unable to connect to the mongoDB server. Error:', err);
             callback(err);
         } else {
-            console.log('Connection established to', url);
             var collection = db.collection('users');
             user._role = "user";
             user._pedals = [];
             console.log(user);
             collection.insert([user], function (err, result) {
                 if (err) {
-                    callback(409);
+                    console.log(err);
+                    callback(err, null);
                 } else {
+                    console.log("test");
+                    console.log(result.ops[0] );
                     console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
-                    callback({ _id :  result.ops[0]._id });
-                    console.log(result.ops[0]._id );
+                    callback(null, { _id :  result.ops[0]._id,
+                                     _firstName : result.ops[0]._firstName,
+                                     _lastName : result.ops[0]._lastName});
                 }
             });
         }
@@ -47,6 +50,10 @@ function deleteUser(user, callback) {
     });
 }
 
+
+
+
+/** work in progress **/
 function updateUser(user, callback) {
     console.log("in user");
     console.log(user);

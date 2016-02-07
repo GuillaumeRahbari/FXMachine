@@ -2,8 +2,9 @@
  * Created by Quentin on 1/14/2016.
  */
 var userFinder = require('../../data/user-finder'),
-    usergateway = require("../../data/user-gateway"),
+    userGateway = require("../../data/user-gateway"),
     async = require("async"),
+    user = require("../User"),
     pedalFinder = require('../../data/pedal-finder');
 
 function pedalRetriever(userId, callback) {
@@ -29,7 +30,7 @@ function updateUserPedals(userId, pedals ,callback) {
         } else {
             console.log(pedals);
             res._pedals.push(pedals[0]);
-            usergateway.updateUser(res, function(err, res) {
+            userGateway.updateUser(res, function(err, res) {
                 if(err) {
                     callback(err, null);
                 }
@@ -47,6 +48,10 @@ function retrieveAllUser(callback) {
         }
     })
 }
+
+
+
+
 
 exports.updateUserPedals = updateUserPedals;
 exports.pedalRetriever = pedalRetriever;

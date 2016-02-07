@@ -15,7 +15,7 @@ var mongodb = require('mongodb');
         } else {
             var collection = db.collection('users');
             var collection2 = db.collection('pedals');
-            var user = {email : 'admin@admin.com', password:"admin", role :"admin"};
+            var user = {_email : 'admin@admin.com', _password:"admin", _role :"admin"};
             collection.insert(user, function(err, result) {
                if(err){
                    console.log(err);

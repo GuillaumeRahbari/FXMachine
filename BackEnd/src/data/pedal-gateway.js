@@ -62,15 +62,15 @@ function updatePedal(pedal, callback) {
     });
 }
 
-function updatePedalNote(pedal, callback) {
+function updatePedalNote(pedalId, pedalNote, callback) {
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(err, null);
         } else {
             var collection = db.collection('pedal');
             collection.updateOne(
-                { "_name": pedal.name },
-                { $set : { "_note": pedal.note }}
+                { "_id": pedalId },
+                { $set : { "_note": pedalNote }}
             , function(err, res) {
                 if(err) {
                     console.log(err);
@@ -84,7 +84,7 @@ function updatePedalNote(pedal, callback) {
 }
 
 
-
+exports.updatePedalNote = updatePedalNote;
 exports.deletePedal = deletePedal;
 exports.savePedal = savePedal;
 exports.updatePedal = updatePedal;
