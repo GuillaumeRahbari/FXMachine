@@ -110,6 +110,19 @@ angular.module('frontEndApp')
                            return error.status;
                        }
                    );
+               },
+
+               /**
+                * This function gets all users.
+                * This function returns a promise.
+                * @returns {HttpPromise} An http promise.
+                */
+               getAll: function () {
+                   return $http({
+                       method : 'GET',
+                       url    : 'http://localhost:3000/user/all',
+                       headers: {'Content-Type': 'application/json'}
+                   });
                }
            };
        });

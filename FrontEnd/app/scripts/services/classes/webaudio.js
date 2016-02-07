@@ -25,7 +25,8 @@ angular.module('frontEndApp')
           constructor (){
               console.log("webaudio contructor!");
 
-              this._soundBuffer = null;
+              this._soundBuffer = null; // the buffer of audio files
+              this._micBuffer = null; // the "buffer" of microphone live input
               this._soundInput = null; // The first box of the graph, linked to the soundBuffer
               this._soundOutput = null; // The last box of the graph, linked to.. the speakers in buildGraph()
 
@@ -51,8 +52,37 @@ angular.module('frontEndApp')
 
               // We need to keep access of the filters we connected, to be able to delete them afterwards
               this._connectedFilters = [];
+
+              this._inputMode = 'fileMode';
+
           }
 
+
+
+          loadMic()
+          {
+              console.log("load mic mode !");
+              if(this._inputMode == 'micMode')
+              {
+                  var self = this;
+                  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+                  // navigator.getUserMedia( {audio:true}, this.gotStream(stream), function(err){console.log("err:"+err)} );
+
+                  navigator.webkitGetUserMedia({audio:true}, function(stream){
+
+                      console.log('mic loaded');
+
+                      self._micBuffer = stream;
+                      self._isInitialized = true;
+
+                  }, function(){altert('lol fail')});
+              }
+              else {
+
+                  console.log('asked to load Mic but input mode not good:');
+                  console.log(this._inputMode);
+              }
+          }
 
 
           /**
@@ -70,6 +100,24 @@ angular.module('frontEndApp')
               {
                   alert('Web Audio API is not supported in this browser');
               }
+
+
+
+          }
+
+
+
+          changeInputMode(input)
+          {
+
+              console.log("changing input from " + this._inputMode + " to " + input);
+              // Killing anything going on at this point
+             // this.cleanGraph();
+
+              this.killMic();
+              this.killSound();
+
+              this._inputMode = input;
           }
 
 
@@ -92,6 +140,50 @@ angular.module('frontEndApp')
 
 
           /**
+           * Pre loading different, depending on input source
+           */
+          preLoadGraph()
+          {
+              console.log('preload graph');
+              if(this._isInitialized)
+              {
+                  /*this.killSound();
+                  this.pauseMic();*/
+
+                  this.cleanGraph();
+
+
+                  // quick graph
+                  console.log("WebAudio : creating simple graph input->output.");
+
+                  if(this._inputMode =='fileMode')
+                  {
+                      this._soundInput = this._context.createBufferSource();
+                      this._soundInput.buffer = this._soundBuffer;
+                      console.log('file load graph');
+                  }
+                  else if(this._inputMode =='micMode')
+                  {
+                      console.log('mic load graph');
+                      this._soundInput = this._context.createMediaStreamSource( this._micBuffer );
+                  }
+                  else
+                  {
+                      console.warn("bad input mode during default graph loading");
+                  }
+
+                  this._soundOutput = this._context.destination;
+                  // Connecting webaudio input to analyzer
+                  this._soundInput.connect(this._analyser);
+              }
+              else {
+                  console.error('preloading failed !');
+              }
+
+          }
+
+
+          /**
            * Load new audio graph
            * Note : filterInput and filterOutput are inside the filters array
            * @param {Array} filters - all the filters to connecy
@@ -100,117 +192,284 @@ angular.module('frontEndApp')
            */
           loadGraph(filters, filterInput, filterOutput)
           {
-
-              this.stopSound();
-              this.cleanGraph();
-
-              // Handling input source
-              this._soundInput = this._context.createBufferSource();
-              this._soundOutput = this._context.destination;
-              this._soundInput.buffer = this._soundBuffer;
-
-
-              // **** COnnecting webaudio to filterInput
-              this._soundInput.connect(filterInput.audioNode);
-              // **** COnnecting filterOutput to webaudio output
-              filterOutput.audioNode.connect(this._soundOutput);
-
-              // TODO : faudrait une vraie output sur laquelle on peut se brancher, parce que sur la, soundOutput c le speaker donc on peut pas sy connecter pour visualiser
-              filterOutput.audioNode.connect(this._analyser);
-
-              // if theres filters, graph and all that stuff
-
-              if(filters !== undefined)
+              if(this._isInitialized)
               {
-                  //Need to build graph with filters here
-                  var l = filters.length;
 
-                  if(l >0)
+                  this.preLoadGraph();
+                  this._soundInput.connect(filterInput.audioNode);
+                  filterOutput.audioNode.connect(this._soundOutput);
+
+                  // if theres filters, graph and all that stuff
+
+                  if(filters !== undefined)
                   {
-                      // **** COnnecting everything inside
+                      //Need to build graph with filters here
+                      var l = filters.length;
 
-
-                      for(var i = 0 ; i < l ; i++) // For each filter
+                      if(l >0)
                       {
-                          // and for each output of the filter
-                          for(var j = 0 ; j < filters[i].outputs.length; j++)
+                          // **** COnnecting everything inside
+
+
+                          for(var i = 0 ; i < l ; i++) // For each filter
                           {
-                              // * get uuids of ouput
-                              var filterUUID = filters[i].outputs[j];
+                              // and for each output of the filter
+                              for(var j = 0 ; j < filters[i].outputs.length; j++)
+                              {
+                                  // * get uuids of ouput
+                                  var filterUUID = filters[i].outputs[j];
                                   console.log("filterUUID:"+filterUUID);
 
-                              // * FInd the matching filter
-                              var outputFilter;
-                              outputFilter = this.getFilterByUUID(filters, filterUUID);
+                                  // * FInd the matching filter
+                                  var outputFilter;
+                                  outputFilter = this.getFilterByUUID(filters, filterUUID);
 
-                              if(outputFilter === undefined)
-                              {
-                                  console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
-                                  return;
+                                  if(outputFilter === undefined)
+                                  {
+                                      console.error("problem. outputFilter still undefined, no mqtch for the uuid given");
+                                      return;
+                                  }
+
+                                  // * and connect the filter to that output filter
+                                  filters[i].audioNode.connect(outputFilter.audioNode);
                               }
 
-                              // * and connect the filter to that output filter
-                              filters[i].audioNode.connect(outputFilter.audioNode);
                           }
 
+                          this._connectedFilters = filters;
+                          this._isGraphReady = true;
+
+                          console.info("everything well connected !");
+
                       }
-
-                      this._connectedFilters = filters;
-                      this._isGraphReady = true;
-
-                      console.info("everything well connected !");
+                      else
+                      {
+                          console.info("something happened.");
+                      }
 
                   }
                   else
                   {
-                      console.info("something happened.");
+                      console.error("BIG ERROR . S HOULD BE AT LEAST TWO FILTERS WITH FILTERINPUT AND FILTEROUTPUT");
                   }
+              }
+              else {
+                  console.warn("tryig to load graph but not initialized yet");
+                  alert("the web audio context is not initialized, we make this operation");
+              }
 
+          }
+
+
+          /*
+           Just play the input.
+           */
+          loadDefaultGraph()
+          {
+
+              console.log("load default graph");
+              if(this._isInitialized)
+              {
+                  // before anything, killing graph, just in case
+                  console.log("loading default graph OK nitialized");
+
+                  this.preLoadGraph();
+                  this._soundInput.connect(this._soundOutput);
+
+                  this._isGraphReady = true;
               }
               else
               {
-                  console.error("BIG ERROR . S HOULD BE AT LEAST TWO FILTERS WITH FILTERINPUT AND FILTEROUTPUT");
+                  console.warn("webaudio not initialised ! not loading graph before it is.");
+              }
+
+
+
+          }
+
+
+          //******* MICMODE SPECIFIC METHODS
+
+          startMic()
+          {
+              this.loadDefaultGraph();
+
+
+              // It's a bit different than fileMode, we load default graph here directly because mic sound starts automatically
+              if(this._inputMode =='micMode')
+              {
+                  if(this._isGraphReady)
+                  {
+                      this._isPlaying = true;
+                  }
+                  else
+                  {
+                      console.warn("Impossible to play sound, build graph before !");
+                  }
+              }
+              else
+              {
+                  console.warn('asked for start Mic but wrong input mode:');
+                  console.warn(this._inputMode);
               }
           }
+
+          pauseMic()
+          {
+              if(this._inputMode =='micMode')
+              {
+                  if(this._isPlaying)
+                  {
+                      console.info("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
+                      // stop the source now.
+                      // Parameter : delay before stopping
+                      // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
+                      // We do not need to redecode the data, just to rebuild the graph
+                      this._isPlaying = false;
+                      this.cleanGraph(); // Just in case, because i dont trust this stuff
+                      this._isGraphReady = false;
+                  }
+                  else
+                  {
+                      console.warn("trying to stop mic but not started");
+                  }
+              }
+              else
+              {
+                  console.warn('asked stuff but wrong input mode:');
+                  console.warn(this._inputMode);
+              }
+          }
+
+          // Stop is just pause + kill
+          stopMic()
+          {
+              if(this._inputMode =='micMode')
+              {
+                  if(this._isPlaying)
+                  {
+                      this.pauseMic();
+                  }
+                  else
+                  {
+                     // console.warn("trying to stop mic but not started");
+                  }
+
+                  this.killMic();
+              }
+              else
+              {
+                  console.warn('asked stuff but wrong input mode:');
+                  console.warn(this._inputMode);
+              }
+          }
+
+          killMic()
+          {
+              if(this._inputMode == 'micMode')
+              {
+                  if(this._isPlaying)
+                  {
+
+                      this.stopMic();
+                  }
+                  if(this._micBuffer != null)
+                  {
+                      this._micBuffer.getAudioTracks()[0].stop();
+                      this._micBuffer = null;
+                      this._isInitialized = false;
+                  }
+                  else {
+                      console.info("killmic : already killed");
+                  }
+              }
+              else {
+                  console.info('killmic tried not in mic mode');
+              }
+
+
+          }
+
+          // ***** FILEMODE SPECIFIC METHODS
 
           playSound()
           {
-            if(this._isGraphReady)
-            {
-                this._soundInput.start(0, 0);
-                this._isPlaying = true;
-            }
-             else
-            {
-                console.warn("Impossible to play sound, build graph before !");
-            }
-
-
-          }
-
-
-
-          stopSound() {
-              if(this._isPlaying)
+              if(this._inputMode =='fileMode')
               {
-                  console.info("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
-                  // stop the source now.
-                  // Parameter : delay before stopping
-                  // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
-                  // We do not need to redecode the data, just to rebuild the graph
-                  this._soundInput.stop(0);
-                  this._isPlaying = false;
-                  this.cleanGraph(); // Just in case, because i dont trust this stuff
-                  this._isGraphReady = false;
-
+                  if(this._isGraphReady)
+                  {
+                      this._soundInput.start(0, 0);
+                      this._isPlaying = true;
+                  }
+                  else
+                  {
+                      console.warn("Impossible to play sound, build graph before !");
+                  }
               }
               else
               {
-                  console.warn("trying to stop sound but not playing");
+                  console.warn('asked for play sound but wrong input mode:');
+                  console.warn(this._inputMode);
               }
+
           }
 
 
+          stopSound() {
+              if(this._inputMode =='fileMode')
+              {
+                  if(this._isPlaying)
+                  {
+                      console.info("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
+                      // stop the source now.
+                      // Parameter : delay before stopping
+                      // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
+                      // We do not need to redecode the data, just to rebuild the graph
+                      this._soundInput.stop(0);
+                      this._isPlaying = false;
+                      this.cleanGraph(); // Just in case, because i dont trust this stuff
+                      this._isGraphReady = false;
+
+                  }
+                  else
+                  {
+                      console.warn("trying to stop sound but not playing");
+                  }
+              }
+              else
+              {
+                  console.warn('asked for play sound but wrong input mode:');
+                  console.warn(this._inputMode);
+              }
+
+
+          }
+
+
+          killSound() {
+              if(this._inputMode == 'fileMode')
+              {
+                  //this.stopSound();
+                  if(this._isPlaying)
+                  {
+                      this.stopSound();
+                  }
+                  if(this._soundBuffer != null)
+                  {
+
+                      this._soundBuffer = null;
+                      this._soundInput = null;
+                      this._isInitialized = false;
+                  }
+                  else {
+                      console.info("killSound : already killed");
+                  }
+              }
+              else {
+                  console.info("kill sound tried not in file mode");
+              }
+
+          }
           /**
            * Clean the graph. as simple as that.
            */
@@ -240,39 +499,7 @@ angular.module('frontEndApp')
 
           }
 
-          /*
-          Just play the input.
-           */
-          loadDefaultGraph()
-          {
 
-              if(this._isInitialized)
-              {
-                  // before anything, killing graph, just in case
-                  console.log("loading default graph");
-                  this.cleanGraph();
-
-                  // quick graph
-                  console.log("WebAudio : creating simple graph input->output.");
-                  this._soundInput = this._context.createBufferSource();
-                  this._soundOutput = this._context.destination;
-                  this._soundInput.buffer = this._soundBuffer;
-                  this._soundInput.connect(this._soundOutput);
-
-                  // Connecting webaudio input to analyzer
-                  this._soundInput.connect(this._analyser);
-
-
-                  this._isGraphReady = true;
-              }
-              else
-              {
-                  console.warn("webaudio not initialised ! not loading graph before it is.");
-              }
-
-
-
-          }
 
           //********************************** getters
 
@@ -306,6 +533,10 @@ angular.module('frontEndApp')
            */
           get isInitialized (){
               return this._isInitialized;
+          }
+
+          get inputMode (){
+              return this._inputMode;
           }
 
           /**

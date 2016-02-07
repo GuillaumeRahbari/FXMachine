@@ -1,6 +1,8 @@
 <div class="biquad">
     <div class="valueContentBiquadHeader">Type : {{$ctrl.filter.audioNode.type}}</div>
 
+
+    <!-- Biquad type selection -->
     <form>
         <select name="selectType" ng-model="$ctrl.filter.audioNode.type">
             <option value="lowpass">Low Pass</option>
@@ -14,6 +16,8 @@
         </select>
     </form>
     <br>
+
+    <!-- Controls over biquad parameters -->
 
     <div class="biquadRange">
         <input id="cuttofFreq" type="range" min="0" max="40000" value="40000" step="10"
@@ -37,5 +41,7 @@
         </div>
         <div class="valueContentBiquad"> Gain :{{$ctrl.filter.audioNode.gain.value}}dB</div>
     </div>
+
+    <!-- frequency response visualiser -->
     <canvas id="biquadvisualisation" height="80" width="160" class="canvas-basic"></canvas>
 </div>

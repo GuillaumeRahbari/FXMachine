@@ -63,12 +63,13 @@ $height: 90px;
 .webaudio-control-btn {
   border : 2px solid #7d936f;
   color:white;
-  background-color:rgba(255,255,255,0.5);
+
 }
 
 .webaudio-control-btn:hover {
   border : 2px solid #9eed7e;
   -webkit-transition: 0.5s;
+
 
 }
 
@@ -86,10 +87,21 @@ $height: 90px;
   background-color: #a09693;
 }
 
+.webaudio-control-btn-primary:hover {
+
+  background-color: #a09693;
+}
+
 .webaudio-control-btn-secondary {
   background-color: #514c4b;
 
 }
+
+.webaudio-control-btn-secondary:hover {
+  background-color: #514c4b;
+
+}
+
 
 .smalltext {
   font-size: 10px;
@@ -100,10 +112,16 @@ $height: 90px;
 }
 /** Trucs varies que j'essaie **/
 
+//** TODO : refactor en nopaddinghorizontal **/
 .nopadding {
   padding-left:0;
   padding-right:0;
 
+}
+
+.nopaddingvertical {
+  padding-top:0;
+  padding-bottom:0;
 }
 
 .nopaddingright {
@@ -129,6 +147,12 @@ $height: 90px;
 .fullwidthoparent {
   width:100%;
 }
+
+
+.halfwidthoparent {
+  width:50%;
+}
+
 
 
 

@@ -48,18 +48,23 @@ angular
                     templateUrl : 'views/pedal.html',
                     controller  : 'PedalCtrl',
                     controllerAs: 'pedal',
-                    resolve : {
-                        'pedal' : function (PedalSrv, $route) {
+                    resolve     : {
+                        'pedal': function (PedalSrv, $route) {
                             return PedalSrv.getPedal($route.current.params.pedalId).then(
-                                function(data){
+                                function (data) {
                                     return data.data;
                                 },
-                                function (error){
+                                function (error) {
                                     return error;
                                 }
                             )
                         }
                     }
+                })
+                .when('/users', {
+                    templateUrl : 'views/users.html',
+                    controller  : 'UsersCtrl',
+                    controllerAs: 'users'
                 })
                 .otherwise({
                     redirectTo: '/home'

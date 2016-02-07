@@ -1,6 +1,35 @@
 <div class="container-fluid main-web-audio">
-    <div class="row">
-        <div class="web-audio-elem inputs-web-audio  col-lg-3 ">
+
+    <!-- TODO  duplication de code au niveau du selecteur file/mic -->
+
+    <!-- FOR FILEMODE -->
+    <div class="row" ng-if="$ctrl.webaudio.inputMode == 'fileMode' ">
+
+        <div class="web-audio-elem inputs-web-audio col-lg-1">
+            <!-- Input type selector -->
+
+            <div class="row quartHeight fullwidthoparent nomargin">
+                INPUT TYPE
+                </div>
+
+            <div class="row threequartsheight fullwidthoparent nomargin">
+
+                <div class="row thirdheight fullwidthoparent nomargin">
+                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
+                </div>
+                <div class="row thirdheight fullwidthoparent nomargin">
+                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="web-audio-elem inputs-web-audio  col-lg-3">
+
+
+
 
             <!-- Extremite: need un nomargin -->
             <div class="row quartheight fullwidthoparent nomargin">
@@ -14,7 +43,7 @@
             </div>
 
 
-            <div class="row halfheight fullwidthoparent nomargin">
+            <div class="row quartheight fullwidthoparent nomargin">
                 <div class="col-lg-4 nopadding">
                     <button id="load"
                             class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent threequartsheight"
@@ -44,14 +73,18 @@
             <div ng-if="!$ctrl.webaudio.isPlaying" class="statusbox invalid-box thirdheight">Playing</div>
         </div>
 
-        <div class="web-audio-elem controls-web-audio col-lg-4">
+        <div class="web-audio-elem controls-web-audio col-lg-3">
 
 
             <!-- some space idk what for yet -->
             <div class="row halfheight fullwidthoparent nomargin">
 
                 <div class="col-lg-6 nopadding">
-                    <div class="emptyspace halfheight nopadding"></div>
+                    <div class="emptyspace halfheight nopadding">
+
+
+
+                    </div>
                     <!-- some empty space to use someday -->
                 </div>
 
@@ -66,7 +99,7 @@
 
                 <div class="col-lg-6 nopadding">
                     <button id="cleangraph"
-                            class="btn btn-defaultwebaudio-control-btn  webaudio-control-btn-secondary quartheight smalltext nopadding fullwidthoparent"
+                            class="btn btn-default webaudio-control-btn  webaudio-control-btn-secondary quartheight smalltext nopadding fullwidthoparent"
                             ng-click="$ctrl.webaudio.cleanGraph();">Clean Audio Graph
                     </button>
 
@@ -131,6 +164,125 @@
 
                 </div>
                 <div class="col-lg-7 nopadding">
+
+                    <div class="row quartheight nomargin">
+                        <canvas volume-visualiser orientation="'horizontal'" analyser-node="$ctrl.webaudio.analyser"
+                                class="canvas-basic quartheight fullwidthoparent"></canvas>
+                    </div>
+
+                    <div class="row quartheight nomargin">
+                        <canvas volume-visualiser orientation="'horizontal'" analyser-node="$ctrl.webaudio.analyser"
+                                class="canvas-basic quartheight fullwidthoparent"></canvas>
+                    </div>
+
+                    <div class="row halfheight nomargin">
+                        <canvas egaliser-visualizer analyser-node="$ctrl.webaudio.analyser"
+
+                                class="canvas-basic halfheight fullwidthoparent"></canvas>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-1 nopadding">
+
+                    <canvas volume-visualiser orientation="'vertical'" analyser-node="$ctrl.webaudio.analyser"
+                            class="canvas-basic fullheight fullwidthoparent"></canvas>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- FOR MIC INPUT MODE -->
+    <div class="row" ng-if="$ctrl.webaudio.inputMode == 'micMode'">
+
+        <div class="web-audio-elem inputs-web-audio col-lg-1">
+            <!-- Input type selector -->
+
+            <div class="row quartHeight fullwidthoparent nomargin">
+                INPUT TYPE
+            </div>
+
+            <div class="row threequartsheight fullwidthoparent nomargin">
+
+                <div class="row thirdheight fullwidthoparent nomargin">
+                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
+                </div>
+                <div class="row thirdheight fullwidthoparent nomargin">
+                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="web-audio-elem inputs-web-audio  col-lg-3 ">
+
+
+
+            <!-- Extremite: need un nomargin -->
+            <div class="row fullwidthoparent nomargin">
+
+                <div class="col-lg-3 nopadding">
+                    <button
+                            class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
+                            ng-click="$ctrl.webaudio.loadMic()">LoadMic
+                    </button>
+
+                </div>
+                <div class="col-lg-3 nopadding">
+                    <button
+                            class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
+                            ng-click="$ctrl.webaudio.startMic()">Start
+                    </button>
+                </div>
+                <div class="col-lg-3 nopadding">
+                    <button
+                            class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
+                            ng-click="$ctrl.webaudio.pauseMic()">Pause
+                    </button>
+                </div>
+                <div class="col-lg-3 nopadding">
+                    <button
+                            class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
+                            ng-click="$ctrl.webaudio.stopMic()">Stop
+                    </button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="web-audio-elem status-web-audio  col-lg-1">
+            <div ng-if="$ctrl.webaudio.isInitialized" class="statusbox valid-box thirdheight">MIC</div>
+            <div ng-if="$ctrl.webaudio.isGraphReady" class="statusbox valid-box thirdheight">GRAPH</div>
+            <div ng-if="$ctrl.webaudio.isPlaying" class="statusbox valid-box thirdheight">ON-AIR</div>
+
+            <div ng-if="!$ctrl.webaudio.isInitialized" class="statusbox invalid-box thirdheight">MIC</div>
+            <div ng-if="!$ctrl.webaudio.isGraphReady" class="statusbox invalid-box thirdheight">GRAPH</div>
+            <div ng-if="!$ctrl.webaudio.isPlaying" class="statusbox invalid-box thirdheight">ON-AIR</div>
+        </div>
+
+        <div class="web-audio-elem controls-web-audio col-lg-5">
+
+            <!--By default : speakers-->
+            <canvas signal-visualiser analyser-node="$ctrl.webaudio.analyser"
+
+                    class="canvas-basic fullheight fullwidthoparent nopadding"></canvas>
+
+
+        </div>
+
+        <div class="web-audio-elem outputs-web-audio  col-lg-2">
+            <div class="row nomargin">
+
+                <div class="col-lg-11 nopadding">
 
                     <div class="row quartheight nomargin">
                         <canvas volume-visualiser orientation="'horizontal'" analyser-node="$ctrl.webaudio.analyser"
