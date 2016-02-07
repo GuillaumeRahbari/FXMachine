@@ -35,7 +35,7 @@ router.get("/all", function(req, res) {
         } else {
             console.log("result in the router");
             console.log(result);
-            res.sendStatus(result);
+            res.sendStatus(JSON.stringify(result));
         }
     });
 });

@@ -14,7 +14,6 @@ var app = require('../../app/core/core.js').app,
 router.get("/all", function(req, res) {
     if(!(req.params.user_id && typeof req.params.user_id === 'undefined')) {
         userController.pedalRetriever(req.params.user_id, function(response) {
-            console.log(response);
             res.send(response);
         });
     } else {
@@ -97,10 +96,10 @@ router.put("/:pedalId/note/", function(req, res){
  *
  *
  */
-router.put("/:pedalId/comment", function(req, res){
+router.put("/comment", function(req, res){
     if(req.body.comment && req.params.pedalId) {
         pedalController.updatePedalComment( req.params.pedalId, req.query.comment, function(err, result){
-
+            res.send(200);
         });
     }
 });
