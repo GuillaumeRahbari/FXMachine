@@ -50,7 +50,7 @@ angular
                     controllerAs: 'pedal',
                     resolve     : {
                         pedal: function (PedalSrv, $route, $cookies) {
-                            return PedalSrv.getPedal($cookies.get('userId'),$route.current.params.pedalId).then(
+                            return PedalSrv.getPedal($cookies.get('userId'), $route.current.params.pedalId).then(
                                 function (data) {
                                     return data.data;
                                 },
@@ -62,7 +62,7 @@ angular
                     }
                 })
                 .when('/users', {
-                    template : '<section id="users" class="container"><users-list></users-list></section>'
+                    template: '<section id="users" class="container"><users-list></users-list></section>'
                 })
                 .when('/users/:userId/pedals', {
                     template: '<section class="container"><user-pedal-list pedals="$resolve.pedals"></user-pedal-list></section>',
@@ -81,7 +81,21 @@ angular
                     }
                 })
                 .when('/users/:userId/pedals/:pedalId', {
-
+                    templateUrl : 'views/pedal.html',
+                    controller  : 'PedalCtrl',
+                    controllerAs: 'pedal',
+                    resolve     : {
+                        pedal: function (PedalSrv, $route, $cookies) {
+                            return PedalSrv.getPedal($route.current.params.userId, $route.current.params.pedalId).then(
+                                function (data) {
+                                    return data.data;
+                                },
+                                function (error) {
+                                    return error;
+                                }
+                            )
+                        }
+                    }
                 })
                 .otherwise({
                     redirectTo: '/home'
