@@ -78,7 +78,7 @@ router.put("/:pedalId", function(req, res) {
  *
  *
  */
-router.put("/:pedalId/note/", function(req, res){
+router.post("/:pedalId/note/", function(req, res){
     if(req.body._note && req.params.pedalId) {
         pedalController.updatePedalNote(req.params.pedalId, req.query._note, function(err, result) {
 
@@ -96,10 +96,32 @@ router.put("/:pedalId/note/", function(req, res){
  *
  *
  */
-router.put("/comment", function(req, res){
-    if(req.body.comment && req.params.pedalId) {
-        pedalController.updatePedalComment( req.params.pedalId, req.query.comment, function(err, result){
-            res.send(200);
+/*router.post("/:pedalId/comment", function(req, res){
+    console.log("coucou")
+    if(req.body._comment && req.params.pedalId) {
+        console.log("in if")
+        pedalController.updatePedalComment(req.params.pedalId, req.body._comment, function(err, result){
+            if(err) {
+                console.log("....")
+                res.sendStatus(400)
+            } else {
+                res.sendStatus(200);
+            }
+        });
+    }
+}); */
+
+
+
+
+router.post("/:pedalId/comments", function(req, res) {
+    if(req.body._comments && req.params.pedalId) {
+        pedalController.updatePedalComment(req.params.pedalId, req.body._comments, function(err, result) {
+            if(err) {
+                res.sendStatus(400);
+            } else {
+                res.sendStatus(200);
+            }
         });
     }
 });
