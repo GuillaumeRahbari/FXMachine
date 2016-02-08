@@ -14,7 +14,7 @@ var app = require('../../app/core/core.js').app,
 router.get("/all", function(req, res) {
     if(!(req.params.user_id && typeof req.params.user_id === 'undefined')) {
         userController.pedalRetriever(req.params.user_id, function(response) {
-            res.send(response);
+            res.send(response[0]);
         });
     } else {
         res.sendStatus(404);
@@ -80,10 +80,10 @@ router.put("/:pedalId", function(req, res) {
  *
  *
  */
-router.post("/:pedalId/note", function(req, res){
+router.post("/:pedalId/rate", function(req, res){
     console.log(req.params.pedalId);
-    if(req.body._note && req.params.pedalId) {
-        pedalController.updatePedalNote(req.params.pedalId, req.body._note, function(err, result) {
+    if(req.body._rate && req.params.pedalId) {
+        pedalController.updatePedalNote(req.params.pedalId, req.body._rate, function(err, result) {
             if(err) {
                 res.sendStatus(400);
             } else {

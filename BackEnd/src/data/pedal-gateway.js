@@ -98,6 +98,7 @@ function updatePedalNote(pedalId, pedalNote,callback) {
         if(err) {
             callback(err, null);
         } else {
+            console.log("yolo");
             var collection = db.collection('pedals');
             collection.updateOne(
                 { "_id" : pedalId },
@@ -106,6 +107,7 @@ function updatePedalNote(pedalId, pedalNote,callback) {
                     if(error) {
                         callback(error, null);
                     } else {
+                        console.log(res);
                         callback(null, res);
                     }
                 }
