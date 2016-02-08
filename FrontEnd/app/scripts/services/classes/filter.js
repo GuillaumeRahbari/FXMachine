@@ -16,6 +16,8 @@ angular.module('frontEndApp')
 
                // TODO : ESTCE QUON A VRAIMENT BESOIN DUN TABLEAU DINPUTS ?? techniquement non... a voir.
 
+               //****************** CONSTRUCTOR(S) STUFF
+
                /**
                 * The constructor of Filter
                 * @param type {String} - the type of filter we want to create.
@@ -23,53 +25,8 @@ angular.module('frontEndApp')
                 */
                constructor (type, webaudioService) {
 
-                   var success = true;
 
-                   // ALL OUR AVAILABLE FILTERS ARE HERE
-                   switch (type) {
-                       // Only passing the audio signal
-                       case 'node':
-                           // TODO: doit disparaitre
-                           // TODO : j'ai mis panner pour bien les differencier dans les graphes, mais a terme, mettre des gains.
-                           this._audioNode = webaudioService.context.createPanner();
-                           break;
-
-                       // SPECIAL filters, to represent input and output of a graph
-                       case 'input':
-                           this._audioNode = webaudioService.context.createGain();
-                           break;
-                       case 'output':
-                           this._audioNode = webaudioService.context.createGain();
-                           break;
-
-                       case 'gain':
-                           this._audioNode = webaudioService.context.createGain();
-                           break;
-                       case 'biquad':
-                           this._audioNode = webaudioService.context.createBiquadFilter();
-                           break;
-                       case "waveShaper":
-                           this._audioNode = webaudioService.context.createWaveShaper();
-                           break;
-                       case "delay":
-                           this._audioNode = webaudioService.context.createDelay(5.0);// represents the maximum delay time
-                           break;
-                       case "dynamicCompressor":
-                           this._audioNode = webaudioService.context.createDynamicsCompressor();
-                           break;
-                       case "stereoPanner":
-                           this._audioNode = webaudioService.context.createStereoPanner();
-                           break;
-                       case'visualiser':
-                           this._audioNode = webaudioService.context.createAnalyser();
-                           break;
-
-                       default:
-                           success = false;
-                           console.error("Filter : wrong type given to constructor :");
-                           console.error(type);
-                           break;
-                   }
+                   var success = this.setAudioNode(type, webaudioService);
 
                    if (success) {
                        // Continue construction
@@ -80,22 +37,36 @@ angular.module('frontEndApp')
                        this._outputs = [];
                        console.log("Filter : success creation filter");
                    }
+                   else
+                   {
+                       console.error('we shoudlnt be here')
+                   }
 
 
                }
 
 
-               importFilter(filterJSON, webaudioService)
+               /**
+                * Object Constructor for a filter
+                * @param filterJSON
+                * @param webaudioService
+                */
+               objectContructor(filterJSON, webaudioService)
                {
-                  //TODO :  Pour l'instant, bruteforce
+
                    console.info("import filter : " + JSON.stringify(filterJSON));
 
                    // IF AN OBJECT WAS PASSED THEN INITIALISE PROPERTIES FROM THAT OBJECT
 
-                   // We convert everything, including the audioNode (wrong)
+                   // *********** CONSTRUCTING VARIABLES
+                   // We loop on the JSON,  and put everything
+                   // Permit to initialize all the variables properly
                    for (var prop in filterJSON) this[prop] = filterJSON[prop];
 
-                   // HERE WE REINSTANTIATE OUR AUDIO NODE
+                   // *********** CONSTRUCTING INNER-CLASSES
+                   // THEN, we need to update the objects.
+
+                   // HERE WE REINSTANTIATE OUR AUDIO NODE PROPERLY
                    var audioNodeType = filterJSON._type;
 
                    // ALL OUR AVAILABLE FILTERS ARE HERE
@@ -156,9 +127,67 @@ angular.module('frontEndApp')
                    */
                }
 
+               /**
+                * Takes care of the audionode Set part of the constructor(s)
+                * @param type
+                * @param webaudioService
+                * @returns {boolean}
+                */
+               setAudioNode(type, webaudioService)
+               {
+                   var success = true;
+
+                   // ALL OUR AVAILABLE FILTERS ARE HERE
+                   switch (type) {
+                       // Only passing the audio signal
+                       case 'node':
+                           // TODO: doit disparaitre
+                           // TODO : j'ai mis panner pour bien les differencier dans les graphes, mais a terme, mettre des gains.
+                           this._audioNode = webaudioService.context.createPanner();
+                           break;
+
+                       // SPECIAL filters, to represent input and output of a graph
+                       case 'input':
+                           this._audioNode = webaudioService.context.createGain();
+                           break;
+                       case 'output':
+                           this._audioNode = webaudioService.context.createGain();
+                           break;
+
+                       case 'gain':
+                           this._audioNode = webaudioService.context.createGain();
+                           break;
+                       case 'biquad':
+                           this._audioNode = webaudioService.context.createBiquadFilter();
+                           break;
+                       case "waveShaper":
+                           this._audioNode = webaudioService.context.createWaveShaper();
+                           break;
+                       case "delay":
+                           this._audioNode = webaudioService.context.createDelay(5.0);// represents the maximum delay time
+                           break;
+                       case "dynamicCompressor":
+                           this._audioNode = webaudioService.context.createDynamicsCompressor();
+                           break;
+                       case "stereoPanner":
+                           this._audioNode = webaudioService.context.createStereoPanner();
+                           break;
+                       case'visualiser':
+                           this._audioNode = webaudioService.context.createAnalyser();
+                           break;
+
+                       default:
+                           success = false;
+                           console.error("Filter : wrong type given to constructor :");
+                           console.error(type);
+                           break;
+                   }
+
+                   return success;
+               }
 
                /**
-                *
+                * TODO : euhh
                 */
                changeWebAudioContext(audioCtx)
                {
@@ -170,6 +199,9 @@ angular.module('frontEndApp')
                    this.context = audioCtx;
                    //TODO : NOTE ! si ca marche, on peut supprimer des filtres du contexte en les mettant dans un ctx null
                }
+
+
+               //********************************************************
 
 
                // TODO ca devrait ne servir a rien.

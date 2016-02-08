@@ -28,10 +28,8 @@ angular.module('frontEndApp')
         // TODO Max, ici y'a la pedal qu'on veut editer. Faut connecter maintenant.
         // Pour recharger une pedale, deux etapes
 
-        self.pedal.importPedal(pedal, webaudio);
-
-
-
+        self.pedal.objectConstructor(pedal, webaudio);
+        
         // et on met a jour le webaudiocontext (meme si en vrai.. bref.)
 
 

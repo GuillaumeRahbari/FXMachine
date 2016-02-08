@@ -44,10 +44,10 @@ angular.module('frontEndApp')
                        this._ratersCounter = 0;
     }
 
-               /*
+               /**
                Simili-Object-Constructor
                 */
-               importPedal (pedalJSON, webaudio) {
+               objectConstructor(pedalJSON, webaudio) {
 
 
                    console.info("import pedal : inputoutput");
@@ -55,8 +55,8 @@ angular.module('frontEndApp')
                    // Input and output nodes of the pedal
                    this._input    = new Filter("input", webaudio);
                    this._output   = new Filter("output", webaudio);
-                   this._input.importFilter(pedalJSON._input, webaudio);
-                   this._output.importFilter(pedalJSON._output, webaudio);
+                   this._input.objectContructor(pedalJSON._input, webaudio);
+                   this._output.objectContructor(pedalJSON._output, webaudio);
 
                    console.info("import pedal : filters");
                    this._filters = pedalJSON._filters; // TODO refaire la meme merde das les filtres import
@@ -65,7 +65,7 @@ angular.module('frontEndApp')
                    for(var i = 0 ; i < l ; i++)
                    {
                        var filter = new Filter(pedalJSON._filters[i]._type, webaudio);
-                      filter.importFilter(pedalJSON._filters[i], webaudio); // TODO : dans ce import, on recupere pas les params
+                      filter.objectContructor(pedalJSON._filters[i], webaudio); // TODO : dans ce import, on recupere pas les params
                        this._filters.push(filter);
 
 
