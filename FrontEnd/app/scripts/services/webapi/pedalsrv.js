@@ -31,8 +31,8 @@ angular.module('frontEndApp')
                 */
                putPedal: function (pedal) {
                    $http({
-                       method : 'PUT',
-                       url    : url + '/',
+                       method : 'POST',
+                       url    : url + '/create',
                        data   : pedal,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
