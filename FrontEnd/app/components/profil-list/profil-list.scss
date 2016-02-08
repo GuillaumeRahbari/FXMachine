@@ -62,6 +62,7 @@
 .contentArticle{
   background-color:white;
   text-align: left;
+  border-radius:5px;
 }
 
 .titleArticle{
@@ -69,6 +70,12 @@
   font-size:30px;
 }
 
+.rowArticle{
+  margin-top:2%;
+}
 .contentArticleTitle{
-
+  text-align:center;
+  background-color:rgb(29,135,184);
+  border-radius:5px;
+  color:white;
 }
