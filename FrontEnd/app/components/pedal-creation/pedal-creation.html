@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container ">
     <span ng-click="$ctrl.toggle()" ng-if="!$ctrl.show">
-        <i class="fa fa-plus"></i>
+       Add a pedal <i class="fa fa-plus"></i>
     </span>
     <span ng-click="$ctrl.toggle()" ng-if="$ctrl.show">
-        <i class="fa fa-minus"></i>
+       Write name: <i class="fa fa-minus"></i>
     </span>
     <form name="pedalCreation" ng-submit="$ctrl.submit()" ng-if="$ctrl.show">
         <div class="form-group row">
