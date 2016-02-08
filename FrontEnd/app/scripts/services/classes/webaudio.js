@@ -141,8 +141,8 @@ angular.module('frontEndApp')
               console.log('preload graph');
               if(this._isInitialized)
               {
-                  this.killSound();
-                  this.pauseMic();
+                  //this.killSound();
+                  //this.pauseMic();
                   //this.killMic();
 
                   this.cleanGraph();
@@ -161,7 +161,7 @@ angular.module('frontEndApp')
                   {
                       console.log('mic load graph');
                       this._soundInput = this._context.createMediaStreamSource( this._micBuffer );
-                      this._soundInput.disconnect();
+                      //this._soundInput.disconnect();
                   }
                   else
                   {
