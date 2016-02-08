@@ -30,6 +30,9 @@ angular.module('frontEndApp')
               this._soundInput = null; // The first box of the graph, linked to the soundBuffer
               this._soundOutput = null; // The last box of the graph, linked to.. the speakers in buildGraph()
 
+              this._startPlayTime = 0;
+              this._playerTime = 0; // This one is not always correct. It's updated manually
+
               // The one and only WebAudio context
               this._context = null;
 
@@ -286,9 +289,38 @@ angular.module('frontEndApp')
 
 
           }
+          /**
+           * Clean the graph. as simple as that.
+           */
+          cleanGraph() {
+              if(this._isGraphReady)
+              {
+                  console.log("cleaning graph");
+                  var l = this._connectedFilters.length;
+
+                  // All filters
+                  for(var i = 0 ; i < l ; i++) {
+                      this._connectedFilters[i].audioNode.disconnect();
+                  }
+
+                  // Main input and output
+                  this._soundInput.disconnect();
+                  this._soundOutput.disconnect();
 
 
-          //******* MICMODE SPECIFIC METHODS
+                  this._connectedFilters = [];
+                  this._isGraphReady = false;
+              }
+              else
+              {
+                  console.warn("asked to clean graph, but isGraphReady value tells its clean already");
+              }
+
+          }
+
+
+
+          //******************************* MICMODE SPECIFIC METHODS
 
           startMic()
           {
@@ -390,7 +422,7 @@ angular.module('frontEndApp')
 
           }
 
-          // ***** FILEMODE SPECIFIC METHODS
+          // *********************** FILEMODE SPECIFIC METHODS
 
           playSound()
           {
@@ -398,8 +430,21 @@ angular.module('frontEndApp')
               {
                   if(this._isGraphReady)
                   {
-                      this._soundInput.start(0, 0);
+                      //this._soundInput.start(0, this._context.currentTime + 20);
+                      if(this._playerTime > 0)
+
+                      {
+                          this._soundInput.start(0, this._playerTime/1000);
+                      }
+                      else
+                      {
+                          this._soundInput.start(0, this._playerTime/1000);
+                      }
+
                       this._isPlaying = true;
+                      //this._startPlayTime = Date.now();
+                      this._startPlayTime = Date.now() - this._playerTime;
+
                   }
                   else
                   {
@@ -415,26 +460,41 @@ angular.module('frontEndApp')
           }
 
 
+
+          pauseSound()
+          {
+              if(this._isPlaying) {
+                  var starttime = this._playerTime = Date.now()-this._startPlayTime; // This one is not always correct. It's updated manually
+                  this.stopSound();
+                  this._playerTime = starttime; // We keep track of time
+                  this._isPlaying = false;
+              }
+              else {
+                  console.warn('tried to pause but not playing')
+              }
+
+          }
+
           stopSound() {
               if(this._inputMode =='fileMode')
               {
-                  if(this._isPlaying)
-                  {
+
                       console.info("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
                       // stop the source now.
                       // Parameter : delay before stopping
                       // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
                       // We do not need to redecode the data, just to rebuild the graph
+                  if(this._isPlaying)
+                  {
                       this._soundInput.stop(0);
                       this._isPlaying = false;
+                  }
+
                       this.cleanGraph(); // Just in case, because i dont trust this stuff
                       this._isGraphReady = false;
+                      this._startPlayTime = 0;
+                      this._playerTime = 0; // This one is not always correct. It's updated manually
 
-                  }
-                  else
-                  {
-                      console.warn("trying to stop sound but not playing");
-                  }
               }
               else
               {
@@ -470,35 +530,6 @@ angular.module('frontEndApp')
               }
 
           }
-          /**
-           * Clean the graph. as simple as that.
-           */
-          cleanGraph() {
-              if(this._isGraphReady)
-              {
-                  console.log("cleaning graph");
-                  var l = this._connectedFilters.length;
-
-                  // All filters
-                  for(var i = 0 ; i < l ; i++) {
-                      this._connectedFilters[i].audioNode.disconnect();
-                  }
-
-                  // Main input and output
-                  this._soundInput.disconnect();
-                  this._soundOutput.disconnect();
-
-
-                  this._connectedFilters = [];
-                  this._isGraphReady = false;
-              }
-              else
-              {
-                  console.warn("asked to clean graph, but isGraphReady value tells its clean already");
-              }
-
-          }
-
 
 
           //********************************** getters
@@ -609,6 +640,20 @@ angular.module('frontEndApp')
            */
           set soundOutput (soundOutput) {
               this._soundOutput = soundOutput;
+          }
+
+
+
+        get startPlayTime () {
+            return this._startPlayTime;
+        }
+           get playerTime () {
+               return this._playerTime;
+           }
+
+          // A simple way to access time in the html
+          get now () {
+              return Date.now();
           }
 
           /**

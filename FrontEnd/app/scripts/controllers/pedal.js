@@ -8,21 +8,31 @@
  * Controller of the frontEndApp
  */
 angular.module('frontEndApp')
-    .controller('PedalCtrl', ['WebAudio', 'Pedal', 'WebAudioSrv', 'PedalSrv', 'pedal', function (WebAudio, Pedal, WebAudioSrv, PedalSrv, pedal) {
+    .controller('PedalCtrl', ['WebAudio', 'Pedal', 'WebAudioSrv', 'PedalSrv', 'pedal', '$routeParams', function (WebAudio, Pedal, WebAudioSrv, PedalSrv, pedal, $routeParams) {
 
         var self = this;
 
         self.sidebar = false;
         self.iconmenu=false;
 
-        console.log("Allo")
+        console.log("Allo");
+        console.log("PEDAL FROM SRV : \n"+JSON.stringify(pedal));
         var webaudio = WebAudioSrv.getMainWebAudio();
         this.webaudio = webaudio;
-        console.log("Allo")
-        // TODO Max, ici y'a la pedal qu'on veut editer. Faut connecter maintenant.
-        // self.pedal = pedal;
+        console.log("Allo");
+
+
+
         self.pedal = new Pedal(self.webaudio);
-console.log("Allo")
+
+        // TODO Max, ici y'a la pedal qu'on veut editer. Faut connecter maintenant.
+        // Pour recharger une pedale, deux etapes
+
+        self.pedal.importPedal(pedal, webaudio);
+        // et on met a jour le webaudiocontext (meme si en vrai.. bref.)
+
+
+        console.log("Allo");
         /**
          * Load the pedal in webaudio service, and launch the audio
          */
@@ -51,7 +61,7 @@ console.log("Allo")
         };
 
         self.save = function () {
-            PedalSrv.updatePedal(self.pedal);
+            PedalSrv.updatePedal(self.pedal, $routeParams.pedalId);
         };
 
         self.updateMenu=function(){
