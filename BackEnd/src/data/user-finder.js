@@ -90,9 +90,6 @@ function getUserPedal(id, callback) {
                     if(typeof result[0]._pedals === 'undefined') {
                         callback([]);
                     } else {
-                        console.log("coucou")
-                        console.log(result[0]._pedals)
-                        console.log("herp");
                         callback(result[0]._pedals);
                     }
                 }

@@ -12,6 +12,7 @@ var app = require('../../app/core/core.js').app,
 
 
 router.get("/all", function(req, res) {
+    console.log("In the getAll");
     if(!(req.params.user_id && typeof req.params.user_id === 'undefined')) {
         userController.pedalRetriever(req.params.user_id, function(response) {
             res.send(response);
@@ -21,8 +22,9 @@ router.get("/all", function(req, res) {
     }
 });
 
-router.put("/", function(req, res) {
-    console.log(req.params.user_id);
+router.post("/create", function(req, res) {
+    console.log("In create route");
+    console.log(req.body);
     pedal.JsonToPedal(req.body, function(err, result) {
         if(err) {
             res.sendStatus(400);
@@ -34,13 +36,19 @@ router.put("/", function(req, res) {
                     });
                     res.send(message.ops[0]);
                 } else {
+                    console.log(message);
                     res.sendStatus(500);
                 }
             });
         }
     });
-
 });
+
+router.post("/caca", function(req, res) {
+    res.sendStatus(200);
+})
+
+
 
 router.get("/:pedalId", function(req, res) {
     pedalFinder.myfindOne(req.params.pedalId, function(err, result) {
@@ -58,6 +66,8 @@ router.put("/:pedalId", function(req, res) {
         if(err) {
             res.sendStatus(400);
         } else {
+            console.log("Body : ");
+            console.log(req.body);
             pedalGateway.updatePedal(req.body, function(error, message) {
                 if(error) {
                     res.sendStatus(404)
@@ -79,7 +89,11 @@ router.put("/:pedalId", function(req, res) {
  *
  */
 router.post("/:pedalId/rate", function(req, res){
-    console.log(req.params.pedalId);
+    console.log("-------------------------------------------------------------------------------------------------")
+    console.log(req.body._rate);
+
+    console.log("-------------------------------------------------------------------------------------------------")
+
     if(req.body._rate && req.params.pedalId) {
         pedalController.updatePedalNote(req.params.pedalId, req.body._rate, function(err, result) {
             if(err) {

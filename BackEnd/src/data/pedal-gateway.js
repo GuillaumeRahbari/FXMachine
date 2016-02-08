@@ -50,9 +50,12 @@ function updatePedal(pedal, callback) {
            callback(err, null);
        } else {
            var collection = db.collection('pedals');
+           console.log("Output : ");
             console.log(pedal._output);
-            console.log(pedal._filters);
-            console.log(pedal._input);
+           console.log("Filter : ");
+           console.log(pedal._filters);
+           console.log("Input : ");
+           console.log(pedal._input);
            collection.updateOne(
                { "_id" : new mongodb.ObjectID(pedal._id) },
                { $set: { "_filters" : pedal._filters,
@@ -94,21 +97,22 @@ function updatePedalComments(pedalId, pedalComments, callback) {
 }
 
 
-function updatePedalNote(pedalId, pedalNote,callback) {
+function updatePedalNote(pedalId, pedalNote, rateCounter ,callback) {
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(err, null);
         } else {
-            console.log("yolo");
+            console.log(pedalNote);
+            console.log(rateCounter);
             var collection = db.collection('pedals');
             collection.updateOne(
-                { "_id" : pedalId },
-                { $set: { "_rate" : pedalNote}},
+                { "_id" : new mongodb.ObjectID(pedalId) },
+                { $set: { "_rate" : pedalNote,
+                          "_ratersCounters" : rateCounter}},
                 function(error, res) {
                     if(error) {
                         callback(error, null);
                     } else {
-                        console.log(res);
                         callback(null, res);
                     }
                 }
