@@ -10,7 +10,7 @@
 angular.module('frontEndApp')
        .factory('PedalSrv', function ($cookies, $http, $rootScope) {
 
-           var url = 'http://localhost:3000/user/' + $cookies.get('userId') + '/pedals';
+           var url = 'http://192.168.1.12:3000/user/' + $cookies.get('userId') + '/pedals';
 
            return {
                /**
