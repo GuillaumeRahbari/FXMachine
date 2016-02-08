@@ -26,5 +26,4 @@ function myfindOne(pedalId, callback) {
     });
 }
 
-
 exports.myfindOne = myfindOne;

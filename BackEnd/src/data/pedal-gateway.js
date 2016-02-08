@@ -31,7 +31,7 @@ function deletePedal(pedal, callback) {
         if(err) {
             callback(err, null) ;
         } else {
-            var collection = db.collection('pedal');
+            var collection = db.collection('pedals');
             collection.deleteOne([pedal], function(err, result) {
                 if(err) {
                     console.log("Error during insertion of log in the collection")
@@ -46,28 +46,56 @@ function deletePedal(pedal, callback) {
 
 function updatePedal(pedal, callback) {
     mongoClient.connect(url, function(err, db) {
+        console.log("derp")
        if(err) {
+           console.log("herp")
            callback(err, null);
        } else {
-           var collection = db.collection('pedal');
-           collection.updateOne([pedal], function(err, result) {
+           console.log("coucou")
+           var collection = db.collection('pedals');
+           console.log(pedal)
+           collection.updateOne([pedal], function(error, result) {
+               console.log("yooooo")
               if(err) {
-                  console.log(err);
-                  callback(err, null);
+                  console.log(":(")
+                  callback(error, null);
               } else {
-                  callback(null, res);
+                  console.log(":)")
+                  callback(null, result);
               }
            });
        }
     });
 }
 
+function updatePedalComments(pedalId, pedalComments, callback) {
+    mongoClient.connect(url, function(err, db) {
+        if(err) {
+            callback(err, null);
+        } else {
+            var collection = db.collection('pedals');
+            collection.updateOne(
+                { "_id" : pedalId },
+                { $set: { "_comments" : pedalComments}},
+                function(error, res) {
+                    if(error) {
+                        callback(error, null);
+                    } else {
+                        callback(null, res);
+                    }
+                }
+            );
+        }
+    });
+}
+
+
 function updatePedalNote(pedalId, pedalNote, callback) {
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(err, null);
         } else {
-            var collection = db.collection('pedal');
+            var collection = db.collection('pedals');
             collection.updateOne(
                 { "_id": pedalId },
                 { $set : { "_note": pedalNote }}
@@ -83,7 +111,7 @@ function updatePedalNote(pedalId, pedalNote, callback) {
     });
 }
 
-
+exports.updatePedalComments = updatePedalComments;
 exports.updatePedalNote = updatePedalNote;
 exports.deletePedal = deletePedal;
 exports.savePedal = savePedal;

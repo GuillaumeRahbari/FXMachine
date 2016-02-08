@@ -34,9 +34,20 @@ function updatePedalComment(pedalId, comment, callback) {
         if(err) {
             callback(err, null);
         } else {
-            console.log(res);
+            var pedal = res[0];
+
+            var comments = pedal._comments;
+            comments.push(comment);
+
+            pedalGateway.updatePedalComments(pedal._id, comments ,function(error, response){
+                if(err) {
+                    callback(error, null);
+                } else {
+                    callback(null, response);
+                }
+            });
         }
-    })
+    });
 }
 
 exports.updatePedalComment = updatePedalComment;
