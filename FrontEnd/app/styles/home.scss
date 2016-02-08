@@ -6,13 +6,28 @@
     left:30%;
     z-index:3;
     text-shadow: 3px 3px #000000;
-    top:40%;
+    top:30%;
     font-size:65px;
+}
+.secondHeaderWebSite{
+    position:absolute;
+    color: white;
+    font-weight: 400;
+    left:31%;
+    z-index:3;
+    text-shadow: 4px 4px #000000;
+    top:40%;
+    font-size:50px;
+    font-style: italic;
 }
 .imageContent{
 
 }
 
 body section{
-    margin:0;
+    margin:0px;
+}
+
+.profilList{
+    margin-top:35px;
 }

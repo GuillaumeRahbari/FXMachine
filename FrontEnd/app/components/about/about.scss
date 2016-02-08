@@ -1,0 +1,37 @@
+.about{
+  //background:url('../../images/publicbackground.png');
+}
+.realAboutContent{
+  position: absolute;
+  top:150%;
+  left:20%;
+  z-index:4;
+  color:white;
+}
+.aboutContent{
+  margin-top:3%;
+  border-radius: 5px;
+}
+
+.contentArticle{
+  text-align: left;
+  border-radius:5px;
+}
+
+.titleArticle{
+  color:white;
+  font-size:30px;
+}
+
+.rowArticle{
+  margin-top:2%;
+}
+.contentArticleTitle{
+  text-align:center;
+  //background-color:rgb(60,63,65);
+  border-radius:5px;
+  color:white;
+}
+.specialTitle{
+  background-color:rgb(60,63,65);
+}
