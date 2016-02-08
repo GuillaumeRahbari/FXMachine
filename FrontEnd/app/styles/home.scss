@@ -1,10 +1,10 @@
+
 .headerWebSite{
 
     position:absolute;
     color: white;
     font-weight: 400;
     left:30%;
-    z-index:3;
     text-shadow: 3px 3px #000000;
     top:30%;
     font-size:65px;
@@ -14,14 +14,15 @@
     color: white;
     font-weight: 400;
     left:31%;
-    z-index:3;
     text-shadow: 4px 4px #000000;
     top:40%;
     font-size:50px;
     font-style: italic;
 }
 .imageContent{
-
+    background:url("../../images/guitarebackground.png");
+    width:1914px;
+    height:752px;
 }
 
 body section{
@@ -29,5 +30,5 @@ body section{
 }
 
 .profilList{
-    margin-top:35px;
+    margin-top:70px;
 }
