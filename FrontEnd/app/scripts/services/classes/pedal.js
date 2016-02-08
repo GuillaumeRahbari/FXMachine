@@ -29,20 +29,55 @@ angular.module('frontEndApp')
                 */
                constructor (webaudioService, name) {
 
-                   this._name = name;
+                       console.info("default constructor pedal");
+                       this._name = name;
+                       this._filters = [];
+                       // Input and output nodes of the pedal
+                       this._input    = new Filter("input", webaudioService);
+                       this._output   = new Filter("output", webaudioService);
+                       // TODO : this._input.addOutput(this._output.uuid); ou pas osef (conenxion input->output)
+                   // TODO : on peut le faire quand le graphe sera ok niveau reprise des connexions
+                       this._webaudio = webaudioService;
 
-                   this._filters = [];
+                       this._comments = [];
+                       this._rate = 0;
+                       this._ratersCounter = 0;
+    }
+
+               /*
+               Simili-Object-Constructor
+                */
+               importPedal (pedalJSON, webaudio) {
+
+
+
+                   console.info("import pedal : inputoutput");
+
                    // Input and output nodes of the pedal
-                   this._input    = new Filter("input", webaudioService);
-                   this._output   = new Filter("output", webaudioService);
-                   // TODO : this._input.addOutput(this._output.uuid);
-                   this._webaudio = webaudioService;
+                   this._input    = new Filter("input", webaudio);
+                   this._output   = new Filter("output", webaudio);
+                   this._input.importFilter(pedalJSON._input, webaudio);
+                   this._output.importFilter(pedalJSON._output, webaudio);
 
-                   this._comments = [];
-                   this._rate = 0;
-                   this._ratersCounter = 0;
+                   console.info("import pedal : filters");
+                   this._filters = pedalJSON._filters; // TODO refaire la meme merde das les filtres import
+                   var l = pedalJSON._filters.length;//TODO: ya pa linput dedans hein? normalement non mais bon
 
+                   for(var i = 0 ; i < l ; i++)
+                   {
+                       this._filters.push(new Filter(pedalJSON._type, webaudio));
+                       //TODO : manque les parametres du filtre !!
+                       //importFilter("gain")
+                   }
+
+                   console.info("import pedal : other stuff");
+                   this._webaudio = webaudio;
+                   this._name = pedalJSON._name;
+                   this._comments = pedalJSON._comments;
+                   this._rate = pedalJSON._rate;
+                   this._ratersCounter = pedalJSON._ratersCounter;
                }
+
 
 
                /**
@@ -150,9 +185,17 @@ angular.module('frontEndApp')
                }
 
 
-
                changeWebAudioContext(newCtx) {
                    // Dans tous les filtres,
+                   // Change webaudio !
+                   var l = this.filters.length();
+                   var i;
+
+                   for(i=0; i<l ; i++)
+                   {
+                    this._filters[i].changeWebAudioContext(newCtx);
+                   }
+
                }
 
 

@@ -19,6 +19,8 @@ $height: 90px;
 
   padding-left:0px;
   padding-right:0px;
+
+
 }
 
 .inputs-web-audio {
@@ -64,6 +66,7 @@ $height: 90px;
   border : 2px solid #7d936f;
   color:white;
 
+
 }
 
 .webaudio-control-btn:hover {
@@ -99,6 +102,28 @@ $height: 90px;
 
 .webaudio-control-btn-secondary:hover {
   background-color: #514c4b;
+
+}
+
+.webaudio-timer {
+  background-color: #514c4b;
+  border: 2px ;
+  font-size:25px;
+  text-align:center;
+  font-family: "Courier New", Courier;
+  vertical-align: middle;
+  line-height:45px;
+
+}
+
+
+.webaudio-text {
+  background-color: #514c4b;
+  border: 2px ;
+  font-size:10px;
+  text-align:center;
+  font-family: "Courier New", Courier;
+  vertical-align: middle;
 
 }
 

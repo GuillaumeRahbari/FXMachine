@@ -10,15 +10,18 @@
 
             <div class="row quartHeight fullwidthoparent nomargin">
                 INPUT TYPE
+
                 </div>
 
             <div class="row threequartsheight fullwidthoparent nomargin">
 
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
+                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">
+                        <i class="fa fa-file-audio-o"></i></a>
                 </div>
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
+                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">
+                        <i class="fa fa-microphone"></i></a>
 
                 </div>
             </div>
@@ -77,21 +80,34 @@
 
 
             <!-- some space idk what for yet -->
-            <div class="row halfheight fullwidthoparent nomargin">
-
-                <div class="col-lg-6 nopadding">
-                    <div class="emptyspace halfheight nopadding">
+            <div class="row halfheight fullwidthoparent nomargin ">
 
 
 
+                <!-- some empty space to use someday -->
+
+
+                <div class="col-lg-6 nopadding webaudio-text">
+                    <div class="fullwidthoparent">
+                        startPlayTime:{{$ctrl.webaudio.startPlayTime}}
+                        playerTime:{{$ctrl.webaudio.playerTime}}
                     </div>
-                    <!-- some empty space to use someday -->
+
                 </div>
 
-                <div class="col-lg-6 nopadding">
-                    <div class="emptyspace halfheight nopadding"></div>
-                    <!-- some empty space to use someday -->
+                <div class="col-lg-6  nopadding webaudio-timer">
+
+
+                    <div ng-if="$ctrl.webaudio.startPlayTime > 0" class="fullwidthoparent halfheight">
+                        {{$ctrl.webaudio.now - $ctrl.webaudio.startPlayTime | date: 'mm:ss:sss'}}
+                    </div>
+                    <div ng-if="$ctrl.webaudio.startPlayTime <= 0" class="fullwidthoparent halfheight">
+                        00:00:00
+                    </div>
                 </div>
+
+
+
             </div>
 
 
@@ -120,7 +136,7 @@
                             <button type="button" id="button_play"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
                                     ng-click='$ctrl.webaudio.playSound();'>
-                                Play
+                                <i class="fa fa-play"></i>
                             </button>
 
 
@@ -130,9 +146,8 @@
                             <!-- TODO: un vrai bouton play/pause, ou ne seraitce que un pause. -->
                             <button type="button" id="button_pause"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
-                                    ng-click=''
-                                    disabled>
-                                Pause
+                                    ng-click='$ctrl.webaudio.pauseSound();'>
+                                <i class="fa fa-pause"></i>
                             </button>
                         </div>
 
@@ -140,7 +155,7 @@
                             <button type="button" id="button_stop"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
                                     ng-click='$ctrl.webaudio.stopSound();'>
-                                Stop
+                                <i class="fa fa-stop"></i>
                             </button>
 
                         </div>
@@ -238,19 +253,19 @@
                 <div class="col-lg-3 nopadding">
                     <button
                             class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
-                            ng-click="$ctrl.webaudio.startMic()">Start
+                            ng-click="$ctrl.webaudio.startMic()"> <i class="fa fa-play"></i>
                     </button>
                 </div>
                 <div class="col-lg-3 nopadding">
                     <button
                             class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
-                            ng-click="$ctrl.webaudio.pauseMic()">Pause
+                            ng-click="$ctrl.webaudio.pauseMic()"> <i class="fa fa-pause"></i>
                     </button>
                 </div>
                 <div class="col-lg-3 nopadding">
                     <button
                             class="btn btn-sm webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent halfheight"
-                            ng-click="$ctrl.webaudio.stopMic()">Stop
+                            ng-click="$ctrl.webaudio.stopMic()"> <i class="fa fa-stop"></i>
                     </button>
                 </div>
 

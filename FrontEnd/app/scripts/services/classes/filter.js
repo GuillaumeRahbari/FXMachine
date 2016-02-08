@@ -85,6 +85,32 @@ angular.module('frontEndApp')
                }
 
 
+               importFilter(filterJSON, audioCtx)
+               {
+                  //TODO :  Pour l'instant, bruteforce
+                   console.info("import filter");
+                   // IF AN OBJECT WAS PASSED THEN INITIALISE PROPERTIES FROM THAT OBJECT
+                   for (var prop in filterJSON) this[prop] = filterJSON[prop];
+                   console.info("change filter context");
+                   this.changeWebAudioContext(audioCtx);
+               }
+
+
+               /**
+                *
+                */
+               changeWebAudioContext(audioCtx)
+               {
+                   // TODO : manque la conservation des parametres de chaque filtre.
+                   // Methode privilegiee : faire une "copie locale" du filtre
+                   //Rappeler le constructeur
+                   // Remettre tous les parametres SAUF le webaudioctx ? et encore il est même pas dedans je crois
+                   // TODO: on tente le coup avec la methode bruteforce
+                   this.context = audioCtx;
+                   //TODO : NOTE ! si ca marche, on peut supprimer des filtres du contexte en les mettant dans un ctx null
+               }
+
+
                // TODO ca devrait ne servir a rien.
                /**
                 * Adds a filter id to the filters input array.
