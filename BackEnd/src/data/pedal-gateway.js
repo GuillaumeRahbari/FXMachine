@@ -51,6 +51,8 @@ function updatePedal(pedal, callback) {
        } else {
            var collection = db.collection('pedals');
             console.log(pedal._output);
+            console.log(pedal._filters);
+            console.log(pedal._input);
            collection.updateOne(
                { "_id" : new mongodb.ObjectID(pedal._id) },
                { $set: { "_filters" : pedal._filters,

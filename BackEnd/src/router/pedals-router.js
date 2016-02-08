@@ -14,7 +14,7 @@ var app = require('../../app/core/core.js').app,
 router.get("/all", function(req, res) {
     if(!(req.params.user_id && typeof req.params.user_id === 'undefined')) {
         userController.pedalRetriever(req.params.user_id, function(response) {
-            res.send(response[0]);
+            res.send(response);
         });
     } else {
         res.sendStatus(404);

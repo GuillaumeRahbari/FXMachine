@@ -12,7 +12,7 @@ function pedalRetriever(userId, callback) {
         var pedals = [];
         async.each(pedalList, function iterator (item, callbackIter) {
             pedalFinder.myfindOne(item._id, function(err, res) {
-                pedals.push(res);
+                pedals.push(res[0]);
                 callbackIter(err);
             });
         }, function join (err) {
@@ -30,6 +30,8 @@ function updateUserPedals(userId, pedals ,callback) {
         if(err) {
             callback(err, null);
         } else {
+            console.log("Res of the user find with id");
+            console.log(res);
             res._pedals.push(pedals[0]);
             userGateway.updateUser(res, function(error, response) {
                 if(error) {
