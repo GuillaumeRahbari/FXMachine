@@ -54,15 +54,17 @@ router.get("/:pedalId", function(req, res) {
 
 router.put("/:pedalId", function(req, res) {
     var myPedal = req.body;
+    console.log("coucou");
     pedal.JsonToPedal(myPedal, function(err, response) {
+        console.log("derp")
         if(err) {
             res.sendStatus(400);
         } else {
-            pedalGateway.updatePedal(req.body, function(response, message) {
-                if(response) {
-                    res.sendStatus(200)
+            pedalGateway.updatePedal(req.body, function(error, message) {
+                if(error) {
+                    res.sendStatus(404)
                 } else {
-                    res.sendStatus(404);
+                    res.sendStatus(200);
                 }
             });
         }
@@ -78,38 +80,20 @@ router.put("/:pedalId", function(req, res) {
  *
  *
  */
-router.post("/:pedalId/note/", function(req, res){
+router.post("/:pedalId/note", function(req, res){
+    console.log(req.params.pedalId);
     if(req.body._note && req.params.pedalId) {
-        pedalController.updatePedalNote(req.params.pedalId, req.query._note, function(err, result) {
-
-        });
-    }
-});
-
-
-/**
- * {
- *      "_id" : " .... "
- *      "_comment": "....."
- * }
- *
- *
- *
- */
-/*router.post("/:pedalId/comment", function(req, res){
-    console.log("coucou")
-    if(req.body._comment && req.params.pedalId) {
-        console.log("in if")
-        pedalController.updatePedalComment(req.params.pedalId, req.body._comment, function(err, result){
+        pedalController.updatePedalNote(req.params.pedalId, req.body._note, function(err, result) {
             if(err) {
-                console.log("....")
-                res.sendStatus(400)
+                res.sendStatus(400);
             } else {
                 res.sendStatus(200);
             }
         });
     }
-}); */
+});
+
+
 
 
 

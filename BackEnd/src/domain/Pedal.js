@@ -4,10 +4,12 @@
 "use strict"
 
 class Pedal {
-    constructor(filters, input, output, rate, comments) {
+    constructor(filters, input, output, rate, comments, ratersCounter) {
         this._input = input;
         this._output = output;
         this._filters = filters;
+        this._ratersCounter = ratersCounter;
+
         if(typeof rate == "undefined") {
             this._rate = 0;
         } else {
@@ -61,13 +63,18 @@ function JsonToPedal(json, callback) {
     } else {
         var comments = [];
         var rate = 0;
-        if(json._comments) {
+        var ratersCounter = 0;
+
+        if(!(json._ratersCounter)) {
+            ratersCounter = json._ratersCounter;
+        }
+        if(!(json._comments)) {
             comments = json._comments;
         }
-        if(json._rate) {
+        if(!(json._rate)) {
             rate = json._rate;
         }
-        var pedal = new Pedal(json._filters, json._input, json._output, rate, comments);
+        var pedal = new Pedal(json._filters, json._input, json._output, rate, comments, ratersCounter);
         callback(null, pedal);
     }
 }
