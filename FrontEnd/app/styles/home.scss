@@ -1,0 +1,34 @@
+
+.headerWebSite{
+
+    position:absolute;
+    color: white;
+    font-weight: 400;
+    left:30%;
+    text-shadow: 3px 3px #000000;
+    top:30%;
+    font-size:65px;
+}
+.secondHeaderWebSite{
+    position:absolute;
+    color: white;
+    font-weight: 400;
+    left:31%;
+    text-shadow: 4px 4px #000000;
+    top:40%;
+    font-size:50px;
+    font-style: italic;
+}
+.imageContent{
+    background:url("../../images/guitarebackground.png");
+    width:1914px;
+    height:752px;
+}
+
+body section{
+    margin:0px;
+}
+
+.profilList{
+    margin-top:70px;
+}

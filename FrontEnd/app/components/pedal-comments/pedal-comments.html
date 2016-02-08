@@ -1,0 +1,35 @@
+<section class="container">
+
+    <article class="col-lg-8">
+
+        <h3>Comment the pedal</h3>
+
+        <form name="addingComment" ng-submit="$ctrl.submitComment()">
+            <div class="form-group row">
+                <input type="text" ng-model="$ctrl.commentAdd" name="comment" placeholder="Your comment" required>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-success">Comment</button>
+            </div>
+        </form>
+
+        <div ng-repeat="comment in $ctrl.pedal.comments">
+            {{comment}}
+        </div>
+
+    </article>
+
+    <aside class="col-lg-4">
+        <h3>Rate the pedal</h3>
+
+        <span class="rating">
+            <i class="fa fa-star-o" ng-click="$ctrl.submitRate(1)"></i>
+            <i class="fa fa-star-o" ng-click="$ctrl.submitRate(2)"></i>
+            <i class="fa fa-star-o" ng-click="$ctrl.submitRate(3)"></i>
+            <i class="fa fa-star-o" ng-click="$ctrl.submitRate(4)"></i>
+            <i class="fa fa-star-o" ng-click="$ctrl.submitRate(5)"></i>
+        </span>
+
+    </aside>
+
+</section>
