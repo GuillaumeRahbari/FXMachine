@@ -21,5 +21,6 @@ angular.module('frontEndApp')
            templateUrl: 'components/user-pedal/user-pedal.html',
            bindings   : {
                pedal: '='
-           }
+           },
+           controller : UserPedalController
        });
