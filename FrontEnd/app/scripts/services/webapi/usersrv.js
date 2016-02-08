@@ -8,7 +8,7 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-       .factory('UserSrv', function ($cookies, $location, $http, ExpireDate, $rootScope) {
+       .factory('UserSrv', function ($cookies, $location, $http, ExpireDate, $rootScope, constants) {
            return {
                /**
                 * This function register asynchronously a user.
@@ -27,7 +27,7 @@ angular.module('frontEndApp')
                    var exp = ExpireDate.expireDate();
                    $http({
                        method : 'PUT',
-                       url    : 'http://192.168.1.12:3000/user/subscription',
+                       url    : constants.backendUrl + 'user/subscription',
                        data   : user,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
@@ -61,7 +61,7 @@ angular.module('frontEndApp')
                    var exp = ExpireDate.expireDate();
                    $http({
                        method : 'POST',
-                       url    : 'http://192.168.1.12:3000/user/signin',
+                       url    : constants.backendUrl + 'user/signin',
                        data   : user,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
@@ -93,7 +93,7 @@ angular.module('frontEndApp')
                logout: function () {
                    return $http({
                        method : 'POST',
-                       url    : 'http://192.168.1.12:3000/user/signout',
+                       url    : constants.backendUrl + 'user/signout',
                        data   : {_id: $cookies.get('userId')},
                        headers: {'Content-Type': 'application/json'}
                    }).then(
@@ -120,7 +120,7 @@ angular.module('frontEndApp')
                getAll: function () {
                    return $http({
                        method : 'GET',
-                       url    : 'http://192.168.1.12:3000/user/all',
+                       url    : constants.backendUrl + 'user/all',
                        headers: {'Content-Type': 'application/json'}
                    });
                }

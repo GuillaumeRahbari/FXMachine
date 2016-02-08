@@ -13,14 +13,13 @@ angular.module('frontEndApp')
         var self = this;
 
         self.sidebar = false;
-        self.iconmenu=false;
+        self.iconmenu = false;
 
         console.log("Allo");
-        console.log("PEDAL FROM SRV : \n"+JSON.stringify(pedal));
+        console.log("PEDAL FROM SRV : \n" + JSON.stringify(pedal));
         var webaudio = WebAudioSrv.getMainWebAudio();
         this.webaudio = webaudio;
         console.log("Allo");
-
 
 
         self.pedal = new Pedal(self.webaudio);
@@ -28,9 +27,7 @@ angular.module('frontEndApp')
         // TODO Max, ici y'a la pedal qu'on veut editer. Faut connecter maintenant.
         // Pour recharger une pedale, deux etapes
 
-        self.pedal.importPedal(pedal, webaudio);
-
-
+        self.pedal.objectConstructor(pedal, webaudio);
 
         // et on met a jour le webaudiocontext (meme si en vrai.. bref.)
 
@@ -67,19 +64,17 @@ angular.module('frontEndApp')
             PedalSrv.updatePedal(self.pedal, $routeParams.pedalId);
         };
 
-        self.updateMenu=function(){
+        self.updateMenu = function () {
             self.sidebar = !self.sidebar;
             console.log("side bar: ", self.sidebar);
             self.iconmenu = !self.iconmenu;
             console.log("icon menu: ", self.iconmenu);
         };
 
-        self.getAllFilters=function()
-        {
+        self.getAllFilters = function () {
             var array = [self.pedal.input];
-            for(var i = 0 ; i < self.pedal.filters.length ; i++)
-            {
-             array.push(self.pedal.filters[i]);
+            for (var i = 0; i < self.pedal.filters.length; i++) {
+                array.push(self.pedal.filters[i]);
             }
             array.push(self.pedal.output);
             return array;

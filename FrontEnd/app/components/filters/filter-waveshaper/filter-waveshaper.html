@@ -4,7 +4,7 @@
     <div class="valueContentWaveshaper">Type : {{$ctrl.filter.type}}</div>
 
     <!-- atan parameters -->
-    <div ng-show="$ctrl.distotype == 'atan'">
+    <div ng-if="$ctrl.distotype == 'atan'">
 
         <!-- Oversampling control -->
         Oversampling : {{$ctrl.filter.audioNode.oversample}}
@@ -27,25 +27,28 @@
         <!-- CAREFUL : this is linked to the controller. -->
         <input id="disto1" type="range" min="1" max="100" value="1" step="1" ng-model="$ctrl.amount">
         {{$ctrl.amount}}%
-        <canvas id="distovisualisation2" height="80" width="160" class="canvas-basic"></canvas>
+
 
     </div>
 
     <!-- chebyshev parameters -->
-    <div ng-show="$ctrl.distotype == 'chebyshev'">
+    <div ng-if="$ctrl.distotype == 'chebyshev'">
         <br>
 
         <div class="container-fluid">
             <div class="row">
                 <div class="radioContent col-lg-5">
                     Oversampling  <!--:{{filter.audioNode.oversample}} --><br>
-                    <input type="radio" name="waveShaperSampling" value="none" ng-model="$ctrl.filter.audioNode.oversample"
+                    <input type="radio" name="waveShaperSampling" value="none"
+                           ng-model="$ctrl.filter.audioNode.oversample"
                            checked>
 
                     <label>None</label>
-                    <input type="radio" name="waveShaperSampling" value="2x" ng-model="$ctrl.filter.audioNode.oversample">
+                    <input type="radio" name="waveShaperSampling" value="2x"
+                           ng-model="$ctrl.filter.audioNode.oversample">
                     <label>2x</label>
-                    <input type="radio" name="waveShaperSampling" value="4x" ng-model="$ctrl.filter.audioNode.oversample">
+                    <input type="radio" name="waveShaperSampling" value="4x"
+                           ng-model="$ctrl.filter.audioNode.oversample">
                     <label>4x</label>
                     <br>
                 </div>
@@ -74,7 +77,7 @@
                 </div>
                 <div class="col-lg-1"></div>
                 <div class="canvasContainer col-lg-5">
-                    <canvas id="distovisualisation" height="80" width="160" class="canvas-basic"></canvas>
+
                 </div>
             </div>
         </div>
@@ -133,5 +136,5 @@
         </div>
     </div>
     <br>
-
+    <canvas id="distovisualisation" height="160" width="320" class="canvas-basic fullwidthoparent"></canvas>
 </div>
