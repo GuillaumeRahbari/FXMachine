@@ -77,6 +77,38 @@ angular.module('frontEndApp')
                            console.log(error);
                        }
                    )
+               },
+
+               commentPedal: function (comment, pedalId) {
+                   $http({
+                       method : 'POST',
+                       url    : url + '/' + pedalId + '/comments',
+                       data   : {_comments: comment},
+                       headers: {'Content-Type': 'application/json'}
+                   }).then(
+                       function (response) {
+                           console.log(response);
+                       },
+                       function (error) {
+                           console.log(error);
+                       }
+                   )
+               },
+
+               ratePedal: function (rate, pedalId) {
+                   $http({
+                       method : 'POST',
+                       url    : url + '/' + pedalId + '/note',
+                       data   : {_note: rate},
+                       headers: {'Content-Type': 'application/json'}
+                   }).then(
+                       function (response) {
+                           console.log(response);
+                       },
+                       function (error) {
+                           console.log(error);
+                       }
+                   )
                }
            };
        });
