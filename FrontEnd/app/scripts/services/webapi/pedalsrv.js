@@ -33,7 +33,7 @@ angular.module('frontEndApp')
                    $http({
                        method : 'POST',
                        url    : url + '/create',
-                       data   : pedal._input._audioNode,
+                       data   : pedal,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
                        function (response) {
