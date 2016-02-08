@@ -46,24 +46,25 @@ function deletePedal(pedal, callback) {
 
 function updatePedal(pedal, callback) {
     mongoClient.connect(url, function(err, db) {
-        console.log("derp")
        if(err) {
-           console.log("herp")
            callback(err, null);
        } else {
-           console.log("coucou")
            var collection = db.collection('pedals');
-           console.log(pedal)
-           collection.updateOne([pedal], function(error, result) {
-               console.log("yooooo")
-              if(err) {
-                  console.log(":(")
-                  callback(error, null);
-              } else {
-                  console.log(":)")
-                  callback(null, result);
-              }
-           });
+            console.log(pedal);
+
+           collection.updateOne(
+               { "_id" : pedalId },
+               { $set: { "_filters" : pedal._filters,
+                            "_input" : pedal._input},
+                            "_output" : pedal._output},
+               function(error, res) {
+                   if(error) {
+                       callback(error, null);
+                   } else {
+                       callback(null, res);
+                   }
+               }
+           );
        }
     });
 }
@@ -73,6 +74,8 @@ function updatePedalComments(pedalId, pedalComments, callback) {
         if(err) {
             callback(err, null);
         } else {
+            console.log(pedalId);
+            console.log(pedalComments);
             var collection = db.collection('pedals');
             collection.updateOne(
                 { "_id" : pedalId },
@@ -90,23 +93,25 @@ function updatePedalComments(pedalId, pedalComments, callback) {
 }
 
 
-function updatePedalNote(pedalId, pedalNote, callback) {
+function updatePedalNote(pedalId, pedalNote,callback) {
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(err, null);
         } else {
+            console.log("yolo");
             var collection = db.collection('pedals');
             collection.updateOne(
-                { "_id": pedalId },
-                { $set : { "_note": pedalNote }}
-            , function(err, res) {
-                if(err) {
-                    console.log(err);
-                    callback(err, null);
-                } else {
-                    callback(null, res);
+                { "_id" : pedalId },
+                { $set: { "_rate" : pedalNote}},
+                function(error, res) {
+                    if(error) {
+                        callback(error, null);
+                    } else {
+                        console.log(res);
+                        callback(null, res);
+                    }
                 }
-            });
+            );
         }
     });
 }

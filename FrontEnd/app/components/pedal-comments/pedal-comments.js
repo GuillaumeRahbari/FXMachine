@@ -12,8 +12,8 @@ function PedalCommentsController (PedalSrv, $routeParams) {
         PedalSrv.commentPedal(self.commentAdd, $routeParams.pedalId);
     };
 
-    self.submitRate = function () {
-        PedalSrv.ratePedal(self.rate, $routeParams.pedalId);
+    self.submitRate = function (index) {
+        PedalSrv.ratePedal(index, $routeParams.pedalId);
     };
 
 }

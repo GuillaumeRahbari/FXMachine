@@ -17,14 +17,21 @@ function updatePedalNote(pedalId, pedalNote, callback) {
        if(err) {
            callback(err, null);
        } else {
-           var note =
-           pedalGateway.updatePedalNote(pedalId, res[0]._note, function(error, result) {
-                if(error) {
-                    callback(err,null);
-                } else {
-                    callback(null, result);
-                }
-           });
+           if(!(res[0]._ratersCounter)) {
+               console.log(res[0]);
+               var note = pedalNote + (res[0]._rate * res[0]._ratersCounter);
+                console.log(note);
+
+               pedalGateway.updatePedalNote(pedalId, note, function (error, result) {
+                   if (error) {
+                       callback(err, null);
+                   } else {
+                       callback(null, result);
+                   }
+               });
+           } else {
+               callback(err, null);
+           }
        }
     });
 }

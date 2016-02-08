@@ -11,8 +11,10 @@ function pedalRetriever(userId, callback) {
     userFinder.getUserPedal(userId, function(pedalList) {
         var pedals = [];
         async.each(pedalList, function iterator (item, callbackIter) {
-            pedals.push(item);
-            callbackIter(null);
+            pedalFinder.myfindOne(item._id, function(err, res) {
+                pedals.push(res);
+                callbackIter(err);
+            });
         }, function join (err) {
             if(err) {
                 callback(err);
@@ -28,11 +30,12 @@ function updateUserPedals(userId, pedals ,callback) {
         if(err) {
             callback(err, null);
         } else {
-            console.log(pedals);
             res._pedals.push(pedals[0]);
-            userGateway.updateUser(res, function(err, res) {
-                if(err) {
-                    callback(err, null);
+            userGateway.updateUser(res, function(error, response) {
+                if(error) {
+                    callback(error, null);
+                } else {
+                    callback(null, response);
                 }
             });
         }
@@ -48,9 +51,6 @@ function retrieveAllUser(callback) {
         }
     })
 }
-
-
-
 
 
 exports.updateUserPedals = updateUserPedals;
