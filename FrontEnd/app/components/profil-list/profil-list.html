@@ -1,7 +1,6 @@
 <div class="container">
 
 
-
     <div class="row rowMember">
         <div class="card col-lg-2 itemMember" ng-repeat="member in membersList.memberList">
             <img class="card-img-top" ng-src="{{member.pathImage}}" alt="Card image cap">
@@ -10,6 +9,7 @@
                 <h4 class="card-title">{{member.name}}</h4>
 
                 <p class="card-text">{{member.description}}</p>
+
                 <p class="card-text">{{member.description2}}</p>
             </div>
             <div class="card-block">
@@ -27,5 +27,51 @@
             </div>
         </div>
     </div>
+
+    <article class="aboutContent">
+        <div class="titleArticle"> About</div>
+
+        <div class="contentArticle">
+            <div class="row">
+                <div class="contentArticleTitle col-lg-2 ">
+                    Who are we ?
+                </div>
+                <div class="contentArticleContent col-lg-10">
+                    We are four students from an engineer school in France called Polytech Nice-Sophia.
+                </div>
+            </div>
+            <div class="row">
+                <div class="contentArticleTitle col-lg-2 ">
+                    What is FX Machine project ?
+                </div>
+                <div class="contentArticleContent col-lg-10">
+                    We have developed a web site for guitarists who would like to have their own effect pedals on
+                    their computers.
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="contentArticleTitle col-lg-2 ">
+                    Tired to buy or test a lot of pedal because you can't find the perfect sound?
+                </div>
+                <div class="contentArticleContent col-lg-10">
+                    Don't worry, FX Machine is the solution made for you! Thanks to our system, you will be able to
+                    create
+                    your own pedal by selecting every components of your pedal.
+                </div>
+            </div>
+            <div class="row">
+                <div class="contentArticleTitle col-lg-2 ">
+                    Wait we made more functionalities!
+                </div>
+                <div class="contentArticleContent col-lg-10">
+                    Once you have built your pedal with all effects you need, you can save it and share it to your
+                    friends.
+                    In fact, when you save, your pedal is public and people can use it.
+                </div>
+            </div>
+
+        </div>
+    </article>
 
 </div>
