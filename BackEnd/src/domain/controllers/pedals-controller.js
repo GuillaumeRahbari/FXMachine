@@ -14,7 +14,6 @@ var pedalFinder = require("../../data/pedal-finder"),
  */
 function updatePedalNote(pedalId, pedalNote, callback) {
     pedalFinder.myfindOne(pedalId, function(err, res) {
-        console.log("coucou")
        if(err) {
            callback(err, null);
        } else {

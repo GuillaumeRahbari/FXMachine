@@ -54,9 +54,7 @@ router.get("/:pedalId", function(req, res) {
 
 router.put("/:pedalId", function(req, res) {
     var myPedal = req.body;
-    console.log("coucou");
     pedal.JsonToPedal(myPedal, function(err, response) {
-        console.log("derp")
         if(err) {
             res.sendStatus(400);
         } else {
