@@ -456,11 +456,13 @@ angular.module('frontEndApp')
 
           // *********************** FILEMODE SPECIFIC METHODS
 
+
+
           playSound()
           {
               if(this._inputMode =='fileMode')
               {
-                  if(this._isGraphReady)
+                  if(this._isGraphReady && !this._isPlaying)
                   {
                       //this._soundInput.start(0, this._context.currentTime + 20);
                       if(this._playerTime > 0)
@@ -480,7 +482,7 @@ angular.module('frontEndApp')
                   }
                   else
                   {
-                      console.warn("Impossible to play sound, build graph before !");
+                      console.warn("Impossible to play sound, build graph before ! or it's already playing");
                   }
               }
               else
