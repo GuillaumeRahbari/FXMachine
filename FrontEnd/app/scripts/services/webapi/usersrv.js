@@ -27,7 +27,7 @@ angular.module('frontEndApp')
                    var exp = ExpireDate.expireDate();
                    $http({
                        method : 'PUT',
-                       url    : 'http://localhost:3000/user/subscription',
+                       url    : 'http://192.168.1.12:3000/user/subscription',
                        data   : user,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
@@ -61,7 +61,7 @@ angular.module('frontEndApp')
                    var exp = ExpireDate.expireDate();
                    $http({
                        method : 'POST',
-                       url    : 'http://localhost:3000/user/signin',
+                       url    : 'http://192.168.1.12:3000/user/signin',
                        data   : user,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
@@ -93,7 +93,7 @@ angular.module('frontEndApp')
                logout: function () {
                    return $http({
                        method : 'POST',
-                       url    : 'http://localhost:3000/user/signout',
+                       url    : 'http://192.168.1.12:3000/user/signout',
                        data   : {_id: $cookies.get('userId')},
                        headers: {'Content-Type': 'application/json'}
                    }).then(
@@ -120,7 +120,7 @@ angular.module('frontEndApp')
                getAll: function () {
                    return $http({
                        method : 'GET',
-                       url    : 'http://localhost:3000/user/all',
+                       url    : 'http://192.168.1.12:3000/user/all',
                        headers: {'Content-Type': 'application/json'}
                    });
                }
