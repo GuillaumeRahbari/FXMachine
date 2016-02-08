@@ -94,30 +94,22 @@ function updatePedalComments(pedalId, pedalComments, callback) {
 }
 
 
-function updatePedalNote(pedalId, pedalNote, ratecounter,callback) {
+function updatePedalNote(pedalId, pedalNote,callback) {
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(err, null);
         } else {
+            console.log("yolo");
             var collection = db.collection('pedals');
             collection.updateOne(
-                { "_id" : new mongodb.ObjectID(pedalId) },
+                { "_id" : pedalId },
                 { $set: { "_rate" : pedalNote}},
                 function(error, res) {
                     if(error) {
                         callback(error, null);
                     } else {
-                        collection.updateOne(
-                            { "_id" : new mongodb.ObjectID(pedalId) },
-                            { $set: { "_ratersCounter" : ratecounter}},
-                            function(errorR, response) {
-                                if(error) {
-                                    callback(errorR, null);
-                                } else {
-                                    callback(null, response);
-                                }
-                            }
-                        );
+                        console.log(res);
+                        callback(null, res);
                     }
                 }
             );
