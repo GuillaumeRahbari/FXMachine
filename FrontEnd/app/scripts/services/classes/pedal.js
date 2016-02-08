@@ -50,7 +50,6 @@ angular.module('frontEndApp')
                importPedal (pedalJSON, webaudio) {
 
 
-
                    console.info("import pedal : inputoutput");
 
                    // Input and output nodes of the pedal
@@ -65,8 +64,11 @@ angular.module('frontEndApp')
 
                    for(var i = 0 ; i < l ; i++)
                    {
-                       this._filters.push(new Filter(pedalJSON._type, webaudio));
-                       //TODO : manque les parametres du filtre !!
+                       var filter = new Filter(pedalJSON._filters[i]._type, webaudio);
+                      filter.importFilter(pedalJSON._filters[i], webaudio); // TODO : dans ce import, on recupere pas les params
+                       this._filters.push(filter);
+
+
                        //importFilter("gain")
                    }
 

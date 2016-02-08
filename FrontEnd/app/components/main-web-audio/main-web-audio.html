@@ -9,7 +9,7 @@
             <!-- Input type selector -->
 
             <div class="row quartHeight fullwidthoparent nomargin">
-                INPUT TYPE
+                INPUT
 
                 </div>
 
@@ -99,10 +99,10 @@
 
 
                     <div ng-if="$ctrl.webaudio.startPlayTime > 0" class="fullwidthoparent halfheight">
-                        {{$ctrl.webaudio.now - $ctrl.webaudio.startPlayTime | date: 'mm:ss:sss'}}
+                        {{$ctrl.webaudio.now - $ctrl.webaudio.startPlayTime | date: 'mm:ss'}}
                     </div>
                     <div ng-if="$ctrl.webaudio.startPlayTime <= 0" class="fullwidthoparent halfheight">
-                        00:00:00
+                        00:00
                     </div>
                 </div>
 
@@ -220,16 +220,18 @@
             <!-- Input type selector -->
 
             <div class="row quartHeight fullwidthoparent nomargin">
-                INPUT TYPE
+                INPUT
             </div>
 
             <div class="row threequartsheight fullwidthoparent nomargin">
 
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">File</a>
+                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">
+                        <i class="fa fa-file-audio-o"></i></a></a>
                 </div>
                 <div class="row thirdheight fullwidthoparent nomargin">
-                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">Mic</a>
+                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">
+                        <i class="fa fa-file-microphone"></i></a></a>
 
                 </div>
             </div>
