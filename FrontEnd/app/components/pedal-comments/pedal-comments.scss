@@ -26,6 +26,8 @@ pedal-comments {
   .rating > i:hover:before,
   .rating > i:hover ~ i:before {
     content: "\f005";
+    color:gold;
+    text-shadow: 2px 2px red;
   }
 
 }
