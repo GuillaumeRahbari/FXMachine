@@ -62,32 +62,6 @@ angular.module('frontEndApp')
 
 
 
-          loadMic()
-          {
-              console.log("load mic mode !");
-              if(this._inputMode == 'micMode')
-              {
-                  var self = this;
-                  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-                  // navigator.getUserMedia( {audio:true}, this.gotStream(stream), function(err){console.log("err:"+err)} );
-
-                  navigator.webkitGetUserMedia({audio:true}, function(stream){
-
-                      console.log('mic loaded');
-
-                      self._micBuffer = stream;
-                      self._isInitialized = true;
-
-                  }, function(){altert('lol fail')});
-              }
-              else {
-
-                  console.log('asked to load Mic but input mode not good:');
-                  console.log(this._inputMode);
-              }
-          }
-
-
           /**
            * Initialize the "Audio Context", which is kinda the environment where we create the audio graph
            * There can be only one !
@@ -109,7 +83,10 @@ angular.module('frontEndApp')
           }
 
 
-
+          /**
+           *
+           * @param input {String} the input mode
+           */
           changeInputMode(input)
           {
 
@@ -117,10 +94,24 @@ angular.module('frontEndApp')
               // Killing anything going on at this point
              // this.cleanGraph();
 
+              // We just try to kill everything.
               this.killMic();
               this.killSound();
 
-              this._inputMode = input;
+              switch(input)
+              {
+                  case 'fileMode':
+                      this._inputMode = input;
+                      break;
+                  case 'micMode':
+                      this._inputMode = input;
+                      break;
+
+                  default:
+                  console.error("Wrong input type :");
+                  console.error(input);
+              }
+              //this._inputMode = input;
           }
 
 
@@ -264,8 +255,8 @@ angular.module('frontEndApp')
           }
 
 
-          /*
-           Just play the input.
+          /**
+           Just create a graph connecting input to output(speakers)
            */
           loadDefaultGraph()
           {
@@ -289,6 +280,7 @@ angular.module('frontEndApp')
 
 
           }
+
           /**
            * Clean the graph. as simple as that.
            */
@@ -322,6 +314,38 @@ angular.module('frontEndApp')
 
           //******************************* MICMODE SPECIFIC METHODS
 
+          /**
+           * Loads the mic by requesting access to the browser
+           */
+          loadMic()
+          {
+              console.log("load mic mode !");
+              if(this._inputMode == 'micMode')
+              {
+                  var self = this;
+                  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+                  // navigator.getUserMedia( {audio:true}, this.gotStream(stream), function(err){console.log("err:"+err)} );
+
+                  navigator.webkitGetUserMedia({audio:true}, function(stream){
+
+                      console.log('mic loaded');
+
+                      self._micBuffer = stream;
+                      self._isInitialized = true;
+
+                  }, function(){altert('lol fail')});
+              }
+              else {
+
+                  console.log('asked to load Mic but input mode not good:');
+                  console.log(this._inputMode);
+              }
+          }
+
+
+          /**
+           * Creates a default graph, and sound starts playing
+           */
           startMic()
           {
               this.loadDefaultGraph();
@@ -346,17 +370,21 @@ angular.module('frontEndApp')
               }
           }
 
+          /**
+           * Pause mic for the user, but actually destroy the graph
+           * TODO : just disconnect input node ?
+           */
           pauseMic()
           {
               if(this._inputMode =='micMode')
               {
                   if(this._isPlaying)
                   {
-                      console.info("Stopping sound, Graph destroyed, cannot be played again without rebuilding the graph !");
+                      console.info("Pausing mic, Graph destroyed, cannot be played again without rebuilding the graph !");
                       // stop the source now.
                       // Parameter : delay before stopping
                       // BEWARE : THIS DESTROYS THE NODE ! If we stop, we need to rebuid the graph again !
-                      // We do not need to redecode the data, just to rebuild the graph
+                      // We do not need to re-decode the data, just to rebuild the graph
                       this._isPlaying = false;
                       this.cleanGraph(); // Just in case, because i dont trust this stuff
                       this._isGraphReady = false;
@@ -373,7 +401,9 @@ angular.module('frontEndApp')
               }
           }
 
-          // Stop is just pause + kill
+          /**
+          Stop is just pause + kill
+           */
           stopMic()
           {
               if(this._inputMode =='micMode')
@@ -396,13 +426,15 @@ angular.module('frontEndApp')
               }
           }
 
+          /**
+           * Destroys everything about the mic
+           */
           killMic()
           {
               if(this._inputMode == 'micMode')
               {
                   if(this._isPlaying)
                   {
-
                       this.stopMic();
                   }
                   if(this._micBuffer != null)

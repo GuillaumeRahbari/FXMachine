@@ -29,6 +29,9 @@ angular.module('frontEndApp')
         // Pour recharger une pedale, deux etapes
 
         self.pedal.importPedal(pedal, webaudio);
+
+
+
         // et on met a jour le webaudiocontext (meme si en vrai.. bref.)
 
 
