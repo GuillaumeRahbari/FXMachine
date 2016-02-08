@@ -14,24 +14,20 @@ var pedalFinder = require("../../data/pedal-finder"),
  */
 function updatePedalNote(pedalId, pedalNote, callback) {
     pedalFinder.myfindOne(pedalId, function(err, res) {
+        console.log("coucou")
        if(err) {
            callback(err, null);
        } else {
-           if(!(res[0]._ratersCounter)) {
-               console.log(res[0]);
-               var note = pedalNote + (res[0]._rate * res[0]._ratersCounter);
-                console.log(note);
-
-               pedalGateway.updatePedalNote(pedalId, note, function (error, result) {
+           console.log(res[0]._ratersCounter);
+               var note = (pedalNote + (res[0]._rate * res[0]._ratersCounter))/(res[0]._ratersCounter + 1);
+               var rateCounter = res[0]._ratersCounter + 1;
+               pedalGateway.updatePedalNote(pedalId, note, rateCounter ,function (error, result) {
                    if (error) {
                        callback(err, null);
                    } else {
                        callback(null, result);
                    }
                });
-           } else {
-               callback(err, null);
-           }
        }
     });
 }
