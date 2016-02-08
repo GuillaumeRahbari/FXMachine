@@ -10,7 +10,7 @@
 angular.module('frontEndApp')
        .factory('PedalSrv', function ($cookies, $http, $rootScope) {
 
-           var url = 'http://192.168.1.12:3000/user/' + $cookies.get('userId') + '/pedals';
+           var url = 'http://localhost:3000/user/' + $cookies.get('userId') + '/pedals';
 
            return {
                /**
@@ -30,7 +30,6 @@ angular.module('frontEndApp')
                 * @param {Pedal} pedal - The pedal to add.
                 */
                putPedal: function (pedal) {
-                   console.log("sedal sent to ssrver : " + JSON.stringify(pedal));
                    $http({
                        method : 'PUT',
                        url    : url + '/',
@@ -102,7 +101,7 @@ angular.module('frontEndApp')
                ratePedal: function (rate, pedalId) {
                    $http({
                        method : 'POST',
-                       url    : url + '/' + pedalId + '/note',
+                       url    : url + '/' + pedalId + '/rate',
                        data   : {_note: rate},
                        headers: {'Content-Type': 'application/json'}
                    }).then(
