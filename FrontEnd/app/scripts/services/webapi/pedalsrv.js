@@ -30,7 +30,6 @@ angular.module('frontEndApp')
                 * @param {Pedal} pedal - The pedal to add.
                 */
                putPedal: function (pedal) {
-                   console.log("sedal sent to ssrver : " + JSON.stringify(pedal));
                    $http({
                        method : 'PUT',
                        url    : url + '/',
@@ -102,7 +101,7 @@ angular.module('frontEndApp')
                ratePedal: function (rate, pedalId) {
                    $http({
                        method : 'POST',
-                       url    : url + '/' + pedalId + '/note',
+                       url    : url + '/' + pedalId + '/rate',
                        data   : {_note: rate},
                        headers: {'Content-Type': 'application/json'}
                    }).then(

@@ -38,7 +38,7 @@ angular.module('frontEndApp')
                        },
                        //error
                        function (error) {
-                           console.log('cc');
+                           console.log(error);
                            $location.path('/connection');
                        }
                    );

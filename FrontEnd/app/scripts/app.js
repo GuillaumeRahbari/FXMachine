@@ -52,6 +52,8 @@ angular
                         pedal: function (PedalSrv, $route, $cookies) {
                             return PedalSrv.getPedal($cookies.get('userId'), $route.current.params.pedalId).then(
                                 function (data) {
+                                    console.log('PEDALLLL');
+                                    console.log(data.data);
                                     return data.data;
                                 },
                                 function (error) {
