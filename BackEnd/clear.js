@@ -12,4 +12,5 @@ var url = 'mongodb://localhost:27017/FXMachine';
     mongoClient.connect(url, function(err,db){
        db.dropDatabase();
     });
+    console.log("ok");
 })();
