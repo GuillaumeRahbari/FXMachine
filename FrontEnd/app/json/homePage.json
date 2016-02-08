@@ -12,7 +12,7 @@
           "classLi": "linkedin"
         },
         {
-          "link" : "",
+          "link" : "mailto:qcornevin@gmail.com?subject=FXMachine",
           "icon" : "fa fa-envelope mailIcon",
           "classLi": "mail"
         }
@@ -30,7 +30,7 @@
           "classLi": "linkedin"
         },
         {
-          "link" : "",
+          "link" : "mailto:remi.pourtier@gmail.com?subject=FXMachine",
           "icon" : "fa fa-envelope mailIcon",
           "classLi": "mail "
         }
@@ -48,7 +48,7 @@
           "classLi": "linkedin"
         },
         {
-          "link" : "",
+          "link" : "mailto:guillaume.rahbari@gmail.com?subject=FXMachine",
           "icon" : "fa fa-envelope mailIcon",
           "classLi": "mail"
         }
@@ -66,7 +66,7 @@
           "classLi": "linkedin"
         },
         {
-          "link" : "",
+          "link" : "mailto:maxime.touroute@gmail.com?subject=FXMachine",
           "icon" : "fa fa-envelope mailIcon",
           "classLi": "mail"
         }
