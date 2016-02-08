@@ -37,6 +37,11 @@ angular.module('frontEndApp')
                    this._output   = new Filter("output", webaudioService);
                    // TODO : this._input.addOutput(this._output.uuid);
                    this._webaudio = webaudioService;
+
+                   this._comments = [];
+                   this._rate = 0;
+                   this._ratersCounter = 0;
+
                }
 
 
@@ -145,6 +150,12 @@ angular.module('frontEndApp')
                }
 
 
+
+               changeWebAudioContext(newCtx) {
+                   // Dans tous les filtres,
+               }
+
+
                // *************** Getters Setters
 
                /**
@@ -171,6 +182,14 @@ angular.module('frontEndApp')
 
                get name () {
                    return this._name;
+               }
+
+               get rate () {
+                   return this._name;
+               }
+
+               get comments () {
+                   return this._comments;
                }
 
            }
