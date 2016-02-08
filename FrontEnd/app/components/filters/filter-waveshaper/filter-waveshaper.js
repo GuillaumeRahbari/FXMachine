@@ -10,25 +10,25 @@
  * # filterWaveshaper
  */
 angular.module('frontEndApp')
-       .component('filterWaveshaper', {
-           templateUrl: 'components/filters/filter-waveshaper/filter-waveshaper.html',
-           bindings   : {
-               filter   : '=',
-               amount   : '=',
-               distotype: '=',
-               harmonics: '=',
-               fondfreq : '='
-           },
-           controller : FilterWaveshaperController
-       });
+    .component('filterWaveshaper', {
+        templateUrl: 'components/filters/filter-waveshaper/filter-waveshaper.html',
+        bindings: {
+            filter: '=',
+            amount: '=',
+            distotype: '=',
+            harmonics: '=',
+            fondfreq: '='
+        },
+        controller: FilterWaveshaperController
+    });
 
-function FilterWaveshaperController ($element, canvasManager, $scope) {
+function FilterWaveshaperController($element, canvasManager, $scope) {
 
     var self = this;
 
     self.fondfreq = 5;
     // Initialising scope values
-    self.amount    = 1;
+    self.amount = 1;
     self.distotype = "atan";
     self.harmonics = [0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -44,9 +44,9 @@ function FilterWaveshaperController ($element, canvasManager, $scope) {
     var makeAtanDistortionCurve = function (amount) {
 
         var k = amount, n_samples = 44100,
-            curve                 = new Float32Array(n_samples),
-            deg                   = Math.PI / 180,
-            i                     = 0,
+            curve = new Float32Array(n_samples),
+            deg = Math.PI / 180,
+            i = 0,
             x;
 
 
@@ -68,8 +68,8 @@ function FilterWaveshaperController ($element, canvasManager, $scope) {
      */
     var makeChebyshevDistortionCurve = function (harmonics, fondamentalFreq) {
         var n_samples = 44100,
-            curve     = new Float32Array(n_samples),
-            i         = 0,
+            curve = new Float32Array(n_samples),
+            i = 0,
             x;
 
 

@@ -40,7 +40,7 @@ angular.module('frontEndApp')
                 CanvasManager.setMeterColor(ctx, "vertical");
 
                 // Variable meterWidth depending on canvas width to fill it
-                var meterWidth = $scope.analyserNode.fftSize / (ctx.canvas.width);
+                var meterWidth = $scope.analyserNode.fftSize /(ctx.canvas.width);
 
                 var meterHeight = 0;
 
@@ -57,11 +57,7 @@ angular.module('frontEndApp')
                 $timeout(draw, 60)
 
             };
-
                 draw();
-
-
-
         }
     };
 
