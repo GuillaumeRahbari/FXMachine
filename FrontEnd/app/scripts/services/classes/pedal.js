@@ -59,7 +59,7 @@ angular.module('frontEndApp')
                    this._output.objectContructor(pedalJSON._output, webaudio);
 
                    console.info("import pedal : filters");
-                   this._filters = pedalJSON._filters; // TODO refaire la meme merde das les filtres import
+
                    var l = pedalJSON._filters.length;//TODO: ya pa linput dedans hein? normalement non mais bon
 
                    for(var i = 0 ; i < l ; i++)
