@@ -1,6 +1,6 @@
 
 .headerWebSite{
-
+    //font-family: 'Audimat';
     position:absolute;
     color: white;
     font-weight: 400;
@@ -10,6 +10,7 @@
     font-size:65px;
 }
 .secondHeaderWebSite{
+    //font-family: 'Audimat';
     position:absolute;
     color: white;
     font-weight: 400;
@@ -20,9 +21,10 @@
     font-style: italic;
 }
 .imageContent{
-    background:url("../../images/guitarebackground.png");
-    width:1914px;
-    height:752px;
+    background:url("../../images/guitarebackground.png") no-repeat;
+    //width:1914px;
+    //height:752px;
+    height:100%;
 }
 
 body section{
