@@ -1,10 +1,13 @@
 .about{
-  //background:url('../../images/publicbackground.png');
+  background:url('../../images/publicbackground.png');
+  width:1897px;
+  height:697px;
 }
 .realAboutContent{
   position: absolute;
-  top:150%;
+  margin-top:0%;
   left:20%;
+  margin-top:5%;
   z-index:4;
   color:white;
 }
