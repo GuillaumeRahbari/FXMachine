@@ -8,9 +8,9 @@
  * Factory in the frontEndApp.
  */
 angular.module('frontEndApp')
-       .factory('PedalSrv', function ($cookies, $http, $rootScope) {
+       .factory('PedalSrv', function ($cookies, $http, $rootScope, constants) {
 
-           var url = 'http://192.168.1.12:3000/user/' + $cookies.get('userId') + '/pedals';
+           var url = constants.backendUrl + 'user/' + $cookies.get('userId') + '/pedals';
 
            return {
                /**
@@ -20,7 +20,7 @@ angular.module('frontEndApp')
                getAllPedals: function (userId) {
                    return $http({
                        method : 'GET',
-                       url    : 'http://192.168.1.12:3000/user/' + userId + '/pedals/all',
+                       url    : constants + 'user/' + userId + '/pedals/all',
                        headers: {'Content-Type': 'application/json'}
                    });
                },
@@ -33,7 +33,7 @@ angular.module('frontEndApp')
                    $http({
                        method : 'POST',
                        url    : url + '/create',
-                       data   : pedal,
+                       data   : pedal._input._audioNode,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
                        function (response) {
@@ -54,7 +54,7 @@ angular.module('frontEndApp')
                getPedal: function (userId, pedalId) {
                    return $http({
                        method : 'GET',
-                       url    : 'http://192.168.1.12:3000/user/' + userId + '/pedals/' + pedalId,
+                       url    : constants + 'user/' + userId + '/pedals/' + pedalId,
                        headers: {'Content-Type': 'application/json'}
                    });
                },
@@ -102,7 +102,7 @@ angular.module('frontEndApp')
                    $http({
                        method : 'POST',
                        url    : url + '/' + pedalId + '/rate',
-                       data   : {_note: rate},
+                       data   : {_rate: rate},
                        headers: {'Content-Type': 'application/json'}
                    }).then(
                        function (response) {
