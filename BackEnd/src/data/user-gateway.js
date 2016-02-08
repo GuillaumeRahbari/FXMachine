@@ -15,23 +15,19 @@ function createUser(user ,callback) {
             var collection = db.collection('users');
             user._role = "user";
             user._pedals = [];
-            console.log(user);
             collection.insert([user], function (err, result) {
                 if (err) {
                     console.log(err);
                     callback(err, null);
                 } else {
-                    console.log("test");
-                    console.log(result.ops[0] );
                     console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
-                    callback(null, { _id :  result.ops[0]._id,
-                                     _firstName : result.ops[0]._firstName,
-                                     _lastName : result.ops[0]._lastName});
+                    callback(null, {_id: result.ops[0]._id});
                 }
-            });
+            })
         }
     });
 }
+
 
 function deleteUser(user, callback) {
     mongoClient.connect(url, function(err, db) {

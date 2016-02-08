@@ -85,7 +85,7 @@ angular
                     controller  : 'PedalCtrl',
                     controllerAs: 'pedal',
                     resolve     : {
-                        pedal: function (PedalSrv, $route, $cookies) {
+                        pedal: function (PedalSrv, $route) {
                             return PedalSrv.getPedal($route.current.params.userId, $route.current.params.pedalId).then(
                                 function (data) {
                                     return data.data;
