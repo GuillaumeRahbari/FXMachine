@@ -3,8 +3,9 @@
     <!-- TODO  duplication de code au niveau du selecteur file/mic -->
 
     <!-- FOR FILEMODE -->
-    <div class="row" ng-if="$ctrl.webaudio.inputMode == 'fileMode' ">
+    <div class="row">
 
+        <!-- Common part of the directive for all input modes -->
         <div class="web-audio-elem inputs-web-audio col-lg-1">
             <!-- Input type selector -->
 
@@ -29,7 +30,10 @@
 
         </div>
 
-        <div class="web-audio-elem inputs-web-audio  col-lg-3">
+        <!-- TODO ca serait cool d'isoler chaque inputMode une grosse div, mais ca degomme tout l'affichage. -->
+        <!-- FILEMODE STUFF -->
+
+        <div ng-if="$ctrl.webaudio.inputMode == 'fileMode'" class="web-audio-elem inputs-web-audio  col-lg-3">
 
 
 
@@ -66,7 +70,7 @@
 
         </div>
 
-        <div class="web-audio-elem status-web-audio  col-lg-1">
+        <div ng-if="$ctrl.webaudio.inputMode == 'fileMode'" class="web-audio-elem status-web-audio  col-lg-1">
             <div ng-if="$ctrl.webaudio.isInitialized" class="statusbox valid-box thirdheight">Init</div>
             <div ng-if="$ctrl.webaudio.isGraphReady" class="statusbox valid-box thirdheight">Graph</div>
             <div ng-if="$ctrl.webaudio.isPlaying" class="statusbox valid-box thirdheight">Playing</div>
@@ -76,7 +80,7 @@
             <div ng-if="!$ctrl.webaudio.isPlaying" class="statusbox invalid-box thirdheight">Playing</div>
         </div>
 
-        <div class="web-audio-elem controls-web-audio col-lg-3">
+        <div ng-if="$ctrl.webaudio.inputMode == 'fileMode'" class="web-audio-elem controls-web-audio col-lg-3">
 
 
             <!-- some space idk what for yet -->
@@ -168,7 +172,7 @@
 
         </div>
 
-        <div class="web-audio-elem outputs-web-audio  col-lg-4">
+        <div ng-if="$ctrl.webaudio.inputMode == 'fileMode'" class="web-audio-elem outputs-web-audio  col-lg-4">
             <div class="row nomargin">
                 <!-- Extremite: need un nomargin -->
                 <div class="col-lg-4 nopadding">
@@ -210,35 +214,10 @@
 
 
         </div>
-    </div>
 
+        <!-- MICROPHONEMODE STUFF -->
 
-    <!-- FOR MIC INPUT MODE -->
-    <div class="row" ng-if="$ctrl.webaudio.inputMode == 'micMode'">
-
-        <div class="web-audio-elem inputs-web-audio col-lg-1">
-            <!-- Input type selector -->
-
-            <div class="row quartHeight fullwidthoparent nomargin">
-                INPUT
-            </div>
-
-            <div class="row threequartsheight fullwidthoparent nomargin">
-
-                <div class="row thirdheight fullwidthoparent nomargin">
-                    <a ng-click="$ctrl.webaudio.changeInputMode('fileMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">
-                        <i class="fa fa-file-audio-o"></i></a></a>
-                </div>
-                <div class="row thirdheight fullwidthoparent nomargin">
-                    <a  ng-click="$ctrl.webaudio.changeInputMode('micMode')" class="btn btn-primary webaudio-control-btn webaudio-control-btn-secondary fullwidthoparent thirdheight nopaddingvertical nopadding">
-                        <i class="fa fa-file-microphone"></i></a></a>
-
-                </div>
-            </div>
-
-
-        </div>
-        <div class="web-audio-elem inputs-web-audio  col-lg-3 ">
+        <div ng-if="$ctrl.webaudio.inputMode == 'micMode'" class="web-audio-elem inputs-web-audio  col-lg-3 ">
 
 
 
@@ -276,7 +255,7 @@
 
         </div>
 
-        <div class="web-audio-elem status-web-audio  col-lg-1">
+        <div ng-if="$ctrl.webaudio.inputMode == 'micMode'" class="web-audio-elem status-web-audio  col-lg-1">
             <div ng-if="$ctrl.webaudio.isInitialized" class="statusbox valid-box thirdheight">MIC</div>
             <div ng-if="$ctrl.webaudio.isGraphReady" class="statusbox valid-box thirdheight">GRAPH</div>
             <div ng-if="$ctrl.webaudio.isPlaying" class="statusbox valid-box thirdheight">ON-AIR</div>
@@ -286,7 +265,7 @@
             <div ng-if="!$ctrl.webaudio.isPlaying" class="statusbox invalid-box thirdheight">ON-AIR</div>
         </div>
 
-        <div class="web-audio-elem controls-web-audio col-lg-5">
+        <div ng-if="$ctrl.webaudio.inputMode == 'micMode'" class="web-audio-elem controls-web-audio col-lg-5">
 
             <!--By default : speakers-->
             <canvas signal-visualiser analyser-node="$ctrl.webaudio.analyser"
@@ -296,7 +275,7 @@
 
         </div>
 
-        <div class="web-audio-elem outputs-web-audio  col-lg-2">
+        <div ng-if="$ctrl.webaudio.inputMode == 'micMode'" class="web-audio-elem outputs-web-audio  col-lg-2">
             <div class="row nomargin">
 
                 <div class="col-lg-11 nopadding">
@@ -332,4 +311,10 @@
 
         </div>
     </div>
+
+
+    </div>
+
+
+
 </div>
