@@ -141,14 +141,15 @@ angular.module('frontEndApp')
               console.log('preload graph');
               if(this._isInitialized)
               {
-                  /*this.killSound();
-                  this.pauseMic();*/
+                  //this.killSound();
+                  //this.pauseMic();
+                  //this.killMic();
 
                   this.cleanGraph();
 
 
                   // quick graph
-                  console.log("WebAudio : creating simple graph input->output.");
+                  //console.log("WebAudio : creating simple graph input->output.");
 
                   if(this._inputMode =='fileMode')
                   {
@@ -160,6 +161,7 @@ angular.module('frontEndApp')
                   {
                       console.log('mic load graph');
                       this._soundInput = this._context.createMediaStreamSource( this._micBuffer );
+                      //this._soundInput.disconnect();
                   }
                   else
                   {
@@ -252,6 +254,12 @@ angular.module('frontEndApp')
                   alert("the web audio context is not initialized, we make this operation");
               }
 
+              //TODO:sale
+              if(this._inputMode =='micMode')
+              {
+                  this._isPlaying = true;
+              }
+
           }
 
 
@@ -280,6 +288,7 @@ angular.module('frontEndApp')
 
 
           }
+
 
           /**
            * Clean the graph. as simple as that.
@@ -348,12 +357,14 @@ angular.module('frontEndApp')
            */
           startMic()
           {
-              this.loadDefaultGraph();
+
 
 
               // It's a bit different than fileMode, we load default graph here directly because mic sound starts automatically
               if(this._inputMode =='micMode')
               {
+                  this.loadDefaultGraph();
+
                   if(this._isGraphReady)
                   {
                       this._isPlaying = true;
@@ -388,6 +399,8 @@ angular.module('frontEndApp')
                       this._isPlaying = false;
                       this.cleanGraph(); // Just in case, because i dont trust this stuff
                       this._isGraphReady = false;
+
+                      this._soundOutput.disconnect();
                   }
                   else
                   {
@@ -456,11 +469,13 @@ angular.module('frontEndApp')
 
           // *********************** FILEMODE SPECIFIC METHODS
 
+
+
           playSound()
           {
               if(this._inputMode =='fileMode')
               {
-                  if(this._isGraphReady)
+                  if(this._isGraphReady && !this._isPlaying)
                   {
                       //this._soundInput.start(0, this._context.currentTime + 20);
                       if(this._playerTime > 0)
@@ -480,7 +495,7 @@ angular.module('frontEndApp')
                   }
                   else
                   {
-                      console.warn("Impossible to play sound, build graph before !");
+                      console.warn("Impossible to play sound, build graph before ! or it's already playing");
                   }
               }
               else

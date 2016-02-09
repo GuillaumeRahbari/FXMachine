@@ -20,7 +20,7 @@ angular.module('frontEndApp')
                getAllPedals: function (userId) {
                    return $http({
                        method : 'GET',
-                       url    : constants + 'user/' + userId + '/pedals/all',
+                       url    : constants.backendUrl + 'user/' + userId + '/pedals/all',
                        headers: {'Content-Type': 'application/json'}
                    });
                },
@@ -33,7 +33,7 @@ angular.module('frontEndApp')
                    $http({
                        method : 'POST',
                        url    : url + '/create',
-                       data   : pedal._input._audioNode,
+                       data   : pedal,
                        headers: {'Content-Type': 'application/json'}
                    }).then(
                        function (response) {
@@ -54,7 +54,7 @@ angular.module('frontEndApp')
                getPedal: function (userId, pedalId) {
                    return $http({
                        method : 'GET',
-                       url    : constants + 'user/' + userId + '/pedals/' + pedalId,
+                       url    : constants.backendUrl + 'user/' + userId + '/pedals/' + pedalId,
                        headers: {'Content-Type': 'application/json'}
                    });
                },

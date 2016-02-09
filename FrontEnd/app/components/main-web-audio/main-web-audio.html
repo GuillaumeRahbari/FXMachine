@@ -102,11 +102,17 @@
                 <div class="col-lg-6  nopadding webaudio-timer">
 
 
-                    <div ng-if="$ctrl.webaudio.startPlayTime > 0" class="fullwidthoparent halfheight">
+                    <!-- cas PLAYING -->
+                    <div ng-if="$ctrl.webaudio.isPlaying" class="fullwidthoparent halfheight">
                         {{$ctrl.webaudio.now - $ctrl.webaudio.startPlayTime | date: 'mm:ss'}}
                     </div>
-                    <div ng-if="$ctrl.webaudio.startPlayTime <= 0" class="fullwidthoparent halfheight">
+                    <!-- cas DEBUT -->
+                    <div ng-if="$ctrl.webaudio.startPlayTime <= 0 && $ctrl.webaudio.playerTime <= 0" class="fullwidthoparent halfheight">
                         00:00
+                    </div>
+                    <!-- cas PAUSE -->
+                    <div ng-if=" !$ctrl.webaudio.isPlaying && $ctrl.webaudio.playerTime != 0" class="fullwidthoparent halfheight">
+                        {{$ctrl.webaudio.playerTime | date: 'mm:ss'}}
                     </div>
                 </div>
 
@@ -134,28 +140,19 @@
                 <div class="col-lg-6 nopadding">
 
                     <div class="row nomargin">
-                        <div class="col-lg-4 nopadding">
 
-
-                            <button type="button" id="button_play"
-                                    class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
-                                    ng-click='$ctrl.webaudio.playSound();'>
-                                <i class="fa fa-play"></i>
-                            </button>
-
-
-                        </div>
-
-                        <div class="col-lg-4 nopadding">
+                        <div class="col-lg-6 nopadding">
                             <!-- TODO: un vrai bouton play/pause, ou ne seraitce que un pause. -->
-                            <button type="button" id="button_pause"
+                            <button type="button" id="button_playPause"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
-                                    ng-click='$ctrl.webaudio.pauseSound();'>
-                                <i class="fa fa-pause"></i>
+                                    ng-class="{ 'webaudio-control-btn-playing': $ctrl.webaudio.isPlaying, 'webaudio-control-btn-paused': !$ctrl.webaudio.isPlaying}"
+                                    ng-click="($ctrl.webaudio.isPlaying) ? $ctrl.webaudio.pauseSound() : $ctrl.webaudio.playSound()"                                    " >
+                                <i ng-if="$ctrl.webaudio.isPlaying" class="fa fa-pause"></i>
+                            <i ng-if="!$ctrl.webaudio.isPlaying" class="fa fa-play"></i>
                             </button>
                         </div>
 
-                        <div class="col-lg-4 nopadding">
+                        <div class="col-lg-6 nopadding">
                             <button type="button" id="button_stop"
                                     class="webaudio-control-btn btn webaudio-control-btn-primary nopadding fullwidthoparent halfheight"
                                     ng-click='$ctrl.webaudio.stopSound();'>
