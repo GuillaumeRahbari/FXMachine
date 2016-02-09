@@ -1,7 +1,7 @@
 /**
  * Created by Quentin on 1/14/2016.
  */
-
+var mongodb = require('mongodb');
 var ObjectID = require('mongodb').ObjectID;
 var core = require("../../app/core/core.js");
 
