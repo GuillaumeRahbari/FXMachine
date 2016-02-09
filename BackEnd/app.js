@@ -11,7 +11,6 @@ var logger = require('morgan'),
  */
 app.use(logger('dev'));
 
-
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
@@ -25,22 +24,14 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-(function initDB() {
-    var mongoClient = mongodb.MongoClient;
-    var url = 'mongodb://localhost:27017/FXMachine';
-
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.log('Unable to connect to the mongoDB server. Error:', err);
-        } else {
-            db.collection('users').createIndex({"_email":1}, {unique:true})
-        }
-    });
-})();
-
+/**
+ * Definition of the different routers of the systems.
+ */
 app.use("/user", userRouter);
 app.use("/user/:user_id/pedals", pedalRouter);
 
+/**
+ * Definition of the port used by the server
+ */
 app.listen(3000);
 console.log('Server listening on port 3000');

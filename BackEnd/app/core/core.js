@@ -9,6 +9,31 @@
 var http = null;
 var express = require('express');
 var app = express();
+var mongodb = require('mongodb');
+var url = 'mongodb://localhost:27017/FXMachine';
+var mongoClient = mongodb.MongoClient;
+var db = null;
+
+/**
+ *  This function is used to connected to the Mongo database. Once the connexion is done we don't reconnect to the
+ *  database.
+ *
+ * @returns     {*}     Singleton representing the connection to the database.
+ */
+function getDb(callback) {
+    if(db == null) {
+        mongoClient.connect(url, function(err, database) {
+            if(err) {
+                console.log("An error occured while connecting to the database : \n" + err);
+            } else {
+                db = database;
+                callback(db);
+            }
+        });
+    } else {
+        callback(db);
+    }
+}
 
 /**
  * Récupère la variable http pour le serveur.
@@ -23,4 +48,4 @@ var getHttp = function() {
     return http;
 };
 
-module.exports = {getHttp : getHttp, app: app, express : express};
+module.exports = {getHttp : getHttp, app: app, express : express, getDb : getDb};

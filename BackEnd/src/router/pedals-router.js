@@ -44,9 +44,6 @@ router.post("/create", function(req, res) {
     });
 });
 
-router.post("/caca", function(req, res) {
-    res.sendStatus(200);
-})
 
 
 

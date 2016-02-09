@@ -5,8 +5,25 @@
 var mongodb = require('mongodb'),
     url = 'mongodb://localhost:27017/FXMachine',
     mongoClient = mongodb.MongoClient;
+var core = require("../../app/core/core");
+
 
 function saveLog(log, callback) {
+    core.getDb(function(db) {
+        var collection = db.collection('logs');
+        collection.insert([log], function(err, result) {
+            if(err) {
+                console.log("Error during insertion of log in the collection")
+                callback(err, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+
+
+
+    /*
     mongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Unable to connect to the db in saveLog");
@@ -22,10 +39,25 @@ function saveLog(log, callback) {
               }
            });
        }
-    });
+    }); */
 }
 
 function deleteLog(log, callback) {
+    core.getDb(function(db) {
+        var collection = db.collection('logs');
+        collection.deleteOne([log], function(err, result) {
+            if(err) {
+                console.log("Error during insertion of log in the collection")
+                callback(err, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+
+
+
+    /*
     mongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("")
@@ -41,7 +73,7 @@ function deleteLog(log, callback) {
               }
            });
        }
-    });
+    }); */
 }
 
 exports.deleteLog = deleteLog;

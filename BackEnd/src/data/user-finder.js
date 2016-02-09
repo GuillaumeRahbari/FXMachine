@@ -5,6 +5,7 @@ var mongodb = require('mongodb');
 var url = 'mongodb://localhost:27017/FXMachine';
 var mongoClient = mongodb.MongoClient;
 var ObjectID = require('mongodb').ObjectID;
+var core = require("../../app/core/core");
 
 
 /**
@@ -15,6 +16,29 @@ var ObjectID = require('mongodb').ObjectID;
  * @param callback  {function}  Function that will be call when the result is found or not.
  */
 function myfindOne(user, callback) {
+    core.getDb(function(db) {
+        var collection = db.collection('users');
+        collection.find({_email : user._email } ).toArray(function (err, result) {
+            if (err) {
+                console.log(err);
+                callback(500);
+            } else if (result.length) {
+                console.log('Found:', result);
+                callback(result);
+            } else {
+                console.log(result);
+                callback(404);
+                console.log('No document(s) found with defined "find" criteria!');
+            }
+        });
+    });
+
+
+
+
+
+/*
+
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -36,11 +60,25 @@ function myfindOne(user, callback) {
                 }
             })
         }
-    });
+    }); */
 }
 
 
 function findAllUser(callback) {
+    core.getDb(function(db) {
+        var collection = db.collection('users');
+        collection.find({ }).toArray(function(err, result) {
+            if(err) {
+                callback(err, null);
+            } else {;
+                callback(null, result);
+            }
+        });
+    });
+
+
+
+    /*
     mongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Error in findAll users")
@@ -55,7 +93,7 @@ function findAllUser(callback) {
                }
            });
        }
-    });
+    }); */
 }
 
 // admin : 5693be97da0e725c1d0d431a
@@ -77,6 +115,27 @@ function checkRights(id, collection, callback) {
  * @param   callback    {function}  function with two parameter, the first one is error and the second one is the result
  */
 function getUserPedal(id, callback) {
+    core.getDb(function(db) {
+        var o_id = new ObjectID(id);
+        var collection = db.collection('users');
+        collection.find({_id : o_id }).toArray(function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                if(typeof result[0]._pedals === 'undefined') {
+                    callback([]);
+                } else {
+                    callback(result[0]._pedals);
+                }
+            }
+        });
+    });
+
+
+
+
+
+    /*
     mongoClient.connect(url, function(err, db) {
         if(err) {
             callback(500);
@@ -95,7 +154,7 @@ function getUserPedal(id, callback) {
                 }
             });
         }
-    });
+    }); */
 }
 /**
  * This method will check if there is an user with the given id and will return all the information about
@@ -105,6 +164,23 @@ function getUserPedal(id, callback) {
  * @param   callback    {function}  callback with two param error and result.
  */
 function findUserWithId(id, callback) {
+    core.getDb(function(db) {
+        var o_id = new ObjectID(id);
+        var collection = db.collection('users');
+        collection.findOne({ _id : o_id}, function(err, result) {
+            if(err) {
+                callback(err, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+
+
+
+
+
+    /*
     mongoClient.connect(url, function(err, db) {
        if(err) {
            callback(err, null);
@@ -119,7 +195,7 @@ function findUserWithId(id, callback) {
                 }
            });
        }
-    });
+    }); */
 }
 
 exports.findUserWithId = findUserWithId;
