@@ -1,12 +1,11 @@
 /**
  * Created by Quentin on 1/7/2016.
+ *
+ * This module is used to find information about the user in the collection "users".
  */
-var mongodb = require('mongodb');
-var url = 'mongodb://localhost:27017/FXMachine';
-var mongoClient = mongodb.MongoClient;
+
 var ObjectID = require('mongodb').ObjectID;
 var core = require("../../app/core/core");
-
 
 /**
  * This function try to find the user in the database FXMachine and in the collection users. If the user is found
@@ -32,38 +31,14 @@ function myfindOne(user, callback) {
             }
         });
     });
-
-
-
-
-
-/*
-
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.log('Unable to connect to the mongoDB server. Error:', err);
-            callback(500);
-        } else {
-            var collection = db.collection('users');
-            console.log(user.email);
-            collection.find({email : user.email } ).toArray(function (err, result) {
-                if (err) {
-                    console.log(err);
-                    callback(500);
-                } else if (result.length) {
-                    console.log('Found:', result);
-                    callback(result);
-                } else {
-                    console.log(result);
-                    callback(404);
-                    console.log('No document(s) found with defined "find" criteria!');
-                }
-            })
-        }
-    }); */
 }
 
-
+/**
+ * This function is used to find all the user in the collection "users".
+ *
+ * @param       {function}      This callback function take two parameter, the first one is the error message, null
+ *                              if there is no error, and the second one is the result message, null if there is an error.
+ */
 function findAllUser(callback) {
     core.getDb(function(db) {
         var collection = db.collection('users');
@@ -75,28 +50,16 @@ function findAllUser(callback) {
             }
         });
     });
-
-
-
-    /*
-    mongoClient.connect(url, function(err, db) {
-       if(err) {
-           console.log("Error in findAll users")
-           callback(500);
-       } else {
-           var collection = db.collection('users');
-           collection.find({ }).toArray(function(err, result) {
-               if(err) {
-                   callback(err, null);
-               } else {;
-                   callback(null, result);
-               }
-           });
-       }
-    }); */
 }
 
-// admin : 5693be97da0e725c1d0d431a
+/**
+ * This function check the right of the user. If the user is not admin then the access is denied.
+ *
+ * @param       {uuid}          The id is the uuid of a user with the role admin the database.
+ * @param       {collection}    The collection where the id will be checked.
+ * @param       {function}      This callback is the function that will take one parameter, true if the access is allow
+ *                              false otherwise.
+ */
 function checkRights(id, collection, callback) {
     var o_id = new ObjectID(id);
     collection.findOne({ _id : o_id} , function(err, result) {
@@ -130,32 +93,8 @@ function getUserPedal(id, callback) {
             }
         });
     });
-
-
-
-
-
-    /*
-    mongoClient.connect(url, function(err, db) {
-        if(err) {
-            callback(500);
-        } else {
-            var o_id = new ObjectID(id);
-            var collection = db.collection('users');
-            collection.find({_id : o_id }).toArray(function(err, result) {
-                if(err) {
-                    callback(err);
-                } else {
-                    if(typeof result[0]._pedals === 'undefined') {
-                        callback([]);
-                    } else {
-                        callback(result[0]._pedals);
-                    }
-                }
-            });
-        }
-    }); */
 }
+
 /**
  * This method will check if there is an user with the given id and will return all the information about
  * the user in the callback. The callback will receive an error otherwise.
@@ -175,27 +114,6 @@ function findUserWithId(id, callback) {
             }
         });
     });
-
-
-
-
-
-    /*
-    mongoClient.connect(url, function(err, db) {
-       if(err) {
-           callback(err, null);
-       } else {
-           var o_id = new ObjectID(id);
-           var collection = db.collection('users');
-           collection.findOne({ _id : o_id}, function(err, result) {
-                if(err) {
-                    callback(err, null);
-                } else {
-                    callback(null, result);
-                }
-           });
-       }
-    }); */
 }
 
 exports.findUserWithId = findUserWithId;
