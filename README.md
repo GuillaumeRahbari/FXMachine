@@ -4,10 +4,10 @@
 #Description
 
 ###Who are we ?
-We are four students from an engineer school in France called Polytech Nice-Sophia.
+We are four students from an engineer school in France called Polytech Nice-Sophia. If you want to have more information about us, please go on the website.
 
 ###What is FX Machine project ?
-We have developed a website for guitarists who would like to have their own effect pedals on
+We are developing a website for guitarists who would like to have their own effect pedals on
 their computers. 
 
 ###Tired to buy or test a lot of pedal because you can't find the perfect sound?
@@ -21,14 +21,14 @@ friends. In fact, when you save, your pedal is public and people can use it.
 
 #Project structure
 
-We have two big in parts in our project: the Back-end and the Front-end. 
+We have two big parts in our project: the Back-end and the Front-end. 
 
 For the Front-end, we developed it in JavaScript with the framework AngularJS. Let's see how the structure has been made.
-There is four important parts in the folder app: components, scripts, styles, views. The last three parts are really common in an AngularJS project. In fact, scripts contains three types of elements controllers, directives and services (also an app file to manage some things). Controllers have a link with a view in the folder Views and they have their styles in the folder Styles. 
+There is four important parts in the folder app: components, scripts, styles, views. The last three parts are really common in an AngularJS project. In fact, scripts contain three types of elements controllers, directives and services (also an app file to manage some things). Controllers have a link with a view in the folder Views and they have their styles in the folder Styles. 
 
 OKAY ! Do we have something new?
 
-Yes ! We build all our filters for the music and some of our web page pieces as web components. For us, this structure was really important to be able to add elements without refactoring our code all the time and be able to manage current components easily. You can find in the folder Components a folder for each component. In it you will find the controller, the view and style. Right now, all the components have their own behavior and works indepently.
+Yes ! We build all our filters for the music and some of our web page pieces as web components. For us, this structure was really important to be able to add elements without refactoring our code all the time and be able to manage current components easily. You can find in the folder Components a folder for each component. In it, you will find the controller, the view and style. Right now, all the components have their own behavior and work indepently.
 
 
 #Tools
