@@ -19,6 +19,18 @@ When you finish, you can save it and share it with your friends.
  Once you have built your pedal with all effects you need, you can save it and share it to your
 friends. In fact, when you save, your pedal is public and people can use it.
 
+#Project structure
+
+We have two big in parts in our project: the Back-end and the Front-end. 
+
+For the Front-end, we developed it in JavaScript with the framework AngularJS. Let's see how the structure has been made.
+There is four important parts in the folder app: components, scripts, styles, views. The last three parts are really common in an AngularJS project. In fact, scripts contains three types of elements controllers, directives and services (also an app file to manage some things). Controllers have a link with a view in the folder Views and they have their styles in the folder Styles. 
+
+OKAY ! Do we have something new?
+
+Yes ! We build all our filters for the music and some of our web page pieces as web components. For us, this structure was really important to be able to add elements without refactoring our code all the time and be able to manage current components easily. You can find in the folder Components a folder for each component. In it you will find the controller, the view and style. Right now, all the components have their own behavior and works indepently.
+
+
 #Tools
 =========
 ##FrontEnd
