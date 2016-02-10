@@ -1,12 +1,27 @@
-FX Machine
-Be the master of your effects !
-=========
+
+#FX Machine: Be the master of your effects !
+
 #Description
-=========
+
+###Who are we ?
+We are four students from an engineer school in France called Polytech Nice-Sophia.
+
+###What is FX Machine project ?
+We have developed a website for guitarists who would like to have their own effect pedals on
+their computers. 
+
+###Tired to buy or test a lot of pedal because you can't find the perfect sound?
+ Don't worry, FX Machine is the solution made for you! Thanks to our system, you will be able to
+create your own pedal by selecting every components (filters, effects) of your pedal.
+When you finish, you can save it and share it with your friends.
+
+### Wait we made more functionalities!
+ Once you have built your pedal with all effects you need, you can save it and share it to your
+friends. In fact, when you save, your pedal is public and people can use it.
 
 #Tools
 =========
-#FrontEnd
+##FrontEnd
 
 - We use NodeJS (which comes bundle with the node package manager NPM).
 - We use NPM to manage our dependencies.
@@ -19,7 +34,7 @@ Be the master of your effects !
 
 #Installation
 =========
-#FrontEnd
+##FrontEnd
 ### Linux
 
 - Open the Terminal.
