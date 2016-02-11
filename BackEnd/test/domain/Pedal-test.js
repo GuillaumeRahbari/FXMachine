@@ -8,36 +8,39 @@ var assert = require("assert"),
 
 
 suite("Logs domain test suite", function() {
- /*   var pedal;
+    var pedal;
     var json;
 
     setup("Set up of the suite", function(){
-        pedal = new pedals.Pedal("test", "test", "test", "test", undefined, undefined);
+        pedal = new pedals.Pedal("test", "test", "test", 0, [], 0);
         json = {
-            filters: "test",
-            input: "test",
-            output: "test",
-            name: "test"
+            _filters: "test",
+            _input: "test",
+            _output: "test",
+            _ratersCounter: 0,
+            _rate: 0,
+            _comments: []
         }
     });
 
     test("Pedal to JSON test", function() {
         pedal.pedalToJSON(function(err, result) {
             assert.deepEqual({
-                filters: "test",
-                input: "test",
-                output: "test",
-                name: "test",
-                comments: [],
-                rate: 0
+                _filters: "test",
+                _input: "test",
+                _output: "test",
+                _comments: [],
+                _rate: 0
             }, result)
         })
     });
 
     test("Json to Pedal test", function() {
        pedals.JsonToPedal(json , function(err, res) {
+           console.log(json);
+           console.log(res);
             assert.deepEqual(pedal, res);
        });
     });
-*/
+
 });

@@ -9,7 +9,7 @@ var assert = require("assert"),
 
 
 suite("User domain test suite", function() {
-/*
+
     var user1;
 
     setup("Set up of the suite", function() {
@@ -36,5 +36,5 @@ suite("User domain test suite", function() {
                 assert.deepEqual(res, user1);
             });
     });
-*/
+
 });

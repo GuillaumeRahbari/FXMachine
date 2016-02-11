@@ -10,7 +10,7 @@ var assert = require("assert"),
 
 
 suite("Logs domain test suite", function() {
-  /* var log;
+   var log;
 
     setup("Set up of the suite", function(){
         log = new logs.Logs("test", "test", "test");
@@ -34,5 +34,5 @@ suite("Logs domain test suite", function() {
        }, function(err, res) {
            assert.deepEqual(log, res);
        })
-    }); */
+    });
 });
