@@ -21,7 +21,6 @@ function connectionLog(client_id, data) {
             console.log("Error witht the sign out log");
             // we dont treat this case because the client dont need to know if there is an error and the information important
         } else {
-            console.log(result);
             var myLog = new logs.Logs(result.email, new Date().getTime(), data);
             myLog.LogToJson(function(err, res) {
                if(err) {
