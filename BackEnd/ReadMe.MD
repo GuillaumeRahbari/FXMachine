@@ -30,8 +30,11 @@ We use mongoDB, and mongoDB should be running on the port 27017.
 ## Build & development
 
 Start MongoDB on the port 27017.
+If it is the first time you are using the application, run "node init.js".
 Run `grunt` for starting the server.
 Or use the command 'node app' in the this folder.
+
+If you want to clear the database run "node clear.js".
 
 ## Test
 
