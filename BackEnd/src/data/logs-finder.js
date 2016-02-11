@@ -17,7 +17,7 @@ var core = require('../../app/core/core');
 function myfindOne(logsId, callback) {
     core.getDb(function(db) {
         var collection = db.collection('logs');
-        var o_id = new ObjectId(logsId);
+        var o_id = new ObjectID(logsId);
         collection.findOne({ _id : o_id}, function(err, result) {
             if(err) {
                 console.log(err);

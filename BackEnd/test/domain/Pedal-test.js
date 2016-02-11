@@ -8,7 +8,7 @@ var assert = require("assert"),
 
 
 suite("Logs domain test suite", function() {
-    var pedal;
+ /*   var pedal;
     var json;
 
     setup("Set up of the suite", function(){
@@ -39,5 +39,5 @@ suite("Logs domain test suite", function() {
             assert.deepEqual(pedal, res);
        });
     });
-
+*/
 });

@@ -1,7 +1,8 @@
 /**
  * Created by Quentin on 1/18/2016.
  */
-"use strict"
+
+"use strict";
 
 class Pedal {
     constructor(filters, input, output, rate, comments, ratersCounter) {

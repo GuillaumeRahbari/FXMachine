@@ -17,7 +17,7 @@ function myfindOne(pedalId, callback) {
         var o_id =  new mongodb.ObjectId(pedalId);
         collection.find({_id: o_id }).toArray(function(error, result) {
             if(error) {
-                callback(err, null);
+                callback(error, null);
             } else {
                 callback(null, result);
             }
@@ -25,4 +25,18 @@ function myfindOne(pedalId, callback) {
     });
 }
 
+function init(callback) {
+    mongoConnection.connect(function(err) {
+        if (err) {
+            logger.warn(err);
+        }
+        else {
+            logger.info("mixes initialized");
+        }
+        callback(err);
+    });
+}
+
+
 exports.myfindOne = myfindOne;
+exports.init = init;
