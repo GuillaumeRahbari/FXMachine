@@ -5,6 +5,7 @@
 We use NodeJS (which comes bundle with the node package manager NPM).
 We use NPM to manage dependencies.
 We use Grunt for running javascript tasks.
+We use mongoDB, and mongoDB should be running on the port 27017.
 
 ### Linux
 - Open the Terminal.
@@ -28,11 +29,13 @@ We use Grunt for running javascript tasks.
 
 ## Build & development
 
+Start MongoDB on the port 27017.
 Run `grunt` for starting the server.
 Or use the command 'node app' in the this folder.
 
 ## Test
 
+Start MongoDB on the port 27017.
 Run "mocha -u tdd test\XXX" with XXX begin the name of the folder you want to test.
 The available folders are domain - data - core, matching the folders in the src folder.
 
