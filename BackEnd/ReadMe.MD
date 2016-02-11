@@ -1,1 +1,38 @@
-coucou
+# Back-End
+
+## Needed tools
+
+We use NodeJS (which comes bundle with the node package manager NPM).
+We use NPM to manage dependencies.
+We use Grunt for running javascript tasks.
+
+### Linux
+- Open the Terminal.
+- Install NodeJS : Use the [NodeJS Installer](https://nodejs.org/en/download/)
+- Install Grunt : `sudo npm install grunt-cli -g`
+
+### Windows
+- Open the Command Prompt.
+- Install NodeJS : Use the [NodeJS Installer](https://nodejs.org/en/download/)
+- Install Grunt : `npm install grunt-cli -g`
+
+### Mac OS
+- Open the Terminal.
+- Install NodeJS : Use the [NodeJS Installer](https://nodejs.org/en/download/)
+- Install Grunt : `sudo npm install grunt-cli -g`
+
+## Install
+
+- Open the terminal and go to the location of this project
+- Run `npm install`
+
+## Build & development
+
+Run `grunt` for starting the server.
+Or use the command 'node app' in the this folder.
+
+## Test
+
+Run "mocha -u tdd test\XXX" with XXX begin the name of the folder you want to test.
+The available folders are domain - data - core, matching the folders in the src folder.
+
