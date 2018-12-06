@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "async": "^1.5.2",
-    "body-parser": "~1.13.2",
-    "debug": "~2.2.0",
-    "express": "~4.13.1",
-    "morgan": "~1.6.1"
+    "async": "^2.6.1",
+    "body-parser": "~1.18.3",
+    "debug": "~4.1.0",
+    "express": "~4.16.4",
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "mocha" : "^2.3.4",
-    "grunt-contrib-watch": "~0.6.1",
+    "grunt": "^1.0.3",
+    "mocha" : "^5.2.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-develop": "~0.4.0",
-    "load-grunt-tasks": "~3.1.0",
-    "request": "~2.55.0",
-    "time-grunt": "~1.1.0",
-    "mongodb": "~2.0.33"
+    "load-grunt-tasks": "~4.0.0",
+    "request": "~2.88.0",
+    "time-grunt": "^2.0.0",
+    "mongodb": "~3.1.10"
   },
   "scripts": {
     "test": "mocha --recursive"
