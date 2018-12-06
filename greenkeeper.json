@@ -1,0 +1,11 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "BackEnd/package.json",
+        "ExampleWebAudio/package.json",
+        "FrontEnd/package.json"
+      ]
+    }
+  }
+}
